@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="content">
+            <block class="MageOS\DigitalSignature\Block\Order\SignedDocuments"
+                   name="digitalsignature.order.signed_documents"
+                   template="MageOS_DigitalSignature::order/signed_documents.phtml"
+                   after="sales.order.info"/>
+        </referenceContainer>
+    </body>
+</page>

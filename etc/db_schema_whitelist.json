@@ -1,0 +1,117 @@
+{
+    "mageos_digitalsignature_template": {
+        "column": {
+            "template_id": true,
+            "name": true,
+            "is_active": true,
+            "scope": true,
+            "is_required": true,
+            "trigger_code": true,
+            "created_at": true,
+            "updated_at": true
+        },
+        "index": {
+            "MAGEOS_DIGITALSIGNATURE_TEMPLATE_IS_ACTIVE": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "mageos_digitalsignature_template_file": {
+        "column": {
+            "file_id": true,
+            "template_id": true,
+            "store_id": true,
+            "pdf_path": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "MAGEOS_DIGITALSIGNATURE_TEMPLATE_FILE_TEMPLATE_ID_STORE_ID": true,
+            "FK_4648F53DB03EB16CDE6172E55B7D426E": true,
+            "MAGEOS_DIGITALSIGNATURE_TEMPLATE_FILE_STORE_ID_STORE_STORE_ID": true
+        }
+    },
+    "mageos_digitalsignature_template_product": {
+        "column": {
+            "template_id": true,
+            "product_id": true,
+            "trigger_code": true
+        },
+        "index": {
+            "MAGEOS_DIGITALSIGNATURE_TEMPLATE_PRODUCT_PRODUCT_ID": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "FK_53C9C46940EDE42EA905CE472C1540C8": true,
+            "MAGEOS_DIGITALSIGNATURE_TEMPLATE_PRD_PRD_ID_CAT_PRD_ENTT_ENTT_ID": true
+        }
+    },
+    "mageos_digitalsignature_document": {
+        "column": {
+            "document_id": true,
+            "order_id": true,
+            "order_item_id": true,
+            "template_id": true,
+            "provider_code": true,
+            "provider_process_id": true,
+            "status": true,
+            "is_active": true,
+            "callback_token": true,
+            "trigger_code": true,
+            "pdf_path": true,
+            "signed_pdf_path": true,
+            "signer_email": true,
+            "signer_phone": true,
+            "error_message": true,
+            "retry_count": true,
+            "reminder_count": true,
+            "last_reminder_at": true,
+            "escalation_sent_at": true,
+            "purged_at": true,
+            "created_at": true,
+            "updated_at": true,
+            "store_id": true
+        },
+        "index": {
+            "MAGEOS_DIGITALSIGNATURE_DOCUMENT_ORDER_ID": true,
+            "MAGEOS_DIGITALSIGNATURE_DOCUMENT_STATUS": true,
+            "MAGEOS_DIGITALSIGNATURE_DOCUMENT_PROVIDER_PROCESS_ID": true,
+            "MAGEOS_DIGITALSIGNATURE_DOCUMENT_PURGED_AT": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "MAGEOS_DIGITALSIGNATURE_DOCUMENT_ORDER_ID_SALES_ORDER_ENTITY_ID": true,
+            "FK_4C017D3E5E7931357CBF5119B01FBDC9": true,
+            "UNQ_6ED112CCC0563709FA828B9A14B1B022": true
+        }
+    },
+    "mageos_digitalsignature_document_log": {
+        "column": {
+            "log_id": true,
+            "document_id": true,
+            "event": true,
+            "status_from": true,
+            "status_to": true,
+            "message": true,
+            "payload": true,
+            "created_at": true
+        },
+        "index": {
+            "MAGEOS_DIGITALSIGNATURE_DOCUMENT_LOG_DOCUMENT_ID": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "FK_04D91D1EA85D99D2D37BC27AD0389B28": true
+        }
+    },
+    "quote": {
+        "column": {
+            "digitalsignature_requested": true
+        }
+    },
+    "sales_order": {
+        "column": {
+            "digitalsignature_requested": true
+        }
+    }
+}

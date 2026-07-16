@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!--
+    Invalida la section digitalsignature-signature quando cambia il carrello
+    (così la minicart riflette se l'opt-in è ancora applicabile) e dopo il
+    salvataggio della scelta cliente.
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Customer/etc/sections.xsd">
+    <action name="checkout/cart/add">
+        <section name="digitalsignature-signature"/>
+    </action>
+    <action name="checkout/cart/delete">
+        <section name="digitalsignature-signature"/>
+    </action>
+    <action name="checkout/cart/updatePost">
+        <section name="digitalsignature-signature"/>
+    </action>
+    <action name="checkout/cart/updateItemOptions">
+        <section name="digitalsignature-signature"/>
+    </action>
+    <action name="digitalsignature/cart/setRequested">
+        <section name="digitalsignature-signature"/>
+    </action>
+</config>

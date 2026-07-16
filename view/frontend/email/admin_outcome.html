@@ -1,0 +1,24 @@
+<!--@subject {{trans "[Firma Digitale] Documento #%document_id %status (ordine %increment_id)" document_id=$document_id status=$status_label increment_id=$order_increment_id}} @-->
+<!--@vars {
+"var document_id":"ID documento",
+"var order_increment_id":"Numero ordine",
+"var status_label":"Stato documento",
+"var provider_code":"Provider",
+"var signer_email":"Email firmatario",
+"var order_url":"Link all'ordine"
+} @-->
+{{template config_path="design/email/header_template"}}
+
+<p>{{trans "Il processo di firma di un documento si è concluso con esito negativo."}}</p>
+
+<ul>
+    <li>{{trans "Documento: #%document_id" document_id=$document_id}}</li>
+    <li>{{trans "Ordine: #%increment_id" increment_id=$order_increment_id}}</li>
+    <li>{{trans "Esito: %status" status=$status_label}}</li>
+    <li>{{trans "Provider: %provider" provider=$provider_code}}</li>
+    <li>{{trans "Firmatario: %email" email=$signer_email}}</li>
+</ul>
+
+<p>{{trans 'Vai all\'ordine in backend: <a href="%url">%url</a>' url=$order_url |raw}}</p>
+
+{{template config_path="design/email/footer_template"}}

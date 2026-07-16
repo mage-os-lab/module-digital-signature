@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework-message-queue:etc/consumer.xsd">
+    <consumer name="digitalsignatureDocumentProcess" queue="digitalsignature.document.process" connection="db"
+              handler="MageOS\DigitalSignature\Model\Queue\Consumer\ProcessConsumer::process"
+              maxMessages="100"/>
+    <consumer name="digitalsignatureDocumentRefresh" queue="digitalsignature.document.refresh" connection="db"
+              handler="MageOS\DigitalSignature\Model\Queue\Consumer\RefreshConsumer::process"
+              maxMessages="100"/>
+</config>

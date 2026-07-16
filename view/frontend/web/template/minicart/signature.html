@@ -1,0 +1,20 @@
+<div class="digitalsignature-minicart-signature" data-bind="visible: signature().applicable === true">
+    <label class="digitalsignature-minicart-signature__label">
+        <input type="checkbox"
+               data-bind="checked: signature().requested,
+                          enable: !saving(),
+                          event: { change: toggle },
+                          attr: {
+                              'aria-required': signature().mandatory,
+                              'aria-describedby': signature().mandatory
+                                  ? 'digitalsignature-minicart-signature-note digitalsignature-minicart-signature-status'
+                                  : 'digitalsignature-minicart-signature-status'
+                          }"/>
+        <span data-bind="text: signature().label"></span>
+    </label>
+    <!-- ko if: signature().mandatory -->
+    <p id="digitalsignature-minicart-signature-note" class="digitalsignature-minicart-signature__note" data-bind="text: signature().note"></p>
+    <!-- /ko -->
+    <p id="digitalsignature-minicart-signature-status" class="digitalsignature-minicart-signature__status"
+       role="status" data-bind="text: statusText" aria-live="polite"></p>
+</div>

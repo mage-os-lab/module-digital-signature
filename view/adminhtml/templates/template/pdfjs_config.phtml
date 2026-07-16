@@ -1,0 +1,21 @@
+<?php
+/** @var \MageOS\DigitalSignature\Block\Adminhtml\Template\PdfJsConfig $block */
+?>
+<script>
+    require.config({
+        paths: {
+            'pdfjs-dist/build/pdf': '<?= $block->escapeJs(str_replace('.js', '', $block->getPdfJsUrl())) ?>'
+        },
+        map: {
+            '*': {
+                'pdfjs': 'pdfjs-dist/build/pdf'
+            }
+        }
+    });
+
+    window.digitalsignatureConfig = {
+        workerUrl: '<?= $block->escapeJs($block->getPdfJsWorkerUrl()) ?>',
+        previewTmpUrl: '<?= $block->escapeJs($block->getPreviewTmpUrl()) ?>',
+        injectTagUrl: '<?= $block->escapeJs($block->getInjectTagUrl()) ?>'
+    };
+</script>

@@ -1,0 +1,25 @@
+<!--@subject {{trans "[Firma Digitale] Errore documento #%document_id (ordine %increment_id)" document_id=$document_id increment_id=$order_increment_id}} @-->
+<!--@vars {
+"var document_id":"ID documento",
+"var order_id":"ID ordine",
+"var order_increment_id":"Numero ordine",
+"var provider_code":"Provider",
+"var signer_email":"Email firmatario",
+"var error_message":"Messaggio di errore",
+"var order_url":"Link all'ordine"
+} @-->
+{{template config_path="design/email/header_template"}}
+
+<p>{{trans "L'elaborazione di un documento firma è terminata in errore e richiede un intervento manuale."}}</p>
+
+<ul>
+    <li>{{trans "Documento: #%document_id" document_id=$document_id}}</li>
+    <li>{{trans "Ordine: #%increment_id" increment_id=$order_increment_id}}</li>
+    <li>{{trans "Provider: %provider" provider=$provider_code}}</li>
+    <li>{{trans "Firmatario: %email" email=$signer_email}}</li>
+    <li>{{trans "Errore: %message" message=$error_message}}</li>
+</ul>
+
+<p>{{trans 'Vai all\'ordine in backend: <a href="%url">%url</a>' url=$order_url |raw}}</p>
+
+{{template config_path="design/email/footer_template"}}

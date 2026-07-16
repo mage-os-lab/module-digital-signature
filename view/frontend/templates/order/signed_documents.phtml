@@ -1,0 +1,31 @@
+<?php
+/**
+ * Documenti firmati scaricabili nell'area cliente "i miei ordini".
+ *
+ * @var \MageOS\DigitalSignature\Block\Order\SignedDocuments $block
+ */
+declare(strict_types=1);
+
+if (!$block->hasSignedDocuments()) {
+    return;
+}
+?>
+<div class="block digitalsignature-signed-documents">
+    <div class="block-title">
+        <strong><?= $block->escapeHtml(__('Contratti firmati')) ?></strong>
+    </div>
+    <div class="block-content">
+        <p class="note"><?= $block->escapeHtml(__('Scarica i contratti firmati digitalmente per questo ordine.')) ?></p>
+        <ul class="items">
+            <?php foreach ($block->getSignedDocuments() as $document): ?>
+                <li class="item">
+                    <span class="label"><?= $block->escapeHtml($block->getItemLabel($document)) ?></span>
+                    <a class="action download"
+                       href="<?= $block->escapeUrl($block->getDownloadUrl($document)) ?>">
+                        <span><?= $block->escapeHtml(__('Scarica PDF firmato')) ?></span>
+                    </a>
+                </li>
+            <?php endforeach; ?>
+        </ul>
+    </div>
+</div>

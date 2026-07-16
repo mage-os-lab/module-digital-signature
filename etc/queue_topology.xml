@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework-message-queue:etc/topology.xsd">
+    <exchange name="magento-db" type="topic" connection="db">
+        <binding id="digitalsignatureDocumentProcessBinding" topic="digitalsignature.document.process"
+                 destinationType="queue" destination="digitalsignature.document.process"/>
+        <binding id="digitalsignatureDocumentRefreshBinding" topic="digitalsignature.document.refresh"
+                 destinationType="queue" destination="digitalsignature.document.refresh"/>
+    </exchange>
+</config>

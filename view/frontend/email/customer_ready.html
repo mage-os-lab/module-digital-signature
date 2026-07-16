@@ -1,0 +1,18 @@
+<!--@subject {{trans "Il tuo contratto da firmare digitalmente è pronto (ordine %increment_id)" increment_id=$order_increment_id}} @-->
+<!--@vars {
+"var customer_name":"Nome cliente",
+"var order_increment_id":"Numero ordine",
+"var order_url":"Link all'ordine",
+"var signer_email":"Email firmatario"
+} @-->
+{{template config_path="design/email/header_template"}}
+
+<p>{{trans "Ciao %name," name=$customer_name}}</p>
+
+<p>{{trans "il contratto relativo al tuo ordine #%increment_id è pronto per essere firmato digitalmente." increment_id=$order_increment_id}}</p>
+
+<p>{{trans "A breve riceverai (o hai già ricevuto) le istruzioni dal servizio di firma all'indirizzo %email. Segui quel processo per completare la firma." email=$signer_email}}</p>
+
+<p>{{trans 'Puoi consultare lo stato del tuo ordine qui: <a href="%url">I miei ordini</a>' url=$order_url |raw}}</p>
+
+{{template config_path="design/email/footer_template"}}

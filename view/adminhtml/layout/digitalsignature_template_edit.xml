@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="page.main.actions">
+            <block class="Magento\Backend\Block\Store\Switcher" name="digitalsignature_template_store_switcher">
+                <arguments>
+                    <argument name="use_confirm" xsi:type="boolean">false</argument>
+                    <argument name="switch_websites" xsi:type="boolean">false</argument>
+                    <argument name="switch_store_groups" xsi:type="boolean">false</argument>
+                    <argument name="switch_store_views" xsi:type="boolean">true</argument>
+                </arguments>
+            </block>
+        </referenceContainer>
+        <referenceContainer name="content">
+            <block class="MageOS\DigitalSignature\Block\Adminhtml\Template\PdfJsConfig" name="digitalsignature.pdfjs.config" template="MageOS_DigitalSignature::template/pdfjs_config.phtml"/>
+            <uiComponent name="digitalsignature_template_form"/>
+        </referenceContainer>
+    </body>
+</page>

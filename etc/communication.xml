@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework-message-queue:etc/communication.xsd">
+    <topic name="digitalsignature.document.process" request="string"/>
+    <topic name="digitalsignature.document.refresh" request="string"/>
+</config>

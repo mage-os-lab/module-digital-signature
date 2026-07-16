@@ -1,0 +1,21 @@
+<div class="digitalsignature-checkout-signature field choice">
+    <label class="digitalsignature-checkout-signature__label">
+        <input type="checkbox"
+               class="checkbox"
+               data-bind="checked: requested,
+                          enable: !saving(),
+                          event: { change: toggle },
+                          attr: {
+                              'aria-required': mandatory,
+                              'aria-describedby': mandatory
+                                  ? 'digitalsignature-checkout-signature-note digitalsignature-checkout-signature-status'
+                                  : 'digitalsignature-checkout-signature-status'
+                          }"/>
+        <span data-bind="text: label"></span>
+    </label>
+    <!-- ko if: mandatory -->
+    <p id="digitalsignature-checkout-signature-note" class="digitalsignature-checkout-signature__note" data-bind="text: note"></p>
+    <!-- /ko -->
+    <p id="digitalsignature-checkout-signature-status" class="digitalsignature-checkout-signature__status"
+       role="status" data-bind="text: statusText" aria-live="polite"></p>
+</div>

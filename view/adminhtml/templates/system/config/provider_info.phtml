@@ -1,0 +1,39 @@
+<?php
+/** @var \MageOS\DigitalSignature\Block\Adminhtml\System\Config\ProviderInfo\AbstractProviderInfo $block */
+$links = $block->getLinks();
+?>
+<div class="digitalsignature-provider-info" style="display:flex;align-items:flex-start;gap:16px;padding:12px 0;max-width:760px;">
+    <img src="<?= $block->escapeUrl($block->getLogoUrl()) ?>"
+         alt="<?= $block->escapeHtmlAttr($block->getProviderName()) ?>"
+         style="width:56px;height:56px;flex:0 0 auto;" />
+    <div>
+        <strong style="font-size:1.1em;"><?= $block->escapeHtml($block->getProviderName()) ?></strong>
+        <div style="margin:4px 0;">
+            <span style="font-size:0.9em;font-weight:bold;color:#4f5b66;background-color:#e0e6ed;padding:2px 6px;border-radius:4px;display:inline-block;">
+                <?= $block->escapeHtml($block->getLegalLevel()) ?>
+            </span>
+        </div>
+        <p style="margin:6px 0;"><?= $block->escapeHtml($block->getDescription()) ?></p>
+        <?php if ($links): ?>
+            <ul style="margin:0;padding-left:18px;">
+                <?php foreach ($links as $link): ?>
+                    <li>
+                        <?php if (!empty($link['url'])): ?>
+                            <a href="<?= $block->escapeUrl($link['url']) ?>" target="_blank" rel="noopener noreferrer">
+                                <?= $block->escapeHtml($link['label']) ?>
+                            </a>
+                        <?php else: ?>
+                            <?= $block->escapeHtml($link['label']) ?>
+                        <?php endif; ?>
+                        <?php if (!empty($link['note'])): ?>
+                            <em>(<?= $block->escapeHtml($link['note']) ?>)</em>
+                        <?php endif; ?>
+                    </li>
+                <?php endforeach; ?>
+            </ul>
+        <?php endif; ?>
+        <p style="margin:10px 0 0 0;font-size:0.85em;color:#777;border-top:1px solid #ddd;padding-top:6px;line-height:1.4;">
+            <?= $block->escapeHtml(__('Nota: La classificazione del livello di firma si basa sulle specifiche dichiarate dal fornitore. Il modulo non garantisce l\'adeguatezza legale o la conformità per scopi specifici.')) ?>
+        </p>
+    </div>
+</div>

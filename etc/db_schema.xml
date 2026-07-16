@@ -1,0 +1,192 @@
+<?xml version="1.0"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+
+    <!-- Template documento: PDF con tag placeholder, caricato dal merchant -->
+    <table name="mageos_digitalsignature_template" resource="default" engine="innodb"
+           comment="DigitalSignature Document Template">
+        <column xsi:type="int" name="template_id" unsigned="true" nullable="false" identity="true"
+                comment="Template ID"/>
+        <column xsi:type="varchar" name="name" length="255" nullable="false" comment="Template Name"/>
+        <column xsi:type="smallint" name="is_active" unsigned="true" nullable="false" default="1"
+                comment="Is Active"/>
+        <column xsi:type="varchar" name="scope" length="16" nullable="false" default="cart"
+                comment="Scope: cart|product"/>
+        <column xsi:type="smallint" name="is_required" unsigned="true" nullable="false" default="0"
+                comment="1 = signature mandatory, generated regardless of customer choice"/>
+        <column xsi:type="varchar" name="trigger_code" length="32" nullable="true"
+                comment="Generation trigger (null = use global default)"/>
+        <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Created At"/>
+        <column xsi:type="timestamp" name="updated_at" on_update="true" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Updated At"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="template_id"/>
+        </constraint>
+        <index referenceId="MDS_DIGITALSIGNATURE_TEMPLATE_IS_ACTIVE" indexType="btree">
+            <column name="is_active"/>
+        </index>
+    </table>
+
+    <!-- File PDF del template, per store view (store_id=0 => default) -->
+    <table name="mageos_digitalsignature_template_file" resource="default" engine="innodb"
+           comment="DigitalSignature Template PDF per Store View">
+        <column xsi:type="int" name="file_id" unsigned="true" nullable="false" identity="true" comment="File ID"/>
+        <column xsi:type="int" name="template_id" unsigned="true" nullable="false" comment="Template ID"/>
+        <column xsi:type="smallint" name="store_id" unsigned="true" nullable="false" default="0" comment="Store ID"/>
+        <column xsi:type="varchar" name="pdf_path" length="255" nullable="false"
+                comment="PDF path relative to media dir"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="file_id"/>
+        </constraint>
+        <constraint xsi:type="unique" referenceId="MDS_DIGITALSIGNATURE_TEMPLATE_FILE_TEMPLATE_ID_STORE_ID">
+            <column name="template_id"/>
+            <column name="store_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="MDS_DS_TPL_FILE_TPL_ID_MDS_DS_TPL_TPL_ID"
+                    table="mageos_digitalsignature_template_file" column="template_id"
+                    referenceTable="mageos_digitalsignature_template" referenceColumn="template_id"
+                    onDelete="CASCADE"/>
+        <constraint xsi:type="foreign" referenceId="MDS_DS_TPL_FILE_STORE_ID_STORE_STORE_ID"
+                    table="mageos_digitalsignature_template_file" column="store_id"
+                    referenceTable="store" referenceColumn="store_id" onDelete="CASCADE"/>
+    </table>
+
+    <!-- Assegnazione template (scope=product) ai prodotti -->
+    <table name="mageos_digitalsignature_template_product" resource="default" engine="innodb"
+           comment="DigitalSignature Template to Product Assignment">
+        <column xsi:type="int" name="template_id" unsigned="true" nullable="false" comment="Template ID"/>
+        <column xsi:type="int" name="product_id" unsigned="true" nullable="false" comment="Product Entity ID"/>
+        <column xsi:type="varchar" name="trigger_code" length="32" nullable="true"
+                comment="Trigger override at product level (null = template/global)"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="template_id"/>
+            <column name="product_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="MDS_DS_TPL_PRD_TPL_ID_MDS_DS_TPL_TPL_ID"
+                    table="mageos_digitalsignature_template_product" column="template_id"
+                    referenceTable="mageos_digitalsignature_template" referenceColumn="template_id"
+                    onDelete="CASCADE"/>
+        <constraint xsi:type="foreign" referenceId="MDS_DS_TPL_PRD_PRD_ID_CAT_PRD_ENTT_ENTT_ID"
+                    table="mageos_digitalsignature_template_product" column="product_id"
+                    referenceTable="catalog_product_entity" referenceColumn="entity_id"
+                    onDelete="CASCADE"/>
+        <index referenceId="MDS_DIGITALSIGNATURE_TEMPLATE_PRODUCT_PRODUCT_ID" indexType="btree">
+            <column name="product_id"/>
+        </index>
+    </table>
+
+    <!-- Documento firma: 1 record per processo di firma (riga ordine o ordine intero) -->
+    <table name="mageos_digitalsignature_document" resource="default" engine="innodb"
+           comment="DigitalSignature Signature Document">
+        <column xsi:type="int" name="document_id" unsigned="true" nullable="false" identity="true"
+                comment="Document ID"/>
+        <column xsi:type="int" name="order_id" unsigned="true" nullable="false" comment="Sales Order ID"/>
+        <column xsi:type="int" name="order_item_id" unsigned="true" nullable="false" default="0"
+                comment="Sales Order Item ID (0 = cart scope)"/>
+        <column xsi:type="int" name="template_id" unsigned="true" nullable="true" comment="Template ID"/>
+        <column xsi:type="smallint" name="store_id" unsigned="true" nullable="true" comment="Store ID"/>
+        <column xsi:type="varchar" name="provider_code" length="32" nullable="false" comment="Sign provider code"/>
+        <column xsi:type="varchar" name="provider_process_id" length="64" nullable="true"
+                comment="Provider process/document id (e.g. WsSign GUID)"/>
+        <column xsi:type="varchar" name="status" length="16" nullable="false" default="pending"
+                comment="pending|generated|sent|signed|declined|expired|error|canceled"/>
+        <column xsi:type="smallint" name="is_active" unsigned="true" nullable="true" default="1"
+                comment="1 = active document, NULL = historical/replaced (NULLs skip unique index)"/>
+        <column xsi:type="varchar" name="callback_token" length="64" nullable="true"
+                comment="Secret token to validate provider callbacks"/>
+        <column xsi:type="varchar" name="trigger_code" length="32" nullable="false" comment="Trigger that generated it"/>
+        <column xsi:type="varchar" name="pdf_path" length="255" nullable="true" comment="Generated PDF media path"/>
+        <column xsi:type="varchar" name="signed_pdf_path" length="255" nullable="true"
+                comment="Signed PDF media path"/>
+        <column xsi:type="varchar" name="signer_email" length="255" nullable="true" comment="Signer email"/>
+        <column xsi:type="varchar" name="signer_phone" length="32" nullable="true"
+                comment="Signer phone (OTP SMS)"/>
+        <column xsi:type="text" name="error_message" nullable="true" comment="Last error message"/>
+        <column xsi:type="smallint" name="retry_count" unsigned="true" nullable="false" default="0"
+                comment="Retry attempts"/>
+        <column xsi:type="smallint" name="reminder_count" unsigned="true" nullable="false" default="0"
+                comment="Customer reminder email count"/>
+        <column xsi:type="timestamp" name="last_reminder_at" on_update="false" nullable="true"
+                comment="Timestamp of last customer reminder email"/>
+        <column xsi:type="timestamp" name="escalation_sent_at" on_update="false" nullable="true"
+                comment="Timestamp of admin escalation email"/>
+        <column xsi:type="timestamp" name="purged_at" on_update="false" nullable="true"
+                comment="When PDFs and personal data were deleted by GDPR retention (NULL = not purged)"/>
+        <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Created At"/>
+        <column xsi:type="timestamp" name="updated_at" on_update="true" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Updated At"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="document_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="MDS_DS_DOC_ORDER_ID_SALES_ORDER_ENTT_ID"
+                    table="mageos_digitalsignature_document" column="order_id"
+                    referenceTable="sales_order" referenceColumn="entity_id" onDelete="CASCADE"/>
+        <constraint xsi:type="foreign" referenceId="MDS_DS_DOC_TPL_ID_MDS_DS_TPL_TPL_ID"
+                    table="mageos_digitalsignature_document" column="template_id"
+                    referenceTable="mageos_digitalsignature_template" referenceColumn="template_id"
+                    onDelete="SET NULL"/>
+        <!-- Anti-doppia-esecuzione: un solo documento ATTIVO per combinazione; le righe
+             storicizzate hanno is_active=NULL e non partecipano all'unicità -->
+        <constraint xsi:type="unique" referenceId="MDS_DS_DOC_ORDER_ITEM_TPL_TRIGGER_ACTIVE">
+            <column name="order_id"/>
+            <column name="order_item_id"/>
+            <column name="template_id"/>
+            <column name="trigger_code"/>
+            <column name="is_active"/>
+        </constraint>
+        <index referenceId="MDS_DIGITALSIGNATURE_DOCUMENT_ORDER_ID" indexType="btree">
+            <column name="order_id"/>
+        </index>
+        <index referenceId="MDS_DIGITALSIGNATURE_DOCUMENT_STATUS" indexType="btree">
+            <column name="status"/>
+        </index>
+        <index referenceId="MDS_DIGITALSIGNATURE_DOCUMENT_PROVIDER_PROCESS_ID" indexType="btree">
+            <column name="provider_process_id"/>
+        </index>
+        <index referenceId="MDS_DIGITALSIGNATURE_DOCUMENT_PURGED_AT" indexType="btree">
+            <column name="purged_at"/>
+        </index>
+    </table>
+
+    <!-- Log eventi documento: storico stati, callback, errori -->
+    <table name="mageos_digitalsignature_document_log" resource="default" engine="innodb"
+           comment="DigitalSignature Document Event Log">
+        <column xsi:type="bigint" name="log_id" unsigned="true" nullable="false" identity="true" comment="Log ID"/>
+        <column xsi:type="int" name="document_id" unsigned="true" nullable="false" comment="Document ID"/>
+        <column xsi:type="varchar" name="event" length="32" nullable="false"
+                comment="status_change|callback|provider_request|error|retry"/>
+        <column xsi:type="varchar" name="status_from" length="16" nullable="true" comment="Previous status"/>
+        <column xsi:type="varchar" name="status_to" length="16" nullable="true" comment="New status"/>
+        <column xsi:type="text" name="message" nullable="true" comment="Human readable message"/>
+        <column xsi:type="text" name="payload" nullable="true" comment="Raw payload (callback/API)"/>
+        <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Created At"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="log_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="MDS_DS_DOC_LOG_DOC_ID_MDS_DS_DOC_DOC_ID"
+                    table="mageos_digitalsignature_document_log" column="document_id"
+                    referenceTable="mageos_digitalsignature_document" referenceColumn="document_id"
+                    onDelete="CASCADE"/>
+        <index referenceId="MDS_DIGITALSIGNATURE_DOCUMENT_LOG_DOCUMENT_ID" indexType="btree">
+            <column name="document_id"/>
+        </index>
+    </table>
+
+    <!-- Opt-in cliente: scelta "voglio il contratto da firmare" sul carrello.
+         Propagata a sales_order alla conversione quote->order (vedi fieldset.xml).
+         Letta server-side da TriggerHandler per i template facoltativi. -->
+    <!-- Tri-stato: NULL = scelta mai espressa (gli obbligatori partono pre-spuntati,
+         i facoltativi no), 0 = deselezionata esplicitamente, 1 = selezionata.
+         Nullable per distinguere "mai toccato" da "tolta dall'utente". -->
+    <table name="quote" resource="checkout" engine="innodb">
+        <column xsi:type="smallint" name="digitalsignature_requested" unsigned="true" nullable="true"
+                comment="Customer requested digital signature (NULL=unset)"/>
+    </table>
+    <table name="sales_order" resource="sales" engine="innodb">
+        <column xsi:type="smallint" name="digitalsignature_requested" unsigned="true" nullable="true"
+                comment="Customer requested digital signature (NULL=unset)"/>
+    </table>
+</schema>

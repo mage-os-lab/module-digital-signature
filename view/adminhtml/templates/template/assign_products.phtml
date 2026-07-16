@@ -1,0 +1,64 @@
+<?php
+/** @var \MageOS\DigitalSignature\Block\Adminhtml\Template\AssignProducts $block */
+/** @var \Magento\Framework\Escaper $escaper */
+$gridJsObjectName = $block->getBlockGrid()->getJsObjectName();
+?>
+<?= $block->getGridHtml() ?>
+<input type="hidden" name="template_products" id="in_template_products"
+       data-form-part="digitalsignature_template_form"
+       value="<?= $escaper->escapeHtmlAttr($block->getProductsJson()) ?>"/>
+<script>
+require([
+    'mage/adminhtml/grid',
+    'prototype'
+], function () {
+    'use strict';
+
+    var selectedProducts = <?= /* @noEscape */ $block->getProductsJsonForScript() ?>;
+
+    /**
+     * Registra selezione/deselezione di un prodotto nella griglia
+     * e mantiene aggiornato l'input hidden serializzato.
+     */
+    function registerTemplateProduct(grid, element, checked) {
+        if (checked) {
+            selectedProducts[element.value] = 0;
+        } else {
+            delete selectedProducts[element.value];
+        }
+        $('in_template_products').value = JSON.stringify(selectedProducts);
+        grid.reloadParams = {
+            'selected_products[]': Object.keys(selectedProducts)
+        };
+    }
+
+    function templateProductRowClick(grid, event) {
+        var trElement = Event.findElement(event, 'tr'),
+            eventElement = Event.element(event),
+            isInputCheckbox = eventElement.tagName === 'INPUT' && eventElement.type === 'checkbox',
+            checkbox;
+
+        if (trElement) {
+            checkbox = Element.getElementsBySelector(trElement, 'input[type="checkbox"]');
+            if (checkbox[0] && !isInputCheckbox) {
+                checkbox[0].checked = !checkbox[0].checked;
+                registerTemplateProduct(grid, checkbox[0], checkbox[0].checked);
+            }
+        }
+    }
+
+    var waitForGrid = setInterval(function () {
+        var grid = window['<?= /* @noEscape */ $gridJsObjectName ?>'];
+        if (!grid) {
+            return;
+        }
+        clearInterval(waitForGrid);
+        grid.rowClickCallback = templateProductRowClick;
+        grid.initRowCallback = function () {};
+        grid.checkboxCheckCallback = registerTemplateProduct;
+        grid.reloadParams = {
+            'selected_products[]': Object.keys(selectedProducts)
+        };
+    }, 100);
+});
+</script>

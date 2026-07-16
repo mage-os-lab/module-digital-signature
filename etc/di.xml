@@ -1,0 +1,86 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="MageOS\DigitalSignature\Api\Data\TemplateInterface"
+                type="MageOS\DigitalSignature\Model\Template"/>
+    <preference for="MageOS\DigitalSignature\Api\TemplateRepositoryInterface"
+                type="MageOS\DigitalSignature\Model\TemplateRepository"/>
+    <preference for="MageOS\DigitalSignature\Api\Data\DocumentInterface"
+                type="MageOS\DigitalSignature\Model\Document"/>
+    <preference for="MageOS\DigitalSignature\Api\DocumentRepositoryInterface"
+                type="MageOS\DigitalSignature\Model\DocumentRepository"/>
+    <preference for="MageOS\DigitalSignature\Api\SignProviderPoolInterface"
+                type="MageOS\DigitalSignature\Model\Provider\Pool"/>
+    <preference for="MageOS\DigitalSignature\Api\MergeFieldPoolInterface"
+                type="MageOS\DigitalSignature\Model\MergeField\Pool"/>
+    <preference for="MageOS\DigitalSignature\Api\DocumentStorageInterface"
+                type="MageOS\DigitalSignature\Model\Storage\VarDocumentStorage"/>
+
+    <!-- Registro dei connettori di firma: i nuovi provider si aggiungono qui -->
+    <type name="MageOS\DigitalSignature\Model\Provider\Pool">
+        <arguments>
+            <argument name="providers" xsi:type="array">
+                <item name="wssign" xsi:type="object">MageOS\DigitalSignature\Model\Provider\WsSign</item>
+                <item name="dummy" xsi:type="object">MageOS\DigitalSignature\Model\Provider\Dummy</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <!-- Registro dei merge field: i nuovi campi si aggiungono qui -->
+    <type name="MageOS\DigitalSignature\Model\MergeField\Pool">
+        <arguments>
+            <argument name="providers" xsi:type="array">
+                <item name="order_number" xsi:type="object">MageOS\DigitalSignature\Model\MergeField\OrderNumber</item>
+                <item name="grand_total" xsi:type="object">MageOS\DigitalSignature\Model\MergeField\GrandTotal</item>
+                <item name="customer_name" xsi:type="object">MageOS\DigitalSignature\Model\MergeField\CustomerName</item>
+                <item name="order_date" xsi:type="object">MageOS\DigitalSignature\Model\MergeField\OrderDate</item>
+                <item name="invoice_date" xsi:type="object">MageOS\DigitalSignature\Model\MergeField\InvoiceDate</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <!--
+        Uploader PDF template: classe propria (non virtualType di Magento\Catalog\Model\ImageUploader)
+        per non ereditare il plugin core Media Gallery che, dopo ogni spostamento file, tenta di
+        importarlo come asset immagine (thumbnail) e fallisce su un PDF interrompendo il salvataggio
+        del template prima che pdf_path venga persistito.
+    -->
+    <type name="MageOS\DigitalSignature\Model\PdfUploader">
+        <arguments>
+            <argument name="baseTmpPath" xsi:type="string">digitalsignature/tmp</argument>
+            <argument name="basePath" xsi:type="string">digitalsignature/templates</argument>
+            <argument name="allowedExtensions" xsi:type="array">
+                <item name="pdf" xsi:type="string">pdf</item>
+            </argument>
+            <argument name="allowedMimeTypes" xsi:type="array">
+                <item name="pdf" xsi:type="string">application/pdf</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <!-- Data source griglia template -->
+    <virtualType name="MageOS\DigitalSignature\Model\ResourceModel\Template\Grid\Collection"
+                 type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">mageos_digitalsignature_template</argument>
+            <argument name="resourceModel" xsi:type="string">MageOS\DigitalSignature\Model\ResourceModel\Template</argument>
+        </arguments>
+    </virtualType>
+
+    <!-- Data source griglia documenti firma -->
+    <virtualType name="MageOS\DigitalSignature\Model\ResourceModel\Document\Grid\Collection"
+                 type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">mageos_digitalsignature_document</argument>
+            <argument name="resourceModel" xsi:type="string">MageOS\DigitalSignature\Model\ResourceModel\Document</argument>
+        </arguments>
+    </virtualType>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="digitalsignature_template_listing_data_source" xsi:type="string">MageOS\DigitalSignature\Model\ResourceModel\Template\Grid\Collection</item>
+                <item name="digitalsignature_document_listing_data_source" xsi:type="string">MageOS\DigitalSignature\Model\ResourceModel\Document\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+</config>

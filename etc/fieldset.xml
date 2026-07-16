@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!--
+    Copia il flag opt-in dal quote all'ordine durante la conversione
+    quote -> order (Magento\Quote\Model\Quote\Address\ToOrder). Così
+    TriggerHandler legge $order->getData('digitalsignature_requested') senza
+    bisogno di observer/plugin dedicati.
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:DataObject/etc/fieldset.xsd">
+    <scope id="global">
+        <fieldset id="sales_convert_quote">
+            <field name="digitalsignature_requested">
+                <aspect name="to_order"/>
+            </field>
+        </fieldset>
+    </scope>
+</config>

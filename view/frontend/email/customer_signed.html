@@ -1,0 +1,15 @@
+<!--@subject {{trans "Il tuo contratto firmato è disponibile (ordine %increment_id)" increment_id=$order_increment_id}} @-->
+<!--@vars {
+"var customer_name":"Nome cliente",
+"var order_increment_id":"Numero ordine",
+"var order_url":"Link all'ordine"
+} @-->
+{{template config_path="design/email/header_template"}}
+
+<p>{{trans "Ciao %name," name=$customer_name}}</p>
+
+<p>{{trans "il contratto relativo al tuo ordine #%increment_id è stato firmato digitalmente con successo." increment_id=$order_increment_id}}</p>
+
+<p>{{trans 'Puoi scaricare il documento firmato dalla tua area clienti: <a href="%url">Vai all\'ordine</a>' url=$order_url |raw}}</p>
+
+{{template config_path="design/email/footer_template"}}

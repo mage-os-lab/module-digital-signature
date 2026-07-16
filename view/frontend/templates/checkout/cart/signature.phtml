@@ -1,0 +1,49 @@
+<?php
+/**
+ * Checkbox opt-in firma digitale (tema Luma).
+ *
+ * @var \Magento\Framework\View\Element\Template $block
+ */
+declare(strict_types=1);
+
+use MageOS\DigitalSignature\Model\ViewModel\SignatureRequest;
+
+/** @var SignatureRequest $viewModel */
+$viewModel = $block->getData('signature_view_model');
+
+if (!$viewModel || !$viewModel->isApplicable()) {
+    return;
+}
+
+$mandatory = $viewModel->isMandatory();
+$checked = $viewModel->isRequested();
+?>
+<div id="digitalsignature-signature-request" class="digitalsignature-signature-request">
+    <label class="digitalsignature-signature-request__label">
+        <input type="checkbox"
+               class="checkbox digitalsignature-signature-request__checkbox"
+            <?= $checked ? 'checked="checked"' : '' ?>
+            <?= $mandatory
+                ? 'aria-required="true" aria-describedby="digitalsignature-signature-request-note digitalsignature-signature-request-status"'
+                : 'aria-describedby="digitalsignature-signature-request-status"' ?>/>
+        <span><?= $block->escapeHtml($viewModel->getLabel()) ?></span>
+    </label>
+    <?php if ($mandatory): ?>
+        <p id="digitalsignature-signature-request-note" class="digitalsignature-signature-request__note">
+            <?= $block->escapeHtml($viewModel->getNote()) ?>
+        </p>
+    <?php endif; ?>
+    <p id="digitalsignature-signature-request-status" class="digitalsignature-signature-request__status"
+       data-role="status" role="status" aria-live="polite"></p>
+</div>
+<script type="text/x-magento-init">
+    {
+        "#digitalsignature-signature-request": {
+            "MageOS_DigitalSignature/js/signature-toggle": {
+                "url": "<?= $block->escapeJs($viewModel->getEndpointUrl()) ?>",
+                "formKey": "<?= $block->escapeJs($viewModel->getFormKey()) ?>",
+                "mandatory": <?= $mandatory ? 'true' : 'false' ?>
+            }
+        }
+    }
+</script>

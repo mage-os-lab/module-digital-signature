@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Menu/etc/menu.xsd">
+    <menu>
+        <add id="MageOS_DigitalSignature::digitalsignature" title="Firma Digitale" translate="title"
+             module="MageOS_DigitalSignature" sortOrder="55"
+             resource="MageOS_DigitalSignature::digitalsignature"/>
+        <add id="MageOS_DigitalSignature::template" title="Template documenti" translate="title"
+             module="MageOS_DigitalSignature" sortOrder="10"
+             parent="MageOS_DigitalSignature::digitalsignature"
+             action="digitalsignature/template/index"
+             resource="MageOS_DigitalSignature::template"/>
+        <add id="MageOS_DigitalSignature::document" title="Documenti firma" translate="title"
+             module="MageOS_DigitalSignature" sortOrder="20"
+             parent="MageOS_DigitalSignature::digitalsignature"
+             action="digitalsignature/document/index"
+             resource="MageOS_DigitalSignature::document"/>
+        <add id="MageOS_DigitalSignature::config" title="Configurazione" translate="title"
+             module="MageOS_DigitalSignature" sortOrder="90"
+             parent="MageOS_DigitalSignature::digitalsignature"
+             action="adminhtml/system_config/edit/section/digital_signature"
+             resource="MageOS_DigitalSignature::config"/>
+    </menu>
+</config>

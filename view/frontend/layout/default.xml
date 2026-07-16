@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!--
+    Aggiunge il checkbox opt-in firma al contenuto della minicart (Luma),
+    nell'area "extraInfo" del componente KO minicart_content.
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="minicart">
+            <arguments>
+                <argument name="jsLayout" xsi:type="array">
+                    <item name="components" xsi:type="array">
+                        <item name="minicart_content" xsi:type="array">
+                            <item name="children" xsi:type="array">
+                                <item name="digitalsignature_signature" xsi:type="array">
+                                    <item name="component" xsi:type="string">MageOS_DigitalSignature/js/view/minicart-signature</item>
+                                    <item name="config" xsi:type="array">
+                                        <item name="displayArea" xsi:type="string">extraInfo</item>
+                                    </item>
+                                </item>
+                            </item>
+                        </item>
+                    </item>
+                </argument>
+            </arguments>
+        </referenceBlock>
+    </body>
+</page>

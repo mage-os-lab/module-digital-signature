@@ -60,6 +60,7 @@ class Aggregator
         $expiredDeclinedPercentage = $totalGenerated > 0 ? round(($expiredDeclinedCount / $totalGenerated) * 100, 1) : 0.0;
 
         $logTable = $this->resourceConnection->getTableName('mageos_digitalsignature_document_log');
+        $whereSqlWithAlias = str_replace('created_at', 'd.created_at', $whereSql);
         $avgQuery = "
             SELECT AVG(TIMESTAMPDIFF(SECOND, log_sent.created_at, log_signed.created_at)) / 86400.0 as avg_days
             FROM {$documentTable} d
@@ -71,7 +72,7 @@ class Aggregator
                 ON d.document_id = log_signed.document_id
                 AND log_signed.event = 'status_change'
                 AND log_signed.status_to = 'signed'
-            WHERE d.{$whereSql}
+            WHERE {$whereSqlWithAlias}
         ";
 
         $avgDays = (float)$connection->fetchOne($avgQuery, $binds);

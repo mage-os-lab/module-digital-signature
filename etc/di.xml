@@ -21,6 +21,8 @@
         <arguments>
             <argument name="providers" xsi:type="array">
                 <item name="wssign" xsi:type="object">MageOS\DigitalSignature\Model\Provider\WsSign</item>
+                <item name="docusign" xsi:type="object">MageOS\DigitalSignature\Model\Provider\Docusign</item>
+                <item name="adobesign" xsi:type="object">MageOS\DigitalSignature\Model\Provider\AdobeSign</item>
                 <item name="dummy" xsi:type="object">MageOS\DigitalSignature\Model\Provider\Dummy</item>
             </argument>
         </arguments>

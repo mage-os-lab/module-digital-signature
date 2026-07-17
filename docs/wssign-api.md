@@ -3,6 +3,30 @@
 > Fonte: `app/Services/WsignService.php`, `app/Controllers/WsignController.php`,
 > `app/Model/Richieste.php` (flusso reale in produzione). Data estrazione: 2026-06-12.
 
+---
+
+## Iscrizione e Onboarding WsSign
+
+WsSign non offre una procedura di registrazione self-service aperta al pubblico sul proprio sito web. Per iscriversi e attivare un account, è necessario seguire questi passaggi:
+
+1. **Contatto Commerciale**: Richiedere l'attivazione del servizio tramite il proprio account manager/partner commerciale di riferimento o contattando direttamente il servizio clienti WsSign.
+2. **Attivazione Sandbox (Test)**: 
+   * Richiedere al supporto WsSign la creazione di un **Tenant di test** sull'ambiente di Sandbox (solitamente ospitato su `https://demo.wsign.cloud`).
+   * Fornire l'indirizzo email che si desidera impostare come **Account Owner** (sarà colui che risulterà come mittente/proprietario dei documenti da firmare).
+   * Ricevere dal supporto le seguenti credenziali necessarie per configurare il modulo:
+     * **Tenant Code**: Codice alfanumerico del proprio tenant.
+     * **Username (owner)**: L'indirizzo email dell'owner configurato.
+     * **Password**: La password di accesso del tenant owner.
+3. **Adempimenti GDPR (Obbligatorio per la Produzione)**:
+   * Poiché il processo di firma comporta l'invio a terzi di Dati Personali dei clienti (Nome, Cognome, Email e Numero di cellulare per l'invio dell'OTP via SMS), è necessario stipulare un **DPA (Data Processing Agreement)** con WsSign.
+   * Aggiornare la Privacy Policy del proprio e-commerce indicando il trasferimento di tali dati al provider WsSign per scopi di firma contrattuale.
+4. **Attivazione Produzione**:
+   * Una volta stipulato il DPA e concordato il piano commerciale delle firme, richiedere le credenziali di produzione.
+   * WsSign fornirà il nuovo **Tenant Code** e le credenziali associate al server di produzione (l'URL reale di produzione verrà fornito da WsSign, ad esempio `https://wsign.vianova.it` o equivalente).
+   * Per sbloccare l'invio in produzione su Magento/Mage-OS, ricordarsi di attivare la spunta **Presa d'atto GDPR (modalità produzione)** in *Generale > Presa d'atto GDPR* nelle impostazioni del modulo.
+
+---
+
 ## Configurazione richiesta
 
 | Parametro | Esempio | Note |

@@ -4,6 +4,54 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [0.2.0]
+### Added
+- **PDF 1.5+ cross-reference stream support**: a custom parser (`ClassicXrefReader`, `XrefStreamReader`,
+  `XrefChainResolver`, `DictFields`, `StartxrefLocator`) reads both classic and compressed
+  xref tables, with real LibreOffice-generated PDF fixtures for round-trip testing. On-demand
+  preview of the processed template is now available from the admin template form.
+- **Precise-coordinate signature tag injection** (`SignatureTagInjector`): places the signature
+  tag at exact page coordinates on both flat and nested page trees, supports indirect
+  `/Resources` references, falls back to a dedicated embedded Helvetica font when the page has
+  none (avoiding subset fonts that can't render the tag's characters), and prints the tag in a
+  configurable color (invisible by default).
+- **Signature reminders**: automatic reminder/escalation emails for documents awaiting signature,
+  with a dedicated `EligibilityCalculator`, `SignatureReminder` cron job, new DB columns and
+  config group, and translations for all supported locales.
+- **eIDAS legal signature level**: each provider now exposes its legal level (e.g. Simple/Advanced/
+  Qualified) with a disclaimer shown in the admin provider configuration block.
+- **Available connectors catalog**: a DTO/model/block/template listing the signature providers
+  that can be integrated, with cross-linked documentation.
+- **Dynamic merge fields**: order and invoice data (order number, grand total, customer name,
+  order/invoice date) can be substituted directly into PDF templates.
+- **Document stats panel**: a live, DB-backed admin dashboard (5 summary cards) on document
+  volumes and outcomes over a configurable period.
+- **Visual PDF builder** (admin): a pdf.js-based frontend to preview a template and place the
+  signature tag by clicking on the page, with a dedicated CSP collector, upload/preview/inject-tag
+  controllers, and coordinate conversion between screen and PDF space.
+- **DocuSign provider**: JWT Server-to-Server authentication (with session caching), envelope
+  creation via AutoPlace anchor tab (`{WSIGN#`), status polling, signed PDF download and envelope
+  cancellation (void).
+- **Adobe Sign provider skeleton**: config block and provider info placeholder, not yet
+  functionally implemented.
+- Unit test suite for the DocuSign provider (`Docusign`/`Docusign\Client`, 39 tests), covering
+  the JWT auth flow (cache hit/miss/corrupt, incomplete config, invalid key, account selection,
+  demo/production environment), envelope lifecycle and HTTP error classification.
+- The unit test suite can now be run standalone directly from this repository, without a full
+  Magento installation: see `composer.test.json` and the "Running the test suite" section in the
+  README.
+
+### Fixed
+- Ambiguous `created_at` column in the document statistics aggregation query.
+- `Docusign::start()` passed a `Phrase` object to `sprintf()` instead of a string, causing a
+  PHP type error.
+- `Docusign::mapStatus()` referenced non-existent `Status` constants
+  (`STATUS_IN_PROGRESS`/`STATUS_SIGNED`/`STATUS_REJECTED`/`STATUS_EXPIRED`), causing a fatal
+  error on every real status returned by DocuSign during polling.
+- Non-AMD loading of pdf.js and an admin fieldset switcher error in the visual PDF builder.
+- File uploader mixin dropped the original upload response data (e.g. `files`) in its success
+  callback.
+
 ## [0.1.0]
 ### Added
 - Generation and digital signature of order contract documents through external providers

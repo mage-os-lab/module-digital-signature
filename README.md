@@ -73,6 +73,19 @@ Signed Documents**.
 For technical details see the [`docs/`](docs) folder (functional analysis, WsSign API, testing,
 security audit).
 
+## Running the test suite
+
+The unit test suite runs standalone, without a full Magento installation (a set of minimal
+framework stubs under `tests/stubs/` stands in for `magento/framework` and friends). The
+module's own `composer.json` requires `magento/*` packages from the private
+`repo.magento.com` repository, so it cannot be installed on its own for this purpose. Use the
+dedicated test manifest instead:
+
+```
+COMPOSER=composer.test.json composer install
+vendor/bin/phpunit
+```
+
 ## Known limitations
 
 - **Encrypted PDFs and PDFs using object streams (a PDF 1.5+ compression feature) are rejected at

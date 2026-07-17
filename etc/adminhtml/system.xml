@@ -285,6 +285,122 @@
                         <depends><field id="enabled">1</field></depends>
                     </field>
                 </group>
+                <group id="docusign" translate="label comment" type="text" sortOrder="12"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>DocuSign</label>
+                    <comment>Integrazione con la piattaforma DocuSign.</comment>
+                    <field id="info" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <frontend_model>MageOS\DigitalSignature\Block\Adminhtml\System\Config\ProviderInfo\Docusign</frontend_model>
+                    </field>
+                    <field id="enabled" translate="label" type="select" sortOrder="10"
+                           showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Abilitato</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                    <field id="environment" translate="label comment" type="select" sortOrder="20"
+                           showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Ambiente</label>
+                        <source_model>MageOS\DigitalSignature\Model\Config\Source\Environment</source_model>
+                        <depends><field id="enabled">1</field></depends>
+                    </field>
+                    <field id="integration_key" translate="label comment" type="text" sortOrder="30"
+                           showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Integration Key (Client ID)</label>
+                        <comment>Chiave di integrazione recuperata dalla DocuSign Console.</comment>
+                        <validate>required-entry</validate>
+                        <depends><field id="enabled">1</field></depends>
+                    </field>
+                    <field id="secret_key" translate="label comment" type="obscure" sortOrder="40"
+                           showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Secret Key (Client Secret)</label>
+                        <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+                        <depends><field id="enabled">1</field></depends>
+                    </field>
+                    <field id="account_id" translate="label comment" type="text" sortOrder="50"
+                           showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>API Account ID</label>
+                        <comment>ID account visibile nella sezione Apps and Keys.</comment>
+                        <validate>required-entry</validate>
+                        <depends><field id="enabled">1</field></depends>
+                    </field>
+                    <field id="user_id" translate="label comment" type="text" sortOrder="60"
+                           showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>API User ID (GUID)</label>
+                        <comment>Necessario per l'autenticazione JWT di tipo Service Account.</comment>
+                        <validate>required-entry</validate>
+                        <depends><field id="enabled">1</field></depends>
+                    </field>
+                    <field id="private_key" translate="label comment" type="textarea" sortOrder="70"
+                           showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Chiave Privata RSA</label>
+                        <comment>Copia e incolla la chiave privata RSA completa generata su DocuSign (inclusi i tag BEGIN/END PRIVATE KEY).</comment>
+                        <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+                        <depends><field id="enabled">1</field></depends>
+                    </field>
+                    <field id="expiration_days" translate="label" type="text" sortOrder="80"
+                           showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Scadenza busta (giorni)</label>
+                        <validate>validate-digits validate-greater-than-zero</validate>
+                        <depends><field id="enabled">1</field></depends>
+                    </field>
+                    <field id="notes" translate="label comment" type="textarea" sortOrder="90"
+                           showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Messaggio email per il firmatario</label>
+                        <comment>Inviato nel corpo della mail di notifica di DocuSign.</comment>
+                        <depends><field id="enabled">1</field></depends>
+                    </field>
+                </group>
+                <group id="adobesign" translate="label comment" type="text" sortOrder="14"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Adobe Acrobat Sign</label>
+                    <comment>Integrazione con la piattaforma Adobe Acrobat Sign.</comment>
+                    <field id="info" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <frontend_model>MageOS\DigitalSignature\Block\Adminhtml\System\Config\ProviderInfo\AdobeSign</frontend_model>
+                    </field>
+                    <field id="enabled" translate="label" type="select" sortOrder="10"
+                           showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Abilitato</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                    <field id="environment" translate="label comment" type="select" sortOrder="20"
+                           showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Ambiente</label>
+                        <source_model>MageOS\DigitalSignature\Model\Config\Source\Environment</source_model>
+                        <depends><field id="enabled">1</field></depends>
+                    </field>
+                    <field id="client_id" translate="label comment" type="text" sortOrder="30"
+                           showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Application ID (Client ID)</label>
+                        <comment>ID applicazione recuperato dall'Adobe Developer Console.</comment>
+                        <validate>required-entry</validate>
+                        <depends><field id="enabled">1</field></depends>
+                    </field>
+                    <field id="client_secret" translate="label comment" type="obscure" sortOrder="40"
+                           showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Client Secret</label>
+                        <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+                        <depends><field id="enabled">1</field></depends>
+                    </field>
+                    <field id="refresh_token" translate="label comment" type="obscure" sortOrder="50"
+                           showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>OAuth Refresh Token</label>
+                        <comment>Token di aggiornamento a lungo termine per generare gli Access Token delle API.</comment>
+                        <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+                        <depends><field id="enabled">1</field></depends>
+                    </field>
+                    <field id="expiration_days" translate="label" type="text" sortOrder="60"
+                           showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Scadenza accordo (giorni)</label>
+                        <validate>validate-digits validate-greater-than-zero</validate>
+                        <depends><field id="enabled">1</field></depends>
+                    </field>
+                    <field id="notes" translate="label comment" type="textarea" sortOrder="70"
+                           showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Messaggio per il firmatario</label>
+                        <comment>Inviato nella notifica email di Adobe Acrobat Sign.</comment>
+                        <depends><field id="enabled">1</field></depends>
+                    </field>
+                </group>
                 <group id="dummy" translate="label comment" type="text" sortOrder="20"
                        showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Dummy (solo test)</label>

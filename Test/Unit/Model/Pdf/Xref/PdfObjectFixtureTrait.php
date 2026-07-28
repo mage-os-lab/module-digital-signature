@@ -4,15 +4,15 @@ declare(strict_types=1);
 namespace MageOS\DigitalSignature\Test\Unit\Model\Pdf\Xref;
 
 /**
- * Costruisce un PDF con xref classica a partire da un elenco di oggetti già
- * pronti (testo completo "N G obj ... endobj"), usato dai test che devono
- * costruire un albero pagine reale (Catalog/Pages/Page/Contents) senza dover
- * calcolare offset a mano.
+ * Builds a PDF with a classic xref from a list of already-ready objects
+ * (full text "N G obj ... endobj"), used by tests that need to
+ * build a real page tree (Catalog/Pages/Page/Contents) without having to
+ * compute offsets by hand.
  */
 trait PdfObjectFixtureTrait
 {
     /**
-     * @param array<int, string> $objects numero oggetto => testo completo dell'oggetto
+     * @param array<int, string> $objects object number => full text of the object
      */
     private function buildClassicXrefPdf(array $objects, int $rootNumber): string
     {

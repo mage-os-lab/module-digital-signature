@@ -9,8 +9,8 @@ use Magento\Framework\App\Action\HttpGetActionInterface;
 use Magento\Framework\View\Result\PageFactory;
 
 /**
- * Griglia documenti firma (menu Firma Digitale > Documenti): elenco di tutti i
- * documenti generati per gli ordini, con filtri per stato/provider/trigger.
+ * Signature documents grid (menu Firma Digitale > Documenti): list of all
+ * documents generated for orders, with filters by status/provider/trigger.
  */
 class Index extends Action implements HttpGetActionInterface
 {
@@ -28,7 +28,7 @@ class Index extends Action implements HttpGetActionInterface
         /** @var Page $resultPage */
         $resultPage = $this->resultPageFactory->create();
         $resultPage->setActiveMenu('MageOS_DigitalSignature::document');
-        $resultPage->getConfig()->getTitle()->prepend(__('Documenti firma'));
+        $resultPage->getConfig()->getTitle()->prepend(__('Signature documents'));
 
         return $resultPage;
     }

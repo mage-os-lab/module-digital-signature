@@ -9,7 +9,7 @@ use Magento\Framework\Serialize\Serializer\Json;
 use Magento\Store\Model\ScopeInterface;
 
 /**
- * Lettore di configurazione per i connettori: digital_signature/providers/<code>/<field>.
+ * Configuration reader for the connectors: digital_signature/providers/<code>/<field>.
  */
 class ProviderConfig
 {
@@ -43,7 +43,7 @@ class ProviderConfig
     }
 
     /**
-     * Campo salvato con backend model Encrypted.
+     * Field saved with the Encrypted backend model.
      */
     public function getSecret(string $providerCode, string $field, ?int $storeId = null): ?string
     {
@@ -56,7 +56,7 @@ class ProviderConfig
     }
 
     /**
-     * Campo salvato con backend model ArraySerialized (righe dinamiche).
+     * Field saved with the ArraySerialized backend model (dynamic rows).
      *
      * @return array<int|string, array<string, string>>
      */

@@ -9,9 +9,9 @@ use Magento\Framework\Data\Form\FormKey;
 use Magento\Framework\UrlInterface;
 
 /**
- * Espone alla minicart (KO Luma / Alpine Hyva, via customer-data) lo stato
- * dell'opt-in firma per il carrello corrente. Reattiva: invalidata sulle
- * azioni di carrello e dopo il salvataggio della scelta (vedi sections.xml).
+ * Exposes to the minicart (KO Luma / Alpine Hyva, via customer-data) the state
+ * of the signature opt-in for the current cart. Reactive: invalidated on cart
+ * actions and after saving the choice (see sections.xml).
  */
 class SignatureSection implements SectionSourceInterface
 {

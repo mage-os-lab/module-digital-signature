@@ -17,7 +17,7 @@ class Upload extends Action implements HttpPostActionInterface
 {
     public const ADMIN_RESOURCE = 'MageOS_DigitalSignature::template';
 
-    /** Deve combaciare con l'argomento "baseTmpPath" del virtualType PdfUploader in di.xml */
+    /** Must match the "baseTmpPath" argument of the PdfUploader virtualType in di.xml */
     private const BASE_TMP_PATH = 'digitalsignature/tmp';
 
     public function __construct(
@@ -41,7 +41,7 @@ class Upload extends Action implements HttpPostActionInterface
                 $result['warning'] = 'no_tag';
                 $result['message'] = $e->getMessage();
             }
-            // Chiave "file" = marcatore di upload nuovo da spostare al salvataggio
+            // Key "file" = marker of a new upload to be moved on save
             $result['file'] = $result['name'];
             $result['cookie'] = [
                 'name' => $this->_getSession()->getName(),
@@ -61,16 +61,16 @@ class Upload extends Action implements HttpPostActionInterface
     }
 
     /**
-     * Validazione a monte (magic bytes, xref classico, presenza tag firma):
-     * se fallisce, il file temporaneo viene rimosso e l'upload rifiutato.
+     * Upstream validation (magic bytes, classic xref, presence of signature tag):
+     * if it fails, the temporary file is removed and the upload rejected.
      *
      * @param array<string, mixed> $uploadResult
      * @throws \Magento\Framework\Exception\LocalizedException
      */
     private function validateUploadedPdf(array $uploadResult): void
     {
-        // saveFileToTmpDir() rimuove la chiave "path" dal risultato (core Magento):
-        // il path assoluto va ricostruito dalla stessa baseTmpPath usata dall'uploader.
+        // saveFileToTmpDir() removes the "path" key from the result (Magento core):
+        // the absolute path must be rebuilt from the same baseTmpPath used by the uploader.
         $fileName = basename((string)($uploadResult['file'] ?? ''));
         $mediaDirectory = $this->filesystem->getDirectoryRead(DirectoryList::MEDIA);
         $absolutePath = $mediaDirectory->getAbsolutePath(self::BASE_TMP_PATH . '/' . $fileName);

@@ -69,11 +69,11 @@ define([
             var html = '<div id="pdf-builder-modal-content" style="display: none;">' +
                 '    <div class="pdf-builder-controls" style="display: flex; gap: 15px; margin-bottom: 15px; align-items: center; justify-content: space-between; flex-wrap: wrap;">' +
                 '        <div style="display: flex; align-items: center; gap: 8px;">' +
-                '            <button id="pdf-prev-page" class="action-secondary" style="padding: 6px 12px; cursor: pointer;">' + __('Indietro') + '</button>' +
+                '            <button id="pdf-prev-page" class="action-secondary" style="padding: 6px 12px; cursor: pointer;">' + __('Previous') + '</button>' +
                 '            <span style="font-weight: 600; font-size: 1.1em; color: #555;">' +
-                '                ' + __('Pagina') + ' <span id="pdf-page-num">1</span> ' + __('di') + ' <span id="pdf-page-count">-</span>' +
+                '                ' + __('Page') + ' <span id="pdf-page-num">1</span> ' + __('of') + ' <span id="pdf-page-count">-</span>' +
                 '            </span>' +
-                '            <button id="pdf-next-page" class="action-secondary" style="padding: 6px 12px; cursor: pointer;">' + __('Avanti') + '</button>' +
+                '            <button id="pdf-next-page" class="action-secondary" style="padding: 6px 12px; cursor: pointer;">' + __('Next') + '</button>' +
                 '        </div>' +
                 '        <div style="display: flex; align-items: center; gap: 8px;">' +
                 '            <button id="pdf-zoom-out" class="action-secondary" style="padding: 6px 12px; cursor: pointer;">' + __('Zoom -') + '</button>' +
@@ -82,7 +82,7 @@ define([
                 '        </div>' +
                 '    </div>' +
                 '    <div style="color: #666; font-size: 0.9em; margin-bottom: 12px; border-left: 3px solid #ffac00; padding-left: 8px;">' +
-                '        ' + __('Seleziona la firma trascinando il mouse per tracciare un riquadro sulla pagina del PDF.') +
+                '        ' + __('Select signature position by dragging the mouse to draw a box on the PDF page.') +
                 '    </div>' +
                 '    <div id="pdf-canvas-container" style="position: relative; overflow: auto; max-height: 480px; border: 1px solid #d1d5db; background-color: #f3f4f6; text-align: center; border-radius: 6px;">' +
                 '        <div style="position: relative; display: inline-block; margin: 10px;">' +
@@ -102,21 +102,21 @@ define([
                 type: 'slide',
                 responsive: true,
                 innerScroll: true,
-                title: __('Posiziona la firma sul PDF'),
+                title: __('Position signature on PDF'),
                 buttons: [{
-                    text: __('Annulla'),
+                    text: __('Cancel'),
                     class: 'action-secondary',
                     click: function () {
                         this.closeModal();
-                        onFailure(__('Operazione annullata.'));
+                        onFailure(__('Operation cancelled.'));
                     }
                 }, {
-                    text: __('Conferma Posizione'),
+                    text: __('Confirm Position'),
                     class: 'action-primary',
                     click: function () {
                         var self = this;
                         if (startX === null || endX === null || !pageInstance) {
-                            alert(__('Traccia un riquadro sul PDF prima di confermare.'));
+                            alert(__('Draw a box on the PDF before confirming.'));
                             return;
                         }
 
@@ -148,7 +148,7 @@ define([
                             }
                         }).fail(function () {
                             $('body').trigger('processStop');
-                            alert(__('Errore durante il salvataggio delle coordinate.'));
+                            alert(__('Error saving coordinates.'));
                         });
                     }
                 }]
@@ -249,8 +249,8 @@ define([
                 renderPage(1);
             }, function (error) {
                 $('body').trigger('processStop');
-                alert(__('Impossibile caricare il PDF temporaneo.'));
-                onFailure(error.message || __('Errore di caricamento PDF.'));
+                alert(__('Unable to load temporary PDF.'));
+                onFailure(error.message || __('PDF loading error.'));
             });
         }
     };

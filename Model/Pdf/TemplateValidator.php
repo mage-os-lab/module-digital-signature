@@ -7,23 +7,23 @@ use MageOS\DigitalSignature\Model\Pdf\Xref\XrefChainResolver;
 use Magento\Framework\Exception\LocalizedException;
 
 /**
- * Validazione del PDF template all'upload, PRIMA di renderlo disponibile
- * (decisione di analisi §13-bis): controlli economici su dimensione/magic
- * bytes, rifiuto esplicito di PDF cifrati o con compressione a oggetti
- * (object stream, non supportata in questa fase), infine un vero dry-run
- * della sostituzione tag con un'email segnaposto — esecuzione reale dello
- * stesso path di scrittura usato in produzione, non solo un controllo di
- * presenza: un template accettato non può più fallire per motivi
- * strutturali durante l'elaborazione di un ordine reale.
+ * Validation of the template PDF on upload, BEFORE making it available
+ * (analysis decision §13-bis): cheap checks on size/magic bytes, explicit
+ * rejection of encrypted PDFs or PDFs with object compression (object
+ * stream, not supported at this stage), finally a real dry-run of the tag
+ * replacement with a placeholder email — actual execution of the same
+ * write path used in production, not just a presence check: an accepted
+ * template can no longer fail for structural reasons during the processing
+ * of a real order.
  */
 class TemplateValidator
 {
-    private const MAX_SIZE_BYTES = 10485760; // allineato al maxFileSize del form
+    private const MAX_SIZE_BYTES = 10485760; // aligned with the form's maxFileSize
 
     /**
-     * Email segnaposto usata sia dal dry-run di validazione sia
-     * dall'anteprima scaricabile (Controller/Adminhtml/Template/Preview):
-     * stessa costante, stesso output deterministico.
+     * Placeholder email used both by the validation dry-run and by the
+     * downloadable preview (Controller/Adminhtml/Template/Preview): same
+     * constant, same deterministic output.
      */
     public const PREVIEW_SIGNER_EMAIL = 'anteprima.firmatario@esempio-dominio-lungo.test';
 
@@ -34,33 +34,32 @@ class TemplateValidator
     }
 
     /**
-     * @throws LocalizedException con messaggio orientato al merchant
+     * @throws LocalizedException with a merchant-facing message
      */
     public function validate(string $pdfContent): void
     {
         if (strlen($pdfContent) > self::MAX_SIZE_BYTES) {
-            throw new LocalizedException(__('Il PDF supera la dimensione massima di 10 MB.'));
+            throw new LocalizedException(__('The PDF exceeds the maximum size of 10 MB.'));
         }
         if (!str_starts_with($pdfContent, '%PDF')) {
-            throw new LocalizedException(__('Il file caricato non è un PDF valido.'));
+            throw new LocalizedException(__('The uploaded file is not a valid PDF.'));
         }
 
         $info = $this->xrefResolver->resolve($pdfContent);
         if ($info->isEncrypted) {
             throw new LocalizedException(__(
-                'PDF cifrati non sono supportati: rimuovi la protezione/password dal documento e ricarica il file.'
+                'Encrypted PDFs are not supported: remove the protection/password from the document and re-upload the file.'
             ));
         }
         if ($info->hasObjectStreams) {
             throw new LocalizedException(__(
-                'PDF non supportato: usa compressione a oggetti (object stream), non gestita in questa versione. '
-                . 'Disabilita la compressione degli oggetti in fase di esportazione e ricarica il file.'
+                'Unsupported PDF: it uses object compression (object streams), not handled in this version. Disable object compression when exporting and re-upload the file.'
             ));
         }
 
-        // Dry-run reale: stesso path di scrittura della produzione, email
-        // segnaposto, risultato scartato. Solleva LocalizedException propria
-        // (PDF non valido / nessun tag) se la sostituzione non è possibile.
+        // Real dry-run: same write path as production, placeholder email,
+        // result discarded. Raises its own LocalizedException (invalid PDF /
+        // no tag) if the replacement is not possible.
         $this->tagReplacer->replaceSignerEmail($pdfContent, self::PREVIEW_SIGNER_EMAIL);
     }
 }

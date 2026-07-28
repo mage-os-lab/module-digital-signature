@@ -6,10 +6,10 @@ namespace MageOS\DigitalSignature\TestSupport;
 use Magento\Framework\HTTP\Client\CurlFactory;
 
 /**
- * Doppio di test di CurlFactory: ogni chiamata a create() restituisce la
- * prossima FakeCurl accodata. Serve per i flussi che eseguono più richieste
- * HTTP in sequenza con risposte diverse (es. autenticazione JWT DocuSign:
- * token OAuth + userinfo + chiamata API).
+ * Test double for CurlFactory: each call to create() returns the next
+ * queued FakeCurl. Used for flows that perform multiple HTTP requests in
+ * sequence with different responses (e.g. DocuSign JWT authentication:
+ * OAuth token + userinfo + API call).
  */
 class SequencedCurlFactory extends CurlFactory
 {

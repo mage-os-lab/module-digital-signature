@@ -80,6 +80,10 @@ namespace Magento\Framework\Exception {
     {
     }
 
+    class CouldNotDeleteException extends LocalizedException
+    {
+    }
+
     class NoSuchEntityException extends LocalizedException
     {
         public function __construct(
@@ -97,6 +101,152 @@ namespace Magento\Framework\Data {
     {
         /** @return array<int, array<string, mixed>> */
         public function toOptionArray();
+    }
+}
+
+namespace Magento\Framework\Api {
+    interface SearchResultsInterface
+    {
+        public function getItems();
+
+        public function setItems(array $items);
+
+        public function setTotalCount($count);
+
+        public function getTotalCount();
+    }
+
+    class Filter
+    {
+        private string $field = '';
+        private string $conditionType = 'eq';
+        private mixed $value = null;
+
+        public function setField(string $field): self
+        {
+            $this->field = $field;
+
+            return $this;
+        }
+
+        public function getField(): string
+        {
+            return $this->field;
+        }
+
+        public function setConditionType(string $conditionType): self
+        {
+            $this->conditionType = $conditionType;
+
+            return $this;
+        }
+
+        public function getConditionType(): string
+        {
+            return $this->conditionType;
+        }
+
+        public function setValue($value): self
+        {
+            $this->value = $value;
+
+            return $this;
+        }
+
+        public function getValue()
+        {
+            return $this->value;
+        }
+    }
+
+    class FilterBuilder
+    {
+        private array $data = [];
+
+        public function setField(string $field): self
+        {
+            $this->data['field'] = $field;
+
+            return $this;
+        }
+
+        public function setConditionType(string $conditionType): self
+        {
+            $this->data['condition_type'] = $conditionType;
+
+            return $this;
+        }
+
+        public function setValue($value): self
+        {
+            $this->data['value'] = $value;
+
+            return $this;
+        }
+
+        public function create(): Filter
+        {
+            $filter = new Filter();
+            $filter->setField($this->data['field'] ?? '');
+            $filter->setConditionType($this->data['condition_type'] ?? 'eq');
+            $filter->setValue($this->data['value'] ?? null);
+            $this->data = [];
+
+            return $filter;
+        }
+    }
+
+    interface SearchCriteriaInterface
+    {
+        /** @return \Magento\Framework\Api\Search\FilterGroup[] */
+        public function getFilterGroups();
+
+        /** @return $this */
+        public function setFilterGroups(array $filterGroups);
+    }
+}
+
+namespace Magento\Framework\Api\Search {
+    class FilterGroup
+    {
+        /** @var \Magento\Framework\Api\Filter[] */
+        private array $filters = [];
+
+        /** @return \Magento\Framework\Api\Filter[] */
+        public function getFilters(): array
+        {
+            return $this->filters;
+        }
+
+        /** @return $this */
+        public function setFilters(array $filters): self
+        {
+            $this->filters = $filters;
+
+            return $this;
+        }
+    }
+
+    class FilterGroupBuilder
+    {
+        /** @var \Magento\Framework\Api\Filter[] */
+        private array $filters = [];
+
+        public function addFilter(\Magento\Framework\Api\Filter $filter): self
+        {
+            $this->filters[] = $filter;
+
+            return $this;
+        }
+
+        public function create(): FilterGroup
+        {
+            $group = new FilterGroup();
+            $group->setFilters($this->filters);
+            $this->filters = [];
+
+            return $group;
+        }
     }
 }
 
@@ -143,11 +293,70 @@ namespace Magento\Store\Api\Data {
     }
 }
 
+namespace Magento\Framework\Model {
+    abstract class AbstractModel
+    {
+        protected array $_data = [];
+
+        public function _init($resourceModel)
+        {
+        }
+
+        public function getData($key = null)
+        {
+            if ($key === null) {
+                return $this->_data;
+            }
+            return $this->_data[$key] ?? null;
+        }
+
+        public function setData($key, $value = null)
+        {
+            if (is_array($key)) {
+                $this->_data = $key;
+            } else {
+                $this->_data[$key] = $value;
+            }
+            return $this;
+        }
+
+        public function getId()
+        {
+            return $this->getData('id') ?? $this->getData('subscription_id') ?? $this->getData('consumer_id');
+        }
+
+        public function isObjectNew()
+        {
+            return !$this->getId();
+        }
+
+        public function dataHasChangedFor($key)
+        {
+            return true;
+        }
+    }
+}
+
 namespace Magento\Framework\Model\ResourceModel\Db {
     abstract class AbstractDb
     {
         public function __construct(...$args)
         {
+        }
+
+        public function save(\Magento\Framework\Model\AbstractModel $object)
+        {
+            return $this;
+        }
+
+        public function load(\Magento\Framework\Model\AbstractModel $object, $value, $field = null)
+        {
+            return $this;
+        }
+
+        public function delete(\Magento\Framework\Model\AbstractModel $object)
+        {
+            return $this;
         }
     }
 }
@@ -156,6 +365,13 @@ namespace Magento\Framework\MessageQueue {
     interface PublisherInterface
     {
         public function publish($topicName, $data);
+    }
+}
+
+namespace Magento\Framework\Event {
+    interface ManagerInterface
+    {
+        public function dispatch($name, array $data = []);
     }
 }
 
@@ -242,6 +458,20 @@ namespace Magento\Framework\Encryption {
     }
 }
 
+namespace Magento\Authorization\Model {
+    interface UserContextInterface
+    {
+        public const USER_TYPE_ADMIN = 0;
+        public const USER_TYPE_INTEGRATION = 1;
+        public const USER_TYPE_CUSTOMER = 2;
+        public const USER_TYPE_GUEST = 3;
+
+        public function getUserId();
+
+        public function getUserType();
+    }
+}
+
 namespace Magento\Framework\Pricing {
     interface PriceCurrencyInterface
     {
@@ -325,6 +555,52 @@ namespace MageOS\DigitalSignature\Model {
         {
             throw new \LogicException('Stub DocumentFactory: configurare un mock nel test.');
         }
+    }
+
+    class WebhookSubscriptionFactory
+    {
+        public function create(array $data = [])
+        {
+            throw new \LogicException('Stub WebhookSubscriptionFactory: configurare un mock nel test.');
+        }
+    }
+
+    class ApiConsumerFactory
+    {
+        public function create(array $data = [])
+        {
+            throw new \LogicException('Stub ApiConsumerFactory: configurare un mock nel test.');
+        }
+    }
+}
+
+namespace Magento\Framework\Event {
+    class Observer
+    {
+        /** @var array<string, mixed> */
+        private array $data = [];
+
+        public function setData(string $key, $value): self
+        {
+            $this->data[$key] = $value;
+
+            return $this;
+        }
+
+        public function getData(string $key)
+        {
+            return $this->data[$key] ?? null;
+        }
+
+        public function getEvent(): self
+        {
+            return $this;
+        }
+    }
+
+    interface ObserverInterface
+    {
+        public function execute(Observer $observer);
     }
 }
 

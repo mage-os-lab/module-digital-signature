@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
-    <!-- sales_order_place_after scatta PRIMA del salvataggio (entity_id assente):
-         submit_success è il punto corretto per "conferma ordine" -->
+    <!-- sales_order_place_after fires BEFORE saving (entity_id not yet set):
+         submit_success is the correct point for "order confirmation" -->
     <event name="sales_model_service_quote_submit_success">
         <observer name="digitalsignature_order_placed"
                   instance="MageOS\DigitalSignature\Observer\OrderPlaced"/>
@@ -14,5 +14,9 @@
     <event name="sales_order_invoice_pay">
         <observer name="digitalsignature_invoice_paid"
                   instance="MageOS\DigitalSignature\Observer\InvoicePaid"/>
+    </event>
+    <event name="mageos_digitalsignature_document_status_changed">
+        <observer name="digitalsignature_dispatch_webhook"
+                  instance="MageOS\DigitalSignature\Observer\DispatchWebhook"/>
     </event>
 </config>

@@ -6,8 +6,8 @@ namespace MageOS\DigitalSignature\Model\Pdf\Xref;
 use Magento\Framework\Exception\LocalizedException;
 
 /**
- * Individua l'ultimo "startxref" del file: punto di ingresso della catena di
- * cross-reference (tabella classica o stream) più recente.
+ * Locates the last "startxref" in the file: entry point of the most recent
+ * cross-reference chain (classic table or stream).
  */
 final class StartxrefLocator
 {
@@ -18,7 +18,7 @@ final class StartxrefLocator
     {
         $tail = substr($pdf, -256);
         if (!preg_match_all('/startxref\s+(\d+)/s', $tail, $matches) || !$matches[1]) {
-            throw new LocalizedException(__('PDF non supportato: startxref non trovato.'));
+            throw new LocalizedException(__('Unsupported PDF: startxref not found.'));
         }
 
         return (int)end($matches[1]);

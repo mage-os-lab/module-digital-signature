@@ -6,19 +6,19 @@ namespace MageOS\DigitalSignature\Model\Pdf\Xref;
 use Magento\Framework\Exception\LocalizedException;
 
 /**
- * Risolve la catena di cross-reference di un PDF (tabella classica e/o xref
- * stream, anche mista), seguendo /Prev fino a un limite fissato. Aggrega
- * hasObjectStreams/isEncrypted su tutta la catena esplorata; Size/Root/
- * isStreamBased vengono dalla revisione più recente (quella da cui parte un
- * eventuale nuovo incremental update).
+ * Resolves the cross-reference chain of a PDF (classic table and/or xref
+ * stream, possibly mixed), following /Prev up to a fixed limit. Aggregates
+ * hasObjectStreams/isEncrypted over the whole explored chain; Size/Root/
+ * isStreamBased come from the most recent revision (the one a new
+ * incremental update, if any, would start from).
  */
 final class XrefChainResolver
 {
     /**
-     * Limite di profondità della catena /Prev esplorata: oltre, si rifiuta
-     * esplicitamente invece di ignorare silenziosamente revisioni storiche
-     * (potrebbero contenere object stream non rilevati). Copre il caso comune
-     * (file appena esportato, 0 o 1 revisione precedente).
+     * Depth limit of the explored /Prev chain: beyond it, explicitly rejects
+     * instead of silently ignoring historical revisions (they could contain
+     * undetected object streams). Covers the common case (freshly exported
+     * file, 0 or 1 previous revision).
      */
     private const MAX_CHAIN_DEPTH = 2;
 
@@ -44,15 +44,15 @@ final class XrefChainResolver
         while ($prevOffset !== null) {
             if ($depth >= self::MAX_CHAIN_DEPTH) {
                 throw new LocalizedException(__(
-                    'PDF non supportato: catena cross-reference con troppe revisioni collegate (max %1).',
+                    'Unsupported PDF: cross-reference chain has too many linked revisions (max %1).',
                     self::MAX_CHAIN_DEPTH
                 ));
             }
             $link = $this->readLinkAt($pdf, $prevOffset);
             $hasObjectStreams = $hasObjectStreams || $link->hasObjectStreams;
             $hasEncrypt = $hasEncrypt || $link->hasEncrypt;
-            // "+=" su array preserva le chiavi già presenti a sinistra: la
-            // revisione più recente (già in $objectOffsets) vince sempre.
+            // "+=" on an array preserves keys already present on the left: the
+            // most recent revision (already in $objectOffsets) always wins.
             $objectOffsets += $link->objectOffsets;
             $prevOffset = $link->prevOffset;
             $depth++;

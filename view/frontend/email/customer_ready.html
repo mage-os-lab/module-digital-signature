@@ -1,18 +1,18 @@
-<!--@subject {{trans "Il tuo contratto da firmare digitalmente è pronto (ordine %increment_id)" increment_id=$order_increment_id}} @-->
+<!--@subject {{trans "Your contract for digital signature is ready (order %increment_id)" increment_id=$order_increment_id}} @-->
 <!--@vars {
-"var customer_name":"Nome cliente",
-"var order_increment_id":"Numero ordine",
-"var order_url":"Link all'ordine",
-"var signer_email":"Email firmatario"
+"var customer_name":"Customer name",
+"var order_increment_id":"Order number",
+"var order_url":"Order link",
+"var signer_email":"Signer email"
 } @-->
 {{template config_path="design/email/header_template"}}
 
-<p>{{trans "Ciao %name," name=$customer_name}}</p>
+<p>{{trans "Hello %name," name=$customer_name}}</p>
 
-<p>{{trans "il contratto relativo al tuo ordine #%increment_id è pronto per essere firmato digitalmente." increment_id=$order_increment_id}}</p>
+<p>{{trans "the contract for your order #%increment_id is ready to be digitally signed." increment_id=$order_increment_id}}</p>
 
-<p>{{trans "A breve riceverai (o hai già ricevuto) le istruzioni dal servizio di firma all'indirizzo %email. Segui quel processo per completare la firma." email=$signer_email}}</p>
+<p>{{trans "You will shortly receive (or have already received) instructions from the signing service at %email. Follow that process to complete the signature." email=$signer_email}}</p>
 
-<p>{{trans 'Puoi consultare lo stato del tuo ordine qui: <a href="%url">I miei ordini</a>' url=$order_url |raw}}</p>
+<p>{{trans 'You can check the status of your order here: <a href="%url">My orders</a>' url=$order_url |raw}}</p>
 
 {{template config_path="design/email/footer_template"}}

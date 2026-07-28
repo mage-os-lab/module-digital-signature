@@ -4,8 +4,8 @@ declare(strict_types=1);
 namespace MageOS\DigitalSignature\Model\Provider\Result;
 
 /**
- * Stato di un processo di firma letto dal provider (valore grezzo,
- * la mappatura sugli stati interni avviene a parte).
+ * Status of a signing process read from the provider (raw value,
+ * the mapping to internal statuses happens separately).
  */
 class StatusResult
 {

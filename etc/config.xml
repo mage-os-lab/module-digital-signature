@@ -39,6 +39,13 @@
                 <admin_threshold_days>7</admin_threshold_days>
                 <batch_limit>50</batch_limit>
             </reminders>
+            <webhooks>
+                <enabled>0</enabled>
+                <max_attempts>5</max_attempts>
+                <batch_limit>50</batch_limit>
+                <failure_notification_enabled>1</failure_notification_enabled>
+                <failure_notification_template>digital_signature_webhooks_failure_notification_template</failure_notification_template>
+            </webhooks>
             <providers>
                 <wssign>
                     <enabled>0</enabled>
@@ -53,7 +60,6 @@
                 </docusign>
                 <adobesign>
                     <enabled>0</enabled>
-                    <environment>demo</environment>
                     <expiration_days>7</expiration_days>
                 </adobesign>
                 <dummy>

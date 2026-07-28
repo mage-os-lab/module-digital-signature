@@ -16,9 +16,9 @@ use Magento\Store\Model\ScopeInterface;
 use Psr\Log\LoggerInterface;
 
 /**
- * Al verificarsi di un trigger (place ordine, fattura, manuale) individua i
- * template applicabili all'ordine e crea i documenti firma, accodandone
- * l'elaborazione. L'enforcement della scelta cliente è qui, server-side.
+ * When a trigger occurs (order placement, invoice, manual) identifies the
+ * templates applicable to the order and creates the signature documents,
+ * queuing their processing. Enforcement of the customer's choice is here, server-side.
  */
 class TriggerHandler
 {
@@ -26,7 +26,7 @@ class TriggerHandler
     private const XML_PATH_DEFAULT_TRIGGER = 'digital_signature/general/default_trigger';
     private const XML_PATH_PROVIDER = 'digital_signature/general/provider';
 
-    /** Campo (futuro: da quote) con cui il cliente ha richiesto la firma */
+    /** Field (future: from quote) with which the customer requested the signature */
     private const ORDER_FLAG_REQUESTED = 'digitalsignature_requested';
 
     public function __construct(
@@ -57,7 +57,7 @@ class TriggerHandler
         $providerCode = $this->productionModeGuard->resolveProviderCode($configuredProviderCode, $storeId);
         if ($providerCode !== $configuredProviderCode) {
             $this->logger->warning(sprintf(
-                'DigitalSignature: modalità produzione non confermata (store %d): provider forzato a "%s" invece di "%s".',
+                'DigitalSignature: unconfirmed production mode (store %d): provider forced to "%s" instead of "%s".',
                 $storeId,
                 $providerCode,
                 $configuredProviderCode
@@ -65,7 +65,7 @@ class TriggerHandler
         }
         $requestedByCustomer = (bool)$order->getData(self::ORDER_FLAG_REQUESTED);
 
-        // Documento di carrello/ordine
+        // Cart/order document
         foreach ($this->templateResource->getActiveCartTemplateRows() as $row) {
             $resolved = $this->resolveTrigger(null, $row['trigger_code'] ?? null, $storeId);
             if ($resolved !== $triggerCode
@@ -82,11 +82,11 @@ class TriggerHandler
             );
         }
 
-        // Documenti di prodotto (uno per riga ordine)
+        // Product documents (one per order line)
         $itemsByProduct = [];
         foreach ($order->getItems() as $item) {
             if ($item->getParentItemId()) {
-                continue; // figli di configurabili/bundle: vale la riga padre
+                continue; // children of configurables/bundles: the parent line applies
             }
             $itemsByProduct[(int)$item->getProductId()][] = (int)$item->getItemId();
         }
@@ -109,7 +109,7 @@ class TriggerHandler
     }
 
     /**
-     * Catena di risoluzione: override prodotto → trigger template → default globale.
+     * Resolution chain: product override → template trigger → global default.
      */
     private function resolveTrigger(?string $productOverride, ?string $templateTrigger, int $storeId): string
     {
@@ -128,8 +128,8 @@ class TriggerHandler
     }
 
     /**
-     * Enforcement server-side: i template obbligatori generano sempre,
-     * i facoltativi solo se il cliente ha richiesto la firma.
+     * Server-side enforcement: mandatory templates always generate,
+     * optional ones only if the customer has requested the signature.
      */
     private function passesCustomerChoice(bool $isRequired, bool $requestedByCustomer): bool
     {
@@ -158,7 +158,7 @@ class TriggerHandler
         try {
             $this->documentRepository->save($document);
         } catch (\Exception $e) {
-            // Indice univoco: documento attivo già esistente per la combinazione → skip
+            // Unique index: active document already exists for the combination → skip
             if ($e instanceof AlreadyExistsException || $e->getPrevious() instanceof AlreadyExistsException
                 || str_contains($e->getMessage(), 'Unique constraint')
                 || str_contains($e->getMessage(), 'Duplicate entry')

@@ -6,13 +6,13 @@ namespace MageOS\DigitalSignature\Api;
 use Magento\Framework\Exception\FileSystemException;
 
 /**
- * Storage dei PDF generati/firmati (interfaccia pluggable: oggi filesystem
- * locale protetto, in futuro S3 o altri backend).
+ * Storage for generated/signed PDFs (pluggable interface: today a protected
+ * local filesystem, in the future S3 or other backends).
  */
 interface DocumentStorageInterface
 {
     /**
-     * @param string $relativePath path relativo allo storage documenti
+     * @param string $relativePath path relative to the document storage
      * @throws FileSystemException
      */
     public function write(string $relativePath, string $content): void;
@@ -25,8 +25,8 @@ interface DocumentStorageInterface
     public function exists(string $relativePath): bool;
 
     /**
-     * Elimina il file, se presente. Idempotente: nessun errore se il path
-     * non esiste già (retention/pulizia possono essere rieseguite).
+     * Deletes the file, if present. Idempotent: no error if the path
+     * doesn't already exist (retention/cleanup can be rerun).
      *
      * @throws FileSystemException
      */

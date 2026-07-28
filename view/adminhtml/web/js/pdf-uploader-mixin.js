@@ -24,8 +24,8 @@ define([
                             },
                             onFailure: function (errorMessage) {
                                 alert({
-                                    title: __('Errore di Validazione'),
-                                    content: errorMessage || __('Impossibile completare la validazione del file.')
+                                    title: __('Validation Error'),
+                                    content: errorMessage || __('Unable to complete file validation.')
                                 });
                                 self.clear();
                             }

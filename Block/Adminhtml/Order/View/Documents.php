@@ -13,12 +13,12 @@ use Magento\Framework\Registry;
 use Magento\Sales\Api\Data\OrderInterface;
 
 /**
- * Tab "Documenti firma" nella vista ordine admin: elenco documenti (storico
- * incluso) con stato, template, provider, PDF e azioni manuali.
+ * "Signature Documents" tab in the admin order view: list of documents (history
+ * included) with status, template, provider, PDF and manual actions.
  */
 class Documents extends Template
 {
-    /** @var array<int, string> cache nome template per id */
+    /** @var array<int, string> template name cache by id */
     private array $templateNames = [];
 
     public function __construct(
@@ -39,7 +39,7 @@ class Documents extends Template
     }
 
     /**
-     * Documenti dell'ordine, più recenti prima (storico incluso).
+     * Order documents, most recent first (history included).
      *
      * @return DocumentInterface[]
      */
@@ -87,7 +87,7 @@ class Documents extends Template
     public function getOrderItemLabel(int $orderItemId): string
     {
         if ($orderItemId === DocumentInterface::ITEM_ID_CART_SCOPE) {
-            return (string)__('Carrello / Ordine');
+            return (string)__('Cart / Order');
         }
         $order = $this->getOrder();
         $item = $order ? $order->getItemById($orderItemId) : null;

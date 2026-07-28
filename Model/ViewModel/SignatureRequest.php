@@ -9,9 +9,9 @@ use Magento\Framework\UrlInterface;
 use Magento\Framework\View\Element\Block\ArgumentInterface;
 
 /**
- * ViewModel del checkbox opt-in (Luma e Hyva, pagina carrello). Delega a
- * SignatureCartContext la logica di applicabilità, condivisa con la
- * customer-data section della minicart.
+ * ViewModel for the opt-in checkbox (Luma and Hyva, cart page). Delegates
+ * the applicability logic to SignatureCartContext, shared with the
+ * minicart's customer-data section.
  */
 class SignatureRequest implements ArgumentInterface
 {

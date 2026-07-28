@@ -19,11 +19,11 @@ use Magento\Framework\Exception\NoSuchEntityException;
 use Psr\Log\LoggerInterface;
 
 /**
- * Callback server-to-server dei provider di firma.
+ * Server-to-server callback from signature providers.
  *
- * La callback è un PING: il payload non viene mai usato; se i controlli
- * passano si accoda un job di polling che legge lo stato dall'API provider.
- * Risposta sempre HTTP 200 uniforme (nessun oracle su validità di id/token).
+ * The callback is a PING: the payload is never used; if the checks
+ * pass, a polling job is queued that reads the status from the provider API.
+ * Response is always a uniform HTTP 200 (no oracle on id/token validity).
  */
 class Index implements HttpPostActionInterface, HttpGetActionInterface, CsrfAwareActionInterface
 {
@@ -46,7 +46,7 @@ class Index implements HttpPostActionInterface, HttpGetActionInterface, CsrfAwar
         try {
             $this->handle();
         } catch (\Exception $e) {
-            // Mai esporre dettagli all'esterno; il dettaglio sta nei log
+            // Never expose details externally; the detail is in the logs
             $this->logger->warning('DigitalSignature: errore callback: ' . $e->getMessage());
         }
 
@@ -82,7 +82,7 @@ class Index implements HttpPostActionInterface, HttpGetActionInterface, CsrfAwar
             return;
         }
 
-        // Dedup: al massimo un job di refresh per documento nella finestra TTL
+        // Dedup: at most one refresh job per document within the TTL window
         $cacheKey = self::DEDUP_CACHE_PREFIX . $documentId;
         if ($this->cache->load($cacheKey)) {
             return;
@@ -107,11 +107,11 @@ class Index implements HttpPostActionInterface, HttpGetActionInterface, CsrfAwar
     }
 
     /**
-     * Il peer TCP reale (REMOTE_ADDR), mai gli header X-Forwarded-For/X-Real-IP/Client-IP:
-     * su Mage-OS il servizio Magento\Framework\HTTP\PhpEnvironment\RemoteAddress si fida di
-     * quegli header per default (app/etc/di.xml del core), quindi un client esterno può
-     * falsificare l'IP e aggirare l'allowlist. Se il sito è dietro un vero reverse proxy,
-     * REMOTE_ADDR sarà l'IP del proxy: è l'unico valore non falsificabile dal chiamante.
+     * The real TCP peer (REMOTE_ADDR), never the X-Forwarded-For/X-Real-IP/Client-IP headers:
+     * on Mage-OS the Magento\Framework\HTTP\PhpEnvironment\RemoteAddress service trusts
+     * those headers by default (core app/etc/di.xml), so an external client can
+     * spoof the IP and bypass the allowlist. If the site is behind a real reverse proxy,
+     * REMOTE_ADDR will be the proxy's IP: it is the only value that cannot be spoofed by the caller.
      */
     private function getTrueRemoteAddress(): string
     {

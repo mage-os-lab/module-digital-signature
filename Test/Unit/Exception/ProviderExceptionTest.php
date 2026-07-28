@@ -10,14 +10,14 @@ class ProviderExceptionTest extends TestCase
 {
     public function testRetryableFactory(): void
     {
-        $exception = ProviderException::retryable(__('errore temporaneo'));
+        $exception = ProviderException::retryable(__('temporary error'));
 
         self::assertTrue($exception->isRetryable());
     }
 
     public function testPermanentFactory(): void
     {
-        $exception = ProviderException::permanent(__('errore permanente'));
+        $exception = ProviderException::permanent(__('permanent error'));
 
         self::assertFalse($exception->isRetryable());
     }
@@ -26,7 +26,7 @@ class ProviderExceptionTest extends TestCase
     {
         $cause = new \RuntimeException('timeout');
 
-        $exception = ProviderException::retryable(__('errore di rete'), $cause);
+        $exception = ProviderException::retryable(__('network error'), $cause);
 
         self::assertSame($cause, $exception->getPrevious());
     }

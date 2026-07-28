@@ -22,11 +22,11 @@ class DeleteButton implements ButtonProviderInterface
         $deleteUrl = $this->context->getUrlBuilder()->getUrl('*/*/delete', ['template_id' => $templateId]);
 
         return [
-            'label' => __('Elimina'),
+            'label' => __('Delete'),
             'class' => 'delete',
             'on_click' => sprintf(
                 "deleteConfirm('%s', '%s', {data: {}})",
-                __('Eliminare questo template? I documenti già generati restano in storico.'),
+                __('Delete this template? Documents already generated remain in the history.'),
                 $deleteUrl
             ),
             'sort_order' => 20,

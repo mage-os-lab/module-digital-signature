@@ -6,5 +6,7 @@
                  destinationType="queue" destination="digitalsignature.document.process"/>
         <binding id="digitalsignatureDocumentRefreshBinding" topic="digitalsignature.document.refresh"
                  destinationType="queue" destination="digitalsignature.document.refresh"/>
+        <binding id="digitalsignatureWebhookDispatchBinding" topic="digitalsignature.webhook.dispatch"
+                 destinationType="queue" destination="digitalsignature.webhook.dispatch"/>
     </exchange>
 </config>

@@ -23,7 +23,7 @@ class Index extends Action implements HttpGetActionInterface
     {
         $resultPage = $this->resultPageFactory->create();
         $resultPage->setActiveMenu('MageOS_DigitalSignature::template');
-        $resultPage->getConfig()->getTitle()->prepend(__('Template documenti firma'));
+        $resultPage->getConfig()->getTitle()->prepend(__('Signature document templates'));
 
         return $resultPage;
     }

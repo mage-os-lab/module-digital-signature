@@ -13,9 +13,9 @@ use Magento\Framework\Exception\NoSuchEntityException;
 use Psr\Log\LoggerInterface;
 
 /**
- * Consumer del topic digitalsignature.document.process: genera il PDF e avvia
- * la firma. Classifica gli errori: i retryable incrementano il contatore
- * (riaccodati dal cron di riconciliazione), i permanenti portano in errore.
+ * Consumer for the digitalsignature.document.process topic: generates the PDF
+ * and starts the signature. Classifies errors: retryable ones increment the
+ * counter (re-queued by the reconciliation cron), permanent ones lead to error.
  */
 class ProcessConsumer
 {
@@ -50,7 +50,7 @@ class ProcessConsumer
                 $this->fail($document, $e->getMessage());
             }
         } catch (\Exception $e) {
-            // Errori non classificati (tag mancante, file assente...): permanenti
+            // Unclassified errors (missing tag, missing file...): permanent
             $this->fail($document, $e->getMessage());
         }
     }

@@ -43,4 +43,10 @@
               type="html"
               module="MageOS_DigitalSignature"
               area="frontend"/>
+    <template id="digital_signature_webhooks_failure_notification_template"
+              label="Digital Signature - Webhook consegna fallita"
+              file="webhook_failure.html"
+              type="html"
+              module="MageOS_DigitalSignature"
+              area="frontend"/>
 </config>

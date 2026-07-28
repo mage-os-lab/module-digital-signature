@@ -19,10 +19,10 @@ class XrefStreamReaderTest extends TestCase
     }
 
     /**
-     * Applica il filtro PNG "Up" (tipo 2) riga per riga: ogni riga è
-     * preceduta dal byte di tipo filtro e i byte sono la differenza rispetto
-     * alla riga precedente (0 per la prima riga) - inverso esatto della
-     * decodifica "Up" in XrefStreamReader.
+     * Applies the PNG "Up" filter (type 2) row by row: each row is
+     * preceded by the filter-type byte and the bytes are the difference relative to
+     * the previous row (0 for the first row) - exact inverse of the
+     * "Up" decoding in XrefStreamReader.
      */
     private function applyPngUpFilter(string $rows, int $columns): string
     {
@@ -66,7 +66,7 @@ class XrefStreamReaderTest extends TestCase
     public function testReadsFlateCompressedStreamWithPngUpPredictor(): void
     {
         $rows = $this->buildXrefStreamRows([[1, 100, 0], [1, 200, 0], [1, 300, 0]], 1, 4, 2);
-        $predicted = $this->applyPngUpFilter($rows, 7); // colonne = somma(W) = 1+4+2
+        $predicted = $this->applyPngUpFilter($rows, 7); // columns = sum(W) = 1+4+2
         $compressed = gzcompress($predicted, 9);
         $pdf = $this->buildXrefStreamPdf(
             '/Type /XRef /Size 4 /Root 2 0 R /W [1 4 2] /Index [1 3] '
@@ -82,7 +82,7 @@ class XrefStreamReaderTest extends TestCase
 
     public function testDetectsObjectStreamEntries(): void
     {
-        // type 2 = oggetto compresso dentro un object stream (num container, indice)
+        // type 2 = object compressed inside an object stream (container num, index)
         $rows = $this->buildXrefStreamRows([[1, 100, 0], [2, 5, 0]], 1, 4, 2);
         $pdf = $this->buildXrefStreamPdf('/Type /XRef /Size 3 /Root 2 0 R /W [1 4 2] /Index [1 2]', $rows);
 
@@ -181,7 +181,7 @@ class XrefStreamReaderTest extends TestCase
 
     public function testObjectOffsetsSkipObjectStreamEntries(): void
     {
-        // riga 1: oggetto 1 con offset diretto; riga 2: oggetto 2 dentro un object stream (tipo 2)
+        // row 1: object 1 with a direct offset; row 2: object 2 inside an object stream (type 2)
         $rows = $this->buildXrefStreamRows([[1, 100, 0], [2, 5, 0]], 1, 4, 2);
         $pdf = $this->buildXrefStreamPdf('/Type /XRef /Size 3 /Root 2 0 R /W [1 4 2] /Index [1 2]', $rows);
 

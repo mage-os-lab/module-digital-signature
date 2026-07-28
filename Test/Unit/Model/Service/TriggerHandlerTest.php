@@ -28,7 +28,7 @@ class TriggerHandlerTest extends TestCase
     private ProductionModeGuard&MockObject $productionModeGuard;
     private TriggerHandler $handler;
 
-    /** @var FakeDocument[] documenti creati dalla factory durante il test */
+    /** @var FakeDocument[] documents created by the factory during the test */
     private array $createdDocuments = [];
 
     protected function setUp(): void
@@ -165,8 +165,8 @@ class TriggerHandlerTest extends TestCase
             [
                 'product_id' => '10',
                 'template_id' => '3',
-                'trigger_code' => 'invoice_paid',        // override sul prodotto
-                'template_trigger_code' => 'order_place', // trigger del template
+                'trigger_code' => 'invoice_paid',        // override on the product
+                'template_trigger_code' => 'order_place', // template trigger
                 'is_required' => '1',
             ],
         ]);
@@ -198,7 +198,7 @@ class TriggerHandlerTest extends TestCase
 
         $order = $this->buildOrder(items: [
             $this->buildItem(itemId: 100, productId: 10),
-            $this->buildItem(itemId: 101, productId: 10, parentItemId: 100), // figlio: da saltare
+            $this->buildItem(itemId: 101, productId: 10, parentItemId: 100), // child: to be skipped
         ]);
         $this->handler->handle($order, 'order_place');
 

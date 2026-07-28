@@ -9,11 +9,11 @@ use Magento\Framework\HTTP\Client\CurlFactory;
 use Magento\Framework\Serialize\Serializer\Json;
 
 /**
- * Client HTTP per le API WsSign (vedi docs/wssign-api.md).
+ * HTTP client for the WsSign APIs (see docs/wssign-api.md).
  *
- * Hardening: TLS verify attivo, nessun follow di redirect (un redirect malevolo
- * dirotterebbe il bearer token), timeout stretti, risposte JSON validate
- * strutturalmente prima dell'uso, niente token nei messaggi d'errore.
+ * Hardening: TLS verify enabled, no redirect following (a malicious redirect
+ * would hijack the bearer token), tight timeouts, JSON responses structurally
+ * validated before use, no tokens in error messages.
  */
 class Client
 {
@@ -46,7 +46,7 @@ class Client
         $token = $data['access_token'] ?? null;
         if (!is_string($token) || $token === '') {
             throw ProviderException::permanent(
-                __('WsSign: autenticazione fallita, verifica credenziali e tenant.')
+                __('WsSign: authentication failed, check the credentials and tenant.')
             );
         }
 
@@ -54,7 +54,7 @@ class Client
     }
 
     /**
-     * @return string GUID del documento creato
+     * @return string GUID of the created document
      * @throws ProviderException
      */
     public function uploadDocument(
@@ -78,12 +78,12 @@ class Client
 
         if (($data['message'] ?? '') !== 'DOCUMENT_ADDED') {
             throw ProviderException::permanent(
-                __('WsSign: caricamento documento rifiutato (%1).', (string)($data['message'] ?? 'risposta sconosciuta'))
+                __('WsSign: document upload rejected (%1).', (string)($data['message'] ?? 'risposta sconosciuta'))
             );
         }
         $guid = $data['data']['documents'][0]['guid'] ?? null;
         if (!is_string($guid) || $guid === '') {
-            throw ProviderException::permanent(__('WsSign: GUID non presente nella risposta di upload.'));
+            throw ProviderException::permanent(__('WsSign: GUID missing from the upload response.'));
         }
 
         return $guid;
@@ -91,7 +91,7 @@ class Client
 
     /**
      * @param array<string, mixed> $sharePayload
-     * @return array<string, mixed> risposta decodificata
+     * @return array<string, mixed> decoded response
      * @throws ProviderException
      */
     public function shareDocument(string $platformUrl, string $token, string $guid, array $sharePayload): array
@@ -104,7 +104,7 @@ class Client
     }
 
     /**
-     * @return array<string, mixed>|null null = 404 (scaduto/cancellato lato provider)
+     * @return array<string, mixed>|null null = 404 (expired/cancelled on the provider side)
      * @throws ProviderException
      */
     public function getDocument(string $platformUrl, string $token, string $guid): ?array
@@ -120,7 +120,7 @@ class Client
     }
 
     /**
-     * @return string contenuto binario del PDF firmato
+     * @return string binary content of the signed PDF
      * @throws ProviderException
      */
     public function downloadDocument(string $platformUrl, string $token, string $guid): string
@@ -131,10 +131,10 @@ class Client
         $url = rtrim($platformUrl, '/') . '/api/v2/consumer/document/' . rawurlencode($guid) . '/download';
         $body = $this->execute($curl, 'GET', $url, null, 'download');
 
-        // Il provider è un confine di fiducia: validare che sia davvero un PDF
+        // The provider is a trust boundary: validate that it is really a PDF
         if (!str_starts_with($body, '%PDF')) {
             throw ProviderException::permanent(
-                __('WsSign: il contenuto scaricato non è un PDF valido.')
+                __('WsSign: the downloaded content is not a valid PDF.')
             );
         }
 
@@ -142,7 +142,7 @@ class Client
     }
 
     /**
-     * Non fallisce su 404 (documento già rimosso).
+     * Does not fail on 404 (document already removed).
      *
      * @throws ProviderException
      */
@@ -176,7 +176,7 @@ class Client
     }
 
     /**
-     * @param int[] $allowedErrorCodes codici HTTP di errore da non trattare come eccezione (ritorna null)
+     * @param int[] $allowedErrorCodes HTTP error codes not to treat as an exception (returns null)
      * @throws ProviderException
      */
     private function execute(
@@ -197,9 +197,9 @@ class Client
                 $curl->get($url);
             }
         } catch (\Exception $e) {
-            // Errore di trasporto (DNS, timeout, TLS): ha senso ritentare
+            // Transport error (DNS, timeout, TLS): retrying makes sense
             throw ProviderException::retryable(
-                __('WsSign: errore di rete durante "%1": %2', $operation, $e->getMessage()),
+                __('WsSign: network error during "%1": %2', $operation, $e->getMessage()),
                 $e
             );
         }
@@ -213,13 +213,13 @@ class Client
         }
         if ($status >= 500 || $status === 429) {
             throw ProviderException::retryable(
-                __('WsSign: errore temporaneo del servizio durante "%1" (HTTP %2).', $operation, $status)
+                __('WsSign: temporary service error during "%1" (HTTP %2).', $operation, $status)
             );
         }
 
-        // 4xx: configurazione o dati errati, il retry non aiuta
+        // 4xx: wrong configuration or data, retrying does not help
         throw ProviderException::permanent(
-            __('WsSign: richiesta rifiutata durante "%1" (HTTP %2).', $operation, $status)
+            __('WsSign: request rejected during "%1" (HTTP %2).', $operation, $status)
         );
     }
 
@@ -233,12 +233,12 @@ class Client
             $data = $this->json->unserialize($body);
         } catch (\InvalidArgumentException $e) {
             throw ProviderException::permanent(
-                __('WsSign: risposta non-JSON durante "%1".', $operation),
+                __('WsSign: non-JSON response during "%1".', $operation),
                 $e
             );
         }
         if (!is_array($data)) {
-            throw ProviderException::permanent(__('WsSign: struttura risposta inattesa durante "%1".', $operation));
+            throw ProviderException::permanent(__('WsSign: unexpected response structure during "%1".', $operation));
         }
 
         return $data;

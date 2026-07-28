@@ -89,10 +89,10 @@ class DocumentManagerTest extends TestCase
         $newId = $this->manager->regenerate(10);
 
         self::assertSame(99, $newId);
-        // Il vecchio documento esce dall'indice attivo e resta in storico
+        // The old document leaves the active index and remains in history
         self::assertFalse($old->getIsActive());
         self::assertSame(Status::CANCELED, $old->getStatus());
-        // Il nuovo eredita la combinazione e riparte da pending
+        // The new one inherits the combination and starts over from pending
         self::assertSame(42, $this->newDocument->getOrderId());
         self::assertSame(7, $this->newDocument->getTemplateId());
         self::assertSame(Status::PENDING, $this->newDocument->getStatus());
@@ -106,10 +106,10 @@ class DocumentManagerTest extends TestCase
         $this->documentRepository->method('save')->willReturnArgument(0);
 
         $provider = $this->createMock(SignProviderInterface::class);
-        $provider->method('cancel')->willThrowException(ProviderException::retryable(__('provider giù')));
+        $provider->method('cancel')->willThrowException(ProviderException::retryable(__('provider down')));
         $this->providerPool->method('get')->willReturn($provider);
 
-        // La rigenerazione non deve fallire: il nuovo documento parte comunque
+        // Regeneration must not fail: the new document is created regardless
         $this->publisher->expects(self::once())->method('publishProcess')->with(99);
 
         self::assertSame(99, $this->manager->regenerate(10));

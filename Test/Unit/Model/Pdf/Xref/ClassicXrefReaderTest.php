@@ -102,10 +102,10 @@ class ClassicXrefReaderTest extends TestCase
 
     public function testObjectOffsetsSkipsMalformedEntryLinesWithoutThrowing(): void
     {
-        // La seconda entry ha un offset di 9 cifre invece di 10 (formato non
-        // conforme): viene scartata silenziosamente, non solleva eccezione.
-        // Comportamento intenzionale (allineato ai lettori PDF reali, tolleranti
-        // verso imperfezioni di formattazione nella tabella xref testuale).
+        // The second entry has a 9-digit offset instead of 10 (non-conforming
+        // format): it is silently discarded, no exception is thrown.
+        // Intentional behavior (aligned with real PDF readers, which are tolerant
+        // of formatting imperfections in the textual xref table).
         $pdf = "xref\n0 3\n"
             . "0000000000 65535 f \n"
             . "000000015 00000 n \n"

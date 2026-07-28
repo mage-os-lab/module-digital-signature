@@ -1,303 +1,303 @@
-"Voglio ricevere il contratto da firmare digitalmente",我希望收到需要电子签名的合同
-"Per i prodotti nel carrello la firma del contratto è obbligatoria.",购物车中的商品必须签署合同。
-"Carrello non disponibile.",购物车不可用。
-"Impossibile salvare la scelta.",无法保存您的选择。
-"Per procedere devi accettare la firma digitale del contratto.",若要继续，您必须接受合同的电子签名。
-"Documenti firma",签名文档
-"ID ordine",订单编号
-"Email firmatario",签署人邮箱
-"Vedi ordine",查看订单
-"Scarica firmato",下载已签名文件
-"Scarica generato",下载已生成文件
-"PDF non disponibile per questo documento.",此文档没有可用的PDF。
-"Impossibile scaricare il PDF: %1",无法下载PDF：%1
-"Genera documenti firma",生成签名文档
-"Generare i documenti firma per gli ordini selezionati?",是否为所选订单生成签名文档？
-"Generazione documenti firma presa in carico per %1 ordine/i.",已为%1个订单加入签名文档生成队列。
-"Impossibile prendere in carico %1 ordine/i (vedi log).",无法将%1个订单加入队列（详见日志）。
-"Contratti firmati",已签名合同
-"Scarica i contratti firmati digitalmente per questo ordine.",下载此订单的电子签名合同。
-"Scarica PDF firmato",下载已签名PDF
-"Contratto d'ordine",订单合同
-Contratto,合同
-"Notifiche email",邮件通知
-"Email inviate al cliente e all'admin sugli eventi del documento firma.",发送给客户和管理员的签名文档事件邮件。
-Mittente,发件人
-"Email destinatario admin",管理员收件邮箱
-"Per le notifiche di errore ed esito negativo. Vuoto = contatto generale dello store.","用于错误和负面结果通知。留空 = 商店的通用联系方式。"
-"Avvisa il cliente quando il documento è pronto",文档就绪时通知客户
-"Spesso il provider invia già il proprio invito a firmare: disattivato di default.",服务商通常已经发送了自己的签名邀请：默认关闭。
-"Template ""documento pronto"" (cliente)","""文档就绪""邮件模板（客户）"
-"Avvisa il cliente quando il documento è firmato",文档签署完成时通知客户
-"Template ""documento firmato"" (cliente)","""文档已签署""邮件模板（客户）"
-"Avvisa il cliente se il documento scade o viene rifiutato",文档过期或被拒绝时通知客户
-"Disattivato di default per evitare allarmismi: valutare caso per caso.",默认关闭，以避免不必要的担忧：请根据具体情况评估。
-"Template ""scaduto/rifiutato"" (cliente)","""已过期/已拒绝""邮件模板（客户）"
-"Avvisa l'admin in caso di errore definitivo",出现最终错误时通知管理员
-"Template ""errore documento"" (admin)","""文档错误""邮件模板（管理员）"
-"Avvisa l'admin se il documento scade o viene rifiutato",文档过期或被拒绝时通知管理员
-"Template ""scaduto/rifiutato"" (admin)","""已过期/已拒绝""邮件模板（管理员）"
-"Il tuo contratto da firmare digitalmente è pronto (ordine %increment_id)","您需要电子签名的合同已准备就绪（订单 %increment_id）"
-"Ciao %name,","您好 %name，"
-"il contratto relativo al tuo ordine #%increment_id è pronto per essere firmato digitalmente.","您的订单 #%increment_id 的合同已准备好进行电子签名。"
-"A breve riceverai (o hai già ricevuto) le istruzioni dal servizio di firma all'indirizzo %email. Segui quel processo per completare la firma.","您很快将收到（或已经收到）签名服务发送至 %email 的说明。请按照该流程完成签名。"
-"Puoi consultare lo stato del tuo ordine qui: <a href=""%url"">I miei ordini</a>","您可以在此查看订单状态：<a href=""%url"">我的订单</a>"
-"Il tuo contratto firmato è disponibile (ordine %increment_id)","您的已签名合同现已可用（订单 %increment_id）"
-"il contratto relativo al tuo ordine #%increment_id è stato firmato digitalmente con successo.","您的订单 #%increment_id 的合同已成功完成电子签名。"
-"Puoi scaricare il documento firmato dalla tua area clienti: <a href=""%url"">Vai all'ordine</a>","您可以从您的客户中心下载已签名文档：<a href=""%url"">前往订单</a>"
-"Aggiornamento sul contratto da firmare (ordine %increment_id)","关于待签合同的更新（订单 %increment_id）"
-"il processo di firma del contratto relativo al tuo ordine #%increment_id si è concluso con esito: %status.","您订单 #%increment_id 合同的签名流程已结束，结果为：%status。"
-"Se ritieni che si tratti di un errore, contatta il nostro servizio clienti. Puoi consultare il tuo ordine qui: <a href=""%url"">I miei ordini</a>","如果您认为这是错误，请联系我们的客服。您可以在此查看订单：<a href=""%url"">我的订单</a>"
-"[Firma Digitale] Errore documento #%document_id (ordine %increment_id)","[电子签名] 文档错误 #%document_id（订单 %increment_id）"
-"L'elaborazione di un documento firma è terminata in errore e richiede un intervento manuale.",一份签名文档的处理已出错，需要人工干预。
-"Documento: #%document_id",文档：#%document_id
-"Ordine: #%increment_id",订单：#%increment_id
-"Provider: %provider",服务商：%provider
-"Firmatario: %email",签署人：%email
-"Errore: %message",错误：%message
-"Vai all'ordine in backend: <a href=""%url"">%url</a>","在后台打开订单：<a href=""%url"">%url</a>"
-"[Firma Digitale] Documento #%document_id %status (ordine %increment_id)","[电子签名] 文档 #%document_id %status（订单 %increment_id）"
-"Il processo di firma di un documento si è concluso con esito negativo.",文档的签名流程已以负面结果结束。
-"Esito: %status",结果：%status
-"In attesa",待处理
-Generato,已生成
-"Inviato in firma",已发送签名
-Firmato,已签名
-Rifiutato,已拒绝
-Scaduto,已过期
-Errore,错误
-Annullato,已取消
-"Salvataggio in corso...",正在保存……
-"Preferenza salvata.",偏好设置已保存。
-"Non è stato possibile salvare la preferenza. Riprova.",无法保存偏好设置，请重试。
-"Attenzione: la firma resta obbligatoria per completare l'ordine.",注意：完成订单仍需签名。
-"Mage-OS","Mage-OS"
-"Firma Digitale","数字签名"
-"Generale","常规"
-"Abilitato","已启用"
-"Presa d'atto GDPR (modalità produzione)","GDPR 确认（生产模式）"
-"Trigger di generazione predefinito","默认生成触发器"
-"Provider di firma attivo","当前签名提供商"
-"Tentativi massimi","最大尝试次数"
-"Limite documenti per riconciliazione","每次对账处理的文档数量上限"
-"Provider di firma","签名提供商"
-"WsSign","WsSign"
-"Platform URL","平台 URL"
-"Tenant","租户"
-"Username (owner)","用户名（所有者）"
-"Password","密码"
-"Tipo firma","签名类型"
-"Scadenza firma (giorni)","签名过期时间（天）"
-"Prefisso telefonico di default","默认电话区号"
-"Messaggio per il firmatario","给签署人的信息"
-"Email notifier (opzionale)","通知邮箱（可选）"
-"Allowlist IP callback","回调 IP 白名单"
-"Mappatura stati","状态映射"
-"Dummy (solo test)","Dummy（仅测试）"
-"Consenti provider dummy","允许使用 Dummy 提供商"
-"Ritardo auto-firma (secondi)","自动签名延迟（秒）"
-"Conservazione documenti (GDPR)","文档保留（GDPR）"
-"Elimina automaticamente oltre il periodo di conservazione","超过保留期后自动删除"
-"Giorni di conservazione","保留天数"
-"Limite documenti per esecuzione","每次运行的文档数量上限"
-"Spuntare SOLO dopo aver stipulato un DPA (Data Processing Agreement) con il provider di firma selezionato e aver aggiornato la privacy policy dello store, indicando l'invio di dati personali del cliente (email, telefono) a un fornitore terzo per il processo di firma. Finché non è spuntato, tutti i nuovi documenti vengono generati con il provider dummy (test), indipendentemente dal provider configurato sotto.","仅在与所选签名提供商签订 DPA（数据处理协议）并更新商店隐私政策（说明将客户个人数据如邮箱、电话发送给第三方提供商用于签名流程）后才勾选此项。未勾选前，无论下方配置了哪个提供商，所有新文档都将使用 dummy（测试）提供商生成。"
-"Usato quando il template non specifica un trigger proprio.","当模板未指定自己的触发器时使用。"
-"Il connettore usato per i nuovi documenti quando la modalità produzione è confermata sopra. Configura le credenziali nel gruppo del provider.","在上方确认生产模式后用于新文档的连接器。请在对应提供商分组中配置凭据。"
-"Numero massimo di tentativi per errori temporanei (rete/servizio) prima dello stato di errore.","在进入错误状态前，针对临时性错误（网络/服务）的最大重试次数。"
-"Cap di documenti accodati a ogni run del cron (throttling verso il provider).","每次 cron 运行排队的文档数量上限（对提供商的限流）。"
-"Es. https://demo.wsign.cloud (solo HTTPS).","例如 https://demo.wsign.cloud（仅支持 HTTPS）。"
-"Email dell'account owner WsSign.","WsSign 所有者账户的电子邮箱。"
-"Default OTP_SMS: richiede il telefono del firmatario.","默认 OTP_SMS：需要签署人的电话号码。"
-"Inviato dal provider nell'invito a firmare.","由提供商在签名邀请中发送。"
-"Indirizzo notificato da WsSign sugli eventi del processo.","WsSign 用于通知流程事件的地址。"
-"IP separati da virgola; vuoto = nessun filtro IP (resta il token segreto).","以逗号分隔的 IP 列表；留空 = 不做 IP 过滤（仍会校验密钥令牌）。"
-"Stato grezzo restituito da WsSign → stato interno del documento. Gli stati non mappati vengono registrati nel log per essere aggiunti qui.","WsSign 返回的原始状态 → 文档内部状态。未映射的状态会记录到日志中，以便在此处补充。"
-"Provider fittizio che simula la firma in locale. NON usare in produzione.","在本地模拟签名的虚拟提供商。请勿在生产环境中使用。"
-"ATTENZIONE: abilitare solo in ambienti di test/sviluppo.","注意：仅可在测试/开发环境中启用。"
-"Dopo questo tempo il documento risulta firmato.","经过此时间后，文档将被标记为已签名。"
-"Cron giornaliero che, se attivo, elimina PDF e dati personali (email/telefono) dei documenti conclusi (firmato/rifiutato/scaduto/annullato) oltre il periodo di conservazione. Il record e lo storico stato restano per finalità di audit/fiscali, senza PDF né PII.","每日定时任务：启用后会删除超过保留期的已完成文档（已签名/已拒绝/已过期/已取消）的 PDF 及个人数据（邮箱/电话）。记录及状态历史会为审计/财务目的保留，但不含 PDF 或个人身份信息。"
-"Disattivato di default: la cancellazione è distruttiva, va attivata consapevolmente dopo aver definito i tempi di conservazione richiesti (fiscali/legali).","默认关闭：删除操作具有破坏性，应在明确所需的（财务/法律）保留期限后再谨慎启用。"
-"Dall'ultimo cambio di stato del documento concluso. Default 3650 (10 anni, indicativo: verificare i termini fiscali/legali applicabili).","自已完成文档的最后一次状态变更起计算。默认 3650（10 年，仅供参考：请核实适用的财务/法律期限）。"
-"Cap di documenti elaborati a ogni run del cron.","每次 cron 运行处理的文档数量上限。"
-"Template documenti","文档模板"
-"Configurazione","配置"
-"Conferma ordine","订单确认"
-"Creazione fattura","发票创建"
-"Fattura pagata","发票已付款"
-"Manuale da backend","后台手动触发"
-"-- Nessuno --","-- 无 --"
-"-- Usa default globale --","-- 使用全局默认值 --"
-"Aggiungi mappatura","添加映射"
-"Carrello / Ordine","购物车/订单"
-"Carrello/Ordine","购物车/订单"
-"Documentazione API (nel repository del modulo)","API 文档（位于模块代码仓库中）"
-"Documento annullato per rigenerazione manuale.","文档已取消以便手动重新生成。"
-"Documento con id ""%1"" inesistente.","ID 为“%1”的文档不存在。"
-"Documento rigenerato (sostituisce #%1).","文档已重新生成（替代 #%1）。"
-"Documento rigenerato: nuovo documento #%1 in elaborazione.","文档已重新生成：新文档 #%1 正在处理中。"
-"Dummy: PDF generato non trovato nello storage.","Dummy：在存储中未找到生成的 PDF。"
-"Dummy: il contenuto da inviare non è un PDF.","Dummy：待发送的内容不是 PDF。"
-"Dummy: il documento non ha un PDF generato.","Dummy：该文档没有已生成的 PDF。"
-"Dummy: process id assente o non riconosciuto.","Dummy：流程 ID 缺失或无法识别。"
-"Elimina","删除"
-"Elimina template","删除模板"
-"Eliminare il template ""%1""?","确定删除模板“%1”吗？"
-"Eliminare questo template? I documenti già generati restano in storico.","确定删除此模板吗？已生成的文档仍会保留在历史记录中。"
-"Email del firmatario mancante o non valida.","签署人邮箱缺失或无效。"
-"Errore durante il salvataggio del template.","保存模板时出错。"
-"File PDF del template non trovato: %1","未找到模板 PDF 文件：%1"
-"File documento non trovato nello storage: %1","在存储中未找到文档文件：%1"
-"Grazie! La firma è stata acquisita. Riceverai conferma quando il documento sarà disponibile nel tuo account.","感谢！签名已收到。文档在您的账户中可用后，您将收到确认通知。"
-"ID","ID"
-"Il PDF supera la dimensione massima di 10 MB.","PDF 超过最大 10 MB 的限制。"
-"Il documento #%1 non è attivo: usa quello attivo per rigenerare.","文档 #%1 未处于激活状态：请使用激活的文档进行重新生成。"
-"Il documento non ha un PDF generato da inviare.","该文档没有可供发送的已生成 PDF。"
-"Il documento non ha un template associato.","该文档没有关联的模板。"
-"Il file caricato non è un PDF valido.","上传的文件不是有效的 PDF。"
-"Il file template non è un PDF.","模板文件不是 PDF。"
-"Il nome del template è obbligatorio.","模板名称为必填项。"
-"Il provider dummy non è abilitato: attivalo esplicitamente in configurazione (solo ambienti di test).","Dummy 提供商未启用：请在配置中显式启用（仅限测试环境）。"
-"Il template %1 non ha un file PDF caricato.","模板 %1 没有已上传的 PDF 文件。"
-"Impossibile eliminare il template: %1","无法删除模板：%1"
-"Impossibile generare i documenti firma: %1","无法生成签名文档：%1"
-"Impossibile rigenerare il documento: %1","无法重新生成文档：%1"
-"Impossibile salvare il documento: %1","无法保存文档：%1"
-"Impossibile salvare il template: %1","无法保存模板：%1"
-"Indietro","返回"
-"Modifica","编辑"
-"Modifica template ""%1""","编辑模板“%1”"
-"Nessun tag firma trovato nel PDF template: impossibile inserire i dati del firmatario.","在模板 PDF 中未找到签名标签：无法插入签署人的数据。"
-"Nessun tag firma trovato nel PDF. Inserisci nel documento almeno un tag nel formato {WSIGN#larghezza,altezza#email-placeholder}.","在 PDF 中未找到签名标签。请在文档中至少添加一个格式为 {WSIGN#宽度,高度#email-placeholder} 的标签。"
-"Nessun template selezionato.","未选择模板。"
-"Nome","名称"
-"Nuovo template documento","新建文档模板"
-"PDF e dati personali eliminati per fine periodo di conservazione.","保留期结束后，PDF 及个人数据已删除。"
-"PDF non supportato: cross-reference table classica non trovata (salvare come PDF 1.4).","不支持的 PDF：未找到经典交叉引用表（请另存为 PDF 1.4）。"
-"PDF non supportato: startxref non trovato.","不支持的 PDF：未找到 startxref。"
-"PDF non supportato: trailer privo di Size/Root.","不支持的 PDF：trailer 缺少 Size/Root。"
-"PDF non supportato: usa una cross-reference table classica. Salva/esporta il documento come ""PDF 1.4"" e ricarica il file.","不支持的 PDF：请使用经典交叉引用表。将文档另存为/导出为“PDF 1.4”后重新上传。"
-"Piattaforma di firma elettronica avanzata (OTP via SMS o email). Il connettore carica il PDF generato dal template, avvia la richiesta di firma verso il firmatario e riceve gli aggiornamenti di stato tramite callback autenticata. Richiede un account WsSign attivo (tenant, utente owner, password) fornito dal team WsSign.","高级电子签名平台（通过短信或邮件发送 OTP）。该连接器上传由模板生成的 PDF，向签署人发起签名请求，并通过经身份验证的回调接收状态更新。需要 WsSign 团队提供的有效 WsSign 账户（租户、owner 用户名、密码）。"
-"Prezzo","价格"
-"Prodotto","产品"
-"Provider di firma ""%1"" non registrato.","签名提供商“%1”未注册。"
-"Provider fittizio incluso nel modulo: non contatta nessun servizio esterno. Simula una firma riuscita dopo il ritardo configurato sotto, restituendo il PDF originale come ""firmato"". Utile per collaudare l'intero flusso (template, trigger, notifiche, area cliente) senza credenziali di un provider reale. Da NON abilitare in produzione.","模块内置的虚拟提供商：不会联系任何外部服务。在下方配置的延迟后模拟成功签名，将原始 PDF 作为“已签名”返回。适用于在没有真实提供商凭据的情况下测试整个流程（模板、触发器、通知、客户区域）。请勿在生产环境中启用。"
-"Questo template non esiste più.","此模板已不存在。"
-"Richiesta di generazione documenti firma presa in carico.","签名文档生成请求已受理。"
-"SKU","SKU"
-"Salva template","保存模板"
-"Stato interno","内部状态"
-"Stato provider","提供商状态"
-"Telefono del firmatario mancante: richiesto da WsSign per l'OTP via SMS.","缺少签署人电话号码：WsSign 的短信 OTP 需要此信息。"
-"Telefono del firmatario non valido.","签署人电话号码无效。"
-"Template con id ""%1"" inesistente.","ID 为“%1”的模板不存在。"
-"Template documenti firma","签名文档模板"
-"Template eliminato.","模板已删除。"
-"Template salvato.","模板已保存。"
-"Ti chiediamo di firmare digitalmente il documento relativo al tuo ordine.","请对您订单相关的文档进行数字签名。"
-"WsSign: GUID non presente nella risposta di upload.","WsSign：上传响应中缺少 GUID。"
-"WsSign: autenticazione fallita, verifica credenziali e tenant.","WsSign：身份验证失败，请检查凭据和租户设置。"
-"WsSign: caricamento documento rifiutato (%1).","WsSign：文档上传被拒绝（%1）。"
-"WsSign: credenziali o tenant non configurati.","WsSign：凭据或租户未配置。"
-"WsSign: errore di rete durante ""%1"": %2","WsSign：在“%1”期间发生网络错误：%2"
-"WsSign: errore temporaneo del servizio durante ""%1"" (HTTP %2).","WsSign：在“%1”期间发生临时服务错误（HTTP %2）。"
-"WsSign: il contenuto scaricato non è un PDF valido.","WsSign：下载的内容不是有效的 PDF。"
-"WsSign: il documento non ha un processo avviato.","WsSign：该文档尚未启动流程。"
-"WsSign: platform URL non configurato o non HTTPS.","WsSign：平台 URL 未配置或非 HTTPS。"
-"WsSign: richiesta rifiutata durante ""%1"" (HTTP %2).","WsSign：在“%1”期间请求被拒绝（HTTP %2）。"
-"WsSign: risposta non-JSON durante ""%1"".","WsSign：在“%1”期间返回了非 JSON 响应。"
-"WsSign: stato assente nella risposta del provider.","WsSign：提供商响应中缺少状态信息。"
-"WsSign: store del documento non valido.","WsSign：文档所属店铺无效。"
-"WsSign: struttura risposta inattesa durante ""%1"".","WsSign：在“%1”期间返回了意外的响应结构。"
-"PDF non supportato: sezione cross-reference classica non trovata alla posizione attesa.","不支持的 PDF：在预期位置未找到经典交叉引用表。"
-"PDF non supportato: trailer non trovato dopo la tabella cross-reference.","不支持的 PDF：在交叉引用表之后未找到 trailer。"
-"PDF non supportato: oggetto cross-reference stream non riconosciuto.","不支持的 PDF：无法识别交叉引用流对象。"
-"PDF non supportato: stream cross-reference non riconosciuto.","不支持的 PDF：无法识别交叉引用流。"
-"PDF non supportato: stream cross-reference incompleto.","不支持的 PDF：交叉引用流不完整。"
-"PDF non supportato: atteso un oggetto /Type /XRef.","不支持的 PDF：应为 /Type /XRef 对象。"
-"PDF non supportato: dizionario cross-reference stream incompleto.","不支持的 PDF：交叉引用流字典不完整。"
-"PDF non supportato: stream cross-reference non decomprimibile.","不支持的 PDF：无法解压交叉引用流。"
-"PDF non supportato: predictor cross-reference stream non gestito (valore %1).","不支持的 PDF：不支持的交叉引用流预测器（值 %1）。"
-"PDF non supportato: parametri di predizione cross-reference stream non gestiti.","不支持的 PDF：不支持的交叉引用流预测参数。"
-"PDF non supportato: larghezze /W cross-reference stream non valide.","不支持的 PDF：交叉引用流 /W 宽度无效。"
-"PDF non supportato: stream cross-reference troppo corto per le voci dichiarate.","不支持的 PDF：交叉引用流对于声明的条目而言过短。"
-"PDF non supportato: stream cross-reference con predizione PNG malformato.","不支持的 PDF：交叉引用流的 PNG 预测格式错误。"
-"PDF non supportato: filtro PNG riga cross-reference stream non riconosciuto (%1).","不支持的 PDF：交叉引用流中无法识别的 PNG 行过滤器（%1）。"
-"PDF non supportato: catena cross-reference con troppe revisioni collegate (max %1).","不支持的 PDF：交叉引用链接的修订版本过多（最多 %1 个）。"
-"PDF cifrati non sono supportati: rimuovi la protezione/password dal documento e ricarica il file.","不支持加密的 PDF：请移除文档的保护/密码后重新上传文件。"
-"PDF non supportato: usa compressione a oggetti (object stream), non gestita in questa versione. Disabilita la compressione degli oggetti in fase di esportazione e ricarica il file.","不支持的 PDF：使用了对象压缩（object stream），此版本尚不支持。请在导出时禁用对象压缩后重新上传文件。"
-"Il template non ha un file PDF caricato per questa vista.","该模板在此商店视图下未上传 PDF 文件。"
-"File PDF del template non trovato.","未找到模板的 PDF 文件。"
-"Impossibile generare l'anteprima: %1","无法生成预览：%1"
-"Scarica anteprima elaborata","下载已处理的预览"
-"Reminder automatici","自动催签"
-"Solleciti per documenti in attesa di firma.","待签署文档的催签。"
-"Invia solleciti al cliente","向客户发送催签邮件"
-"Invia email periodiche al cliente per ricordargli di firmare. Disattivato di default.","定期向客户发送电子邮件以提醒他们签署。默认禁用。"
-"Template sollecito (cliente)","催签模板（客户）"
-"Giorni prima del primo sollecito","首次催签前的天数"
-"Giorni trascorsi dall'invio prima del primo reminder cliente.","发送后首次向客户发送催签前经过的天数。"
-"Giorni tra solleciti successivi","后续催签之间的间隔天数"
-"Giorni da attendere tra un reminder e il successivo.","两次催签之间需要等待的天数。"
-"Numero massimo di solleciti cliente","客户最大催签次数"
-"Quante volte al massimo sollecitare il cliente.","提醒客户的最大次数。"
-"Invia escalation all'admin","向管理员发送升级通知"
-"Invia una notifica all'admin se il documento rimane non firmato. Abilitato di default.","如果文档保持未签署状态，则向管理员发送通知。默认启用。"
-"Template escalation (admin)","升级模板（管理员）"
-"Giorni prima dell'escalation admin","管理员升级前的天数"
-"Giorni trascorsi dall'invio prima di allertare l'admin.","发送后警示管理员前经过的天数。"
-"Promemoria: Firma il tuo contratto (ordine %increment_id)","提醒：签署您的合同（订单 %increment_id）"
-"ti ricordiamo che il contratto relativo al tuo ordine #%increment_id è ancora in attesa di firma digitale.","我们提醒您，您的订单 #%increment_id 的合同仍在等待电子签署。"
-"Per completare l'ordine, ti invitiamo a seguire le istruzioni ricevute all'indirizzo %email dal provider di firma.","要完成订单，请按照签署服务商发送到 %email 的说明进行操作。"
-"[Firma Digitale] Sollecito: Documento #%document_id in attesa di firma (ordine %increment_id)","[电子签署] 提醒：文档 #%document_id 等待签署（订单 %increment_id）"
-"Il seguente documento è in attesa di firma digitale da oltre il periodo configurato di escalation.","以下文档在超出配置的升级期限后仍在等待电子签署。"
-"Gestisci l'ordine in backend: <a href=\"\"%url\"\">%url</a>","在后台管理订单：<a href=\"\"%url\"\">%url</a>"
-"Inviato sollecito cliente (sollecito %1 di %2).","已发送客户催签（第 %1 次催签，共 %2 次）。"
-"Inviata email di escalation all'admin per documento in attesa di firma.","已就等待签署的文档向管理员发送升级电子邮件。"
-"Nessuna validità legale — solo test/sviluppo","无法律效力 — 仅限测试/开发"
-"Firma Elettronica Avanzata (AES)","高级电子签名 (AES)"
-"Nota: La classificazione del livello di firma si basa sulle specifiche dichiarate dal fornitore. Il modulo non garantisce l'adeguatezza legale o la conformità per scopi specifici.","注：签名级别的分类基于服务商声明的技术规范。本模块不保证特定用途的法律适用性或合规性。"
-"Connettori Aggiuntivi & Pianificati","附加和计划中的连接器"
-"Adobe Acrobat Sign","Adobe Acrobat Sign"
-"Connettore per integrare le firme digitali ed elettroniche di Adobe Acrobat Sign. Consente l'autenticazione OAuth2 ed il tracciamento asincrono del processo di firma.","用于集成 Adobe Acrobat Sign 电子和数字签名的连接器。支持 OAuth2 认证和异步签署流程追踪。"
-"Sito ufficiale del provider","服务商官方网站"
-"Vuoi integrare un provider differente?","想要集成不同的服务商？"
-"Il modulo è progettato per essere esteso in modo modulare. Puoi implementare un connettore personalizzato per qualsiasi provider di firma digitale (es. DocuSign, Namirial, InfoCert) seguendo la nostra guida.","该模块设计为模块化扩展。您可以按照我们的指南为任何电子签名服务商（例如 DocuSign、Namirial、InfoCert）实现自定义连接器。"
-"Guida all'integrazione dei provider di firma","电子签名服务商集成指南"
-"In sviluppo","开发中"
-"Disponibile","可用"
-"Connettori aggiuntivi","附加连接器"
-"Metriche e performance documenti","文档指标和性能"
-"Periodo di analisi:","分析周期："
-"Ultimi 30 giorni","最近30天"
-"Ultimi 90 giorni","最近90天"
-"Ultimo anno","最近一年"
-"Sempre","所有时间"
-"Totale generati","生成总数"
-"Firmati","已签署"
-"In attesa di firma","待签署"
-"Scaduti o Rifiutati","已过期或已拒绝"
-"Tempo medio firma","平均签署时间"
-"giorno","天"
-"giorni","天"
-"Posiziona la firma sul PDF","在PDF上放置签名"
-"Indietro","返回"
-"Pagina","页码"
-"di","/"
-"Avanti","下一页"
-"Zoom -","缩小"
-"Zoom +","放大"
-"Seleziona la firma trascinando il mouse per tracciare un riquadro sulla pagina del PDF.","通过拖拽鼠标在PDF页面上画一个方框来选择签名位置。"
-"Annulla","取消"
-"Conferma Posizione","确认位置"
-"Traccia un riquadro sul PDF prima di confermare.","确认前请在PDF上画一个选择框。"
-"Errore durante il salvataggio delle coordinate.","保存坐标时出错。"
-"Impossibile caricare il PDF temporaneo.","无法加载临时PDF文件。"
-"Sorgente Libreria pdf.js","pdf.js 库来源"
-"URL CDN pdf.js","pdf.js CDN 地址"
-"Locale (Consigliato)","本地（推荐）"
-"CDN","CDN"
-"File non specificato.","未指定文件。"
-"Il file temporaneo richiesto non esiste.","请求的临时文件不存在。"
-"Parametri di firma non validi.","签名参数无效。"
-"Il file temporaneo non esiste.","临时文件不存在。"
-"Operazione annullata.","操作已取消。"
+"""Document error"" template (admin)","""文档错误""邮件模板（管理员）"
+"""Document ready"" template (customer)","""文档就绪""邮件模板（客户）"
+"""Document signed"" template (customer)","""文档已签署""邮件模板（客户）"
+"""Expired/rejected"" template (admin)","""已过期/已拒绝""邮件模板（管理员）"
+"""Expired/rejected"" template (customer)","""已过期/已拒绝""邮件模板（客户）"
+-- None --,-- 无 --
+-- Use global default --,-- 使用全局默认值 --
+API documentation (in the module repository),API 文档（位于模块代码仓库中）
+Active signature provider,当前签名提供商
+Add mapping,添加映射
+Additional & Planned Connectors,附加和计划中的连接器
+Additional connectors,附加连接器
+Address notified by WsSign about process events.,WsSign 用于通知流程事件的地址。
+Admin escalation email sent for document pending signature.,已就等待签署的文档向管理员发送升级电子邮件。
+Admin recipient email,管理员收件邮箱
+Adobe Acrobat Sign,Adobe Acrobat Sign
+Advanced Electronic Signature (AES),高级电子签名 (AES)
+"Advanced electronic signature platform (OTP via SMS or email). The connector uploads the PDF generated from the template, starts the signing request to the signer, and receives status updates via an authenticated callback. Requires an active WsSign account (tenant, owner user, password) provided by the WsSign team.",高级电子签名平台（通过短信或邮件发送 OTP）。该连接器上传由模板生成的 PDF，向签署人发起签名请求，并通过经身份验证的回调接收状态更新。需要 WsSign 团队提供的有效 WsSign 账户（租户、owner 用户名、密码）。
+After this time the document is marked as signed.,经过此时间后，文档将被标记为已签名。
+All time,所有时间
+Allow dummy provider,允许使用 Dummy 提供商
+Analysis period:,分析周期：
+Auto-sign delay (seconds),自动签名延迟（秒）
+Automatic reminders,自动催签
+Automatically delete past the retention period,超过保留期后自动删除
+Available,可用
+Avg signing time,平均签署时间
+CDN,CDN
+Callback IP allowlist,回调 IP 白名单
+Cancel,取消
+Canceled,已取消
+Cap on documents processed at each cron run.,每次 cron 运行处理的文档数量上限。
+Cap on documents queued at each cron run (throttling towards the provider).,每次 cron 运行排队的文档数量上限（对提供商的限流）。
+Cart / Order,购物车/订单
+Cart not available.,购物车不可用。
+Cart/Order,购物车/订单
+"Check this ONLY after signing a DPA (Data Processing Agreement) with the selected signature provider and updating the store's privacy policy to disclose that customer personal data (email, phone) is sent to a third-party provider for the signing process. Until this is checked, all new documents are generated with the dummy (test) provider, regardless of the provider configured below.",仅在与所选签名提供商签订 DPA（数据处理协议）并更新商店隐私政策（说明将客户个人数据如邮箱、电话发送给第三方提供商用于签名流程）后才勾选此项。未勾选前，无论下方配置了哪个提供商，所有新文档都将使用 dummy（测试）提供商生成。
+Comma-separated IPs; empty = no IP filtering (the secret token still applies).,以逗号分隔的 IP 列表；留空 = 不做 IP 过滤（仍会校验密钥令牌）。
+Configuration,配置
+Confirm Position,确认位置
+Connector to integrate digital and electronic signatures from Adobe Acrobat Sign. Supports OAuth2 authentication and asynchronous signature process tracking.,用于集成 Adobe Acrobat Sign 电子和数字签名的连接器。支持 OAuth2 认证和异步签署流程追踪。
+Contract,合同
+Could not queue %1 order(s) (see log).,无法将%1个订单加入队列（详见日志）。
+Customer reminder sent (reminder %1 of %2).,已发送客户催签（第 %1 次催签，共 %2 次）。
+"Daily cron that, when active, deletes PDFs and personal data (email/phone) of completed documents (signed/rejected/expired/cancelled) past the retention period. The record and status history are kept for audit/tax purposes, without the PDF or PII.",每日定时任务：启用后会删除超过保留期的已完成文档（已签名/已拒绝/已过期/已取消）的 PDF 及个人数据（邮箱/电话）。记录及状态历史会为审计/财务目的保留，但不含 PDF 或个人身份信息。
+Days before admin escalation,管理员升级前的天数
+Days before the first reminder,首次催签前的天数
+Days between subsequent reminders,后续催签之间的间隔天数
+Days elapsed since sending before alerting the admin.,发送后警示管理员前经过的天数。
+Days elapsed since sending before the first customer reminder.,发送后首次向客户发送催签前经过的天数。
+Days to wait between one reminder and the next.,两次催签之间需要等待的天数。
+Declined,已拒绝
+Default OTP_SMS: requires the signer's phone number.,默认 OTP_SMS：需要签署人的电话号码。
+Default generation trigger,默认生成触发器
+Default phone prefix,默认电话区号
+Delete,删除
+Delete template,删除模板
+"Delete the template ""%1""?",确定删除模板“%1”吗？
+Delete this template? Documents already generated remain in the history.,确定删除此模板吗？已生成的文档仍会保留在历史记录中。
+Digital Signature,数字签名
+Disabled by default to avoid alarming customers: evaluate on a case-by-case basis.,默认关闭，以避免不必要的担忧：请根据具体情况评估。
+Disabled by default: deletion is destructive and should be enabled deliberately after defining the required retention periods (tax/legal).,默认关闭：删除操作具有破坏性，应在明确所需的（财务/法律）保留期限后再谨慎启用。
+Document #%1 is not active: use the active one to regenerate.,文档 #%1 未处于激活状态：请使用激活的文档进行重新生成。
+Document canceled for manual regeneration.,文档已取消以便手动重新生成。
+Document file not found in storage: %1,在存储中未找到文档文件：%1
+Document metrics and performance,文档指标和性能
+Document regenerated (replaces #%1).,文档已重新生成（替代 #%1）。
+Document regenerated: new document #%1 is being processed.,文档已重新生成：新文档 #%1 正在处理中。
+Document retention (GDPR),文档保留（GDPR）
+Document templates,文档模板
+"Document with id ""%1"" does not exist.",ID 为“%1”的文档不存在。
+Document: #%document_id,文档：#%document_id
+Documents per reconciliation limit,每次对账处理的文档数量上限
+Documents per run limit,每次运行的文档数量上限
+Download generated,下载已生成文件
+Download processed preview,下载已处理的预览
+Download signed,下载已签名文件
+Download signed PDF,下载已签名PDF
+Download the digitally signed contracts for this order.,下载此订单的电子签名合同。
+Draw a box on the PDF before confirming.,确认前请在PDF上画一个选择框。
+Dummy (test only),Dummy（仅测试）
+"Dummy provider included with the module: it does not contact any external service. It simulates a successful signature after the delay configured below, returning the original PDF as ""signed"". Useful for testing the whole flow (templates, triggers, notifications, customer area) without a real provider's credentials. Do NOT enable in production.",模块内置的虚拟提供商：不会联系任何外部服务。在下方配置的延迟后模拟成功签名，将原始 PDF 作为“已签名”返回。适用于在没有真实提供商凭据的情况下测试整个流程（模板、触发器、通知、客户区域）。请勿在生产环境中启用。
+Dummy: generated PDF not found in storage.,Dummy：在存储中未找到生成的 PDF。
+Dummy: missing or unrecognized process id.,Dummy：流程 ID 缺失或无法识别。
+Dummy: the content to send is not a PDF.,Dummy：待发送的内容不是 PDF。
+Dummy: the document has no generated PDF.,Dummy：该文档没有已生成的 PDF。
+E.g. https://demo.wsign.cloud (HTTPS only).,例如 https://demo.wsign.cloud（仅支持 HTTPS）。
+Edit,编辑
+"Edit template ""%1""",编辑模板“%1”
+Email notifications,邮件通知
+Email of the WsSign owner account.,WsSign 所有者账户的电子邮箱。
+Emails sent to the customer and admin about signature document events.,发送给客户和管理员的签名文档事件邮件。
+Enabled,已启用
+Encrypted PDFs are not supported: remove the protection/password from the document and re-upload the file.,不支持加密的 PDF：请移除文档的保护/密码后重新上传文件。
+Error,错误
+Error saving coordinates.,保存坐标时出错。
+Error while saving the template.,保存模板时出错。
+Error: %message,错误：%message
+Escalation template (admin),升级模板（管理员）
+Expired,已过期
+Expired or Declined,已过期或已拒绝
+Fake provider that simulates signing locally. Do NOT use in production.,在本地模拟签名的虚拟提供商。请勿在生产环境中使用。
+File not specified.,未指定文件。
+For error and negative outcome notifications. Empty = store's general contact.,用于错误和负面结果通知。留空 = 商店的通用联系方式。
+"From the last status change of the completed document. Default 3650 (10 years, indicative: check the applicable tax/legal terms).",自已完成文档的最后一次状态变更起计算。默认 3650（10 年，仅供参考：请核实适用的财务/法律期限）。
+GDPR acknowledgement (production mode),GDPR 确认（生产模式）
+General,常规
+Generate signature documents,生成签名文档
+Generate signature documents for the selected orders?,是否为所选订单生成签名文档？
+Generated,已生成
+Guide to integrating signature providers,电子签名服务商集成指南
+"Hello %name,",您好 %name，
+I want to receive the contract to sign digitally,我希望收到需要电子签名的合同
+ID,ID
+"If you believe this is a mistake, contact our customer service. You can check your order here: <a href=""%url"">My orders</a>","如果您认为这是错误，请联系我们的客服。您可以在此查看订单：<a href=""%url"">我的订单</a>"
+In development,开发中
+Internal status,内部状态
+Invalid signature parameters.,签名参数无效。
+Invoice creation,发票创建
+Invoice paid,发票已付款
+Last 30 days,最近30天
+Last 90 days,最近90天
+Last year,最近一年
+Local (Recommended),本地（推荐）
+Mage-OS,Mage-OS
+"Manage the order in backend: <a href=\\""%url\""\"">%url</a>""","在后台管理订单：<a href=\\""%url\""\"">%url</a>"""
+Manual from backend,后台手动触发
+Maximum number of customer reminders,客户最大催签次数
+Maximum number of retries for temporary errors (network/service) before reaching the error state.,在进入错误状态前，针对临时性错误（网络/服务）的最大重试次数。
+Maximum number of times to remind the customer.,提醒客户的最大次数。
+Maximum retries,最大尝试次数
+Message for the signer,给签署人的信息
+Name,名称
+New document template,新建文档模板
+Next,下一页
+No legal validity — test/development only,无法律效力 — 仅限测试/开发
+"No signature tag found in the PDF. Add at least one tag to the document in the format {WSIGN#width,height#email-placeholder}.","在 PDF 中未找到签名标签。请在文档中至少添加一个格式为 {WSIGN#宽度,高度#email-placeholder} 的标签。"
+No signature tag found in the template PDF: unable to insert the signer\'s data.,在模板 PDF 中未找到签名标签：无法插入签署人的数据。
+No template selected.,未选择模板。
+Note: The classification of the signature level is based on the specifications declared by the provider. The module does not guarantee legal adequacy or compliance for specific purposes.,注：签名级别的分类基于服务商声明的技术规范。本模块不保证特定用途的法律适用性或合规性。
+Notifier email (optional),通知邮箱（可选）
+Notify the admin if the document expires or is rejected,文档过期或被拒绝时通知管理员
+Notify the admin on a definitive error,出现最终错误时通知管理员
+Notify the customer if the document expires or is rejected,文档过期或被拒绝时通知客户
+Notify the customer when the document is ready,文档就绪时通知客户
+Notify the customer when the document is signed,文档签署完成时通知客户
+Official provider website,服务商官方网站
+"Open the order in backend: <a href=""%url"">%url</a>","在后台打开订单：<a href=""%url"">%url</a>"
+Operation cancelled.,操作已取消。
+Order ID,订单编号
+Order confirmation,订单确认
+Order contract,订单合同
+Order: #%increment_id,订单：#%increment_id
+Outcome: %status,结果：%status
+PDF and personal data deleted at the end of the retention period.,保留期结束后，PDF 及个人数据已删除。
+PDF not available for this document.,此文档没有可用的PDF。
+Page,页码
+Password,密码
+Pending,待处理
+Pending signature,待签署
+Platform URL,平台 URL
+Position signature on PDF,在PDF上放置签名
+Preference saved.,偏好设置已保存。
+Previous,返回
+Previous,返回
+Price,价格
+Processing of a signature document ended in error and requires manual intervention.,一份签名文档的处理已出错，需要人工干预。
+Product,产品
+Provider status,提供商状态
+Provider: %provider,服务商：%provider
+Raw status returned by WsSign → internal document status. Unmapped statuses are logged so they can be added here.,WsSign 返回的原始状态 → 文档内部状态。未映射的状态会记录到日志中，以便在此处补充。
+Reminder template (customer),催签模板（客户）
+Reminder: Sign your contract (order %increment_id),提醒：签署您的合同（订单 %increment_id）
+Reminders for documents awaiting signature.,待签署文档的催签。
+Retention days,保留天数
+SKU,SKU
+Save template,保存模板
+Saving...,正在保存……
+Select signature position by dragging the mouse to draw a box on the PDF page.,通过拖拽鼠标在PDF页面上画一个方框来选择签名位置。
+Send escalation to the admin,向管理员发送升级通知
+Send reminders to the customer,向客户发送催签邮件
+Sender,发件人
+Sends a notification to the admin if the document remains unsigned. Enabled by default.,如果文档保持未签署状态，则向管理员发送通知。默认启用。
+Sends periodic emails to the customer to remind them to sign. Disabled by default.,定期向客户发送电子邮件以提醒他们签署。默认禁用。
+Sent by the provider in the signing invitation.,由提供商在签名邀请中发送。
+Sent for signature,已发送签名
+Signature document generation queued for %1 order(s).,已为%1个订单加入签名文档生成队列。
+Signature document generation request has been queued.,签名文档生成请求已受理。
+Signature document templates,签名文档模板
+Signature documents,签名文档
+Signature expiration (days),签名过期时间（天）
+"Signature provider ""%1"" is not registered.",签名提供商“%1”未注册。
+Signature providers,签名提供商
+Signature type,签名类型
+Signed,已签名
+Signed,已签署
+Signed contracts,已签名合同
+Signer email,签署人邮箱
+Signer email missing or invalid.,签署人邮箱缺失或无效。
+Signer's phone number missing: required by WsSign for OTP via SMS.,缺少签署人电话号码：WsSign 的短信 OTP 需要此信息。
+Signer: %email,签署人：%email
+Signer\'s phone number is invalid.,签署人电话号码无效。
+Signing the contract is mandatory for the products in your cart.,购物车中的商品必须签署合同。
+Status mapping,状态映射
+Template %1 has no uploaded PDF file.,模板 %1 没有已上传的 PDF 文件。
+Template PDF file not found.,未找到模板的 PDF 文件。
+Template PDF file not found: %1,未找到模板 PDF 文件：%1
+Template deleted.,模板已删除。
+Template saved.,模板已保存。
+"Template with id ""%1"" does not exist.",ID 为“%1”的模板不存在。
+Tenant,租户
+Thank you! The signature has been received. You will get a confirmation once the document is available in your account.,感谢！签名已收到。文档在您的账户中可用后，您将收到确认通知。
+The PDF exceeds the maximum size of 10 MB.,PDF 超过最大 10 MB 的限制。
+The connector used for new documents once production mode is confirmed above. Configure the credentials in the provider's group.,在上方确认生产模式后用于新文档的连接器。请在对应提供商分组中配置凭据。
+The document has no associated template.,该文档没有关联的模板。
+The document has no generated PDF to send.,该文档没有可供发送的已生成 PDF。
+The dummy provider is not enabled: enable it explicitly in the configuration (test environments only).,Dummy 提供商未启用：请在配置中显式启用（仅限测试环境）。
+The following document is pending digital signature beyond the configured escalation period.,以下文档在超出配置的升级期限后仍在等待电子签署。
+"The module is designed to be extended modularly. You can implement a custom connector for any digital signature provider (e.g. DocuSign, Namirial, InfoCert) by following our guide.",该模块设计为模块化扩展。您可以按照我们的指南为任何电子签名服务商（例如 DocuSign、Namirial、InfoCert）实现自定义连接器。
+The provider often already sends its own signing invitation: disabled by default.,服务商通常已经发送了自己的签名邀请：默认关闭。
+The requested temporary file does not exist.,请求的临时文件不存在。
+The signing process of a document ended with a negative outcome.,文档的签名流程已以负面结果结束。
+The template file is not a PDF.,模板文件不是 PDF。
+The template has no PDF file uploaded for this store view.,该模板在此商店视图下未上传 PDF 文件。
+The template name is required.,模板名称为必填项。
+The temporary file does not exist.,临时文件不存在。
+The uploaded file is not a valid PDF.,上传的文件不是有效的 PDF。
+This template no longer exists.,此模板已不存在。
+"To complete the order, we invite you to follow the instructions received at %email from the signature provider.",要完成订单，请按照签署服务商发送到 %email 的说明进行操作。
+Total generated,生成总数
+Unable to delete the template: %1,无法删除模板：%1
+Unable to download the PDF: %1,无法下载PDF：%1
+Unable to generate the preview: %1,无法生成预览：%1
+Unable to generate the signature documents: %1,无法生成签名文档：%1
+Unable to load temporary PDF.,无法加载临时PDF文件。
+Unable to regenerate the document: %1,无法重新生成文档：%1
+Unable to save the document: %1,无法保存文档：%1
+Unable to save the template: %1,无法保存模板：%1
+Unable to save your choice.,无法保存您的选择。
+Unsupported PDF: classic cross-reference section not found at the expected position.,不支持的 PDF：在预期位置未找到经典交叉引用表。
+Unsupported PDF: classic cross-reference table not found (save as PDF 1.4).,不支持的 PDF：未找到经典交叉引用表（请另存为 PDF 1.4）。
+Unsupported PDF: cross-reference chain has too many linked revisions (max %1).,不支持的 PDF：交叉引用链接的修订版本过多（最多 %1 个）。
+Unsupported PDF: cross-reference stream could not be decompressed.,不支持的 PDF：无法解压交叉引用流。
+Unsupported PDF: cross-reference stream not recognized.,不支持的 PDF：无法识别交叉引用流。
+Unsupported PDF: cross-reference stream object not recognized.,不支持的 PDF：无法识别交叉引用流对象。
+Unsupported PDF: cross-reference stream prediction parameters not handled.,不支持的 PDF：不支持的交叉引用流预测参数。
+Unsupported PDF: cross-reference stream predictor not handled (value %1).,不支持的 PDF：不支持的交叉引用流预测器（值 %1）。
+Unsupported PDF: cross-reference stream too short for the declared entries.,不支持的 PDF：交叉引用流对于声明的条目而言过短。
+Unsupported PDF: cross-reference stream with malformed PNG prediction.,不支持的 PDF：交叉引用流的 PNG 预测格式错误。
+Unsupported PDF: expected an object of /Type /XRef.,不支持的 PDF：应为 /Type /XRef 对象。
+Unsupported PDF: incomplete cross-reference stream dictionary.,不支持的 PDF：交叉引用流字典不完整。
+Unsupported PDF: incomplete cross-reference stream.,不支持的 PDF：交叉引用流不完整。
+Unsupported PDF: invalid cross-reference stream /W widths.,不支持的 PDF：交叉引用流 /W 宽度无效。
+"Unsupported PDF: it uses object compression (object streams), not handled in this version. Disable object compression when exporting and re-upload the file.",不支持的 PDF：使用了对象压缩（object stream），此版本尚不支持。请在导出时禁用对象压缩后重新上传文件。
+Unsupported PDF: startxref not found.,不支持的 PDF：未找到 startxref。
+Unsupported PDF: trailer missing Size/Root.,不支持的 PDF：trailer 缺少 Size/Root。
+Unsupported PDF: trailer not found after the cross-reference table.,不支持的 PDF：在交叉引用表之后未找到 trailer。
+Unsupported PDF: unrecognized PNG row filter in cross-reference stream (%1).,不支持的 PDF：交叉引用流中无法识别的 PNG 行过滤器（%1）。
+"Unsupported PDF: use a classic cross-reference table. Save/export the document as ""PDF 1.4"" and re-upload the file.",不支持的 PDF：请使用经典交叉引用表。将文档另存为/导出为“PDF 1.4”后重新上传。
+Update on the contract to sign (order %increment_id),关于待签合同的更新（订单 %increment_id）
+Used when the template does not specify its own trigger.,当模板未指定自己的触发器时使用。
+Username (owner),用户名（所有者）
+View order,查看订单
+WARNING: enable only in test/development environments.,注意：仅可在测试/开发环境中启用。
+Want to integrate a different provider?,想要集成不同的服务商？
+Warning: the signature is still required to complete the order.,注意：完成订单仍需签名。
+We couldn't save your preference. Please try again.,无法保存偏好设置，请重试。
+We kindly ask you to digitally sign the document related to your order.,请对您订单相关的文档进行数字签名。
+WsSign,WsSign
+WsSign: GUID missing from the upload response.,WsSign：上传响应中缺少 GUID。
+"WsSign: authentication failed, check the credentials and tenant.",WsSign：身份验证失败，请检查凭据和租户设置。
+WsSign: credentials or tenant not configured.,WsSign：凭据或租户未配置。
+WsSign: document upload rejected (%1).,WsSign：文档上传被拒绝（%1）。
+WsSign: invalid document store.,WsSign：文档所属店铺无效。
+"WsSign: network error during ""%1"": %2",WsSign：在“%1”期间发生网络错误：%2
+"WsSign: non-JSON response during ""%1"".",WsSign：在“%1”期间返回了非 JSON 响应。
+WsSign: platform URL not configured or not HTTPS.,WsSign：平台 URL 未配置或非 HTTPS。
+"WsSign: request rejected during ""%1"" (HTTP %2).",WsSign：在“%1”期间请求被拒绝（HTTP %2）。
+WsSign: status missing from the provider\'s response.,WsSign：提供商响应中缺少状态信息。
+"WsSign: temporary service error during ""%1"" (HTTP %2).",WsSign：在“%1”期间发生临时服务错误（HTTP %2）。
+WsSign: the document has no started process.,WsSign：该文档尚未启动流程。
+WsSign: the downloaded content is not a valid PDF.,WsSign：下载的内容不是有效的 PDF。
+"WsSign: unexpected response structure during ""%1"".",WsSign：在“%1”期间返回了意外的响应结构。
+"You can check your order status here: <a href=""%url"">My orders</a>","您可以在此查看订单状态：<a href=""%url"">我的订单</a>"
+"You can download the signed document from your account area: <a href=""%url"">Go to the order</a>","您可以从您的客户中心下载已签名文档：<a href=""%url"">前往订单</a>"
+You must accept the digital signature of the contract to proceed.,若要继续，您必须接受合同的电子签名。
+You will soon receive (or have already received) instructions from the signature service at %email. Follow that process to complete the signature.,您很快将收到（或已经收到）签名服务发送至 %email 的说明。请按照该流程完成签名。
+Your contract to sign digitally is ready (order %increment_id),您需要电子签名的合同已准备就绪（订单 %increment_id）
+Your signed contract is available (order %increment_id),您的已签名合同现已可用（订单 %increment_id）
+Zoom +,放大
+Zoom -,缩小
+[Digital Signature] Document #%document_id %status (order %increment_id),[电子签名] 文档 #%document_id %status（订单 %increment_id）
+[Digital Signature] Document error #%document_id (order %increment_id),[电子签名] 文档错误 #%document_id（订单 %increment_id）
+[Digital Signature] Reminder: Document #%document_id pending signature (order %increment_id),[电子签署] 提醒：文档 #%document_id 等待签署（订单 %increment_id）
+day,天
+days,天
+of,/
+pdf.js CDN URL,pdf.js CDN 地址
+pdf.js library source,pdf.js 库来源
+the contract for your order #%increment_id has been signed digitally successfully.,您的订单 #%increment_id 的合同已成功完成电子签名。
+the contract for your order #%increment_id is ready to be signed digitally.,您的订单 #%increment_id 的合同已准备好进行电子签名。
+the signing process for the contract of your order #%increment_id ended with outcome: %status.,您订单 #%increment_id 合同的签名流程已结束，结果为：%status。
+we remind you that the contract for your order #%increment_id is still pending digital signature.,我们提醒您，您的订单 #%increment_id 的合同仍在等待电子签署。

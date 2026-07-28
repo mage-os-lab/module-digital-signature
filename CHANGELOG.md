@@ -4,6 +4,31 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+## [0.3.0]
+### Added
+- **REST API for signature documents**: `getById`/`getList` (with standard search criteria) plus
+  `generate`/`regenerate` actions exposed via `webapi.xml`, all secured by the module's own ACL
+  resources.
+- **Multi-store API scoping ("API Integrations")**: Magento integrations can be mapped to a
+  restricted set of stores (`ApiConsumer` entity + admin CRUD); any REST caller resolved as an
+  unmapped or disabled integration is fail-closed (sees no documents, cannot generate for
+  out-of-scope orders) via `ApiConsumerScope` and a `DocumentRepositoryInterface` plugin.
+- **Outbound webhooks**: a `WebhookSubscription` entity (admin CRUD) lets external systems
+  subscribe to document status changes; each transition dispatches a Magento event, queues one
+  signed HTTP delivery per active subscription (HMAC-SHA256, re-signed with the current secret on
+  every attempt), and retries failed deliveries with exponential backoff (1'/5'/30'/2h) via a
+  dedicated consumer and cron job. Deliveries that exhaust all attempts are marked failed and
+  trigger an admin notification email. The signature is sent in the `X-Signature` header
+  (`sha256=<hex>`), the JSON payload carries a `delivery_id` for receiver-side deduplication,
+  delivery rows are claimed atomically (`sending` status) so parallel consumers never send the
+  same POST twice, and permanent HTTP errors (4xx other than 408/429) fail immediately instead of
+  burning the remaining retries. Target URLs are restricted to the `http`/`https` schemes.
+
+### Changed
+- **System-wide English codebase standardization**: all inline code comments, docblocks, system XML configuration labels/comments, exception/log messages, UI component labels, email templates, and primary translation keys (`__()`/`$t()`) have been standardized to English across the entire module. Updated `src/i18n/*.csv` (including `it_IT.csv` and all foreign locales) to use English source keys as the primary translation dictionary.
+
 ## [0.2.0]
 ### Added
 - **PDF 1.5+ cross-reference stream support**: a custom parser (`ClassicXrefReader`, `XrefStreamReader`,
@@ -32,11 +57,15 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - **DocuSign provider**: JWT Server-to-Server authentication (with session caching), envelope
   creation via AutoPlace anchor tab (`{WSIGN#`), status polling, signed PDF download and envelope
   cancellation (void).
-- **Adobe Sign provider skeleton**: config block and provider info placeholder, not yet
-  functionally implemented.
+- **Adobe Sign provider**: OAuth refresh-token authentication (with session caching), transient
+  document upload, agreement creation/status polling/cancellation, signed PDF download and
+  status mapping.
 - Unit test suite for the DocuSign provider (`Docusign`/`Docusign\Client`, 39 tests), covering
   the JWT auth flow (cache hit/miss/corrupt, incomplete config, invalid key, account selection,
   demo/production environment), envelope lifecycle and HTTP error classification.
+- Unit test suite for the Adobe Sign provider (`AdobeSign`/`AdobeSign\Client`, 35 tests), covering
+  the OAuth refresh-token flow (cache hit/miss/corrupt, incomplete config), agreement lifecycle
+  and HTTP error classification.
 - The unit test suite can now be run standalone directly from this repository, without a full
   Magento installation: see `composer.test.json` and the "Running the test suite" section in the
   README.

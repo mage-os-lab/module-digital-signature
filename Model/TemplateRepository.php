@@ -23,7 +23,7 @@ class TemplateRepository implements TemplateRepositoryInterface
         try {
             $this->resource->save($template);
         } catch (\Exception $e) {
-            throw new CouldNotSaveException(__('Impossibile salvare il template: %1', $e->getMessage()), $e);
+            throw new CouldNotSaveException(__('Unable to save the template: %1', $e->getMessage()), $e);
         }
 
         return $template;
@@ -34,7 +34,7 @@ class TemplateRepository implements TemplateRepositoryInterface
         $template = $this->templateFactory->create();
         $this->resource->load($template, $templateId);
         if (!$template->getTemplateId()) {
-            throw new NoSuchEntityException(__('Template con id "%1" inesistente.', $templateId));
+            throw new NoSuchEntityException(__('Template with id "%1" does not exist.', $templateId));
         }
 
         return $template;
@@ -45,7 +45,7 @@ class TemplateRepository implements TemplateRepositoryInterface
         try {
             $this->resource->delete($template);
         } catch (\Exception $e) {
-            throw new CouldNotDeleteException(__('Impossibile eliminare il template: %1', $e->getMessage()), $e);
+            throw new CouldNotDeleteException(__('Unable to delete the template: %1', $e->getMessage()), $e);
         }
     }
 

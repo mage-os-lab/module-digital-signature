@@ -15,7 +15,7 @@ define(['jquery', 'Magento_Ui/js/modal/alert', 'mage/translate'], function ($, a
                 previousChecked = !$input.prop('checked');
 
             $input.prop('disabled', true);
-            $status.text($t('Salvataggio in corso...'));
+            $status.text($t('Saving...'));
 
             $.ajax({
                 url: config.url,
@@ -28,11 +28,11 @@ define(['jquery', 'Magento_Ui/js/modal/alert', 'mage/translate'], function ($, a
                 showLoader: true
             }).done(function () {
                 if (config.mandatory && !requested) {
-                    $status.text($t('Attenzione: la firma resta obbligatoria per completare l\'ordine.'));
+                    $status.text($t('Warning: the signature is still required to complete the order.'));
 
                     return;
                 }
-                $status.text($t('Preferenza salvata.'));
+                $status.text($t('Preference saved.'));
                 setTimeout(function () {
                     $status.text('');
                 }, 2000);
@@ -40,7 +40,7 @@ define(['jquery', 'Magento_Ui/js/modal/alert', 'mage/translate'], function ($, a
                 $input.prop('checked', previousChecked);
                 $status.text('');
                 alert({
-                    content: $t('Non è stato possibile salvare la preferenza. Riprova.')
+                    content: $t('We couldn\'t save your preference. Please try again.')
                 });
             }).always(function () {
                 $input.prop('disabled', false);

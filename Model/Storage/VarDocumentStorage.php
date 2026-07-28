@@ -9,8 +9,8 @@ use Magento\Framework\Exception\FileSystemException;
 use Magento\Framework\Filesystem;
 
 /**
- * Storage su var/digitalsignature/: directory non servita dal web server,
- * il download passa sempre da controller autorizzati (analisi §12).
+ * Storage under var/digitalsignature/: directory not served by the web server,
+ * downloads always go through authorized controllers (analysis §12).
  */
 class VarDocumentStorage implements DocumentStorageInterface
 {
@@ -31,7 +31,7 @@ class VarDocumentStorage implements DocumentStorageInterface
         $dir = $this->filesystem->getDirectoryRead(DirectoryList::VAR_DIR);
         $path = $this->path($relativePath);
         if (!$dir->isExist($path)) {
-            throw new FileSystemException(__('File documento non trovato nello storage: %1', $relativePath));
+            throw new FileSystemException(__('Document file not found in storage: %1', $relativePath));
         }
 
         return $dir->readFile($path);
@@ -54,8 +54,8 @@ class VarDocumentStorage implements DocumentStorageInterface
 
     private function path(string $relativePath): string
     {
-        // Il path arriva sempre dai record documento, mai da input utente;
-        // la normalizzazione è comunque una difesa in profondità
+        // The path always comes from document records, never from user input;
+        // normalization is nonetheless a defense in depth
         $clean = str_replace(['..', "\0"], '', $relativePath);
 
         return self::BASE_DIR . '/' . ltrim($clean, '/');

@@ -9,12 +9,24 @@
                 type="MageOS\DigitalSignature\Model\Document"/>
     <preference for="MageOS\DigitalSignature\Api\DocumentRepositoryInterface"
                 type="MageOS\DigitalSignature\Model\DocumentRepository"/>
+    <preference for="MageOS\DigitalSignature\Api\Data\DocumentSearchResultsInterface"
+                type="MageOS\DigitalSignature\Model\Data\DocumentSearchResults"/>
+    <preference for="MageOS\DigitalSignature\Api\Data\ApiConsumerInterface"
+                type="MageOS\DigitalSignature\Model\ApiConsumer"/>
+    <preference for="MageOS\DigitalSignature\Api\ApiConsumerRepositoryInterface"
+                type="MageOS\DigitalSignature\Model\ApiConsumerRepository"/>
+    <preference for="MageOS\DigitalSignature\Api\Data\WebhookSubscriptionInterface"
+                type="MageOS\DigitalSignature\Model\WebhookSubscription"/>
+    <preference for="MageOS\DigitalSignature\Api\WebhookSubscriptionRepositoryInterface"
+                type="MageOS\DigitalSignature\Model\WebhookSubscriptionRepository"/>
     <preference for="MageOS\DigitalSignature\Api\SignProviderPoolInterface"
                 type="MageOS\DigitalSignature\Model\Provider\Pool"/>
     <preference for="MageOS\DigitalSignature\Api\MergeFieldPoolInterface"
                 type="MageOS\DigitalSignature\Model\MergeField\Pool"/>
     <preference for="MageOS\DigitalSignature\Api\DocumentStorageInterface"
                 type="MageOS\DigitalSignature\Model\Storage\VarDocumentStorage"/>
+    <preference for="MageOS\DigitalSignature\Api\DocumentGenerationManagementInterface"
+                type="MageOS\DigitalSignature\Model\Service\DocumentGenerationManagement"/>
 
     <!-- Registro dei connettori di firma: i nuovi provider si aggiungono qui -->
     <type name="MageOS\DigitalSignature\Model\Provider\Pool">
@@ -77,12 +89,34 @@
             <argument name="resourceModel" xsi:type="string">MageOS\DigitalSignature\Model\ResourceModel\Document</argument>
         </arguments>
     </virtualType>
+    <!-- Data source griglia integrazioni API -->
+    <virtualType name="MageOS\DigitalSignature\Model\ResourceModel\ApiConsumer\Grid\Collection"
+                 type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">mageos_digitalsignature_api_consumer</argument>
+            <argument name="resourceModel" xsi:type="string">MageOS\DigitalSignature\Model\ResourceModel\ApiConsumer</argument>
+        </arguments>
+    </virtualType>
+    <!-- Data source griglia sottoscrizioni Webhook -->
+    <virtualType name="MageOS\DigitalSignature\Model\ResourceModel\WebhookSubscription\Grid\Collection"
+                 type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">mageos_digitalsignature_webhook_subscription</argument>
+            <argument name="resourceModel" xsi:type="string">MageOS\DigitalSignature\Model\ResourceModel\WebhookSubscription</argument>
+        </arguments>
+    </virtualType>
     <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
         <arguments>
             <argument name="collections" xsi:type="array">
                 <item name="digitalsignature_template_listing_data_source" xsi:type="string">MageOS\DigitalSignature\Model\ResourceModel\Template\Grid\Collection</item>
                 <item name="digitalsignature_document_listing_data_source" xsi:type="string">MageOS\DigitalSignature\Model\ResourceModel\Document\Grid\Collection</item>
+                <item name="digitalsignature_apiconsumer_listing_data_source" xsi:type="string">MageOS\DigitalSignature\Model\ResourceModel\ApiConsumer\Grid\Collection</item>
+                <item name="digitalsignature_webhooksubscription_listing_data_source" xsi:type="string">MageOS\DigitalSignature\Model\ResourceModel\WebhookSubscription\Grid\Collection</item>
             </argument>
         </arguments>
+    </type>
+
+    <type name="MageOS\DigitalSignature\Api\DocumentRepositoryInterface">
+        <plugin name="digitalsignature_document_scope" type="MageOS\DigitalSignature\Plugin\Webapi\DocumentScopePlugin"/>
     </type>
 </config>

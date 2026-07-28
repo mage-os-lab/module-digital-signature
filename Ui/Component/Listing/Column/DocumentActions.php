@@ -9,9 +9,9 @@ use Magento\Framework\View\Element\UiComponentFactory;
 use Magento\Ui\Component\Listing\Columns\Column;
 
 /**
- * Azioni della griglia documenti firma: vista ordine e download del PDF
- * generato/firmato (la rigenerazione resta nel tab della vista ordine, dove
- * è una POST con form key).
+ * Actions for the signature documents grid: order view and download of the
+ * generated/signed PDF (regeneration stays in the order view tab, where
+ * it is a POST with form key).
  */
 class DocumentActions extends Column
 {
@@ -44,7 +44,7 @@ class DocumentActions extends Column
                         'sales/order/view',
                         ['order_id' => (int)$item['order_id']]
                     ),
-                    'label' => __('Vedi ordine'),
+                    'label' => __('View order'),
                 ];
             }
 
@@ -54,7 +54,7 @@ class DocumentActions extends Column
                         'digitalsignature/document/download',
                         ['id' => $documentId, 'type' => 'signed']
                     ),
-                    'label' => __('Scarica firmato'),
+                    'label' => __('Download signed'),
                 ];
             }
 
@@ -64,7 +64,7 @@ class DocumentActions extends Column
                         'digitalsignature/document/download',
                         ['id' => $documentId, 'type' => 'generated']
                     ),
-                    'label' => __('Scarica generato'),
+                    'label' => __('Download generated'),
                 ];
             }
 

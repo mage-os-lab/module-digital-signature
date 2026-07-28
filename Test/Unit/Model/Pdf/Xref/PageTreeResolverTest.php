@@ -89,7 +89,7 @@ class PageTreeResolverTest extends TestCase
         $objects = [
             1 => "1 0 obj\n<</Type /Catalog /Pages 2 0 R>>\nendobj\n",
             2 => "2 0 obj\n<</Type /Pages /Kids [3 0 R] /Count 1>>\nendobj\n",
-            // Il kid è a sua volta un nodo /Pages, non una /Page diretta.
+            // The kid is itself a /Pages node, not a direct /Page.
             3 => "3 0 obj\n<</Type /Pages /Kids [4 0 R] /Count 1>>\nendobj\n",
             4 => "4 0 obj\n<</Type /Page /Parent 3 0 R /Contents 5 0 R /Resources <<>>>>\nendobj\n",
             5 => $this->contentStreamObject(5, 'x'),
@@ -97,7 +97,7 @@ class PageTreeResolverTest extends TestCase
         $pdf = $this->buildClassicXrefPdf($objects, 1);
 
         $this->expectException(LocalizedException::class);
-        $this->expectExceptionMessageMatches('/annidat/');
+        $this->expectExceptionMessageMatches('/nested/');
 
         $this->resolver->resolve($pdf, 1);
     }
@@ -114,7 +114,7 @@ class PageTreeResolverTest extends TestCase
         $pdf = $this->buildClassicXrefPdf($objects, 1);
 
         $this->expectException(LocalizedException::class);
-        $this->expectExceptionMessageMatches('/ruotata/');
+        $this->expectExceptionMessageMatches('/rotated/');
 
         $this->resolver->resolve($pdf, 1);
     }

@@ -15,7 +15,7 @@ class BackButton implements ButtonProviderInterface
     public function getButtonData(): array
     {
         return [
-            'label' => __('Indietro'),
+            'label' => __('Back'),
             'on_click' => sprintf("location.href = '%s';", $this->context->getUrlBuilder()->getUrl('*/*/')),
             'class' => 'back',
             'sort_order' => 10,

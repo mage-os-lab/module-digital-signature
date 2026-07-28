@@ -13,10 +13,10 @@ class PeriodSource
     public function getOptions(): array
     {
         return [
-            self::PERIOD_30_DAYS => __('Ultimi 30 giorni'),
-            self::PERIOD_90_DAYS => __('Ultimi 90 giorni'),
-            self::PERIOD_365_DAYS => __('Ultimo anno'),
-            self::PERIOD_ALL => __('Sempre')
+            self::PERIOD_30_DAYS => __('Last 30 days'),
+            self::PERIOD_90_DAYS => __('Last 90 days'),
+            self::PERIOD_365_DAYS => __('Last year'),
+            self::PERIOD_ALL => __('All time')
         ];
     }
 

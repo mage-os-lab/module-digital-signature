@@ -4,14 +4,14 @@ declare(strict_types=1);
 namespace MageOS\DigitalSignature\Model\Pdf\Xref;
 
 /**
- * Esito della risoluzione dell'intera catena di cross-reference di un PDF
- * (tabella/stream più recente + storico entro il limite supportato).
+ * Result of resolving the entire cross-reference chain of a PDF (most
+ * recent table/stream + history within the supported limit).
  */
 final class XrefInfo
 {
     /**
-     * @param array<int, int> $objectOffsets numero oggetto => offset byte, fuso su
-     *        tutta la catena esplorata (la revisione più recente vince)
+     * @param array<int, int> $objectOffsets object number => byte offset, merged over
+     *        the whole explored chain (the most recent revision wins)
      */
     public function __construct(
         public readonly int $size,

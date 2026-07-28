@@ -8,11 +8,11 @@ use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Store\Model\ScopeInterface;
 
 /**
- * Gate GDPR: il modulo può usare provider di firma reali solo dopo che il
- * merchant ha spuntato la presa d'atto di avere un DPA con il provider e una
- * privacy policy aggiornata. In assenza della presa d'atto, i nuovi
- * documenti vengono forzati sul provider dummy (test), indipendentemente dal
- * provider configurato in "Provider di firma attivo".
+ * GDPR gate: the module can use real signature providers only after the
+ * merchant has checked the acknowledgment of having a DPA with the provider and
+ * an up-to-date privacy policy. In the absence of the acknowledgment, new
+ * documents are forced onto the dummy (test) provider, regardless of the
+ * provider configured in "Active signature provider".
  */
 class ProductionModeGuard
 {
@@ -32,9 +32,8 @@ class ProductionModeGuard
     }
 
     /**
-     * Restituisce il provider da usare per un nuovo documento: quello
-     * configurato se la modalità produzione è confermata, altrimenti forza
-     * il provider dummy.
+     * Returns the provider to use for a new document: the configured one if
+     * production mode is confirmed, otherwise forces the dummy provider.
      */
     public function resolveProviderCode(string $configuredProviderCode, int $storeId): string
     {

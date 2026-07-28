@@ -27,95 +27,328 @@ interface DocumentInterface
     public const LAST_REMINDER_AT = 'last_reminder_at';
     public const ESCALATION_SENT_AT = 'escalation_sent_at';
 
-    /** order_item_id = 0 indica documento di scope carrello */
+    /** order_item_id = 0 indicates a cart-scope document */
     public const ITEM_ID_CART_SCOPE = 0;
 
+    /**
+     * Returns document id.
+     *
+     * @return int|null
+     */
     public function getDocumentId(): ?int;
 
+    /**
+     * Returns order id.
+     *
+     * @return int
+     */
     public function getOrderId(): int;
 
+    /**
+     * Sets order id.
+     *
+     * @param int $orderId
+     * @return $this
+     */
     public function setOrderId(int $orderId): self;
 
+    /**
+     * Returns order item id.
+     *
+     * @return int
+     */
     public function getOrderItemId(): int;
 
+    /**
+     * Sets order item id.
+     *
+     * @param int $orderItemId
+     * @return $this
+     */
     public function setOrderItemId(int $orderItemId): self;
 
+    /**
+     * Returns template id.
+     *
+     * @return int|null
+     */
     public function getTemplateId(): ?int;
 
+    /**
+     * Sets template id.
+     *
+     * @param int|null $templateId
+     * @return $this
+     */
     public function setTemplateId(?int $templateId): self;
 
+    /**
+     * Returns store id.
+     *
+     * @return int|null
+     */
     public function getStoreId(): ?int;
 
+    /**
+     * Sets store id.
+     *
+     * @param int|null $storeId
+     * @return $this
+     */
     public function setStoreId(?int $storeId): self;
 
+    /**
+     * Returns provider code.
+     *
+     * @return string
+     */
     public function getProviderCode(): string;
 
+    /**
+     * Sets provider code.
+     *
+     * @param string $providerCode
+     * @return $this
+     */
     public function setProviderCode(string $providerCode): self;
 
+    /**
+     * Returns provider process id.
+     *
+     * @return string|null
+     */
     public function getProviderProcessId(): ?string;
 
+    /**
+     * Sets provider process id.
+     *
+     * @param string|null $processId
+     * @return $this
+     */
     public function setProviderProcessId(?string $processId): self;
 
+    /**
+     * Returns status.
+     *
+     * @return string
+     */
     public function getStatus(): string;
 
+    /**
+     * Sets status.
+     *
+     * @param string $status
+     * @return $this
+     */
     public function setStatus(string $status): self;
 
+    /**
+     * Returns is active.
+     *
+     * @return bool
+     */
     public function getIsActive(): bool;
 
-    /** false = storicizzato (la colonna passa a NULL per uscire dall'indice univoco) */
+    /**
+     * false = archived (the column is set to NULL to exit the unique index)
+     *
+     * @param bool $isActive
+     * @return $this
+     */
     public function setIsActive(bool $isActive): self;
 
-    /** Hash sha256 del token di callback (mai il token in chiaro) */
+    /**
+     * Sha256 hash of the callback token (never the plaintext token)
+     *
+     * @return string|null
+     */
     public function getCallbackTokenHash(): ?string;
 
+    /**
+     * Sets callback token hash.
+     *
+     * @param string|null $hash
+     * @return $this
+     */
     public function setCallbackTokenHash(?string $hash): self;
 
+    /**
+     * Returns trigger code.
+     *
+     * @return string
+     */
     public function getTriggerCode(): string;
 
+    /**
+     * Sets trigger code.
+     *
+     * @param string $triggerCode
+     * @return $this
+     */
     public function setTriggerCode(string $triggerCode): self;
 
+    /**
+     * Returns pdf path.
+     *
+     * @return string|null
+     */
     public function getPdfPath(): ?string;
 
+    /**
+     * Sets pdf path.
+     *
+     * @param string|null $pdfPath
+     * @return $this
+     */
     public function setPdfPath(?string $pdfPath): self;
 
+    /**
+     * Returns signed pdf path.
+     *
+     * @return string|null
+     */
     public function getSignedPdfPath(): ?string;
 
+    /**
+     * Sets signed pdf path.
+     *
+     * @param string|null $signedPdfPath
+     * @return $this
+     */
     public function setSignedPdfPath(?string $signedPdfPath): self;
 
+    /**
+     * Returns signer email.
+     *
+     * @return string|null
+     */
     public function getSignerEmail(): ?string;
 
+    /**
+     * Sets signer email.
+     *
+     * @param string|null $signerEmail
+     * @return $this
+     */
     public function setSignerEmail(?string $signerEmail): self;
 
+    /**
+     * Returns signer phone.
+     *
+     * @return string|null
+     */
     public function getSignerPhone(): ?string;
 
+    /**
+     * Sets signer phone.
+     *
+     * @param string|null $signerPhone
+     * @return $this
+     */
     public function setSignerPhone(?string $signerPhone): self;
 
+    /**
+     * Returns error message.
+     *
+     * @return string|null
+     */
     public function getErrorMessage(): ?string;
 
+    /**
+     * Sets error message.
+     *
+     * @param string|null $errorMessage
+     * @return $this
+     */
     public function setErrorMessage(?string $errorMessage): self;
 
+    /**
+     * Returns retry count.
+     *
+     * @return int
+     */
     public function getRetryCount(): int;
 
+    /**
+     * Sets retry count.
+     *
+     * @param int $retryCount
+     * @return $this
+     */
     public function setRetryCount(int $retryCount): self;
 
-    /** Data/ora in cui PDF e dati personali sono stati eliminati dalla retention (NULL = mai) */
+    /**
+     * Date/time at which the PDF and personal data were deleted by retention (NULL = never)
+     *
+     * @return string|null
+     */
     public function getPurgedAt(): ?string;
 
+    /**
+     * Sets purged at.
+     *
+     * @param string|null $purgedAt
+     * @return $this
+     */
     public function setPurgedAt(?string $purgedAt): self;
 
+    /**
+     * Returns reminder count.
+     *
+     * @return int
+     */
     public function getReminderCount(): int;
 
+    /**
+     * Sets reminder count.
+     *
+     * @param int $reminderCount
+     * @return $this
+     */
     public function setReminderCount(int $reminderCount): self;
 
+    /**
+     * Returns last reminder at.
+     *
+     * @return string|null
+     */
     public function getLastReminderAt(): ?string;
 
+    /**
+     * Sets last reminder at.
+     *
+     * @param string|null $lastReminderAt
+     * @return $this
+     */
     public function setLastReminderAt(?string $lastReminderAt): self;
 
+    /**
+     * Returns escalation sent at.
+     *
+     * @return string|null
+     */
     public function getEscalationSentAt(): ?string;
 
+    /**
+     * Sets escalation sent at.
+     *
+     * @param string|null $escalationSentAt
+     * @return $this
+     */
     public function setEscalationSentAt(?string $escalationSentAt): self;
 
+    /**
+     * Returns updated at.
+     *
+     * @return string
+     */
     public function getUpdatedAt(): string;
 
+    /**
+     * Sets updated at.
+     *
+     * @param string $updatedAt
+     * @return $this
+     */
     public function setUpdatedAt(string $updatedAt): self;
 }

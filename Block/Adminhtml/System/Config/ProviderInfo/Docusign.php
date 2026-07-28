@@ -27,9 +27,7 @@ class Docusign extends AbstractProviderInfo
     public function getDescription(): string
     {
         return (string)__(
-            'Piattaforma di firma elettronica leader globale. Supporta firme elettroniche Semplici (SES), '
-            . 'Avanzate (AES) e Qualificate (QES). L\'integrazione consente l\'invio automatico delle buste (envelopes) '
-            . 'con i PDF contrattuali generati al momento dell\'ordine, tracciandone lo stato fino al completamento.'
+            'Global leading electronic signature platform. Supports Simple (SES), Advanced (AES), and Qualified (QES) electronic signatures. The integration allows automatic sending of envelopes with the contractual PDFs generated at order time, tracking their status through to completion.'
         );
     }
 
@@ -38,7 +36,7 @@ class Docusign extends AbstractProviderInfo
      */
     public function getLegalLevel(): string
     {
-        return (string)__('Firma Elettronica Semplice (SES), Avanzata (AES), Qualificata (QES)');
+        return (string)__('Simple (SES), Advanced (AES), Qualified (QES) Electronic Signature');
     }
 
     /**

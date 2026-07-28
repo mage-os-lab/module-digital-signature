@@ -7,4 +7,7 @@
     <consumer name="digitalsignatureDocumentRefresh" queue="digitalsignature.document.refresh" connection="db"
               handler="MageOS\DigitalSignature\Model\Queue\Consumer\RefreshConsumer::process"
               maxMessages="100"/>
+    <consumer name="digitalsignatureWebhookDispatch" queue="digitalsignature.webhook.dispatch" connection="db"
+              handler="MageOS\DigitalSignature\Model\Queue\Consumer\WebhookConsumer::process"
+              maxMessages="100"/>
 </config>

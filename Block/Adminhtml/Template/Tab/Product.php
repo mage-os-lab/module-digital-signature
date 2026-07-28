@@ -89,7 +89,7 @@ class Product extends Extended
             'column_css_class' => 'col-id',
         ]);
         $this->addColumn('name', [
-            'header' => __('Nome'),
+            'header' => __('Name'),
             'index' => 'name',
         ]);
         $this->addColumn('sku', [
@@ -97,7 +97,7 @@ class Product extends Extended
             'index' => 'sku',
         ]);
         $this->addColumn('price', [
-            'header' => __('Prezzo'),
+            'header' => __('Price'),
             'type' => 'currency',
             'currency_code' => (string)$this->_scopeConfig->getValue(
                 \Magento\Directory\Model\Currency::XML_PATH_CURRENCY_BASE,

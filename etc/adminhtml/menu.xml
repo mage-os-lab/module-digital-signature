@@ -15,6 +15,16 @@
              parent="MageOS_DigitalSignature::digitalsignature"
              action="digitalsignature/document/index"
              resource="MageOS_DigitalSignature::document"/>
+        <add id="MageOS_DigitalSignature::api_consumer" title="Integrazioni API" translate="title"
+             module="MageOS_DigitalSignature" sortOrder="25"
+             parent="MageOS_DigitalSignature::digitalsignature"
+             action="digitalsignature/apiconsumer/index"
+             resource="MageOS_DigitalSignature::api_consumer"/>
+        <add id="MageOS_DigitalSignature::webhook_subscription" title="Webhook" translate="title"
+             module="MageOS_DigitalSignature" sortOrder="26"
+             parent="MageOS_DigitalSignature::digitalsignature"
+             action="digitalsignature/webhooksubscription/index"
+             resource="MageOS_DigitalSignature::webhook_subscription"/>
         <add id="MageOS_DigitalSignature::config" title="Configurazione" translate="title"
              module="MageOS_DigitalSignature" sortOrder="90"
              parent="MageOS_DigitalSignature::digitalsignature"

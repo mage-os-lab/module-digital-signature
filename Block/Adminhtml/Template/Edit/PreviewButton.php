@@ -25,7 +25,7 @@ class PreviewButton implements ButtonProviderInterface
         );
 
         return [
-            'label' => __('Scarica anteprima elaborata'),
+            'label' => __('Download processed preview'),
             'class' => 'action-secondary',
             'on_click' => sprintf("location.href = '%s';", $previewUrl),
             'sort_order' => 15,

@@ -12,8 +12,8 @@ use Magento\Framework\View\Element\Template\Context;
 use Magento\Sales\Api\Data\OrderInterface;
 
 /**
- * Elenco dei documenti firmati di un ordine nell'area cliente "i miei ordini",
- * con link di download del PDF firmato (controller autorizzato).
+ * List of an order's signed documents in the customer "my orders" area,
+ * with download link for the signed PDF (authorized controller).
  */
 class SignedDocuments extends Template
 {
@@ -34,7 +34,7 @@ class SignedDocuments extends Template
     }
 
     /**
-     * Documenti firmati e scaricabili dell'ordine corrente.
+     * Signed and downloadable documents of the current order.
      *
      * @return DocumentInterface[]
      */
@@ -72,7 +72,7 @@ class SignedDocuments extends Template
     {
         $orderItemId = $document->getOrderItemId();
         if ($orderItemId === DocumentInterface::ITEM_ID_CART_SCOPE) {
-            return (string)__('Contratto d\'ordine');
+            return (string)__('Order contract');
         }
 
         $order = $this->getOrder();
@@ -81,6 +81,6 @@ class SignedDocuments extends Template
             return (string)$item->getName();
         }
 
-        return (string)__('Contratto');
+        return (string)__('Contract');
     }
 }

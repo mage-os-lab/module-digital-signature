@@ -17,15 +17,15 @@ class StatusMapping extends AbstractFieldArray
     protected function _prepareToRender(): void
     {
         $this->addColumn('provider_status', [
-            'label' => __('Stato provider'),
+            'label' => __('Provider status'),
             'class' => 'required-entry',
         ]);
         $this->addColumn('internal_status', [
-            'label' => __('Stato interno'),
+            'label' => __('Internal status'),
             'renderer' => $this->getInternalStatusRenderer(),
         ]);
         $this->_addAfter = false;
-        $this->_addButtonLabel = (string)__('Aggiungi mappatura');
+        $this->_addButtonLabel = (string)__('Add mapping');
     }
 
     protected function _prepareArrayRow(DataObject $row): void

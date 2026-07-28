@@ -10,7 +10,7 @@ use Magento\Framework\Controller\Result\Redirect;
 use Psr\Log\LoggerInterface;
 
 /**
- * Rigenera/reinvia un documento firma attivo dalla vista ordine in admin.
+ * Regenerates/resends an active signature document from the order view in admin.
  */
 class Regenerate extends Action implements HttpPostActionInterface
 {
@@ -33,12 +33,12 @@ class Regenerate extends Action implements HttpPostActionInterface
         try {
             $newId = $this->documentManager->regenerate($documentId);
             $this->messageManager->addSuccessMessage(
-                __('Documento rigenerato: nuovo documento #%1 in elaborazione.', $newId)
+                __('Document regenerated: new document #%1 is being processed.', $newId)
             );
         } catch (\Exception $e) {
             $this->logger->error('DigitalSignature: rigenerazione fallita: ' . $e->getMessage());
             $this->messageManager->addErrorMessage(
-                __('Impossibile rigenerare il documento: %1', $e->getMessage())
+                __('Unable to regenerate the document: %1', $e->getMessage())
             );
         }
 

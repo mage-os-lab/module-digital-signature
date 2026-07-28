@@ -62,14 +62,14 @@ class DataProvider extends AbstractDataProvider
     {
         $meta = parent::getMeta();
         $storeId = (int)$this->request->getParam('store', 0);
-        // Il checkbox "usa default" ha senso solo nelle store view specifiche
+        // The "use default" checkbox only makes sense in specific store views
         $meta['pdf']['children']['pdf_use_default']['arguments']['data']['config']['visible'] = $storeId > 0;
 
         return $meta;
     }
 
     /**
-     * Valore per il fileUploader + flag "usa default" calcolato sul fallback.
+     * Value for the fileUploader + "use default" flag computed on the fallback.
      */
     private function getPdfFileData(int $templateId, int $storeId): array
     {

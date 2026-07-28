@@ -36,17 +36,17 @@ class TemplateActions extends Column
                         'digitalsignature/template/edit',
                         ['template_id' => $item['template_id']]
                     ),
-                    'label' => __('Modifica'),
+                    'label' => __('Edit'),
                 ],
                 'delete' => [
                     'href' => $this->urlBuilder->getUrl(
                         'digitalsignature/template/delete',
                         ['template_id' => $item['template_id']]
                     ),
-                    'label' => __('Elimina'),
+                    'label' => __('Delete'),
                     'confirm' => [
-                        'title' => __('Elimina template'),
-                        'message' => __('Eliminare il template "%1"?', $item['name'] ?? ''),
+                        'title' => __('Delete template'),
+                        'message' => __('Delete the template "%1"?', $item['name'] ?? ''),
                     ],
                     'post' => true,
                 ],

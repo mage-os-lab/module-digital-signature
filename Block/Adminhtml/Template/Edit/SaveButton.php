@@ -10,7 +10,7 @@ class SaveButton implements ButtonProviderInterface
     public function getButtonData(): array
     {
         return [
-            'label' => __('Salva template'),
+            'label' => __('Save template'),
             'class' => 'save primary',
             'data_attribute' => [
                 'mage-init' => ['button' => ['event' => 'save']],

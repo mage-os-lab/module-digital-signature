@@ -7,14 +7,14 @@ use Magento\Config\Block\System\Config\Form\Field;
 use Magento\Framework\Data\Form\Element\AbstractElement;
 
 /**
- * Riquadro informativo (logo, descrizione estesa, link utili) mostrato in cima
- * al gruppo di configurazione di un provider di firma, in Negozi > Configurazione
- * > Mage-OS > Firma Digitale > Provider di firma.
+ * Info box (logo, extended description, useful links) shown at the top of a
+ * signature provider's configuration group, in Stores > Configuration
+ * > Mage-OS > Digital Signature > Signature Providers.
  *
- * Un'agenzia terza che aggiunge un nuovo provider replica questo pattern:
- * estende questa classe, implementa i 4 metodi astratti e la referenzia come
- * frontend_model di un field id="info" (type="note", nessun valore salvato) in
- * cima al proprio gruppo <group id="miocodice"> in system.xml.
+ * A third-party agency adding a new provider replicates this pattern:
+ * extend this class, implement the 4 abstract methods and reference it as
+ * frontend_model of a field id="info" (type="note", no saved value) at
+ * the top of its own <group id="mycode"> in system.xml.
  */
 abstract class AbstractProviderInfo extends Field
 {
@@ -22,7 +22,7 @@ abstract class AbstractProviderInfo extends Field
     protected $_template = 'MageOS_DigitalSignature::system/config/provider_info.phtml';
 
     /**
-     * Campo "note": nessun controllo di input, solo il riquadro informativo.
+     * "Note" field: no input control, just the info box.
      */
     protected function _getElementHtml(AbstractElement $element): string
     {
@@ -30,9 +30,9 @@ abstract class AbstractProviderInfo extends Field
     }
 
     /**
-     * URL del logo, tipicamente via {@see getViewFileUrl()} su un asset in
-     * view/adminhtml/web/ del proprio modulo (funziona sia in developer mode
-     * che dopo static-content:deploy in produzione).
+     * Logo URL, typically via {@see getViewFileUrl()} on an asset in
+     * view/adminhtml/web/ of the module (works both in developer mode
+     * and after static-content:deploy in production).
      */
     abstract public function getLogoUrl(): string;
 
@@ -46,4 +46,20 @@ abstract class AbstractProviderInfo extends Field
      * @return array<int, array{label: string, url: string}>
      */
     abstract public function getLinks(): array;
+
+    /**
+     * If true, the provider's box is highlighted with a "Recommended" badge.
+     */
+    public function isRecommended(): bool
+    {
+        return false;
+    }
+
+    /**
+     * Marketing text shown in the highlighted box when {@see isRecommended()} is true.
+     */
+    public function getRecommendationText(): ?string
+    {
+        return null;
+    }
 }

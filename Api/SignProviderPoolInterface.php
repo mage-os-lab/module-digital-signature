@@ -8,12 +8,12 @@ use Magento\Framework\Exception\NoSuchEntityException;
 interface SignProviderPoolInterface
 {
     /**
-     * @return SignProviderInterface[] indicizzati per codice
+     * @return SignProviderInterface[] indexed by code
      */
     public function getProviders(): array;
 
     /**
-     * @throws NoSuchEntityException se il codice non è registrato
+     * @throws NoSuchEntityException if the code is not registered
      */
     public function get(string $code): SignProviderInterface;
 }

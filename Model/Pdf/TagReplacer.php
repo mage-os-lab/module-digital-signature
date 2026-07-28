@@ -7,14 +7,15 @@ use MageOS\DigitalSignature\Model\Pdf\Xref\XrefChainResolver;
 use Magento\Framework\Exception\LocalizedException;
 
 /**
- * Individua i tag firma {WSIGN#W,H#email} nel PDF e sostituisce l'email
- * placeholder con quella reale, riscrivendo il content stream tramite
- * "incremental update" (appende gli oggetti modificati + delta xref, come
- * previsto dallo standard PDF). Pure PHP, nessuna dipendenza esterna.
+ * Locates the signature tags {WSIGN#W,H#email} in the PDF and replaces the
+ * placeholder email with the real one, rewriting the content stream via
+ * "incremental update" (appends the modified objects + xref delta, as
+ * expected by the PDF standard). Pure PHP, no external dependency.
  *
- * Supporta PDF con cross-reference table classica (PDF 1.4) e con xref
- * stream (PDF 1.5+, senza object stream): l'incremental update scritto usa
- * lo stesso formato della revisione più recente del PDF sorgente.
+ * Supports PDFs with a classic cross-reference table (PDF 1.4) and with
+ * xref stream (PDF 1.5+, without object streams): the incremental update
+ * written uses the same format as the most recent revision of the source
+ * PDF.
  */
 class TagReplacer
 {
@@ -22,11 +23,11 @@ class TagReplacer
     public const FIELD_REGEX = '/\{FIELD:([a-z0-9_]+)\}/';
 
     /**
-     * Cap alla dimensione decompressa di un singolo stream FlateDecode.
-     * Difesa contro le "decompression bomb": uno stream di pochi KB può
-     * espandersi a centinaia di MB (amplificazione zlib), aggirando il cap
-     * sulla dimensione del file. 50 MB è ampio per stream legittimi (anche
-     * immagini) ma taglia l'amplificazione patologica.
+     * Cap on the decompressed size of a single FlateDecode stream. Defense
+     * against "decompression bombs": a stream of a few KB can expand to
+     * hundreds of MB (zlib amplification), bypassing the cap on file size.
+     * 50 MB is generous for legitimate streams (even images) but cuts off
+     * pathological amplification.
      */
     private const MAX_DECOMPRESSED_STREAM = 52428800;
 
@@ -40,9 +41,9 @@ class TagReplacer
     }
 
     /**
-     * Tag trovati nel PDF (in qualunque stream, anche compresso).
+     * Tags found in the PDF (in any stream, even compressed).
      *
-     * @return string[] tag completi, es. ["{WSIGN#80,20#placeholder@example.com}"]
+     * @return string[] complete tags, e.g. ["{WSIGN#80,20#placeholder@example.com}"]
      */
     public function findTags(string $pdf): array
     {
@@ -52,7 +53,7 @@ class TagReplacer
                 array_push($tags, ...$matches[0]);
             }
         }
-        // Tag eventualmente fuori dagli stream (PDF non strutturati)
+        // Tags possibly outside the streams (unstructured PDFs)
         if (preg_match_all(self::TAG_REGEX, $pdf, $matches)) {
             foreach ($matches[0] as $tag) {
                 if (!in_array($tag, $tags, true)) {
@@ -65,9 +66,9 @@ class TagReplacer
     }
 
     /**
-     * Merge field tag trovati nel PDF.
+     * Merge field tags found in the PDF.
      *
-     * @return string[] codici campo, es. ["order_number", "grand_total"]
+     * @return string[] field codes, e.g. ["order_number", "grand_total"]
      */
     public function findFieldTags(string $pdf): array
     {
@@ -89,34 +90,36 @@ class TagReplacer
     }
 
     /**
-     * Sostituisce l'email placeholder di tutti i tag con quella reale e i merge fields dinamici.
+     * Replaces the placeholder email of all tags with the real one and the
+     * dynamic merge fields.
      *
-     * Strategia ibrida: l'oggetto aggiornato viene appeso con una nuova sezione
-     * xref (incremental update) e i byte dell'oggetto originale vengono
-     * sbiancati in place con spazi della STESSA lunghezza — gli offset della
-     * xref esistente restano validi e il tag placeholder non è più presente
-     * nel file, nemmeno per scanner testuali non conformi allo standard.
+     * Hybrid strategy: the updated object is appended with a new xref
+     * section (incremental update) and the bytes of the original object are
+     * blanked out in place with spaces of the SAME length — the offsets of
+     * the existing xref remain valid and the placeholder tag is no longer
+     * present in the file, not even for text scanners that don't conform to
+     * the standard.
      *
-     * @throws LocalizedException se nessun tag è presente o il PDF non è supportato
+     * @throws LocalizedException if no tag is present or the PDF is not supported
      */
     public function replaceSignerEmail(string $pdf, string $email, ?\MageOS\DigitalSignature\Model\MergeField\Context $context = null): string
     {
         if (!str_starts_with($pdf, '%PDF')) {
-            throw new LocalizedException(__('Il file template non è un PDF.'));
+            throw new LocalizedException(__('The template file is not a PDF.'));
         }
-        // L'email finisce dentro una stringa letterale PDF: escape dei caratteri riservati
+        // The email ends up inside a PDF literal string: escape reserved characters
         $escapedEmail = addcslashes($email, "\\()");
         $replacer = static function (array $m) use ($escapedEmail): string {
-            // Ricostruzione per concatenazione: nessun problema di escaping
-            // della replacement string di preg_replace
+            // Reconstruction via concatenation: no escaping issues with the
+            // preg_replace replacement string
             $lastHash = strrpos($m[0], '#');
 
             return substr($m[0], 0, $lastHash) . '#' . $escapedEmail . '}';
         };
 
-        // Snapshot pre-sbiancamento: la risoluzione della catena xref deve
-        // descrivere la struttura ORIGINALE del documento, non quella con gli
-        // oggetti-tag già sbiancati.
+        // Pre-blanking snapshot: the resolution of the xref chain must
+        // describe the ORIGINAL structure of the document, not the one with
+        // the tag objects already blanked out.
         $originalPdf = $pdf;
 
         $modifiedObjects = [];
@@ -131,11 +134,12 @@ class TagReplacer
             $newContent = $object['content'];
             if ($hasWsign) {
                 $newContent = preg_replace_callback(self::TAG_REGEX, $replacer, $newContent);
-                // Il colore configurato va applicato SOLO nella generazione reale del
-                // documento per un ordine (context non nullo): l'anteprima/dry-run
-                // (context nullo, vedi Preview.php e TemplateValidator) deve mostrare
-                // il tag ben visibile, altrimenti il merchant non può verificarne la
-                // posizione prima di confermare il template.
+                // The configured color must be applied ONLY during the actual
+                // generation of the document for an order (context not null):
+                // the preview/dry-run (null context, see Preview.php and
+                // TemplateValidator) must show the tag clearly visible,
+                // otherwise the merchant cannot verify its position before
+                // confirming the template.
                 if ($context !== null && str_contains($newContent, '/MDSHelv1')) {
                     $colorOperator = $this->scopeConfig->getValue(
                         'digital_signature/general/builder_tag_color',
@@ -160,12 +164,12 @@ class TagReplacer
                 'number' => $object['number'],
                 'body' => $this->updateWriter->buildStreamObject($object['number'], $newContent, $object['compressed']),
             ];
-            // Sbianca i byte dell'oggetto originale preservandone la lunghezza
+            // Blank out the bytes of the original object while preserving its length
             $pdf = substr_replace($pdf, str_repeat(' ', $object['length']), $object['offset'], $object['length']);
         }
         if (!$modifiedObjects) {
             throw new \MageOS\DigitalSignature\Exception\NoSignatureTagException(
-                __('Nessun tag firma trovato nel PDF template: impossibile inserire i dati del firmatario.')
+                __('No signature tag found in the template PDF: unable to insert the signer\'s data.')
             );
         }
 
@@ -173,12 +177,12 @@ class TagReplacer
     }
 
     /**
-     * Estrae gli oggetti stream del PDF con contenuto decompresso e la
-     * posizione/lunghezza dell'oggetto nel file (per lo sbiancamento in place).
+     * Extracts the PDF's stream objects with decompressed content and the
+     * object's position/length in the file (for in-place blanking).
      *
-     * Gli oggetti vengono delimitati per confini espliciti (header → endobj),
-     * MAI con un'unica regex multi-oggetto: i quantificatori lazy in
-     * backtracking possono attraversare i confini e corrompere l'estrazione.
+     * Objects are delimited by explicit boundaries (header -> endobj), NEVER
+     * with a single multi-object regex: lazy backtracking quantifiers can
+     * cross the boundaries and corrupt the extraction.
      *
      * @return array<int, array{number: int, content: string, compressed: bool, offset: int, length: int}>
      */
@@ -195,14 +199,14 @@ class TagReplacer
             $regionEnd = $i + 1 < $headerCount ? $headers[0][$i + 1][1] : strlen($pdf);
             $region = substr($pdf, $regionStart, $regionEnd - $regionStart);
 
-            // L'oggetto termina a endobj: esclude xref/trailer in coda al file
+            // The object ends at endobj: excludes xref/trailer at the end of the file
             $endobjPos = strrpos($region, 'endobj');
             if ($endobjPos === false) {
                 continue;
             }
             $region = substr($region, 0, $endobjPos + strlen('endobj'));
 
-            // Inizio dati stream: keyword "stream" subito dopo il dizionario
+            // Start of stream data: "stream" keyword right after the dictionary
             if (!preg_match('/>>\s*stream(\r\n|\n)/', $region, $streamMatch, PREG_OFFSET_CAPTURE)) {
                 continue;
             }
@@ -223,10 +227,10 @@ class TagReplacer
 
             $compressed = str_contains($dict, '/FlateDecode');
             if ($compressed) {
-                // FlateDecode = zlib (RFC 1950); se l'inflate fallisce, o se lo
-                // stream decompresso sfora il cap anti-bomba, l'oggetto viene
-                // saltato (mai corrotto)
-                // phpcs:ignore Generic.PHP.NoSilencedErrors.Discouraged -- il warning su stream non-zlib/oltre cap è il fallback previsto
+                // FlateDecode = zlib (RFC 1950); if the inflate fails, or if the
+                // decompressed stream exceeds the anti-bomb cap, the object is
+                // skipped (never corrupted)
+                // phpcs:ignore Generic.PHP.NoSilencedErrors.Discouraged -- the warning on non-zlib/over-cap streams is the expected fallback
                 $content = @gzuncompress($raw, self::MAX_DECOMPRESSED_STREAM);
                 if ($content === false) {
                     continue;

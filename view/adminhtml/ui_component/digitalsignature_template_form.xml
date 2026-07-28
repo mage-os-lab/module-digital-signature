@@ -5,7 +5,7 @@
         <item name="js_config" xsi:type="array">
             <item name="provider" xsi:type="string">digitalsignature_template_form.template_form_data_source</item>
         </item>
-        <item name="label" xsi:type="string" translate="true">Template documento</item>
+        <item name="label" xsi:type="string" translate="true">Document Template</item>
         <item name="template" xsi:type="string">templates/form/collapsible</item>
     </argument>
     <settings>
@@ -39,7 +39,7 @@
     </dataSource>
     <fieldset name="general">
         <settings>
-            <label translate="true">Informazioni generali</label>
+            <label translate="true">General Information</label>
         </settings>
         <field name="template_id" formElement="input">
             <settings>
@@ -56,7 +56,7 @@
         <field name="name" formElement="input" sortOrder="10">
             <settings>
                 <dataType>text</dataType>
-                <label translate="true">Nome template</label>
+                <label translate="true">Template Name</label>
                 <validation>
                     <rule name="required-entry" xsi:type="boolean">true</rule>
                 </validation>
@@ -70,7 +70,7 @@
             </argument>
             <settings>
                 <dataType>boolean</dataType>
-                <label translate="true">Attivo</label>
+                <label translate="true">Active</label>
             </settings>
             <formElements>
                 <checkbox>
@@ -92,9 +92,9 @@
             </argument>
             <settings>
                 <dataType>boolean</dataType>
-                <label translate="true">Firma obbligatoria</label>
+                <label translate="true">Signature Required</label>
                 <tooltip>
-                    <description translate="true">Se attivo, il documento viene sempre generato al trigger, indipendentemente dalla scelta del cliente al checkout (l'indicazione al cliente è informativa e non deselezionabile).</description>
+                    <description translate="true">If active, the document is always generated on trigger, regardless of the customer's choice at checkout (the indication to the customer is informational and cannot be deselected).</description>
                 </tooltip>
             </settings>
             <formElements>
@@ -117,9 +117,9 @@
             </argument>
             <settings>
                 <dataType>text</dataType>
-                <label translate="true">Ambito</label>
+                <label translate="true">Scope</label>
                 <tooltip>
-                    <description translate="true">Carrello/Ordine: un documento per l'intero ordine. Prodotto: un documento per ogni riga d'ordine dei prodotti assegnati.</description>
+                    <description translate="true">Cart/Order: one document for the entire order. Product: one document for each order line of the assigned products.</description>
                 </tooltip>
                 <switcherConfig>
                     <rules>
@@ -162,9 +162,9 @@
         <field name="trigger_code" formElement="select" sortOrder="40">
             <settings>
                 <dataType>text</dataType>
-                <label translate="true">Trigger di generazione</label>
+                <label translate="true">Generation Trigger</label>
                 <tooltip>
-                    <description translate="true">Quando generare e inviare il documento al provider di firma. Vuoto = usa il default globale di configurazione. Può essere ulteriormente sovrascritto a livello di singolo prodotto.</description>
+                    <description translate="true">When to generate and send the document to the signature provider. Empty = use the global configuration default. Can be further overridden at the individual product level.</description>
                 </tooltip>
             </settings>
             <formElements>
@@ -178,14 +178,14 @@
     </fieldset>
     <fieldset name="pdf">
         <settings>
-            <label translate="true">File PDF</label>
+            <label translate="true">PDF File</label>
         </settings>
         <field name="pdf_use_default" formElement="checkbox" sortOrder="10">
             <settings>
                 <dataType>boolean</dataType>
-                <label translate="true">Usa file di default</label>
+                <label translate="true">Use default file</label>
                 <tooltip>
-                    <description translate="true">Se attivo, questa store view usa il PDF della configurazione di default.</description>
+                    <description translate="true">If active, this store view uses the PDF from the default configuration.</description>
                 </tooltip>
             </settings>
             <formElements>
@@ -201,9 +201,9 @@
         </field>
         <field name="pdf_file" formElement="fileUploader" sortOrder="20">
             <settings>
-                <label translate="true">PDF del contratto</label>
+                <label translate="true">Contract PDF</label>
                 <componentType>fileUploader</componentType>
-                <notice translate="true">PDF contenente i tag placeholder firma, es. {WSIGN#80,20#email-placeholder}. L'email nel tag verrà sostituita con quella reale del cliente alla generazione. Se esporti da Adobe Acrobat, disabilita la compressione a oggetti (Object Level Compression) nelle impostazioni di esportazione — LibreOffice/Word/Google Docs vanno bene senza modifiche.</notice>
+                <notice translate="true">PDF containing the signature placeholder tags, e.g. {WSIGN#80,20#email-placeholder}. The email in the tag will be replaced with the customer's real one at generation time. If exporting from Adobe Acrobat, disable object-level compression in the export settings — LibreOffice/Word/Google Docs work fine without changes.</notice>
             </settings>
             <formElements>
                 <fileUploader>
@@ -220,7 +220,7 @@
     </fieldset>
     <fieldset name="assigned_products">
         <settings>
-            <label translate="true">Prodotti assegnati</label>
+            <label translate="true">Assigned Products</label>
             <collapsible>true</collapsible>
             <opened>true</opened>
         </settings>

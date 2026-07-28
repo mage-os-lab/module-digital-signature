@@ -7,4 +7,7 @@
     <publisher topic="digitalsignature.document.refresh">
         <connection name="db" exchange="magento-db"/>
     </publisher>
+    <publisher topic="digitalsignature.webhook.dispatch">
+        <connection name="db" exchange="magento-db"/>
+    </publisher>
 </config>

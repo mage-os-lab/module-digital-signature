@@ -11,8 +11,8 @@ use Magento\Framework\HTTP\Client\CurlFactory;
 use Magento\Framework\Serialize\Serializer\Json;
 
 /**
- * Client HTTP per le API REST v2.1 di DocuSign.
- * Gestisce l'autenticazione JWT Server-to-Server e la memorizzazione in cache del token.
+ * HTTP client for the DocuSign REST v2.1 APIs.
+ * Handles JWT Server-to-Server authentication and token caching.
  */
 class Client
 {
@@ -29,7 +29,7 @@ class Client
     }
 
     /**
-     * Esegue l'avvio della busta (envelope) su DocuSign.
+     * Starts the envelope on DocuSign.
      *
      * @throws ProviderException
      */
@@ -48,7 +48,7 @@ class Client
     }
 
     /**
-     * Recupera lo stato attuale della busta su DocuSign.
+     * Retrieves the current status of the envelope on DocuSign.
      *
      * @throws ProviderException
      */
@@ -64,7 +64,7 @@ class Client
     }
 
     /**
-     * Scarica il PDF firmato associato alla busta.
+     * Downloads the signed PDF associated with the envelope.
      *
      * @throws ProviderException
      */
@@ -77,16 +77,16 @@ class Client
         $curl = $this->createCurlWithAuth($session['access_token']);
         $curl->addHeader('Accept', 'application/pdf');
 
-        $body = $this->execute($curl, 'GET', $url, null, 'download PDF firmato');
+        $body = $this->execute($curl, 'GET', $url, null, 'downloading signed PDF');
         if ($body === null || $body === '') {
-            throw ProviderException::permanent(__('DocuSign: contenuto PDF scaricato vuoto.'));
+            throw ProviderException::permanent(__('DocuSign: downloaded PDF content is empty.'));
         }
 
         return $body;
     }
 
     /**
-     * Annulla (void) la busta attiva su DocuSign.
+     * Voids the active envelope on DocuSign.
      *
      * @throws ProviderException
      */
@@ -107,8 +107,8 @@ class Client
     }
 
     /**
-     * Ottiene la sessione attiva (access_token, base_url, account_id), leggendola dalla cache
-     * o effettuando il login JWT.
+     * Gets the active session (access_token, base_url, account_id), reading it from the cache
+     * or performing the JWT login.
      *
      * @throws ProviderException
      */
@@ -123,19 +123,19 @@ class Client
                     return $session;
                 }
             } catch (\Exception) {
-                // Se la cache è corrotta, la rigeneriamo
+                // If the cache is corrupted, regenerate it
             }
         }
 
         $session = $this->authenticateJwt($storeId);
-        // Salviamo in cache per 50 minuti (il token JWT dura 60 minuti)
+        // Cache for 50 minutes (the JWT token lasts 60 minutes)
         $this->cache->save($this->json->serialize($session), $cacheKey, [], 3000);
 
         return $session;
     }
 
     /**
-     * Effettua l'autenticazione tramite JWT Assertion.
+     * Authenticates via JWT Assertion.
      *
      * @throws ProviderException
      */
@@ -159,12 +159,12 @@ class Client
             $jwt = $this->generateJwt($integrationKey, $userId, $privateKeyPem, $authServer);
         } catch (\Exception $e) {
             throw ProviderException::permanent(
-                __('DocuSign: errore nella generazione dell\'asserzione JWT: %1', $e->getMessage()),
+                __('DocuSign: error generating the JWT assertion: %1', $e->getMessage()),
                 $e
             );
         }
 
-        // 1. Richiesta OAuth Access Token
+        // 1. Request OAuth Access Token
         $curl = $this->createCurl();
         $curl->addHeader('Content-Type', 'application/x-www-form-urlencoded');
         $url = 'https://' . $authServer . '/oauth/token';
@@ -179,11 +179,11 @@ class Client
 
         if (!$accessToken) {
             throw ProviderException::permanent(
-                __('DocuSign: risposta OAuth valida ma priva di access token.')
+                __('DocuSign: valid OAuth response but missing access token.')
             );
         }
 
-        // 2. Richiesta Info Account per ottenere base_url e account_id
+        // 2. Request Account Info to obtain base_url and account_id
         $curlUserInfo = $this->createCurl();
         $curlUserInfo->addHeader('Authorization', 'Bearer ' . $accessToken);
         $userInfoUrl = 'https://' . $authServer . '/oauth/userinfo';
@@ -194,11 +194,11 @@ class Client
         $accounts = $userInfoData['accounts'] ?? [];
         if (!is_array($accounts) || empty($accounts)) {
             throw ProviderException::permanent(
-                __('DocuSign: nessun account associato alle credenziali fornite.')
+                __('DocuSign: no account associated with the provided credentials.')
             );
         }
 
-        // Cerchiamo l'account configurato dall'admin, altrimenti usiamo il di default o il primo
+        // Look for the account configured by the admin, otherwise use the default one or the first
         $targetAccountId = $this->config->get($providerCode, 'account_id', $storeId);
         $selectedAccount = null;
 
@@ -233,7 +233,7 @@ class Client
     }
 
     /**
-     * Genera un token JWT (RS256) per l'autenticazione con DocuSign.
+     * Generates a JWT token (RS256) for authentication with DocuSign.
      */
     private function generateJwt(
         string $integrationKey,
@@ -284,7 +284,7 @@ class Client
         $curl->setOption(CURLOPT_TIMEOUT, self::TIMEOUT);
         $curl->setOption(CURLOPT_SSL_VERIFYPEER, true);
         $curl->setOption(CURLOPT_SSL_VERIFYHOST, 2);
-        // Non seguire redirect per sicurezza (evita dirottamento dei token)
+        // Do not follow redirects for security (avoids token hijacking)
         $curl->setOption(CURLOPT_FOLLOWLOCATION, false);
 
         return $curl;
@@ -322,7 +322,7 @@ class Client
             }
         } catch (\Exception $e) {
             throw ProviderException::retryable(
-                __('DocuSign: errore di rete durante "%1": %2', $operation, $e->getMessage()),
+                __('DocuSign: network error during "%1": %2', $operation, $e->getMessage()),
                 $e
             );
         }
@@ -336,11 +336,11 @@ class Client
         }
         if ($status >= 500 || $status === 429) {
             throw ProviderException::retryable(
-                __('DocuSign: errore temporaneo del servizio durante "%1" (HTTP %2).', $operation, $status)
+                __('DocuSign: temporary service error during "%1" (HTTP %2).', $operation, $status)
             );
         }
 
-        // 4xx: errore permanente (credenziali errate, payload malformato, ecc.)
+        // 4xx: permanent error (wrong credentials, malformed payload, etc.)
         throw ProviderException::permanent(
             __('DocuSign: richiesta rifiutata durante "%1" (HTTP %2). Risposta: %3', $operation, $status, $curl->getBody())
         );
@@ -355,7 +355,7 @@ class Client
             $data = $this->json->unserialize($body);
         } catch (\InvalidArgumentException $e) {
             throw ProviderException::permanent(
-                __('DocuSign: risposta non-JSON durante "%1".', $operation),
+                __('DocuSign: non-JSON response during "%1".', $operation),
                 $e
             );
         }

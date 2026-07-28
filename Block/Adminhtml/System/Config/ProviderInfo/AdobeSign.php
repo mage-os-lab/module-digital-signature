@@ -27,9 +27,7 @@ class AdobeSign extends AbstractProviderInfo
     public function getDescription(): string
     {
         return (string)__(
-            'Servizio di firma digitale integrato nell\'ecosistema Adobe Document Cloud. Supporta standard '
-            . 'eIDAS per firme elettroniche Semplici (SES), Avanzate (AES) e Qualificate (QES). Consente '
-            . 'di orchestrare l\'invio di accordi (agreements) e tracciarne l\'esito in tempo reale tramite webhook.'
+            'Digital signature service integrated into the Adobe Document Cloud ecosystem. Supports the eIDAS standard for Simple (SES), Advanced (AES), and Qualified (QES) electronic signatures. Allows you to orchestrate the sending of agreements and track their outcome through to completion.'
         );
     }
 
@@ -38,7 +36,7 @@ class AdobeSign extends AbstractProviderInfo
      */
     public function getLegalLevel(): string
     {
-        return (string)__('Firma Elettronica Semplice (SES), Avanzata (AES), Qualificata (QES)');
+        return (string)__('Simple (SES), Advanced (AES), Qualified (QES) Electronic Signature');
     }
 
     /**

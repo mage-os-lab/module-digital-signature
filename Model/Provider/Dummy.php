@@ -14,11 +14,11 @@ use Magento\Framework\Math\Random;
 use Magento\Framework\Stdlib\DateTime\DateTime;
 
 /**
- * Provider di test: simula l'intero ciclo di firma in locale, senza servizi
- * esterni. Il documento risulta "firmato" dopo un ritardo configurabile.
+ * Test provider: simulates the entire signing cycle locally, without
+ * external services. The document becomes "signed" after a configurable delay.
  *
- * NON va usato in produzione: è selezionabile solo se il flag di
- * configurazione "allow" è esplicitamente attivo.
+ * MUST NOT be used in production: it is only selectable if the "allow"
+ * configuration flag is explicitly enabled.
  */
 class Dummy implements SignProviderInterface
 {
@@ -42,7 +42,7 @@ class Dummy implements SignProviderInterface
 
     public function getLabel(): string
     {
-        return (string)__('Dummy (solo test)');
+        return (string)__('Dummy (test only)');
     }
 
     public function isEnabled(?int $storeId = null): bool
@@ -54,11 +54,11 @@ class Dummy implements SignProviderInterface
     {
         $this->assertAllowed($document);
         if (!str_starts_with($pdfContent, '%PDF')) {
-            throw ProviderException::permanent(__('Dummy: il contenuto da inviare non è un PDF.'));
+            throw ProviderException::permanent(__('Dummy: the content to send is not a PDF.'));
         }
 
-        // Il "process id" incorpora il momento di avvio: serve a simulare
-        // la transizione a firmato dopo il ritardo configurato.
+        // The "process id" embeds the start time: it is used to simulate
+        // the transition to signed after the configured delay.
         $processId = sprintf('dummy-%d-%s', $this->dateTime->gmtTimestamp(), $this->random->getRandomString(16));
 
         return new StartResult($processId);
@@ -69,7 +69,7 @@ class Dummy implements SignProviderInterface
         $this->assertAllowed($document);
         $processId = $document->getProviderProcessId();
         if ($processId === null || !preg_match('/^dummy-(\d+)-/', $processId, $matches)) {
-            throw ProviderException::permanent(__('Dummy: process id assente o non riconosciuto.'));
+            throw ProviderException::permanent(__('Dummy: missing or unrecognized process id.'));
         }
         $startedAt = (int)$matches[1];
         $delay = max(0, (int)($this->config->get(self::CODE, 'auto_sign_delay', $document->getStoreId()) ?? 60));
@@ -83,19 +83,19 @@ class Dummy implements SignProviderInterface
         $this->assertAllowed($document);
         $pdfPath = $document->getPdfPath();
         if ($pdfPath === null) {
-            throw ProviderException::permanent(__('Dummy: il documento non ha un PDF generato.'));
+            throw ProviderException::permanent(__('Dummy: the document has no generated PDF.'));
         }
         if (!$this->storage->exists($pdfPath)) {
-            throw ProviderException::permanent(__('Dummy: PDF generato non trovato nello storage.'));
+            throw ProviderException::permanent(__('Dummy: generated PDF not found in storage.'));
         }
 
-        // "Firma" simulata: restituisce il PDF generato così com'è
+        // Simulated "signature": returns the generated PDF as-is
         return $this->storage->read($pdfPath);
     }
 
     public function cancel(DocumentInterface $document): void
     {
-        // Nessuno stato remoto da annullare
+        // No remote state to cancel
     }
 
     public function mapStatus(string $providerStatus): ?string
@@ -111,7 +111,7 @@ class Dummy implements SignProviderInterface
     {
         if (!$this->isEnabled($document->getStoreId())) {
             throw ProviderException::permanent(
-                __('Il provider dummy non è abilitato: attivalo esplicitamente in configurazione (solo ambienti di test).')
+                __('The dummy provider is not enabled: enable it explicitly in the configuration (test environments only).')
             );
         }
     }

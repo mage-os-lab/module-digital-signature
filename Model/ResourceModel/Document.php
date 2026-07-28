@@ -34,9 +34,9 @@ class Document extends AbstractDb
     }
 
     /**
-     * Retention GDPR: azzera i payload grezzi (spesso contengono PII) dello
-     * storico eventi del documento, mantenendo evento/stato/messaggio/data
-     * per finalità di audit.
+     * GDPR retention: clears the raw payloads (which often contain PII) from
+     * the document's event history, keeping event/status/message/date
+     * for audit purposes.
      */
     public function clearLogPayloads(int $documentId): void
     {

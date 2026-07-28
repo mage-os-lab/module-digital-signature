@@ -14,7 +14,7 @@ class Provider implements OptionSourceInterface
 
     public function toOptionArray(): array
     {
-        $options = [['value' => '', 'label' => __('-- Nessuno --')]];
+        $options = [['value' => '', 'label' => __('-- None --')]];
         foreach ($this->providerPool->getProviders() as $code => $provider) {
             $options[] = ['value' => $code, 'label' => $provider->getLabel()];
         }

@@ -10,9 +10,9 @@ use Magento\Framework\Exception\NoSuchEntityException;
 use Psr\Log\LoggerInterface;
 
 /**
- * Consumer del topic digitalsignature.document.refresh: interroga il provider
- * e riallinea lo stato. Idempotente; gli errori vengono solo loggati
- * (il cron di riconciliazione riproverà al giro successivo).
+ * Consumer for the digitalsignature.document.refresh topic: queries the
+ * provider and realigns the status. Idempotent; errors are only logged
+ * (the reconciliation cron will retry on the next run).
  */
 class RefreshConsumer
 {

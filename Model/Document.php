@@ -102,7 +102,7 @@ class Document extends AbstractModel implements DocumentInterface
 
     public function setIsActive(bool $isActive): DocumentInterface
     {
-        // NULL (non 0) per uscire dall'indice univoco anti-doppia-esecuzione
+        // NULL (not 0) to opt out of the unique index preventing double execution
         return $this->setData(self::IS_ACTIVE, $isActive ? 1 : null);
     }
 

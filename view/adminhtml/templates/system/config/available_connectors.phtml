@@ -4,7 +4,7 @@ $connectors = $block->getConnectors();
 ?>
 <div class="digitalsignature-available-connectors" style="padding:12px 0;max-width:760px;">
     <h4 style="margin:0 0 12px 0;font-size:1.1em;border-bottom:1px solid #ddd;padding-bottom:6px;color:#333;">
-        <?= $block->escapeHtml(__('Connettori Aggiuntivi & Pianificati')) ?>
+        <?= $block->escapeHtml(__('Additional & Planned Connectors')) ?>
     </h4>
 
     <div style="display:flex;flex-direction:column;gap:16px;margin-bottom:16px;">
@@ -14,11 +14,11 @@ $connectors = $block->getConnectors();
                     <strong style="font-size:1.05em;color:#333;"><?= $block->escapeHtml($connector->getName()) ?></strong>
                     <?php if ($connector->getStatus() === 'in_development'): ?>
                         <span style="font-size:0.85em;font-weight:bold;color:#a85507;background-color:#fef3c7;padding:2px 6px;border-radius:4px;display:inline-block;">
-                            <?= $block->escapeHtml(__('In sviluppo')) ?>
+                            <?= $block->escapeHtml(__('In development')) ?>
                         </span>
                     <?php else: ?>
                         <span style="font-size:0.85em;font-weight:bold;color:#15803d;background-color:#dcfce7;padding:2px 6px;border-radius:4px;display:inline-block;">
-                            <?= $block->escapeHtml(__('Disponibile')) ?>
+                            <?= $block->escapeHtml(__('Available')) ?>
                         </span>
                     <?php endif; ?>
                 </div>
@@ -27,7 +27,7 @@ $connectors = $block->getConnectors();
                 </p>
                 <?php if ($connector->getLink()): ?>
                     <a href="<?= $block->escapeUrl($connector->getLink()) ?>" target="_blank" rel="noopener noreferrer" style="font-size:0.9em;text-decoration:none;font-weight:bold;">
-                        <?= $block->escapeHtml(__('Sito ufficiale del provider')) ?> &rarr;
+                        <?= $block->escapeHtml(__('Official provider website')) ?> &rarr;
                     </a>
                 <?php endif; ?>
             </div>
@@ -35,12 +35,12 @@ $connectors = $block->getConnectors();
     </div>
 
     <div style="padding:12px;border:1px dashed #ccc;border-radius:4px;background-color:#fff;">
-        <strong style="font-size:0.95em;display:block;margin-bottom:4px;color:#333;"><?= $block->escapeHtml(__('Vuoi integrare un provider differente?')) ?></strong>
+        <strong style="font-size:0.95em;display:block;margin-bottom:4px;color:#333;"><?= $block->escapeHtml(__('Want to integrate a different provider?')) ?></strong>
         <p style="margin:0 0 6px 0;font-size:0.85em;color:#666;line-height:1.4;">
-            <?= $block->escapeHtml(__('Il modulo è progettato per essere esteso in modo modulare. Puoi implementare un connettore personalizzato per qualsiasi provider di firma digitale (es. DocuSign, Namirial, InfoCert) seguendo la nostra guida.')) ?>
+            <?= $block->escapeHtml(__('The module is designed to be extended modularly. You can implement a custom connector for any digital signature provider (e.g. DocuSign, Namirial, InfoCert) by following our guide.')) ?>
         </p>
         <a href="<?= $block->escapeUrl($block->getDeveloperGuideUrl()) ?>" target="_blank" rel="noopener noreferrer" style="font-size:0.85em;font-weight:bold;text-decoration:none;">
-            <?= $block->escapeHtml(__('Guida all\'integrazione dei provider di firma')) ?> &rarr;
+            <?= $block->escapeHtml(__('Guide to integrating signature providers')) ?> &rarr;
         </a>
     </div>
 </div>

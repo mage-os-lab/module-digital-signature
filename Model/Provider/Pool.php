@@ -10,7 +10,7 @@ use Magento\Framework\Exception\NoSuchEntityException;
 class Pool implements SignProviderPoolInterface
 {
     /**
-     * @param SignProviderInterface[] $providers iniettati via di.xml, chiave = codice
+     * @param SignProviderInterface[] $providers injected via di.xml, key = code
      */
     public function __construct(private readonly array $providers = [])
     {
@@ -31,7 +31,7 @@ class Pool implements SignProviderPoolInterface
     public function get(string $code): SignProviderInterface
     {
         if (!isset($this->providers[$code])) {
-            throw new NoSuchEntityException(__('Provider di firma "%1" non registrato.', $code));
+            throw new NoSuchEntityException(__('Signature provider "%1" is not registered.', $code));
         }
 
         return $this->providers[$code];

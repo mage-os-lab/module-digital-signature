@@ -17,11 +17,11 @@ use Magento\Framework\Filesystem;
 use Psr\Log\LoggerInterface;
 
 /**
- * Rigenera on-demand (nessuna persistenza) il PDF del template con il tag
- * firma sostituito da un'email segnaposto fissa, per dare al merchant una
- * conferma visiva che la sostituzione avvenga nella posizione corretta.
- * Stesso path di scrittura usato in produzione e nel dry-run di validazione
- * dell'upload (TemplateValidator::PREVIEW_SIGNER_EMAIL).
+ * Regenerates on-demand (no persistence) the template PDF with the signature
+ * tag replaced by a fixed placeholder email, to give the merchant a
+ * visual confirmation that the replacement happens at the correct position.
+ * Same write path used in production and in the upload validation
+ * dry-run (TemplateValidator::PREVIEW_SIGNER_EMAIL).
  */
 class Preview extends Action implements HttpGetActionInterface
 {
@@ -46,13 +46,13 @@ class Preview extends Action implements HttpGetActionInterface
         try {
             $fileRow = $this->templateResource->getPdfPathForStore($templateId, $storeId);
             if ($fileRow === null) {
-                throw new \RuntimeException((string)__('Il template non ha un file PDF caricato per questa vista.'));
+                throw new \RuntimeException((string)__('The template has no PDF file uploaded for this store view.'));
             }
             [, $templatePdfPath] = $fileRow;
 
             $mediaDir = $this->filesystem->getDirectoryRead(DirectoryList::MEDIA);
             if (!$mediaDir->isExist($templatePdfPath)) {
-                throw new \RuntimeException((string)__('File PDF del template non trovato.'));
+                throw new \RuntimeException((string)__('Template PDF file not found.'));
             }
 
             $preview = $this->tagReplacer->replaceSignerEmail(
@@ -76,7 +76,7 @@ class Preview extends Action implements HttpGetActionInterface
         } catch (\Exception $e) {
             $this->logger->error('DigitalSignature: anteprima template fallita: ' . $e->getMessage());
             $this->messageManager->addErrorMessage(
-                __('Impossibile generare l\'anteprima: %1', $e->getMessage())
+                __('Unable to generate the preview: %1', $e->getMessage())
             );
             /** @var Redirect $redirect */
             $redirect = $this->resultRedirectFactory->create();

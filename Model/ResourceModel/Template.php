@@ -18,8 +18,8 @@ class Template extends AbstractDb
     }
 
     /**
-     * Path PDF per store view con fallback sul default (store_id=0).
-     * Ritorna [store_id_effettivo, pdf_path] oppure null se nessun file.
+     * PDF path per store view with fallback to default (store_id=0).
+     * Returns [effective_store_id, pdf_path] or null if no file.
      */
     public function getPdfPathForStore(int $templateId, int $storeId): ?array
     {
@@ -53,7 +53,7 @@ class Template extends AbstractDb
     }
 
     /**
-     * Template attivi di scope carrello: [template_id, trigger_code, is_required].
+     * Active templates with cart scope: [template_id, trigger_code, is_required].
      *
      * @return array<int, array<string, string|null>>
      */
@@ -69,8 +69,8 @@ class Template extends AbstractDb
     }
 
     /**
-     * Assegnazioni template attivi di scope prodotto per i prodotti dati:
-     * [template_id, product_id, trigger_code (override prodotto),
+     * Active template assignments with product scope for the given products:
+     * [template_id, product_id, trigger_code (product override),
      * template_trigger_code, is_required].
      *
      * @param int[] $productIds

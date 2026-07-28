@@ -7,204 +7,245 @@
         </tab>
         <section id="digital_signature" translate="label" type="text" sortOrder="10"
                  showInDefault="1" showInWebsite="1" showInStore="1">
-            <label>Firma Digitale</label>
+            <label>Digital Signature</label>
             <tab>mageos</tab>
             <resource>MageOS_DigitalSignature::config</resource>
             <group id="general" translate="label" type="text" sortOrder="10"
                    showInDefault="1" showInWebsite="1" showInStore="1">
-                <label>Generale</label>
+                <label>General</label>
                 <field id="enabled" translate="label" type="select" sortOrder="10"
                        showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
-                    <label>Abilitato</label>
+                    <label>Enabled</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                 </field>
                 <field id="production_ack" translate="label comment" type="select" sortOrder="15"
                        showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
-                    <label>Presa d'atto GDPR (modalità produzione)</label>
-                    <comment><![CDATA[Spuntare SOLO dopo aver stipulato un DPA (Data Processing Agreement) con il provider di firma selezionato e aver aggiornato la privacy policy dello store, indicando l'invio di dati personali del cliente (email, telefono) a un fornitore terzo per il processo di firma. Finché non è spuntato, tutti i nuovi documenti vengono generati con il provider dummy (test), indipendentemente dal provider configurato sotto.]]></comment>
+                    <label>GDPR acknowledgement (production mode)</label>
+                    <comment><![CDATA[Check this ONLY after signing a DPA (Data Processing Agreement) with the selected signature provider and updating the store's privacy policy to disclose that customer personal data (email, phone) is sent to a third-party provider for the signing process. Until this is checked, all new documents are generated with the dummy (test) provider, regardless of the provider configured below.]]></comment>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                 </field>
                 <field id="default_trigger" translate="label comment" type="select" sortOrder="20"
                        showInDefault="1" showInWebsite="1" showInStore="0" canRestore="1">
-                    <label>Trigger di generazione predefinito</label>
-                    <comment>Usato quando il template non specifica un trigger proprio.</comment>
+                    <label>Default generation trigger</label>
+                    <comment>Used when the template does not specify its own trigger.</comment>
                     <source_model>MageOS\DigitalSignature\Model\Template\Source\Trigger</source_model>
                 </field>
                 <field id="provider" translate="label comment" type="select" sortOrder="30"
                        showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
-                    <label>Provider di firma attivo</label>
-                    <comment>Il connettore usato per i nuovi documenti quando la modalità produzione è confermata sopra. Configura le credenziali nel gruppo del provider.</comment>
+                    <label>Active signature provider</label>
+                    <comment>The connector used for new documents once production mode is confirmed above. Configure the credentials in the provider's group.</comment>
                     <source_model>MageOS\DigitalSignature\Model\Config\Source\Provider</source_model>
                 </field>
                 <field id="max_retries" translate="label comment" type="text" sortOrder="40"
                        showInDefault="1" showInWebsite="0" showInStore="0" canRestore="1">
-                    <label>Tentativi massimi</label>
-                    <comment>Numero massimo di tentativi per errori temporanei (rete/servizio) prima dello stato di errore.</comment>
+                    <label>Maximum retries</label>
+                    <comment>Maximum number of retries for temporary errors (network/service) before reaching the error state.</comment>
                     <validate>validate-digits validate-greater-than-zero</validate>
                 </field>
                 <field id="reconcile_batch_limit" translate="label comment" type="text" sortOrder="50"
                        showInDefault="1" showInWebsite="0" showInStore="0" canRestore="1">
-                    <label>Limite documenti per riconciliazione</label>
-                    <comment>Cap di documenti accodati a ogni run del cron (throttling verso il provider).</comment>
+                    <label>Documents per reconciliation limit</label>
+                    <comment>Cap on documents queued at each cron run (throttling towards the provider).</comment>
                     <validate>validate-digits validate-greater-than-zero</validate>
                 </field>
                 <field id="pdfjs_source" translate="label" type="select" sortOrder="60"
                        showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
-                    <label>Sorgente Libreria pdf.js</label>
+                    <label>pdf.js library source</label>
                     <source_model>MageOS\DigitalSignature\Model\Config\Source\PdfJsSource</source_model>
                 </field>
                 <field id="pdfjs_cdn_url" translate="label comment" type="text" sortOrder="70"
                        showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
-                    <label>URL CDN pdf.js</label>
-                    <comment>Es. https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/</comment>
+                    <label>pdf.js CDN URL</label>
+                    <comment>E.g. https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/</comment>
                     <depends><field id="pdfjs_source">cdn</field></depends>
                 </field>
                 <field id="builder_tag_color" translate="label comment" type="select" sortOrder="80"
                        showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
-                    <label>Colore tag firma (PDF Builder)</label>
-                    <comment>Colore con cui stampare il tag firma nel documento reale generato per l'ordine. Seleziona "White (Invisible)" per nasconderlo sotto la firma digitale.</comment>
+                    <label>Signature tag color (PDF Builder)</label>
+                    <comment>Color used to print the signature tag on the actual document generated for the order. Select "White (Invisible)" to hide it beneath the digital signature.</comment>
                     <source_model>MageOS\DigitalSignature\Model\Config\Source\TagColor</source_model>
                 </field>
             </group>
             <group id="notifications" translate="label comment" type="text" sortOrder="15"
                    showInDefault="1" showInWebsite="1" showInStore="1">
-                <label>Notifiche email</label>
-                <comment>Email inviate al cliente e all'admin sugli eventi del documento firma.</comment>
+                <label>Email notifications</label>
+                <comment>Emails sent to the customer and admin about signature document events.</comment>
                 <field id="identity" translate="label" type="select" sortOrder="10"
                        showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
-                    <label>Mittente</label>
+                    <label>Sender</label>
                     <source_model>Magento\Config\Model\Config\Source\Email\Identity</source_model>
                 </field>
                 <field id="admin_recipient" translate="label comment" type="text" sortOrder="20"
                        showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Email destinatario admin</label>
-                    <comment>Per le notifiche di errore ed esito negativo. Vuoto = contatto generale dello store.</comment>
+                    <label>Admin recipient email</label>
+                    <comment>For error and negative outcome notifications. Empty = store's general contact.</comment>
                     <validate>validate-email</validate>
                 </field>
                 <field id="customer_ready_enabled" translate="label comment" type="select" sortOrder="30"
                        showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
-                    <label>Avvisa il cliente quando il documento è pronto</label>
-                    <comment>Spesso il provider invia già il proprio invito a firmare: disattivato di default.</comment>
+                    <label>Notify the customer when the document is ready</label>
+                    <comment>The provider often already sends its own signing invitation: disabled by default.</comment>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                 </field>
                 <field id="customer_ready_template" translate="label" type="select" sortOrder="40"
                        showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Template "documento pronto" (cliente)</label>
+                    <label>"Document ready" template (customer)</label>
                     <source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
                     <depends><field id="customer_ready_enabled">1</field></depends>
                 </field>
                 <field id="customer_signed_enabled" translate="label" type="select" sortOrder="50"
                        showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
-                    <label>Avvisa il cliente quando il documento è firmato</label>
+                    <label>Notify the customer when the document is signed</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                 </field>
                 <field id="customer_signed_template" translate="label" type="select" sortOrder="60"
                        showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Template "documento firmato" (cliente)</label>
+                    <label>"Document signed" template (customer)</label>
                     <source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
                     <depends><field id="customer_signed_enabled">1</field></depends>
                 </field>
                 <field id="customer_outcome_enabled" translate="label comment" type="select" sortOrder="70"
                        showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
-                    <label>Avvisa il cliente se il documento scade o viene rifiutato</label>
-                    <comment>Disattivato di default per evitare allarmismi: valutare caso per caso.</comment>
+                    <label>Notify the customer if the document expires or is rejected</label>
+                    <comment>Disabled by default to avoid alarming customers: evaluate on a case-by-case basis.</comment>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                 </field>
                 <field id="customer_outcome_template" translate="label" type="select" sortOrder="80"
                        showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Template "scaduto/rifiutato" (cliente)</label>
+                    <label>"Expired/rejected" template (customer)</label>
                     <source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
                     <depends><field id="customer_outcome_enabled">1</field></depends>
                 </field>
                 <field id="admin_error_enabled" translate="label" type="select" sortOrder="90"
                        showInDefault="1" showInWebsite="0" showInStore="0" canRestore="1">
-                    <label>Avvisa l'admin in caso di errore definitivo</label>
+                    <label>Notify the admin on a definitive error</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                 </field>
                 <field id="admin_error_template" translate="label" type="select" sortOrder="100"
                        showInDefault="1" showInWebsite="0" showInStore="0">
-                    <label>Template "errore documento" (admin)</label>
+                    <label>"Document error" template (admin)</label>
                     <source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
                     <depends><field id="admin_error_enabled">1</field></depends>
                 </field>
                 <field id="admin_outcome_enabled" translate="label" type="select" sortOrder="110"
                        showInDefault="1" showInWebsite="0" showInStore="0" canRestore="1">
-                    <label>Avvisa l'admin se il documento scade o viene rifiutato</label>
+                    <label>Notify the admin if the document expires or is rejected</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                 </field>
                 <field id="admin_outcome_template" translate="label" type="select" sortOrder="120"
                        showInDefault="1" showInWebsite="0" showInStore="0">
-                    <label>Template "scaduto/rifiutato" (admin)</label>
+                    <label>"Expired/rejected" template (admin)</label>
                     <source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
                     <depends><field id="admin_outcome_enabled">1</field></depends>
                 </field>
             </group>
             <group id="reminders" translate="label comment" type="text" sortOrder="18"
                    showInDefault="1" showInWebsite="1" showInStore="1">
-                <label>Reminder automatici</label>
-                <comment>Solleciti per documenti in attesa di firma.</comment>
+                <label>Automatic reminders</label>
+                <comment>Reminders for documents awaiting signature.</comment>
                 <field id="customer_enabled" translate="label comment" type="select" sortOrder="10"
                        showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
-                    <label>Invia solleciti al cliente</label>
-                    <comment>Invia email periodiche al cliente per ricordargli di firmare. Disattivato di default.</comment>
+                    <label>Send reminders to the customer</label>
+                    <comment>Sends periodic emails to the customer to remind them to sign. Disabled by default.</comment>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                 </field>
                 <field id="customer_template" translate="label" type="select" sortOrder="20"
                        showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Template sollecito (cliente)</label>
+                    <label>Reminder template (customer)</label>
                     <source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
                     <depends><field id="customer_enabled">1</field></depends>
                 </field>
                 <field id="customer_threshold_days" translate="label comment" type="text" sortOrder="30"
                        showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
-                    <label>Giorni prima del primo sollecito</label>
-                    <comment>Giorni trascorsi dall'invio prima del primer reminder cliente.</comment>
+                    <label>Days before the first reminder</label>
+                    <comment>Days elapsed since sending before the first customer reminder.</comment>
                     <validate>validate-digits validate-greater-than-zero</validate>
                     <depends><field id="customer_enabled">1</field></depends>
                 </field>
                 <field id="customer_interval_days" translate="label comment" type="text" sortOrder="40"
                        showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
-                    <label>Giorni tra solleciti successivi</label>
-                    <comment>Giorni da attendere tra un reminder e il successivo.</comment>
+                    <label>Days between subsequent reminders</label>
+                    <comment>Days to wait between one reminder and the next.</comment>
                     <validate>validate-digits validate-greater-than-zero</validate>
                     <depends><field id="customer_enabled">1</field></depends>
                 </field>
                 <field id="customer_max_reminders" translate="label comment" type="text" sortOrder="50"
                        showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
-                    <label>Numero massimo di solleciti cliente</label>
-                    <comment>Quante volte al massimo sollecitare il cliente.</comment>
+                    <label>Maximum number of customer reminders</label>
+                    <comment>Maximum number of times to remind the customer.</comment>
                     <validate>validate-digits validate-greater-than-zero</validate>
                     <depends><field id="customer_enabled">1</field></depends>
                 </field>
                 <field id="admin_enabled" translate="label comment" type="select" sortOrder="60"
                        showInDefault="1" showInWebsite="0" showInStore="0" canRestore="1">
-                    <label>Invia escalation all'admin</label>
-                    <comment>Invia una notifica all'admin se il documento rimane non firmato. Abilitato di default.</comment>
+                    <label>Send escalation to the admin</label>
+                    <comment>Sends a notification to the admin if the document remains unsigned. Enabled by default.</comment>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                 </field>
                 <field id="admin_template" translate="label" type="select" sortOrder="70"
                        showInDefault="1" showInWebsite="0" showInStore="0">
-                    <label>Template escalation (admin)</label>
+                    <label>Escalation template (admin)</label>
                     <source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
                     <depends><field id="admin_enabled">1</field></depends>
                 </field>
                 <field id="admin_threshold_days" translate="label comment" type="text" sortOrder="80"
                        showInDefault="1" showInWebsite="0" showInStore="0" canRestore="1">
-                    <label>Giorni prima dell'escalation admin</label>
-                    <comment>Giorni trascorsi dall'invio prima di allertare l'admin.</comment>
+                    <label>Days before admin escalation</label>
+                    <comment>Days elapsed since sending before alerting the admin.</comment>
                     <validate>validate-digits validate-greater-than-zero</validate>
                     <depends><field id="admin_enabled">1</field></depends>
                 </field>
                 <field id="batch_limit" translate="label comment" type="text" sortOrder="90"
                        showInDefault="1" showInWebsite="0" showInStore="0" canRestore="1">
-                    <label>Limite documenti per esecuzione</label>
-                    <comment>Cap di documenti elaborati a ogni run del cron.</comment>
+                    <label>Documents per run limit</label>
+                    <comment>Cap on documents processed at each cron run.</comment>
                     <validate>validate-digits validate-greater-than-zero</validate>
+                </field>
+            </group>
+            <group id="webhooks" translate="label comment" type="text" sortOrder="19"
+                   showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Webhook</label>
+                <comment>Outbound notifications to external systems about document events.</comment>
+                <field id="enabled" translate="label comment" type="select" sortOrder="10"
+                       showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Enable webhooks</label>
+                    <comment>Sends the configured webhooks to active subscriptions. Disabled by default.</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="max_attempts" translate="label comment" type="text" sortOrder="20"
+                       showInDefault="1" showInWebsite="0" showInStore="0" canRestore="1">
+                    <label>Maximum number of attempts</label>
+                    <comment>Delivery attempts before marking the webhook as permanently failed.</comment>
+                    <validate>validate-digits validate-greater-than-zero</validate>
+                    <depends><field id="enabled">1</field></depends>
+                </field>
+                <field id="batch_limit" translate="label comment" type="text" sortOrder="30"
+                       showInDefault="1" showInWebsite="0" showInStore="0" canRestore="1">
+                    <label>Deliveries per run limit</label>
+                    <comment>Cap on deliveries processed at each reconciliation cron run.</comment>
+                    <validate>validate-digits validate-greater-than-zero</validate>
+                    <depends><field id="enabled">1</field></depends>
+                </field>
+                <field id="failure_notification_enabled" translate="label comment" type="select" sortOrder="40"
+                       showInDefault="1" showInWebsite="0" showInStore="0" canRestore="1">
+                    <label>Notify admin on permanent failure</label>
+                    <comment>Sends an email to the admin when a webhook delivery exhausts its attempts. Enabled by default.</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends><field id="enabled">1</field></depends>
+                </field>
+                <field id="failure_notification_template" translate="label" type="select" sortOrder="50"
+                       showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Webhook failure notification template</label>
+                    <source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
+                    <depends>
+                        <field id="enabled">1</field>
+                        <field id="failure_notification_enabled">1</field>
+                    </depends>
                 </field>
             </group>
             <group id="providers" translate="label" type="text" sortOrder="20"
                    showInDefault="1" showInWebsite="1" showInStore="1">
-                <label>Provider di firma</label>
+                <label>Signature providers</label>
                 <group id="wssign" translate="label" type="text" sortOrder="10"
                        showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>WsSign</label>
@@ -213,13 +254,13 @@
                     </field>
                     <field id="enabled" translate="label" type="select" sortOrder="10"
                            showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
-                        <label>Abilitato</label>
+                        <label>Enabled</label>
                         <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                     </field>
                     <field id="platform_url" translate="label comment" type="text" sortOrder="20"
                            showInDefault="1" showInWebsite="1" showInStore="1">
                         <label>Platform URL</label>
-                        <comment>Es. https://demo.wsign.cloud (solo HTTPS).</comment>
+                        <comment>E.g. https://demo.wsign.cloud (HTTPS only).</comment>
                         <validate>required-entry validate-url</validate>
                         <depends><field id="enabled">1</field></depends>
                     </field>
@@ -231,7 +272,7 @@
                     <field id="username" translate="label comment" type="text" sortOrder="40"
                            showInDefault="1" showInWebsite="1" showInStore="1">
                         <label>Username (owner)</label>
-                        <comment>Email dell'account owner WsSign.</comment>
+                        <comment>Email of the WsSign owner account.</comment>
                         <depends><field id="enabled">1</field></depends>
                     </field>
                     <field id="password" translate="label" type="obscure" sortOrder="50"
@@ -242,44 +283,44 @@
                     </field>
                     <field id="signature_type" translate="label comment" type="text" sortOrder="60"
                            showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
-                        <label>Tipo firma</label>
-                        <comment>Default OTP_SMS: richiede il telefono del firmatario.</comment>
+                        <label>Signature type</label>
+                        <comment>Default OTP_SMS: requires the signer's phone number.</comment>
                         <depends><field id="enabled">1</field></depends>
                     </field>
                     <field id="expiration_days" translate="label" type="text" sortOrder="70"
                            showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
-                        <label>Scadenza firma (giorni)</label>
+                        <label>Signature expiration (days)</label>
                         <validate>validate-digits validate-greater-than-zero</validate>
                         <depends><field id="enabled">1</field></depends>
                     </field>
                     <field id="default_phone_prefix" translate="label" type="text" sortOrder="80"
                            showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
-                        <label>Prefisso telefonico di default</label>
+                        <label>Default phone prefix</label>
                         <depends><field id="enabled">1</field></depends>
                     </field>
                     <field id="notes" translate="label comment" type="textarea" sortOrder="90"
                            showInDefault="1" showInWebsite="1" showInStore="1">
-                        <label>Messaggio per il firmatario</label>
-                        <comment>Inviato dal provider nell'invito a firmare.</comment>
+                        <label>Message for the signer</label>
+                        <comment>Sent by the provider in the signing invitation.</comment>
                         <depends><field id="enabled">1</field></depends>
                     </field>
                     <field id="notifier_email" translate="label comment" type="text" sortOrder="100"
                            showInDefault="1" showInWebsite="1" showInStore="1">
-                        <label>Email notifier (opzionale)</label>
-                        <comment>Indirizzo notificato da WsSign sugli eventi del processo.</comment>
+                        <label>Notifier email (optional)</label>
+                        <comment>Address notified by WsSign about process events.</comment>
                         <validate>validate-email</validate>
                         <depends><field id="enabled">1</field></depends>
                     </field>
                     <field id="allowed_ips" translate="label comment" type="text" sortOrder="110"
                            showInDefault="1" showInWebsite="0" showInStore="0">
-                        <label>Allowlist IP callback</label>
-                        <comment>IP separati da virgola; vuoto = nessun filtro IP (resta il token segreto).</comment>
+                        <label>Callback IP allowlist</label>
+                        <comment>Comma-separated IPs; empty = no IP filtering (the secret token still applies).</comment>
                         <depends><field id="enabled">1</field></depends>
                     </field>
                     <field id="status_mapping" translate="label comment" sortOrder="120"
                            showInDefault="1" showInWebsite="0" showInStore="0">
-                        <label>Mappatura stati</label>
-                        <comment>Stato grezzo restituito da WsSign → stato interno del documento. Gli stati non mappati vengono registrati nel log per essere aggiunti qui.</comment>
+                        <label>Status mapping</label>
+                        <comment>Raw status returned by WsSign → internal document status. Unmapped statuses are logged so they can be added here.</comment>
                         <frontend_model>MageOS\DigitalSignature\Block\Adminhtml\Form\Field\StatusMapping</frontend_model>
                         <backend_model>Magento\Config\Model\Config\Backend\Serialized\ArraySerialized</backend_model>
                         <depends><field id="enabled">1</field></depends>
@@ -288,25 +329,25 @@
                 <group id="docusign" translate="label comment" type="text" sortOrder="12"
                        showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>DocuSign</label>
-                    <comment>Integrazione con la piattaforma DocuSign.</comment>
+                    <comment>Integration with the DocuSign platform.</comment>
                     <field id="info" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
                         <frontend_model>MageOS\DigitalSignature\Block\Adminhtml\System\Config\ProviderInfo\Docusign</frontend_model>
                     </field>
                     <field id="enabled" translate="label" type="select" sortOrder="10"
                            showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
-                        <label>Abilitato</label>
+                        <label>Enabled</label>
                         <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                     </field>
                     <field id="environment" translate="label comment" type="select" sortOrder="20"
                            showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
-                        <label>Ambiente</label>
+                        <label>Environment</label>
                         <source_model>MageOS\DigitalSignature\Model\Config\Source\Environment</source_model>
                         <depends><field id="enabled">1</field></depends>
                     </field>
                     <field id="integration_key" translate="label comment" type="text" sortOrder="30"
                            showInDefault="1" showInWebsite="1" showInStore="1">
                         <label>Integration Key (Client ID)</label>
-                        <comment>Chiave di integrazione recuperata dalla DocuSign Console.</comment>
+                        <comment>Integration key retrieved from the DocuSign Console.</comment>
                         <validate>required-entry</validate>
                         <depends><field id="enabled">1</field></depends>
                     </field>
@@ -319,59 +360,53 @@
                     <field id="account_id" translate="label comment" type="text" sortOrder="50"
                            showInDefault="1" showInWebsite="1" showInStore="1">
                         <label>API Account ID</label>
-                        <comment>ID account visibile nella sezione Apps and Keys.</comment>
+                        <comment>Account ID visible in the Apps and Keys section.</comment>
                         <validate>required-entry</validate>
                         <depends><field id="enabled">1</field></depends>
                     </field>
                     <field id="user_id" translate="label comment" type="text" sortOrder="60"
                            showInDefault="1" showInWebsite="1" showInStore="1">
                         <label>API User ID (GUID)</label>
-                        <comment>Necessario per l'autenticazione JWT di tipo Service Account.</comment>
+                        <comment>Required for Service Account JWT authentication.</comment>
                         <validate>required-entry</validate>
                         <depends><field id="enabled">1</field></depends>
                     </field>
                     <field id="private_key" translate="label comment" type="textarea" sortOrder="70"
                            showInDefault="1" showInWebsite="1" showInStore="1">
-                        <label>Chiave Privata RSA</label>
-                        <comment>Copia e incolla la chiave privata RSA completa generata su DocuSign (inclusi i tag BEGIN/END PRIVATE KEY).</comment>
+                        <label>RSA Private Key</label>
+                        <comment>Copy and paste the complete RSA private key generated on DocuSign (including the BEGIN/END PRIVATE KEY tags).</comment>
                         <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
                         <depends><field id="enabled">1</field></depends>
                     </field>
                     <field id="expiration_days" translate="label" type="text" sortOrder="80"
                            showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
-                        <label>Scadenza busta (giorni)</label>
+                        <label>Envelope expiration (days)</label>
                         <validate>validate-digits validate-greater-than-zero</validate>
                         <depends><field id="enabled">1</field></depends>
                     </field>
                     <field id="notes" translate="label comment" type="textarea" sortOrder="90"
                            showInDefault="1" showInWebsite="1" showInStore="1">
-                        <label>Messaggio email per il firmatario</label>
-                        <comment>Inviato nel corpo della mail di notifica di DocuSign.</comment>
+                        <label>Email message for the signer</label>
+                        <comment>Sent in the body of the DocuSign notification email.</comment>
                         <depends><field id="enabled">1</field></depends>
                     </field>
                 </group>
                 <group id="adobesign" translate="label comment" type="text" sortOrder="14"
                        showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Adobe Acrobat Sign</label>
-                    <comment>Integrazione con la piattaforma Adobe Acrobat Sign.</comment>
+                    <comment>Integration with the Adobe Acrobat Sign platform.</comment>
                     <field id="info" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
                         <frontend_model>MageOS\DigitalSignature\Block\Adminhtml\System\Config\ProviderInfo\AdobeSign</frontend_model>
                     </field>
                     <field id="enabled" translate="label" type="select" sortOrder="10"
                            showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
-                        <label>Abilitato</label>
+                        <label>Enabled</label>
                         <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
-                    </field>
-                    <field id="environment" translate="label comment" type="select" sortOrder="20"
-                           showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
-                        <label>Ambiente</label>
-                        <source_model>MageOS\DigitalSignature\Model\Config\Source\Environment</source_model>
-                        <depends><field id="enabled">1</field></depends>
                     </field>
                     <field id="client_id" translate="label comment" type="text" sortOrder="30"
                            showInDefault="1" showInWebsite="1" showInStore="1">
                         <label>Application ID (Client ID)</label>
-                        <comment>ID applicazione recuperato dall'Adobe Developer Console.</comment>
+                        <comment>Application ID retrieved from the Adobe Developer Console.</comment>
                         <validate>required-entry</validate>
                         <depends><field id="enabled">1</field></depends>
                     </field>
@@ -384,71 +419,82 @@
                     <field id="refresh_token" translate="label comment" type="obscure" sortOrder="50"
                            showInDefault="1" showInWebsite="1" showInStore="1">
                         <label>OAuth Refresh Token</label>
-                        <comment>Token di aggiornamento a lungo termine per generare gli Access Token delle API.</comment>
+                        <comment>Long-lived refresh token used to generate API Access Tokens.</comment>
                         <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+                        <depends><field id="enabled">1</field></depends>
+                    </field>
+                    <field id="api_access_point" translate="label comment" type="text" sortOrder="55"
+                           showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>API Access Point</label>
+                        <comment>
+                            E.g. https://api.na1.adobesign.com. Unlike DocuSign, Adobe Sign has no fixed
+                            demo/production host: the shard is tied to the account and must be copied from the
+                            "api_access_point" returned during the initial OAuth exchange (interactive authorization).
+                        </comment>
+                        <validate>required-entry</validate>
                         <depends><field id="enabled">1</field></depends>
                     </field>
                     <field id="expiration_days" translate="label" type="text" sortOrder="60"
                            showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
-                        <label>Scadenza accordo (giorni)</label>
+                        <label>Agreement expiration (days)</label>
                         <validate>validate-digits validate-greater-than-zero</validate>
                         <depends><field id="enabled">1</field></depends>
                     </field>
                     <field id="notes" translate="label comment" type="textarea" sortOrder="70"
                            showInDefault="1" showInWebsite="1" showInStore="1">
-                        <label>Messaggio per il firmatario</label>
-                        <comment>Inviato nella notifica email di Adobe Acrobat Sign.</comment>
+                        <label>Message for the signer</label>
+                        <comment>Sent in the Adobe Acrobat Sign notification email.</comment>
                         <depends><field id="enabled">1</field></depends>
                     </field>
                 </group>
                 <group id="dummy" translate="label comment" type="text" sortOrder="20"
                        showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Dummy (solo test)</label>
-                    <comment>Provider fittizio che simula la firma in locale. NON usare in produzione.</comment>
+                    <label>Dummy (test only)</label>
+                    <comment>Fake provider that simulates signing locally. Do NOT use in production.</comment>
                     <field id="info" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
                         <frontend_model>MageOS\DigitalSignature\Block\Adminhtml\System\Config\ProviderInfo\Dummy</frontend_model>
                     </field>
                     <field id="allow" translate="label comment" type="select" sortOrder="10"
                            showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
-                        <label>Consenti provider dummy</label>
-                        <comment>ATTENZIONE: abilitare solo in ambienti di test/sviluppo.</comment>
+                        <label>Allow dummy provider</label>
+                        <comment>WARNING: enable only in test/development environments.</comment>
                         <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                     </field>
                     <field id="auto_sign_delay" translate="label comment" type="text" sortOrder="20"
                            showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
-                        <label>Ritardo auto-firma (secondi)</label>
-                        <comment>Dopo questo tempo il documento risulta firmato.</comment>
+                        <label>Auto-sign delay (seconds)</label>
+                        <comment>After this time the document is marked as signed.</comment>
                         <validate>validate-digits</validate>
                         <depends><field id="allow">1</field></depends>
                     </field>
                 </group>
                 <field id="available_connectors" translate="label comment" sortOrder="30"
                        showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Connettori aggiuntivi</label>
+                    <label>Additional connectors</label>
                     <frontend_model>MageOS\DigitalSignature\Block\Adminhtml\System\Config\AvailableConnectors</frontend_model>
                 </field>
             </group>
             <group id="retention" translate="label comment" type="text" sortOrder="25"
                    showInDefault="1" showInWebsite="0" showInStore="0">
-                <label>Conservazione documenti (GDPR)</label>
-                <comment><![CDATA[Cron giornaliero che, se attivo, elimina PDF e dati personali (email/telefono) dei documenti conclusi (firmato/rifiutato/scaduto/annullato) oltre il periodo di conservazione. Il record e lo storico stato restano per finalità di audit/fiscali, senza PDF né PII.]]></comment>
+                <label>Document retention (GDPR)</label>
+                <comment><![CDATA[Daily cron that, when active, deletes PDFs and personal data (email/phone) of completed documents (signed/rejected/expired/cancelled) past the retention period. The record and status history are kept for audit/tax purposes, without the PDF or PII.]]></comment>
                 <field id="enabled" translate="label comment" type="select" sortOrder="10"
                        showInDefault="1" showInWebsite="0" showInStore="0" canRestore="1">
-                    <label>Elimina automaticamente oltre il periodo di conservazione</label>
-                    <comment>Disattivato di default: la cancellazione è distruttiva, va attivata consapevolmente dopo aver definito i tempi di conservazione richiesti (fiscali/legali).</comment>
+                    <label>Automatically delete past the retention period</label>
+                    <comment>Disabled by default: deletion is destructive and should be enabled deliberately after defining the required retention periods (tax/legal).</comment>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                 </field>
                 <field id="retention_days" translate="label comment" type="text" sortOrder="20"
                        showInDefault="1" showInWebsite="0" showInStore="0" canRestore="1">
-                    <label>Giorni di conservazione</label>
-                    <comment>Dall'ultimo cambio di stato del documento concluso. Default 3650 (10 anni, indicativo: verificare i termini fiscali/legali applicabili).</comment>
+                    <label>Retention days</label>
+                    <comment>From the last status change of the completed document. Default 3650 (10 years, indicative: check the applicable tax/legal terms).</comment>
                     <validate>validate-digits validate-greater-than-zero</validate>
                     <depends><field id="enabled">1</field></depends>
                 </field>
                 <field id="batch_limit" translate="label comment" type="text" sortOrder="30"
                        showInDefault="1" showInWebsite="0" showInStore="0" canRestore="1">
-                    <label>Limite documenti per esecuzione</label>
-                    <comment>Cap di documenti elaborati a ogni run del cron.</comment>
+                    <label>Documents per run limit</label>
+                    <comment>Cap on documents processed at each cron run.</comment>
                     <validate>validate-digits validate-greater-than-zero</validate>
                     <depends><field id="enabled">1</field></depends>
                 </field>

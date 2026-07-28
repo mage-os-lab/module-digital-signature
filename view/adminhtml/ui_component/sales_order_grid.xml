@@ -5,12 +5,12 @@
         <action name="digitalsignature_generate_documents">
             <settings>
                 <confirm>
-                    <message translate="true">Generare i documenti firma per gli ordini selezionati?</message>
-                    <title translate="true">Genera documenti firma</title>
+                    <message translate="true">Generate signature documents for the selected orders?</message>
+                    <title translate="true">Generate signature documents</title>
                 </confirm>
                 <url path="digitalsignature/order/massGenerateDocuments"/>
                 <type>digitalsignature_generate_documents</type>
-                <label translate="true">Genera documenti firma</label>
+                <label translate="true">Generate signature documents</label>
             </settings>
         </action>
     </massaction>

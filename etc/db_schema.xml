@@ -127,8 +127,8 @@
                     table="mageos_digitalsignature_document" column="template_id"
                     referenceTable="mageos_digitalsignature_template" referenceColumn="template_id"
                     onDelete="SET NULL"/>
-        <!-- Anti-doppia-esecuzione: un solo documento ATTIVO per combinazione; le righe
-             storicizzate hanno is_active=NULL e non partecipano all'unicità -->
+        <!-- Anti-double-execution: only one ACTIVE document per combination; historicized
+             rows have is_active=NULL and do not participate in uniqueness -->
         <constraint xsi:type="unique" referenceId="MDS_DS_DOC_ORDER_ITEM_TPL_TRIGGER_ACTIVE">
             <column name="order_id"/>
             <column name="order_item_id"/>
@@ -175,6 +175,42 @@
         </index>
     </table>
 
+    <!-- API Consumer: registrazione consumer API per accesso OAuth -->
+    <table name="mageos_digitalsignature_api_consumer" resource="default" engine="innodb"
+           comment="DigitalSignature API Consumer (store scope mapping)">
+        <column xsi:type="int" name="consumer_id" unsigned="true" nullable="false" identity="true"
+                comment="Consumer ID"/>
+        <column xsi:type="int" name="integration_id" unsigned="true" nullable="false"
+                comment="Magento Integration ID"/>
+        <column xsi:type="varchar" name="name" length="255" nullable="false" comment="Display name"/>
+        <column xsi:type="smallint" name="enabled" unsigned="true" nullable="false" default="1"
+                comment="1 = enabled"/>
+        <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Created At"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="consumer_id"/>
+        </constraint>
+        <constraint xsi:type="unique" referenceId="MDS_DS_API_CONSUMER_INTEGRATION_ID">
+            <column name="integration_id"/>
+        </constraint>
+    </table>
+
+    <!-- API Consumer Store Mapping: associazione consumer ai store -->
+    <table name="mageos_digitalsignature_api_consumer_store" resource="default" engine="innodb"
+           comment="DigitalSignature API Consumer Store Mapping">
+        <column xsi:type="int" name="consumer_id" unsigned="true" nullable="false" comment="Consumer ID"/>
+        <column xsi:type="smallint" name="store_id" unsigned="true" nullable="false" comment="Store ID"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="consumer_id"/>
+            <column name="store_id"/>
+        </constraint>
+        <constraint xsi:type="foreign"
+                    referenceId="MDS_DS_API_CONSUMER_STORE_CONSUMER_ID_MDS_DS_API_CONSUMER_CONSUMER_ID"
+                    table="mageos_digitalsignature_api_consumer_store" column="consumer_id"
+                    referenceTable="mageos_digitalsignature_api_consumer" referenceColumn="consumer_id"
+                    onDelete="CASCADE"/>
+    </table>
+
     <!-- Opt-in cliente: scelta "voglio il contratto da firmare" sul carrello.
          Propagata a sales_order alla conversione quote->order (vedi fieldset.xml).
          Letta server-side da TriggerHandler per i template facoltativi. -->
@@ -188,5 +224,61 @@
     <table name="sales_order" resource="sales" engine="innodb">
         <column xsi:type="smallint" name="digitalsignature_requested" unsigned="true" nullable="true"
                 comment="Customer requested digital signature (NULL=unset)"/>
+    </table>
+
+    <!-- Webhook Subscription: registrazioni per notifiche push outbound -->
+    <table name="mageos_digitalsignature_webhook_subscription" resource="default" engine="innodb"
+           comment="DigitalSignature Webhook Subscription">
+        <column xsi:type="int" name="subscription_id" unsigned="true" nullable="false" identity="true"
+                comment="Subscription ID"/>
+        <column xsi:type="smallint" name="store_id" unsigned="true" nullable="true"
+                comment="Store ID (NULL = all stores)"/>
+        <column xsi:type="varchar" name="target_url" length="255" nullable="false" comment="Webhook target URL"/>
+        <column xsi:type="text" name="secret" nullable="false" comment="HMAC secret (encrypted at rest)"/>
+        <column xsi:type="smallint" name="enabled" unsigned="true" nullable="false" default="1" comment="1 = enabled"/>
+        <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Created At"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="subscription_id"/>
+        </constraint>
+    </table>
+
+    <!-- Webhook Delivery: registro tentativi di invio webhook -->
+    <table name="mageos_digitalsignature_webhook_delivery" resource="default" engine="innodb"
+           comment="DigitalSignature Webhook Delivery Attempt">
+        <column xsi:type="int" name="delivery_id" unsigned="true" nullable="false" identity="true"
+                comment="Delivery ID"/>
+        <column xsi:type="int" name="subscription_id" unsigned="true" nullable="false" comment="Subscription ID"/>
+        <column xsi:type="int" name="document_id" unsigned="true" nullable="false" comment="Document ID"/>
+        <column xsi:type="varchar" name="event_type" length="32" nullable="false" default="status_changed"
+                comment="Event type"/>
+        <column xsi:type="text" name="payload" nullable="false" comment="JSON payload sent to target"/>
+        <column xsi:type="varchar" name="status" length="16" nullable="false" default="pending"
+                comment="pending|sending|delivered|failed"/>
+        <column xsi:type="smallint" name="attempts" unsigned="true" nullable="false" default="0"
+                comment="Delivery attempts"/>
+        <column xsi:type="datetime" name="next_attempt_at" nullable="true" comment="Next retry timestamp"/>
+        <column xsi:type="text" name="last_error" nullable="true" comment="Last delivery error"/>
+        <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Created At"/>
+        <column xsi:type="timestamp" name="updated_at" on_update="true" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Updated At"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="delivery_id"/>
+        </constraint>
+        <constraint xsi:type="foreign"
+                    referenceId="MDS_DS_WH_DELIVERY_SUBSCRIPTION_ID_MDS_DS_WH_SUB_SUBSCRIPTION_ID"
+                    table="mageos_digitalsignature_webhook_delivery" column="subscription_id"
+                    referenceTable="mageos_digitalsignature_webhook_subscription" referenceColumn="subscription_id"
+                    onDelete="CASCADE"/>
+        <constraint xsi:type="foreign"
+                    referenceId="MDS_DS_WH_DELIVERY_DOCUMENT_ID_MDS_DS_DOC_DOCUMENT_ID"
+                    table="mageos_digitalsignature_webhook_delivery" column="document_id"
+                    referenceTable="mageos_digitalsignature_document" referenceColumn="document_id"
+                    onDelete="CASCADE"/>
+        <index referenceId="MDS_DIGITALSIGNATURE_WH_DELIVERY_STATUS_NEXT_ATTEMPT" indexType="btree">
+            <column name="status"/>
+            <column name="next_attempt_at"/>
+        </index>
     </table>
 </schema>

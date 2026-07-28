@@ -12,9 +12,9 @@ use Magento\Ui\Component\MassAction\Filter;
 use Psr\Log\LoggerInterface;
 
 /**
- * Mass action sulla griglia ordini: genera i documenti firma (trigger MANUAL)
- * per gli ordini selezionati. Il lavoro pesante è comunque accodato dal
- * DocumentManager, qui si limita a prendere in carico le richieste.
+ * Mass action on the orders grid: generates the signature documents (MANUAL
+ * trigger) for the selected orders. The heavy lifting is queued by the
+ * DocumentManager anyway, here it just takes charge of the requests.
  */
 class MassGenerateDocuments extends AbstractMassAction
 {
@@ -54,12 +54,12 @@ class MassGenerateDocuments extends AbstractMassAction
 
         if ($processed) {
             $this->messageManager->addSuccessMessage(
-                __('Generazione documenti firma presa in carico per %1 ordine/i.', $processed)
+                __('Signature document generation queued for %1 order(s).', $processed)
             );
         }
         if ($failed) {
             $this->messageManager->addErrorMessage(
-                __('Impossibile prendere in carico %1 ordine/i (vedi log).', $failed)
+                __('Could not queue %1 order(s) (see log).', $failed)
             );
         }
 

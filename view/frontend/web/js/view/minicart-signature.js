@@ -46,7 +46,7 @@ define([
             }
 
             this.saving(true);
-            this.statusText($t('Salvataggio in corso...'));
+            this.statusText($t('Saving...'));
 
             $.ajax({
                 url: section.url,
@@ -59,18 +59,18 @@ define([
                 showLoader: true
             }).done(function () {
                 if (section.mandatory && !requested) {
-                    self.statusText($t('Attenzione: la firma resta obbligatoria per completare l\'ordine.'));
+                    self.statusText($t('Warning: the signature is still required to complete the order.'));
 
                     return;
                 }
-                self.statusText($t('Preferenza salvata.'));
+                self.statusText($t('Preference saved.'));
                 setTimeout(function () {
                     self.statusText('');
                 }, 2000);
             }).fail(function () {
                 self.statusText('');
                 alert({
-                    content: $t('Non è stato possibile salvare la preferenza. Riprova.')
+                    content: $t('We couldn\'t save your preference. Please try again.')
                 });
             }).always(function () {
                 self.saving(false);

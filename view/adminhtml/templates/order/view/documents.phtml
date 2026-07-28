@@ -16,13 +16,13 @@ $documents = $block->getDocuments();
 ?>
 <section class="admin__page-section digitalsignature-order-documents">
     <div class="admin__page-section-title">
-        <span class="title"><?= $block->escapeHtml(__('Documenti firma')) ?></span>
+        <span class="title"><?= $block->escapeHtml(__('Signature documents')) ?></span>
         <div class="actions">
             <form method="post" action="<?= $block->escapeUrl($block->getGenerateUrl()) ?>"
                   style="display:inline-block;">
                 <?= /* @noEscape */ $block->getBlockHtml('formkey') ?>
-                <button type="submit" class="action-secondary" title="<?= $block->escapeHtmlAttr(__('Genera i documenti dei template con trigger manuale')) ?>">
-                    <span><?= $block->escapeHtml(__('Genera documenti firma (manuale)')) ?></span>
+                <button type="submit" class="action-secondary" title="<?= $block->escapeHtmlAttr(__('Generate template documents with manual trigger')) ?>">
+                    <span><?= $block->escapeHtml(__('Generate signature documents (manual)')) ?></span>
                 </button>
             </form>
         </div>
@@ -30,21 +30,21 @@ $documents = $block->getDocuments();
 
     <?php if (empty($documents)): ?>
         <div class="admin__field-note">
-            <span><?= $block->escapeHtml(__('Nessun documento firma per questo ordine.')) ?></span>
+            <span><?= $block->escapeHtml(__('No signature documents for this order.')) ?></span>
         </div>
     <?php else: ?>
         <table class="data-grid">
             <thead>
                 <tr>
                     <th class="data-grid-th"><?= $block->escapeHtml(__('ID')) ?></th>
-                    <th class="data-grid-th"><?= $block->escapeHtml(__('Riga')) ?></th>
+                    <th class="data-grid-th"><?= $block->escapeHtml(__('Item')) ?></th>
                     <th class="data-grid-th"><?= $block->escapeHtml(__('Template')) ?></th>
                     <th class="data-grid-th"><?= $block->escapeHtml(__('Provider')) ?></th>
-                    <th class="data-grid-th"><?= $block->escapeHtml(__('Stato')) ?></th>
+                    <th class="data-grid-th"><?= $block->escapeHtml(__('Status')) ?></th>
                     <th class="data-grid-th"><?= $block->escapeHtml(__('Trigger')) ?></th>
-                    <th class="data-grid-th"><?= $block->escapeHtml(__('ID processo')) ?></th>
-                    <th class="data-grid-th"><?= $block->escapeHtml(__('Creato')) ?></th>
-                    <th class="data-grid-th"><?= $block->escapeHtml(__('Azioni')) ?></th>
+                    <th class="data-grid-th"><?= $block->escapeHtml(__('Process ID')) ?></th>
+                    <th class="data-grid-th"><?= $block->escapeHtml(__('Created')) ?></th>
+                    <th class="data-grid-th"><?= $block->escapeHtml(__('Actions')) ?></th>
                 </tr>
             </thead>
             <tbody>
@@ -55,7 +55,7 @@ $documents = $block->getDocuments();
                         <td class="data-grid-td">
                             #<?= (int)$doc->getDocumentId() ?>
                             <?php if (!$active): ?>
-                                <small>(<?= $block->escapeHtml(__('storico')) ?>)</small>
+                                <small>(<?= $block->escapeHtml(__('historical')) ?>)</small>
                             <?php endif; ?>
                         </td>
                         <td class="data-grid-td"><?= $block->escapeHtml($block->getOrderItemLabel($doc->getOrderItemId())) ?></td>
@@ -68,12 +68,12 @@ $documents = $block->getDocuments();
                         <td class="data-grid-td">
                             <?php if ($active): ?>
                                 <form method="post" action="<?= $block->escapeUrl($block->getRegenerateUrl()) ?>"
-                                      onsubmit="return confirm('<?= $block->escapeJs(__('Rigenerare e reinviare questo documento?')) ?>');">
+                                      onsubmit="return confirm('<?= $block->escapeJs(__('Regenerate and resend this document?')) ?>');">
                                     <?= /* @noEscape */ $block->getBlockHtml('formkey') ?>
                                     <input type="hidden" name="id" value="<?= (int)$doc->getDocumentId() ?>"/>
                                     <input type="hidden" name="order_id" value="<?= (int)$order->getId() ?>"/>
                                     <button type="submit" class="action-default scalable">
-                                        <span><?= $block->escapeHtml(__('Rigenera / Reinvia')) ?></span>
+                                        <span><?= $block->escapeHtml(__('Regenerate / Resend')) ?></span>
                                     </button>
                                 </form>
                             <?php else: ?>

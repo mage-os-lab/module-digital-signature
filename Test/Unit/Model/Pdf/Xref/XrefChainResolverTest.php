@@ -78,7 +78,7 @@ class XrefChainResolverTest extends TestCase
         $pdf = $link1 . $link2 . $link3 . "startxref\n{$link3Offset}\n%%EOF\n";
 
         $this->expectException(LocalizedException::class);
-        $this->expectExceptionMessageMatches('/troppe revisioni/');
+        $this->expectExceptionMessageMatches('/too many linked revisions/');
 
         $this->resolver->resolve($pdf);
     }
@@ -96,12 +96,12 @@ class XrefChainResolverTest extends TestCase
 
     public function testMergesObjectOffsetsAcrossPrevChainWithNewestWinning(): void
     {
-        // Revisione precedente: oggetto 1 all'offset 42, oggetto 2 all'offset 99.
+        // Previous revision: object 1 at offset 42, object 2 at offset 99.
         $prev = "xref\n0 3\n0000000000 65535 f \n0000000042 00000 n \n0000000099 00000 n \n"
             . "trailer\n<</Size 3 /Root 1 0 R>>\n";
         $prevOffset = 0;
-        // Revisione corrente: oggetto 1 aggiornato all'offset 500 (l'oggetto 2 resta
-        // valido solo nella revisione precedente e deve comunque comparire nella mappa fusa).
+        // Current revision: object 1 updated to offset 500 (object 2 remains
+        // valid only in the previous revision and must still appear in the merged map).
         $current = "xref\n0 1\n0000000000 65535 f \n"
             . "1 1\n0000000500 00000 n \n"
             . "trailer\n<</Size 3 /Root 1 0 R /Prev {$prevOffset}>>\n";

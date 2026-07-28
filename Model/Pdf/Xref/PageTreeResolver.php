@@ -6,14 +6,14 @@ namespace MageOS\DigitalSignature\Model\Pdf\Xref;
 use Magento\Framework\Exception\LocalizedException;
 
 /**
- * Risolve una pagina per numero (1-based) risalendo Root -> /Pages ->
- * /Kids[N] -> oggetto Page, usando la tabella "numero oggetto => offset"
- * esposta da XrefChainResolver. Supporta solo alberi /Pages "piatti" (Kids
- * che referenzia direttamente le pagine): un nodo /Pages annidato o una
- * pagina con /Rotate diverso da zero sono rifiutati esplicitamente, mai
- * gestiti silenziosamente. /Resources è supportato sia inline sia come
- * riferimento indiretto (oggetto separato risolto tramite la tabella xref);
- * se assente in entrambe le forme, viene rifiutato.
+ * Resolves a page by number (1-based) by walking Root -> /Pages ->
+ * /Kids[N] -> Page object, using the "object number => offset" table
+ * exposed by XrefChainResolver. Supports only "flat" /Pages trees (Kids
+ * referencing the pages directly): a nested /Pages node or a page with
+ * non-zero /Rotate is explicitly rejected, never handled silently.
+ * /Resources is supported both inline and as an indirect reference
+ * (separate object resolved via the xref table); if absent in both forms,
+ * it is rejected.
  */
 final class PageTreeResolver
 {
@@ -31,18 +31,18 @@ final class PageTreeResolver
         $root = $this->readObjectDict($pdf, $info->objectOffsets, $this->refToObjectNumber($info->root));
         $pagesRef = DictFields::extractRef($root['dict'], 'Pages');
         if ($pagesRef === null) {
-            throw new LocalizedException(__('PDF non supportato: catalogo privo di /Pages.'));
+            throw new LocalizedException(__('Unsupported PDF: catalog is missing /Pages.'));
         }
 
         $pages = $this->readObjectDict($pdf, $info->objectOffsets, $this->refToObjectNumber($pagesRef));
         $kids = DictFields::extractRefArray($pages['dict'], 'Kids');
         if ($kids === null || $kids === []) {
-            throw new LocalizedException(__('PDF non supportato: /Pages privo di /Kids.'));
+            throw new LocalizedException(__('Unsupported PDF: /Pages is missing /Kids.'));
         }
 
         if ($pageNumber < 1 || $pageNumber > count($kids)) {
             throw new LocalizedException(
-                __('Numero di pagina %1 non valido: il PDF ne ha %2.', $pageNumber, count($kids))
+                __('Invalid page number %1: the PDF has %2.', $pageNumber, count($kids))
             );
         }
 
@@ -51,14 +51,14 @@ final class PageTreeResolver
 
         if (DictFields::extractName($page['dict'], 'Type') === 'Pages') {
             throw new LocalizedException(
-                __('PDF non supportato: struttura pagine annidata non gestita dal builder.')
+                __('Unsupported PDF: nested page structure not handled by the builder.')
             );
         }
 
         $rotate = DictFields::extractInt($page['dict'], 'Rotate') ?? 0;
         if ($rotate !== 0) {
             throw new LocalizedException(
-                __('PDF non supportato: pagina ruotata (/Rotate %1) non gestita dal builder.', $rotate)
+                __('Unsupported PDF: rotated page (/Rotate %1) not handled by the builder.', $rotate)
             );
         }
 
@@ -73,7 +73,7 @@ final class PageTreeResolver
             [$resourcesDict] = DictFields::extractBalancedDict($page['dict'], $resourcesContentStart);
         } else {
             throw new LocalizedException(
-                __('PDF non supportato: pagina priva di /Resources dichiarate.')
+                __('Unsupported PDF: page has no declared /Resources.')
             );
         }
 
@@ -88,12 +88,12 @@ final class PageTreeResolver
 
         $contentsRef = DictFields::extractRef($page['dict'], 'Contents');
         if ($contentsRef === null) {
-            throw new LocalizedException(__('PDF non supportato: pagina priva di /Contents.'));
+            throw new LocalizedException(__('Unsupported PDF: page is missing /Contents.'));
         }
         $contentsNumber = $this->refToObjectNumber($contentsRef);
         if (!isset($info->objectOffsets[$contentsNumber])) {
             throw new LocalizedException(
-                __('PDF non supportato: content stream della pagina non risolvibile.')
+                __('Unsupported PDF: page content stream could not be resolved.')
             );
         }
 
@@ -120,14 +120,14 @@ final class PageTreeResolver
     {
         if (!isset($objectOffsets[$objectNumber])) {
             throw new LocalizedException(
-                __('PDF non supportato: oggetto %1 non risolvibile nella tabella cross-reference.', $objectNumber)
+                __('Unsupported PDF: object %1 could not be resolved in the cross-reference table.', $objectNumber)
             );
         }
         $offset = $objectOffsets[$objectNumber];
         $region = substr($pdf, $offset);
         if (!preg_match('/^(\d+)\s+(\d+)\s+obj\s*<</', $region, $header)) {
             throw new LocalizedException(
-                __('PDF non supportato: oggetto %1 non riconosciuto alla posizione attesa.', $objectNumber)
+                __('Unsupported PDF: object %1 not recognized at the expected position.', $objectNumber)
             );
         }
         $dictContentStart = strlen($header[0]);
@@ -136,7 +136,7 @@ final class PageTreeResolver
         $endobjPos = strpos($region, 'endobj', $closeStart + 2);
         if ($endobjPos === false) {
             throw new LocalizedException(
-                __('PDF non supportato: oggetto %1 privo di endobj.', $objectNumber)
+                __('Unsupported PDF: object %1 is missing endobj.', $objectNumber)
             );
         }
 

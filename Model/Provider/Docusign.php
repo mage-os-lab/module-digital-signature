@@ -59,9 +59,9 @@ class Docusign implements SignProviderInterface
         $expirationDays = max(1, (int)($this->config->get(self::CODE, 'expiration_days', $storeId) ?? 7));
 
         $envelopeData = [
-            'emailSubject' => (string)__('Firma contratto ordine #%1', $document->getOrderId()),
+            'emailSubject' => (string)__('Sign contract for order #%1', $document->getOrderId()),
             'emailBlurb' => (string)($this->config->get(self::CODE, 'notes', $storeId)
-                ?? __('Ti chiediamo di firmare digitalmente il documento relativo al tuo ordine.')),
+                ?? __('We kindly ask you to digitally sign the document related to your order.')),
             'documents' => [
                 [
                     'documentId' => '1',
@@ -122,7 +122,7 @@ class Docusign implements SignProviderInterface
         $envelopeId = $response['envelopeId'] ?? null;
 
         if (!$envelopeId) {
-            throw ProviderException::permanent(__('DocuSign: creazione busta fallita, ID non ricevuto.'));
+            throw ProviderException::permanent(__('DocuSign: envelope creation failed, no ID received.'));
         }
 
         return new StartResult($envelopeId, $this->json->serialize($response));
@@ -137,7 +137,7 @@ class Docusign implements SignProviderInterface
         $rawStatus = $response['status'] ?? null;
 
         if (!$rawStatus) {
-            throw ProviderException::permanent(__('DocuSign: risposta lettura stato priva di campo status.'));
+            throw ProviderException::permanent(__('DocuSign: status response is missing the status field.'));
         }
 
         return new StatusResult($rawStatus, $this->json->serialize($response));
@@ -177,7 +177,7 @@ class Docusign implements SignProviderInterface
     {
         $processId = $document->getProviderProcessId();
         if ($processId === null || $processId === '') {
-            throw ProviderException::permanent(__('DocuSign: il documento non ha un processo (envelope) avviato.'));
+            throw ProviderException::permanent(__('DocuSign: the document has no started process (envelope).'));
         }
 
         return $processId;
@@ -187,7 +187,7 @@ class Docusign implements SignProviderInterface
     {
         $email = (string)($document->getSignerEmail() ?? '');
         if (!filter_var($email, FILTER_VALIDATE_EMAIL) || preg_match('/[\x00-\x1F\x7F]/', $email)) {
-            throw ProviderException::permanent(__('DocuSign: email del firmatario mancante o non valida.'));
+            throw ProviderException::permanent(__('DocuSign: signer email is missing or invalid.'));
         }
 
         return $email;
@@ -215,7 +215,7 @@ class Docusign implements SignProviderInterface
         try {
             return $this->storeManager->getStore($storeId)->getBaseUrl();
         } catch (\Exception $e) {
-            throw ProviderException::permanent(__('DocuSign: store del documento non valido.'), $e);
+            throw ProviderException::permanent(__('DocuSign: invalid document store.'), $e);
         }
     }
 }

@@ -4,8 +4,8 @@ declare(strict_types=1);
 namespace MageOS\DigitalSignature\Test\Unit\Model\Pdf\Xref;
 
 /**
- * Helper condivisi per costruire fixture binarie di xref stream nei test
- * (righe /W a larghezza variabile, big-endian).
+ * Shared helpers to build binary xref stream fixtures in tests
+ * (/W rows with variable width, big-endian).
  */
 trait XrefStreamFixtureTrait
 {
@@ -20,7 +20,7 @@ trait XrefStreamFixtureTrait
     }
 
     /**
-     * @param array<int, array{0: int, 1: int, 2: int}> $entries righe [type, field2, field3]
+     * @param array<int, array{0: int, 1: int, 2: int}> $entries rows [type, field2, field3]
      */
     private function buildXrefStreamRows(array $entries, int $w1, int $w2, int $w3): string
     {

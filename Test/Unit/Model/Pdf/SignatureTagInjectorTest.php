@@ -75,8 +75,8 @@ class SignatureTagInjectorTest extends TestCase
 
         $result = $this->injector->injectAt($pdf, 1, 72.0, 700.0, 80.0, 20.0);
 
-        // Viene aggiunto un nuovo oggetto Font (MDSHelv1) per evitare problemi di subsetting:
-        // (5 oggetti originali + 1 content-stream + 1 Font object + 1 xref = 8).
+        // A new Font object (MDSHelv1) is added to avoid subsetting issues:
+        // (5 original objects + 1 content-stream + 1 Font object + 1 xref = 8).
         self::assertSame(8, preg_match_all('/\d+\s+0\s+obj/', $result));
         self::assertStringContainsString('/MDSHelv1', $result);
     }
@@ -189,8 +189,8 @@ class SignatureTagInjectorTest extends TestCase
 
         $result = $this->injector->injectAt($pdf, 1, 50.0, 400.0, 60.0, 15.0);
 
-        // Il font va aggiunto nell'oggetto /Resources riscritto (5 0 obj),
-        // non iniettato inline nel dizionario dell'oggetto Page (3 0 obj).
+        // The font must be added in the rewritten /Resources object (5 0 obj),
+        // not injected inline into the Page object's dictionary (3 0 obj).
         self::assertMatchesRegularExpression(
             '/5 0 obj\s*<<[^>]*\/Font\s*<<\/MDSHelv1/',
             $result

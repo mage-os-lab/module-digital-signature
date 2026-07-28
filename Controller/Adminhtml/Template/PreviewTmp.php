@@ -27,14 +27,14 @@ class PreviewTmp extends Action implements HttpGetActionInterface
     {
         $fileName = basename((string)$this->getRequest()->getParam('file', ''));
         if ($fileName === '') {
-            throw new LocalizedException(__('File non specificato.'));
+            throw new LocalizedException(__('File not specified.'));
         }
 
         $mediaDirectory = $this->filesystem->getDirectoryRead(DirectoryList::MEDIA);
         $relativePath = self::BASE_TMP_PATH . '/' . $fileName;
 
         if (!$mediaDirectory->isFile($relativePath)) {
-            throw new LocalizedException(__('Il file temporaneo richiesto non esiste.'));
+            throw new LocalizedException(__('The requested temporary file does not exist.'));
         }
 
         $content = $mediaDirectory->readFile($relativePath);

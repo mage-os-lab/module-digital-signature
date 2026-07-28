@@ -28,15 +28,15 @@ class Edit extends Action implements HttpGetActionInterface
         if ($templateId) {
             try {
                 $template = $this->templateRepository->getById($templateId);
-                $title = __('Modifica template "%1"', $template->getName());
+                $title = __('Edit template "%1"', $template->getName());
             } catch (NoSuchEntityException) {
-                $this->messageManager->addErrorMessage(__('Questo template non esiste più.'));
+                $this->messageManager->addErrorMessage(__('This template no longer exists.'));
                 $resultRedirect = $this->resultRedirectFactory->create();
 
                 return $resultRedirect->setPath('*/*/');
             }
         } else {
-            $title = __('Nuovo template documento');
+            $title = __('New document template');
         }
 
         $resultPage = $this->resultPageFactory->create();

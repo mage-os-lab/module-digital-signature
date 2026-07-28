@@ -10,7 +10,7 @@ use Magento\Backend\Block\Template\Context;
 use Magento\Framework\Serialize\Serializer\Json;
 
 /**
- * Wrapper griglia + serializer per l'assegnazione prodotti nel form template.
+ * Grid + serializer wrapper for product assignment in the template form.
  */
 class AssignProducts extends Template
 {
@@ -50,9 +50,9 @@ class AssignProducts extends Template
     }
 
     /**
-     * JSON sicuro per inserimento diretto in un blocco <script> (niente @noEscape):
-     * JSON_HEX_TAG/AMP/APOS/QUOT impediscono di chiudere il tag <script> o rompere
-     * il contesto anche se in futuro il payload dovesse includere stringhe.
+     * Safe JSON for direct insertion into a <script> block (no @noEscape):
+     * JSON_HEX_TAG/AMP/APOS/QUOT prevent closing the <script> tag or breaking
+     * the context even if the payload should include strings in the future.
      */
     public function getProductsJsonForScript(): string
     {
@@ -63,7 +63,7 @@ class AssignProducts extends Template
     }
 
     /**
-     * @return array<int, int> formato {productId: position} atteso dal serializer della griglia
+     * @return array<int, int> {productId: position} format expected by the grid serializer
      */
     private function getAssignedProducts(): array
     {

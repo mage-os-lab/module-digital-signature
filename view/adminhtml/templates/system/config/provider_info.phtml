@@ -1,18 +1,30 @@
 <?php
 /** @var \MageOS\DigitalSignature\Block\Adminhtml\System\Config\ProviderInfo\AbstractProviderInfo $block */
 $links = $block->getLinks();
+$isRecommended = $block->isRecommended();
+$recommendationText = $block->getRecommendationText();
 ?>
-<div class="digitalsignature-provider-info" style="display:flex;align-items:flex-start;gap:16px;padding:12px 0;max-width:760px;">
-    <img src="<?= $block->escapeUrl($block->getLogoUrl()) ?>"
-         alt="<?= $block->escapeHtmlAttr($block->getProviderName()) ?>"
-         style="width:56px;height:56px;flex:0 0 auto;" />
+<div class="digitalsignature-provider-info" style="display:flex;align-items:flex-start;gap:16px;padding:12px;max-width:760px;<?php if ($isRecommended): ?>border:1px solid #79a22e;border-radius:6px;background-color:#f6faf0;<?php endif; ?>">
+    <span style="display:flex;align-items:center;justify-content:center;width:64px;height:64px;flex:0 0 auto;overflow:hidden;border-radius:4px;">
+        <img src="<?= $block->escapeUrl($block->getLogoUrl()) ?>"
+             alt="<?= $block->escapeHtmlAttr($block->getProviderName()) ?>"
+             style="max-width:100%;max-height:100%;object-fit:contain;" />
+    </span>
     <div>
         <strong style="font-size:1.1em;"><?= $block->escapeHtml($block->getProviderName()) ?></strong>
         <div style="margin:4px 0;">
             <span style="font-size:0.9em;font-weight:bold;color:#4f5b66;background-color:#e0e6ed;padding:2px 6px;border-radius:4px;display:inline-block;">
                 <?= $block->escapeHtml($block->getLegalLevel()) ?>
             </span>
+            <?php if ($isRecommended): ?>
+                <span style="font-size:0.9em;font-weight:bold;color:#fff;background-color:#79a22e;padding:2px 6px;border-radius:4px;display:inline-block;">
+                    <?= $block->escapeHtml(__('Consigliato')) ?>
+                </span>
+            <?php endif; ?>
         </div>
+        <?php if ($isRecommended && $recommendationText): ?>
+            <p style="margin:6px 0;font-weight:bold;color:#3d5115;"><?= $block->escapeHtml($recommendationText) ?></p>
+        <?php endif; ?>
         <p style="margin:6px 0;"><?= $block->escapeHtml($block->getDescription()) ?></p>
         <?php if ($links): ?>
             <ul style="margin:0;padding-left:18px;">
@@ -33,7 +45,7 @@ $links = $block->getLinks();
             </ul>
         <?php endif; ?>
         <p style="margin:10px 0 0 0;font-size:0.85em;color:#777;border-top:1px solid #ddd;padding-top:6px;line-height:1.4;">
-            <?= $block->escapeHtml(__('Nota: La classificazione del livello di firma si basa sulle specifiche dichiarate dal fornitore. Il modulo non garantisce l\'adeguatezza legale o la conformità per scopi specifici.')) ?>
+            <?= $block->escapeHtml(__('Note: The classification of the signature level is based on the specifications declared by the provider. The module does not guarantee legal adequacy or compliance for specific purposes.')) ?>
         </p>
     </div>
 </div>

@@ -14,12 +14,12 @@ use Magento\Framework\Stdlib\DateTime\DateTime;
 use Psr\Log\LoggerInterface;
 
 /**
- * Retention GDPR (analisi §12, §13-bis): elimina periodicamente PDF e dati
- * personali dei documenti conclusi (stati finali) oltre il periodo di
- * conservazione configurato. Il record e lo storico stato restano (audit
- * fiscale/legale), ma senza PDF, email/telefono del firmatario né payload
- * grezzi nel log eventi. Disattivato di default: opt-in esplicito perché
- * distruttivo.
+ * GDPR retention (analysis §12, §13-bis): periodically deletes PDFs and
+ * personal data of completed documents (final states) past the configured
+ * retention period. The record and status history remain (tax/legal
+ * audit), but without PDF, signer email/phone, or raw payloads in the
+ * event log. Disabled by default: explicit opt-in because it is
+ * destructive.
  */
 class RetentionCleanup
 {
@@ -85,7 +85,7 @@ class RetentionCleanup
             'retention_purge',
             null,
             null,
-            (string)__('PDF e dati personali eliminati per fine periodo di conservazione.')
+            (string)__('PDF and personal data deleted at the end of the retention period.')
         );
     }
 

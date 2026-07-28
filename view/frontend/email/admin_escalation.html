@@ -1,22 +1,22 @@
-<!--@subject {{trans "[Firma Digitale] Sollecito: Documento #%document_id in attesa di firma (ordine %increment_id)" document_id=$document_id increment_id=$order_increment_id}} @-->
+<!--@subject {{trans "[Digital Signature] Reminder: Document #%document_id awaiting signature (order %increment_id)" document_id=$document_id increment_id=$order_increment_id}} @-->
 <!--@vars {
-"var document_id":"ID documento",
-"var order_increment_id":"Numero ordine",
+"var document_id":"Document ID",
+"var order_increment_id":"Order number",
 "var provider_code":"Provider",
-"var signer_email":"Email firmatario",
-"var order_url":"Link all'ordine"
+"var signer_email":"Signer email",
+"var order_url":"Order link"
 } @-->
 {{template config_path="design/email/header_template"}}
 
-<p>{{trans "Il seguente documento è in attesa di firma digitale da oltre il periodo configurato di escalation."}}</p>
+<p>{{trans "The following document has been awaiting digital signature for longer than the configured escalation period."}}</p>
 
 <ul>
-    <li>{{trans "Documento: #%document_id" document_id=$document_id}}</li>
-    <li>{{trans "Ordine: #%increment_id" increment_id=$order_increment_id}}</li>
+    <li>{{trans "Document: #%document_id" document_id=$document_id}}</li>
+    <li>{{trans "Order: #%increment_id" increment_id=$order_increment_id}}</li>
     <li>{{trans "Provider: %provider" provider=$provider_code}}</li>
-    <li>{{trans "Firmatario: %email" email=$signer_email}}</li>
+    <li>{{trans "Signer: %email" email=$signer_email}}</li>
 </ul>
 
-<p>{{trans 'Gestisci l\'ordine in backend: <a href="%url">%url</a>' url=$order_url |raw}}</p>
+<p>{{trans 'Manage the order in the backend: <a href="%url">%url</a>' url=$order_url |raw}}</p>
 
 {{template config_path="design/email/footer_template"}}

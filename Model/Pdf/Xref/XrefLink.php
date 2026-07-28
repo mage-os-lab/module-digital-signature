@@ -4,14 +4,14 @@ declare(strict_types=1);
 namespace MageOS\DigitalSignature\Model\Pdf\Xref;
 
 /**
- * Esito della lettura di UNA sezione di cross-reference (tabella classica o
- * xref stream), prima di seguire l'eventuale catena /Prev.
+ * Result of reading ONE cross-reference section (classic table or xref
+ * stream), before following any /Prev chain.
  */
 final class XrefLink
 {
     /**
-     * @param array<int, int> $objectOffsets numero oggetto => offset byte nel file,
-     *        solo per gli oggetti "in use" di questa sezione (non l'intera catena)
+     * @param array<int, int> $objectOffsets object number => byte offset in the file,
+     *        only for the "in use" objects of this section (not the whole chain)
      */
     public function __construct(
         public readonly int $size,

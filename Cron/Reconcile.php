@@ -10,10 +10,10 @@ use Magento\Framework\App\Config\ScopeConfigInterface;
 use Psr\Log\LoggerInterface;
 
 /**
- * Riconciliazione periodica (analisi §5):
- * - documenti "sent" fermi da troppo → refresh di stato (copre callback perse);
- * - documenti pending/generated bloccati con retry residui → riaccodati.
- * Il cap per run è il throttling verso il provider deciso in analisi.
+ * Periodic reconciliation (analysis §5):
+ * - "sent" documents stuck for too long → status refresh (covers missed callbacks);
+ * - pending/generated documents stuck with remaining retries → re-queued.
+ * The cap per run is the throttling toward the provider decided in the analysis.
  */
 class Reconcile
 {

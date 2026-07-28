@@ -24,14 +24,14 @@ class Delete extends Action implements HttpPostActionInterface
         $resultRedirect = $this->resultRedirectFactory->create();
         $templateId = (int)$this->getRequest()->getParam('template_id');
         if (!$templateId) {
-            $this->messageManager->addErrorMessage(__('Nessun template selezionato.'));
+            $this->messageManager->addErrorMessage(__('No template selected.'));
 
             return $resultRedirect->setPath('*/*/');
         }
 
         try {
             $this->templateRepository->deleteById($templateId);
-            $this->messageManager->addSuccessMessage(__('Template eliminato.'));
+            $this->messageManager->addSuccessMessage(__('Template deleted.'));
         } catch (\Exception $e) {
             $this->messageManager->addErrorMessage($e->getMessage());
 

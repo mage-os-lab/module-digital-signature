@@ -10,7 +10,7 @@ class PdfJsSource implements OptionSourceInterface
     public function toOptionArray(): array
     {
         return [
-            ['value' => 'local', 'label' => __('Locale (Consigliato)')],
+            ['value' => 'local', 'label' => __('Local (Recommended)')],
             ['value' => 'cdn', 'label' => __('CDN')]
         ];
     }

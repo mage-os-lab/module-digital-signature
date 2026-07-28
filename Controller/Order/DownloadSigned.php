@@ -21,13 +21,13 @@ use Magento\Sales\Api\OrderRepositoryInterface;
 use Psr\Log\LoggerInterface;
 
 /**
- * Download del PDF firmato dall'area cliente ("i miei ordini").
+ * Download of the signed PDF from the customer area ("my orders").
  *
- * Riservato ai clienti registrati (no guest, analisi §13-bis): richiede il
- * login, verifica che il documento appartenga a un ordine del cliente loggato
- * ed espone solo documenti effettivamente firmati. Lo storage è in
- * var/digitalsignature/ (non servito dal web), il PDF viene letto e ritornato in
- * streaming come allegato.
+ * Restricted to registered customers (no guest, analysis §13-bis): requires
+ * login, verifies that the document belongs to an order of the logged-in
+ * customer, and exposes only actually signed documents. Storage is in
+ * var/digitalsignature/ (not served by the web), the PDF is read and returned in
+ * streaming as an attachment.
  */
 class DownloadSigned extends Action implements HttpGetActionInterface
 {

@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace MageOS\DigitalSignature\Model\Provider\Result;
 
 /**
- * Esito dell'avvio di un processo di firma presso il provider.
+ * Result of starting a signing process with the provider.
  */
 class StartResult
 {

@@ -15,9 +15,9 @@ use Magento\Framework\Controller\ResultInterface;
 use Psr\Log\LoggerInterface;
 
 /**
- * Download autorizzato (ACL ::document) del PDF generato o firmato di un
- * documento. Lo storage è in var/digitalsignature/ (non servito dal web), il file
- * viene letto e ritornato in streaming come allegato (analisi §12).
+ * Authorized download (ACL ::document) of the generated or signed PDF of a
+ * document. Storage is in var/digitalsignature/ (not served by the web), the file
+ * is read and returned in streaming as an attachment (analysis §12).
  */
 class Download extends Action implements HttpGetActionInterface
 {
@@ -45,7 +45,7 @@ class Download extends Action implements HttpGetActionInterface
                 : ($document->getSignedPdfPath() ?: $document->getPdfPath());
 
             if (!$relativePath || !$this->storage->exists($relativePath)) {
-                throw new \RuntimeException((string)__('PDF non disponibile per questo documento.'));
+                throw new \RuntimeException((string)__('PDF not available for this document.'));
             }
 
             $content = $this->storage->read($relativePath);
@@ -66,7 +66,7 @@ class Download extends Action implements HttpGetActionInterface
         } catch (\Exception $e) {
             $this->logger->error('DigitalSignature: download documento fallito: ' . $e->getMessage());
             $this->messageManager->addErrorMessage(
-                __('Impossibile scaricare il PDF: %1', $e->getMessage())
+                __('Unable to download the PDF: %1', $e->getMessage())
             );
             /** @var Redirect $redirect */
             $redirect = $this->resultRedirectFactory->create();

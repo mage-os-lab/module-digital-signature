@@ -11,8 +11,8 @@ use Magento\Sales\Api\OrderRepositoryInterface;
 use Psr\Log\LoggerInterface;
 
 /**
- * Genera manualmente i documenti firma (trigger MANUAL) per un ordine,
- * dalla vista ordine in admin.
+ * Manually generates the signature documents (MANUAL trigger) for an order,
+ * from the order view in admin.
  */
 class Generate extends Action implements HttpPostActionInterface
 {
@@ -36,12 +36,12 @@ class Generate extends Action implements HttpPostActionInterface
             $order = $this->orderRepository->get($orderId);
             $this->documentManager->generateManual($order);
             $this->messageManager->addSuccessMessage(
-                __('Richiesta di generazione documenti firma presa in carico.')
+                __('Signature document generation request has been queued.')
             );
         } catch (\Exception $e) {
             $this->logger->error('DigitalSignature: generazione manuale fallita: ' . $e->getMessage());
             $this->messageManager->addErrorMessage(
-                __('Impossibile generare i documenti firma: %1', $e->getMessage())
+                __('Unable to generate the signature documents: %1', $e->getMessage())
             );
         }
 

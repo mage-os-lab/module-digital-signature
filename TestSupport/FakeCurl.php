@@ -6,9 +6,9 @@ namespace MageOS\DigitalSignature\TestSupport;
 use Magento\Framework\HTTP\Client\Curl;
 
 /**
- * Doppio di test del client Curl Magento: registra le chiamate e restituisce
- * status/body configurabili, oppure lancia l'eccezione impostata (errore di
- * trasporto).
+ * Test double for the Magento Curl client: records calls and returns
+ * configurable status/body, or throws the set exception (transport
+ * error).
  */
 class FakeCurl extends Curl
 {

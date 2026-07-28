@@ -6,7 +6,7 @@ namespace MageOS\DigitalSignature\TestSupport;
 use MageOS\DigitalSignature\Api\Data\DocumentInterface;
 
 /**
- * Implementazione in-memory di DocumentInterface per i test unit.
+ * In-memory implementation of DocumentInterface for unit tests.
  */
 class FakeDocument implements DocumentInterface
 {

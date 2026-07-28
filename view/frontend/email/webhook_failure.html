@@ -1,0 +1,17 @@
+<!--@subject {{trans "[Digital Signature] Webhook failed: document #%document_id (order %order_increment_id)" document_id=$document_id order_increment_id=$order_increment_id}} @-->
+<!--@vars {
+"var document_id":"Document ID",
+"var order_id":"Order ID",
+"var order_increment_id":"Order number",
+"var provider_code":"Provider",
+"var signer_email":"Signer email",
+"var error_message":"Error message",
+"var order_url":"Order link"
+} @-->
+{{template config_path="design/email/header_template"}}
+
+<p>{{trans "Webhook delivery failed for document #%document_id (order #%order_increment_id)." document_id=$document_id order_increment_id=$order_increment_id}}</p>
+<p>{{trans "Details: %error_message" error_message=$error_message}}</p>
+<p><a href="{{var order_url}}">{{trans "View order"}}</a></p>
+
+{{template config_path="design/email/footer_template"}}

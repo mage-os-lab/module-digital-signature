@@ -6,11 +6,11 @@ namespace MageOS\DigitalSignature\Model\Pdf\Xref;
 use Magento\Framework\Exception\LocalizedException;
 
 /**
- * Legge una sezione di cross-reference classica (tabella testuale + trailer)
- * a partire da un offset noto: Size/Root/Encrypt/Prev del trailer associato,
- * e la tabella "numero oggetto => offset" delle sole entry "in use" (serve a
- * PageTreeResolver per risolvere oggetti per numero; TagReplacer continua a
- * ritrovare i propri oggetti con una scansione diretta del testo).
+ * Reads a classic cross-reference section (text table + trailer) starting
+ * from a known offset: Size/Root/Encrypt/Prev of the associated trailer,
+ * and the "object number => offset" table for the "in use" entries only
+ * (used by PageTreeResolver to resolve objects by number; TagReplacer
+ * continues to find its own objects via a direct text scan).
  */
 final class ClassicXrefReader
 {
@@ -21,19 +21,19 @@ final class ClassicXrefReader
     {
         if (substr($pdf, $offset, 4) !== 'xref') {
             throw new LocalizedException(
-                __('PDF non supportato: sezione cross-reference classica non trovata alla posizione attesa.')
+                __('Unsupported PDF: classic cross-reference section not found at the expected position.')
             );
         }
         if (!preg_match('/trailer\s*<<(.*?)>>/s', $pdf, $matches, 0, $offset)) {
             throw new LocalizedException(
-                __('PDF non supportato: trailer non trovato dopo la tabella cross-reference.')
+                __('Unsupported PDF: trailer not found after the cross-reference table.')
             );
         }
         $dict = $matches[1];
         $size = DictFields::extractInt($dict, 'Size');
         $root = DictFields::extractRef($dict, 'Root');
         if ($size === null || $root === null) {
-            throw new LocalizedException(__('PDF non supportato: trailer privo di Size/Root.'));
+            throw new LocalizedException(__('Unsupported PDF: trailer missing Size/Root.'));
         }
 
         $trailerPos = strpos($pdf, 'trailer', $offset);
@@ -51,7 +51,7 @@ final class ClassicXrefReader
     }
 
     /**
-     * @return array<int, int> numero oggetto => offset, solo entry "n" (in use)
+     * @return array<int, int> object number => offset, only "n" entries (in use)
      */
     private function parseObjectOffsets(string $body): array
     {

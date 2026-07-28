@@ -6,18 +6,18 @@ namespace MageOS\DigitalSignature\Model\Pdf\Xref;
 use Magento\Framework\Exception\LocalizedException;
 
 /**
- * Legge un oggetto cross-reference stream (PDF 1.5+, /Type /XRef): decodifica
- * il dizionario, decomprime lo stream (FlateDecode + eventuale PNG predictor)
- * e interpreta le righe binarie secondo /W e /Index. Supporta il caso
- * Colors=1/BitsPerComponent=8 (di gran lunga il più comune per gli xref
- * stream) e predictor 1 (nessuno) o 10-15 (PNG generico: ogni riga porta un
- * proprio byte di tipo filtro, letto ed applicato individualmente).
+ * Reads a cross-reference stream object (PDF 1.5+, /Type /XRef): decodes
+ * the dictionary, decompresses the stream (FlateDecode + optional PNG
+ * predictor) and interprets the binary rows according to /W and /Index.
+ * Supports the Colors=1/BitsPerComponent=8 case (by far the most common for
+ * xref streams) and predictor 1 (none) or 10-15 (generic PNG: each row
+ * carries its own filter-type byte, read and applied individually).
  */
 final class XrefStreamReader
 {
     /**
-     * Cap alla dimensione decompressa dello stream, stessa difesa
-     * anti "decompression bomb" già usata in TagReplacer.
+     * Cap on the decompressed size of the stream, same anti
+     * "decompression bomb" defense already used in TagReplacer.
      */
     private const MAX_DECOMPRESSED_STREAM = 52428800;
 
@@ -28,10 +28,10 @@ final class XrefStreamReader
     {
         $region = substr($pdf, $offset);
         if (!preg_match('/^(\d+)\s+(\d+)\s+obj\s*<</', $region, $header)) {
-            throw new LocalizedException(__('PDF non supportato: oggetto cross-reference stream non riconosciuto.'));
+            throw new LocalizedException(__('Unsupported PDF: cross-reference stream object not recognized.'));
         }
         if (!preg_match('/>>\s*stream(\r\n|\n)/', $region, $streamMatch, PREG_OFFSET_CAPTURE)) {
-            throw new LocalizedException(__('PDF non supportato: stream cross-reference non riconosciuto.'));
+            throw new LocalizedException(__('Unsupported PDF: cross-reference stream not recognized.'));
         }
         $dictStart = strlen($header[0]);
         $dictEnd = $streamMatch[0][1];
@@ -40,7 +40,7 @@ final class XrefStreamReader
         $dataStart = $streamMatch[0][1] + strlen($streamMatch[0][0]);
         $endstreamPos = strpos($region, 'endstream', $dataStart);
         if ($endstreamPos === false) {
-            throw new LocalizedException(__('PDF non supportato: stream cross-reference incompleto.'));
+            throw new LocalizedException(__('Unsupported PDF: incomplete cross-reference stream.'));
         }
         $dataEnd = $endstreamPos;
         if (substr($region, $dataEnd - 1, 1) === "\n") {
@@ -52,14 +52,14 @@ final class XrefStreamReader
         $raw = substr($region, $dataStart, $dataEnd - $dataStart);
 
         if (!str_contains($dict, '/XRef')) {
-            throw new LocalizedException(__('PDF non supportato: atteso un oggetto /Type /XRef.'));
+            throw new LocalizedException(__('Unsupported PDF: expected an object of /Type /XRef.'));
         }
 
         $size = DictFields::extractInt($dict, 'Size');
         $root = DictFields::extractRef($dict, 'Root');
         $widths = DictFields::extractIntArray($dict, 'W');
         if ($size === null || $root === null || $widths === null || count($widths) !== 3) {
-            throw new LocalizedException(__('PDF non supportato: dizionario cross-reference stream incompleto.'));
+            throw new LocalizedException(__('Unsupported PDF: incomplete cross-reference stream dictionary.'));
         }
         $index = DictFields::extractIntArray($dict, 'Index') ?? [0, $size];
 
@@ -105,10 +105,10 @@ final class XrefStreamReader
         if (!str_contains($dict, '/FlateDecode')) {
             return $raw;
         }
-        // phpcs:ignore Generic.PHP.NoSilencedErrors.Discouraged -- warning atteso oltre il cap anti-bomba
+        // phpcs:ignore Generic.PHP.NoSilencedErrors.Discouraged -- warning expected beyond the anti-bomb cap
         $content = @gzuncompress($raw, self::MAX_DECOMPRESSED_STREAM);
         if ($content === false) {
-            throw new LocalizedException(__('PDF non supportato: stream cross-reference non decomprimibile.'));
+            throw new LocalizedException(__('Unsupported PDF: cross-reference stream could not be decompressed.'));
         }
 
         $decodeParms = DictFields::extractSubDict($dict, 'DecodeParms') ?? DictFields::extractSubDict($dict, 'DP') ?? '';
@@ -118,7 +118,7 @@ final class XrefStreamReader
         }
         if ($predictor < 10 || $predictor > 15) {
             throw new LocalizedException(
-                __('PDF non supportato: predictor cross-reference stream non gestito (valore %1).', $predictor)
+                __('Unsupported PDF: cross-reference stream predictor not handled (value %1).', $predictor)
             );
         }
         $columns = DictFields::extractInt($decodeParms, 'Columns');
@@ -126,7 +126,7 @@ final class XrefStreamReader
         $bpc = DictFields::extractInt($decodeParms, 'BitsPerComponent') ?? 8;
         if ($columns === null || $colors !== 1 || $bpc !== 8) {
             throw new LocalizedException(
-                __('PDF non supportato: parametri di predizione cross-reference stream non gestiti.')
+                __('Unsupported PDF: cross-reference stream prediction parameters not handled.')
             );
         }
 
@@ -135,7 +135,7 @@ final class XrefStreamReader
 
     /**
      * @param int[] $widths [w1, w2, w3]
-     * @param int[] $index coppie [obj_start, count, obj_start, count, ...]
+     * @param int[] $index pairs [obj_start, count, obj_start, count, ...]
      * @return array<int, array{0: int, 1: int, 2: int}>
      * @throws LocalizedException
      */
@@ -144,7 +144,7 @@ final class XrefStreamReader
         [$w1, $w2, $w3] = $widths;
         $rowWidth = $w1 + $w2 + $w3;
         if ($rowWidth <= 0) {
-            throw new LocalizedException(__('PDF non supportato: larghezze /W cross-reference stream non valide.'));
+            throw new LocalizedException(__('Unsupported PDF: invalid cross-reference stream /W widths.'));
         }
         $entryCount = 0;
         for ($i = 0; $i < count($index); $i += 2) {
@@ -152,7 +152,7 @@ final class XrefStreamReader
         }
         if (strlen($content) < $rowWidth * $entryCount) {
             throw new LocalizedException(
-                __('PDF non supportato: stream cross-reference troppo corto per le voci dichiarate.')
+                __('Unsupported PDF: cross-reference stream too short for the declared entries.')
             );
         }
 
@@ -191,7 +191,7 @@ final class XrefStreamReader
         $rowLength = $columns + 1;
         if ($rowLength <= 1 || strlen($content) % $rowLength !== 0) {
             throw new LocalizedException(
-                __('PDF non supportato: stream cross-reference con predizione PNG malformato.')
+                __('Unsupported PDF: cross-reference stream with malformed PNG prediction.')
             );
         }
         $rowCount = intdiv(strlen($content), $rowLength);
@@ -216,7 +216,7 @@ final class XrefStreamReader
                     4 => $rawByte + $this->paethPredictor($left, $up, $upLeft),
                     default => throw new LocalizedException(
                         __(
-                            'PDF non supportato: filtro PNG riga cross-reference stream non riconosciuto (%1).',
+                            'Unsupported PDF: unrecognized PNG row filter in cross-reference stream (%1).',
                             $filterType
                         )
                     ),

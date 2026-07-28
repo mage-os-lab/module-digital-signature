@@ -6,7 +6,7 @@ namespace MageOS\DigitalSignature\Model\Template\Source;
 use Magento\Framework\Data\OptionSourceInterface;
 
 /**
- * Come Trigger, ma con opzione vuota "usa default globale" (per form template).
+ * Like Trigger, but with an empty "use global default" option (for the template form).
  */
 class TriggerWithDefault implements OptionSourceInterface
 {
@@ -17,7 +17,7 @@ class TriggerWithDefault implements OptionSourceInterface
     public function toOptionArray(): array
     {
         return array_merge(
-            [['value' => '', 'label' => __('-- Usa default globale --')]],
+            [['value' => '', 'label' => __('-- Use global default --')]],
             $this->trigger->toOptionArray()
         );
     }

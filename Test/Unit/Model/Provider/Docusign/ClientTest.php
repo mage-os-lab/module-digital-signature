@@ -194,7 +194,7 @@ class ClientTest extends TestCase
         $voidCurl->status = 404;
 
         $client = $this->makeClient(new SequencedCurlFactory($voidCurl));
-        $client->voidEnvelope(self::STORE_ID, 'env-1', 'documento già assente');
+        $client->voidEnvelope(self::STORE_ID, 'env-1', 'document already absent');
     }
 
     public function testAuthenticationFailsWithIncompleteConfig(): void

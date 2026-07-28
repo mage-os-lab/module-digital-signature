@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
+    <route url="/V1/digitalsignature/documents/:documentId" method="GET">
+        <service class="MageOS\DigitalSignature\Api\DocumentRepositoryInterface" method="getById"/>
+        <resources>
+            <resource ref="MageOS_DigitalSignature::document"/>
+        </resources>
+    </route>
+    <route url="/V1/digitalsignature/documents" method="GET">
+        <service class="MageOS\DigitalSignature\Api\DocumentRepositoryInterface" method="getList"/>
+        <resources>
+            <resource ref="MageOS_DigitalSignature::document"/>
+        </resources>
+    </route>
+    <route url="/V1/digitalsignature/orders/:orderId/documents/generate" method="POST">
+        <service class="MageOS\DigitalSignature\Api\DocumentGenerationManagementInterface" method="generate"/>
+        <resources>
+            <resource ref="MageOS_DigitalSignature::document_action"/>
+        </resources>
+    </route>
+    <route url="/V1/digitalsignature/documents/:documentId/regenerate" method="POST">
+        <service class="MageOS\DigitalSignature\Api\DocumentGenerationManagementInterface" method="regenerate"/>
+        <resources>
+            <resource ref="MageOS_DigitalSignature::document_action"/>
+        </resources>
+    </route>
+</routes>

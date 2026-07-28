@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <!--
-    Invalida la section digitalsignature-signature quando cambia il carrello
-    (così la minicart riflette se l'opt-in è ancora applicabile) e dopo il
-    salvataggio della scelta cliente.
+    Invalidates the digitalsignature-signature section when the cart changes
+    (so the minicart reflects whether the opt-in is still applicable) and after
+    saving the customer's choice.
 -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="urn:magento:framework:Customer/etc/sections.xsd">

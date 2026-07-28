@@ -14,9 +14,9 @@ use Magento\Framework\Exception\LocalizedException;
 use Magento\Sales\Api\Data\OrderInterface;
 
 /**
- * Operazioni manuali da backend sui documenti firma: generazione "manuale"
- * (trigger MANUAL) e rigenerazione/reinvio di un documento attivo
- * (storicizza il precedente e ne accoda uno nuovo).
+ * Manual backend operations on signature documents: "manual" generation
+ * (MANUAL trigger) and regeneration/resend of an active document
+ * (archives the previous one and queues a new one).
  */
 class DocumentManager
 {
@@ -31,8 +31,8 @@ class DocumentManager
     }
 
     /**
-     * Genera i documenti dei template con trigger "manuale" per l'ordine.
-     * L'elaborazione vera (PDF + invio al provider) avviene in coda.
+     * Generates the template documents with "manual" trigger for the order.
+     * The actual processing (PDF + sending to the provider) happens in the queue.
      */
     public function generateManual(OrderInterface $order): void
     {
@@ -40,10 +40,10 @@ class DocumentManager
     }
 
     /**
-     * Rigenera/reinvia: annulla il documento attivo (storicizzato) e ne crea
-     * uno nuovo per la stessa combinazione, riaccodandolo.
+     * Regenerates/resends: cancels the active document (archived) and creates
+     * a new one for the same combination, re-queuing it.
      *
-     * @return int id del nuovo documento
+     * @return int id of the new document
      * @throws LocalizedException
      */
     public function regenerate(int $documentId): int
@@ -51,7 +51,7 @@ class DocumentManager
         $old = $this->documentRepository->getById($documentId);
         if (!$old->getIsActive()) {
             throw new LocalizedException(
-                __('Il documento #%1 non è attivo: usa quello attivo per rigenerare.', $documentId)
+                __('Document #%1 is not active: use the active one to regenerate.', $documentId)
             );
         }
 
@@ -64,7 +64,7 @@ class DocumentManager
             'status_change',
             $previousStatus,
             Status::CANCELED,
-            (string)__('Documento annullato per rigenerazione manuale.')
+            (string)__('Document canceled for manual regeneration.')
         );
         $this->cancelAtProvider($old);
 
@@ -89,7 +89,7 @@ class DocumentManager
             'status_change',
             null,
             Status::PENDING,
-            (string)__('Documento rigenerato (sostituisce #%1).', $documentId)
+            (string)__('Document regenerated (replaces #%1).', $documentId)
         );
         $this->publisher->publishProcess($newId);
 
@@ -97,9 +97,9 @@ class DocumentManager
     }
 
     /**
-     * Annulla il processo di firma anche lato provider (decisione di analisi:
-     * il documento sostituito non deve restare firmabile). Best-effort: un
-     * errore del provider non blocca la rigenerazione, ma resta a log.
+     * Cancels the signature process on the provider side as well (design
+     * decision: the replaced document must not remain signable). Best-effort: a
+     * provider error does not block the regeneration, but is logged.
      */
     private function cancelAtProvider(DocumentInterface $old): void
     {

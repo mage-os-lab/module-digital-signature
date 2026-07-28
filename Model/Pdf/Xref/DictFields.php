@@ -6,9 +6,9 @@ namespace MageOS\DigitalSignature\Model\Pdf\Xref;
 use Magento\Framework\Exception\LocalizedException;
 
 /**
- * Estrazione di campi da un dizionario PDF testuale già isolato come stringa
- * (es. il contenuto tra "<<" e ">>" di un oggetto). Solo lettura, nessuna
- * validazione strutturale completa: usato dai reader xref.
+ * Extraction of fields from a text PDF dictionary already isolated as a
+ * string (e.g. the content between "<<" and ">>" of an object). Read-only,
+ * no complete structural validation: used by the xref readers.
  */
 final class DictFields
 {
@@ -67,7 +67,7 @@ final class DictFields
     }
 
     /**
-     * @return string[]|null array di riferimenti "N G R", null se la chiave è assente
+     * @return string[]|null array of "N G R" references, null if the key is absent
      */
     public static function extractRefArray(string $dict, string $key): ?array
     {
@@ -86,15 +86,15 @@ final class DictFields
     }
 
     /**
-     * Estrae il contenuto di un dizionario PDF bilanciando correttamente
-     * eventuali sotto-dizionari annidati (es. /Resources << /Font << ... >> >>):
-     * a differenza di extractSubDict() (che si ferma al primo ">>" e quindi
-     * tronca dizionari con nesting), questo metodo conta la profondità.
+     * Extracts the content of a PDF dictionary correctly balancing any
+     * nested sub-dictionaries (e.g. /Resources << /Font << ... >> >>):
+     * unlike extractSubDict() (which stops at the first ">>" and therefore
+     * truncates nested dictionaries), this method counts the depth.
      *
-     * @param string $text testo in cui cercare (un dizionario padre, o l'intero PDF)
-     * @param int $contentStart posizione subito dopo il "<<" di apertura del dizionario da estrarre
-     * @return array{0: string, 1: int} [contenuto senza i delimitatori, posizione del "<< del ">>" di chiusura]
-     * @throws LocalizedException se il dizionario non si chiude mai
+     * @param string $text text to search in (a parent dictionary, or the entire PDF)
+     * @param int $contentStart position right after the opening "<<" of the dictionary to extract
+     * @return array{0: string, 1: int} [content without delimiters, position of the closing ">>"]
+     * @throws LocalizedException if the dictionary never closes
      */
     public static function extractBalancedDict(string $text, int $contentStart): array
     {
@@ -105,7 +105,7 @@ final class DictFields
             $nextClose = strpos($text, '>>', $pos);
             if ($nextClose === false) {
                 throw new LocalizedException(
-                    __('PDF non supportato: dizionario non bilanciato (delimitatore di chiusura mancante).')
+                    __('Unsupported PDF: unbalanced dictionary (missing closing delimiter).')
                 );
             }
             if ($nextOpen !== false && $nextOpen < $nextClose) {

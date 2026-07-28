@@ -30,8 +30,8 @@ interface TemplateInterface
     public function setIsActive(bool $isActive): self;
 
     /**
-     * Se true il documento viene sempre generato, indipendentemente dalla
-     * scelta del cliente al checkout.
+     * If true the document is always generated, regardless of the
+     * customer's choice at checkout.
      */
     public function getIsRequired(): bool;
 
@@ -42,7 +42,7 @@ interface TemplateInterface
     public function setScope(string $scope): self;
 
     /**
-     * Trigger di generazione; null = usa il default globale di configurazione.
+     * Generation trigger; null = use the global configuration default.
      */
     public function getTriggerCode(): ?string;
 

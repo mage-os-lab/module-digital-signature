@@ -11,7 +11,7 @@
             <button name="add">
                 <url path="*/*/new"/>
                 <class>primary</class>
-                <label translate="true">Nuovo template</label>
+                <label translate="true">New Template</label>
             </button>
         </buttons>
         <spinner>digitalsignature_template_columns</spinner>
@@ -55,7 +55,7 @@
         <column name="name" sortOrder="20">
             <settings>
                 <filter>text</filter>
-                <label translate="true">Nome</label>
+                <label translate="true">Name</label>
             </settings>
         </column>
         <column name="scope" component="Magento_Ui/js/grid/columns/select" sortOrder="30">
@@ -63,7 +63,7 @@
                 <filter>select</filter>
                 <options class="MageOS\DigitalSignature\Model\Template\Source\Scope"/>
                 <dataType>select</dataType>
-                <label translate="true">Ambito</label>
+                <label translate="true">Scope</label>
             </settings>
         </column>
         <column name="trigger_code" component="Magento_Ui/js/grid/columns/select" sortOrder="40">
@@ -79,7 +79,7 @@
                 <filter>select</filter>
                 <options class="Magento\Config\Model\Config\Source\Yesno"/>
                 <dataType>select</dataType>
-                <label translate="true">Obbligatorio</label>
+                <label translate="true">Required</label>
             </settings>
         </column>
         <column name="is_active" component="Magento_Ui/js/grid/columns/select" sortOrder="50">
@@ -87,7 +87,7 @@
                 <filter>select</filter>
                 <options class="Magento\Config\Model\Config\Source\Yesno"/>
                 <dataType>select</dataType>
-                <label translate="true">Attivo</label>
+                <label translate="true">Active</label>
             </settings>
         </column>
         <column name="created_at" class="Magento\Ui\Component\Listing\Columns\Date"
@@ -95,7 +95,7 @@
             <settings>
                 <filter>dateRange</filter>
                 <dataType>date</dataType>
-                <label translate="true">Creato il</label>
+                <label translate="true">Created On</label>
             </settings>
         </column>
         <actionsColumn name="actions" class="MageOS\DigitalSignature\Ui\Component\Listing\Column\TemplateActions"

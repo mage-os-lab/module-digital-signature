@@ -1,0 +1,84 @@
+<?xml version="1.0"?>
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">digitalsignature_apiconsumer_listing.digitalsignature_apiconsumer_listing_data_source</item>
+        </item>
+    </argument>
+    <settings>
+        <buttons>
+            <button name="add">
+                <url path="*/*/new"/>
+                <class>primary</class>
+                <label translate="true">New Integration</label>
+            </button>
+        </buttons>
+        <spinner>digitalsignature_apiconsumer_columns</spinner>
+        <deps>
+            <dep>digitalsignature_apiconsumer_listing.digitalsignature_apiconsumer_listing_data_source</dep>
+        </deps>
+    </settings>
+    <dataSource name="digitalsignature_apiconsumer_listing_data_source" component="Magento_Ui/js/grid/provider">
+        <settings>
+            <storageConfig>
+                <param name="indexField" xsi:type="string">consumer_id</param>
+            </storageConfig>
+            <updateUrl path="mui/index/render"/>
+        </settings>
+        <aclResource>MageOS_DigitalSignature::api_consumer</aclResource>
+        <dataProvider class="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider"
+                      name="digitalsignature_apiconsumer_listing_data_source">
+            <settings>
+                <requestFieldName>consumer_id</requestFieldName>
+                <primaryFieldName>consumer_id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+    <listingToolbar name="listing_top">
+        <settings>
+            <sticky>true</sticky>
+        </settings>
+        <bookmark name="bookmarks"/>
+        <columnsControls name="columns_controls"/>
+        <filters name="listing_filters"/>
+        <paging name="listing_paging"/>
+    </listingToolbar>
+    <columns name="digitalsignature_apiconsumer_columns">
+        <column name="consumer_id" sortOrder="10">
+            <settings>
+                <filter>textRange</filter>
+                <sorting>asc</sorting>
+                <label translate="true">ID</label>
+            </settings>
+        </column>
+        <column name="name" sortOrder="20">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Name</label>
+            </settings>
+        </column>
+        <column name="integration_id" sortOrder="30">
+            <settings>
+                <filter>textRange</filter>
+                <label translate="true">Integration ID</label>
+            </settings>
+        </column>
+        <column name="enabled" component="Magento_Ui/js/grid/columns/select" sortOrder="40">
+            <settings>
+                <filter>select</filter>
+                <options class="Magento\Config\Model\Config\Source\Yesno"/>
+                <dataType>select</dataType>
+                <label translate="true">Enabled</label>
+            </settings>
+        </column>
+        <actionsColumn name="actions" class="MageOS\DigitalSignature\Ui\Component\Listing\Column\ApiConsumerActions"
+                       sortOrder="100">
+            <settings>
+                <indexField>consumer_id</indexField>
+                <resizeEnabled>false</resizeEnabled>
+                <resizeDefaultWidth>107</resizeDefaultWidth>
+            </settings>
+        </actionsColumn>
+    </columns>
+</listing>

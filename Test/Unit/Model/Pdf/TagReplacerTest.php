@@ -81,14 +81,14 @@ class TagReplacerTest extends TestCase
         $result = $this->tagReplacer->replaceSignerEmail($pdf, 'cliente.reale@example.com');
 
         self::assertStringStartsWith('%PDF', $result);
-        // Il placeholder non deve più esistere da nessuna parte (oggetto sbiancato)
+        // The placeholder must no longer exist anywhere (object whitened out)
         self::assertStringNotContainsString('placeholder@example.com', $result);
-        // Round-trip: il tag aggiornato è leggibile con lo stesso parser
+        // Round-trip: the updated tag is readable with the same parser
         self::assertSame(
             ['{WSIGN#80,20#cliente.reale@example.com}'],
             $this->tagReplacer->findTags($result)
         );
-        // Incremental update: nuova xref collegata alla precedente
+        // Incremental update: new xref linked to the previous one
         self::assertStringContainsString('/Prev', $result);
         self::assertSame(2, substr_count($result, 'startxref'));
     }
@@ -111,7 +111,7 @@ class TagReplacerTest extends TestCase
 
         $result = $this->tagReplacer->replaceSignerEmail($pdf, 'a(b)@example.com');
 
-        // ( e ) sono delimitatori di stringa PDF: devono uscire escapati
+        // ( and ) are PDF string delimiters: they must come out escaped
         self::assertStringContainsString('{WSIGN#80,20#a\\(b\\)@example.com}', $result);
     }
 
@@ -127,14 +127,14 @@ class TagReplacerTest extends TestCase
         $pdf = $this->buildPdf('BT (documento senza tag) Tj ET');
 
         $this->expectException(LocalizedException::class);
-        $this->expectExceptionMessageMatches('/Nessun tag firma/');
+        $this->expectExceptionMessageMatches('/No signature tag found/');
 
         $this->tagReplacer->replaceSignerEmail($pdf, 'a@b.it');
     }
 
     public function testStreamUnderDecompressionCapIsParsed(): void
     {
-        // Stream FlateDecode legittimo (contenuto piccolo): il tag si legge.
+        // Legitimate FlateDecode stream (small content): the tag is readable.
         $pdf = $this->buildPdf('BT (' . self::TAG . ') Tj ET', true);
 
         self::assertSame([self::TAG], $this->tagReplacer->findTags($pdf));
@@ -142,10 +142,10 @@ class TagReplacerTest extends TestCase
 
     public function testDecompressionBombOverCapIsRejected(): void
     {
-        // Stream con un tag valido seguito da ~60 MB di padding: superato il cap
-        // anti-bomba, gzuncompress fallisce e l'intero oggetto viene scartato.
-        // Preferiamo perdere un tag piuttosto che decomprimere uno stream ostile:
-        // il risultato è "nessun tag" (senza il cap il tag verrebbe invece letto).
+        // Stream with a valid tag followed by ~60 MB of padding: once the anti-bomb
+        // cap is exceeded, gzuncompress fails and the whole object is discarded.
+        // We'd rather lose a tag than decompress a hostile stream:
+        // the result is "no tag" (without the cap the tag would instead be read).
         $content = self::TAG . str_repeat('A', 60 * 1024 * 1024);
         $compressed = gzcompress($content, 9);
         unset($content);
@@ -162,7 +162,7 @@ class TagReplacerTest extends TestCase
 
     public function testPathologicalInputsDoNotHang(): void
     {
-        // Regressione ReDoS: sequenze lunghe non devono degenerare in backtracking
+        // ReDoS regression: long sequences must not degenerate into backtracking
         $start = microtime(true);
         $this->tagReplacer->findTags('%PDF-1.4\n{WSIGN#' . str_repeat('1,', 50000) . '#a@b.it');
         $this->tagReplacer->findTags('%PDF-1.4\n{WSIGN#1,1#' . str_repeat('x', 200000));
@@ -171,9 +171,9 @@ class TagReplacerTest extends TestCase
 
     public function testReplaceThrowsWhenNoXrefRecognized(): void
     {
-        // PDF con tag ma senza alcuna struttura cross-reference riconoscibile
-        // alla posizione indicata da startxref (né tabella classica, né un
-        // oggetto /Type /XRef valido).
+        // PDF with a tag but without any recognizable cross-reference structure
+        // at the position indicated by startxref (neither a classic table, nor a
+        // valid /Type /XRef object).
         $content = 'BT (' . self::TAG . ') Tj ET';
         $pdf = "%PDF-1.5\n4 0 obj\n<</Length " . strlen($content) . ">>\nstream\n"
             . $content . "\nendstream\nendobj\nstartxref\n9\n%%EOF\n";
@@ -238,22 +238,22 @@ class TagReplacerTest extends TestCase
         $resolver = new XrefChainResolver(new ClassicXrefReader(), new XrefStreamReader());
         $info = $resolver->resolve($result);
 
-        // La nuova revisione appesa dallo scrittore è essa stessa un xref
-        // stream: il resolver deve riconoscerlo rileggendo davvero il blocco
-        // appena prodotto, non solo verificando sottostringhe nell'output.
+        // The new revision appended by the writer is itself an xref
+        // stream: the resolver must recognize it by actually re-reading the block
+        // just produced, not merely checking substrings in the output.
         self::assertTrue($info->isStreamBased);
         self::assertFalse($info->hasObjectStreams);
         self::assertFalse($info->isEncrypted);
-        // buildXrefStreamUpdate() alloca il nuovo oggetto xref con numero
-        // = vecchio Size (3) e dichiara /Size = vecchio Size + 1 (4).
+        // buildXrefStreamUpdate() allocates the new xref object with number
+        // = old Size (3) and declares /Size = old Size + 1 (4).
         self::assertSame(4, $info->size);
     }
 
     /**
-     * Fixture reale (LibreOffice + pikepdf/qpdf) con xref stream genuina
-     * (no object stream) e un tag firma iniettato in un content stream
-     * FlateDecode reale: copre il gap "nessuna fixture PDF reale" segnalato
-     * dalla review finale. Vedi src/Test/Unit/Model/Pdf/_fixtures/.
+     * Real fixture (LibreOffice + pikepdf/qpdf) with a genuine xref stream
+     * (no object stream) and a signature tag injected into a real
+     * FlateDecode content stream: covers the "no real PDF fixture" gap flagged
+     * by the final review. See src/Test/Unit/Model/Pdf/_fixtures/.
      */
     public function testReplaceSignerEmailOnRealXrefStreamFixture(): void
     {
@@ -327,15 +327,15 @@ class TagReplacerTest extends TestCase
             )
             ->willReturn('1 0 0 rg');
 
-        // Contenuto tipico iniettato dal builder
+        // Typical content injected by the builder
         $streamContent = 'q BT /MDSHelv1 10 Tf 100 100 Td ({WSIGN#80,20#placeholder@example.com}) Tj ET Q';
         $pdf = $this->buildPdf($streamContent);
 
-        // Un context non nullo rappresenta la generazione reale del documento per un
-        // ordine (vedi DocumentProcessor): solo qui va applicato il colore configurato.
+        // A non-null context represents the real document generation for an
+        // order (see DocumentProcessor): the configured color must only be applied here.
         $result = $this->tagReplacer->replaceSignerEmail($pdf, 'cliente.reale@example.com', $contextMock);
 
-        // La stringa del content stream modificato deve contenere l'operatore di colore
+        // The modified content stream string must contain the color operator
         self::assertStringContainsString('q 1 0 0 rg BT /MDSHelv1', $result);
     }
 
@@ -343,10 +343,10 @@ class TagReplacerTest extends TestCase
     {
         $this->scopeConfigMock->expects(self::never())->method('getValue');
 
-        // Stesso contenuto builder-injected della generazione reale, ma senza context:
-        // rappresenta l'anteprima (Preview.php) e il dry-run di validazione
-        // (TemplateValidator), che passano sempre null. Il tag deve restare
-        // visibile per permettere al merchant di verificarne la posizione.
+        // Same builder-injected content as the real generation, but without context:
+        // represents the preview (Preview.php) and the validation dry-run
+        // (TemplateValidator), which always pass null. The tag must remain
+        // visible to allow the merchant to verify its position.
         $streamContent = 'q BT /MDSHelv1 10 Tf 100 100 Td ({WSIGN#80,20#placeholder@example.com}) Tj ET Q';
         $pdf = $this->buildPdf($streamContent);
 
@@ -358,8 +358,8 @@ class TagReplacerTest extends TestCase
     }
 
     /**
-     * PDF 1.4 minimo con un content stream e trailer classico. Gli offset
-     * della xref sono fittizi: TagReplacer usa solo startxref e trailer.
+     * Minimal PDF 1.4 with a content stream and a classic trailer. The xref
+     * offsets are fake: TagReplacer only uses startxref and trailer.
      */
     private function buildPdf(string $streamContent, bool $compressed = false): string
     {

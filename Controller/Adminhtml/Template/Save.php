@@ -43,7 +43,7 @@ class Save extends Action implements HttpPostActionInterface
         }
 
         $templateId = (int)($data['template_id'] ?? 0);
-        // Lo store di lavoro viaggia nel payload del form (campo hidden store_id)
+        // The working store travels in the form payload (hidden field store_id)
         $storeId = (int)($data['store_id'] ?? $this->getRequest()->getParam('store', 0));
 
         try {
@@ -51,7 +51,7 @@ class Save extends Action implements HttpPostActionInterface
                 ? $this->templateRepository->getById($templateId)
                 : $this->templateFactory->create();
 
-            // I campi anagrafici del template sono globali: si salvano solo a store=0
+            // The template's master data fields are global: they are saved only at store=0
             if ($storeId === 0) {
                 $template->setName(trim((string)($data['name'] ?? '')));
                 $template->setIsActive((bool)($data['is_active'] ?? false));
@@ -60,7 +60,7 @@ class Save extends Action implements HttpPostActionInterface
                 $trigger = (string)($data['trigger_code'] ?? '');
                 $template->setTriggerCode($trigger === '' ? null : $trigger);
                 if ($template->getName() === '') {
-                    throw new LocalizedException(__('Il nome del template è obbligatorio.'));
+                    throw new LocalizedException(__('The template name is required.'));
                 }
             }
             $this->templateRepository->save($template);
@@ -85,7 +85,7 @@ class Save extends Action implements HttpPostActionInterface
                 $this->saveAssignedProducts($templateId, $data);
             }
 
-            $this->messageManager->addSuccessMessage(__('Template salvato.'));
+            $this->messageManager->addSuccessMessage(__('Template saved.'));
             $this->dataPersistor->clear('digitalsignature_template');
 
             if ($this->getRequest()->getParam('back')) {
@@ -94,13 +94,13 @@ class Save extends Action implements HttpPostActionInterface
 
             return $resultRedirect->setPath('*/*/');
         } catch (NoSuchEntityException) {
-            $this->messageManager->addErrorMessage(__('Questo template non esiste più.'));
+            $this->messageManager->addErrorMessage(__('This template no longer exists.'));
 
             return $resultRedirect->setPath('*/*/');
         } catch (LocalizedException $e) {
             $this->messageManager->addErrorMessage($e->getMessage());
         } catch (\Exception $e) {
-            $this->messageManager->addExceptionMessage($e, __('Errore durante il salvataggio del template.'));
+            $this->messageManager->addExceptionMessage($e, __('Error while saving the template.'));
         }
 
         $this->dataPersistor->set('digitalsignature_template', $data);
@@ -111,8 +111,8 @@ class Save extends Action implements HttpPostActionInterface
     }
 
     /**
-     * Gestione PDF per scope store: a store>0 il flag "usa default" elimina la riga
-     * specifica; un nuovo upload (chiave "file") viene spostato da tmp e salvato.
+     * PDF handling for store scope: at store>0 the "use default" flag deletes the
+     * specific row; a new upload (key "file") is moved from tmp and saved.
      */
     private function savePdfFile(int $templateId, int $storeId, array $data): void
     {
@@ -136,7 +136,7 @@ class Save extends Action implements HttpPostActionInterface
             return;
         }
         $decoded = json_decode((string)$data['template_products'], true) ?: [];
-        // Il serializer della griglia produce {productId: position}
+        // The grid serializer produces {productId: position}
         $this->templateResource->saveAssignedProductIds($templateId, array_keys($decoded));
     }
 
@@ -161,14 +161,14 @@ class Save extends Action implements HttpPostActionInterface
         foreach ($fieldTags as $code) {
             if (!$this->mergeFieldPool->has($code)) {
                 throw new LocalizedException(
-                    __('Il tag merge field "{FIELD:%1}" non è supportato o registrato.', $code)
+                    __('The merge field tag "{FIELD:%1}" is not supported or registered.', $code)
                 );
             }
             $provider = $this->mergeFieldPool->get($code);
             if (!$provider->isAvailableForTrigger($triggerCode)) {
                 throw new LocalizedException(
                     __(
-                        'Il tag merge field "{FIELD:%1}" non è compatibile con il trigger selezionato "%2".',
+                        'The merge field tag "{FIELD:%1}" is not compatible with the selected trigger "%2".',
                         $code,
                         $triggerCode
                     )

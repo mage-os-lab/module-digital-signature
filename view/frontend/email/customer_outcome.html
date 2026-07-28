@@ -1,16 +1,16 @@
-<!--@subject {{trans "Aggiornamento sul contratto da firmare (ordine %increment_id)" increment_id=$order_increment_id}} @-->
+<!--@subject {{trans "Update on your contract to sign (order %increment_id)" increment_id=$order_increment_id}} @-->
 <!--@vars {
-"var customer_name":"Nome cliente",
-"var order_increment_id":"Numero ordine",
-"var status_label":"Stato documento",
-"var order_url":"Link all'ordine"
+"var customer_name":"Customer name",
+"var order_increment_id":"Order number",
+"var status_label":"Document status",
+"var order_url":"Order link"
 } @-->
 {{template config_path="design/email/header_template"}}
 
-<p>{{trans "Ciao %name," name=$customer_name}}</p>
+<p>{{trans "Hello %name," name=$customer_name}}</p>
 
-<p>{{trans "il processo di firma del contratto relativo al tuo ordine #%increment_id si è concluso con esito: %status." increment_id=$order_increment_id status=$status_label}}</p>
+<p>{{trans "the signing process for the contract related to your order #%increment_id has ended with outcome: %status." increment_id=$order_increment_id status=$status_label}}</p>
 
-<p>{{trans 'Se ritieni che si tratti di un errore, contatta il nostro servizio clienti. Puoi consultare il tuo ordine qui: <a href="%url">I miei ordini</a>' url=$order_url |raw}}</p>
+<p>{{trans 'If you believe this is an error, please contact our customer service. You can check your order here: <a href="%url">My orders</a>' url=$order_url |raw}}</p>
 
 {{template config_path="design/email/footer_template"}}

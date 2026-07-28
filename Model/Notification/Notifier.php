@@ -16,12 +16,12 @@ use Magento\Store\Model\StoreManagerInterface;
 use Psr\Log\LoggerInterface;
 
 /**
- * Invio delle notifiche email legate al ciclo di vita del documento firma.
+ * Sends email notifications tied to the signature document lifecycle.
  *
- * Tutti i template sono renderizzati in area frontend (anche quelli all'admin):
- * questo evita problemi di area quando l'invio parte dai consumer della coda o
- * dal cron. Nessun invio deve mai interrompere l'elaborazione del documento:
- * le eccezioni vengono catturate e loggate.
+ * All templates are rendered in the frontend area (even the admin-facing ones):
+ * this avoids area issues when sending is triggered from queue consumers or
+ * from cron. No send must ever interrupt document processing: exceptions are
+ * caught and logged.
  */
 class Notifier
 {
@@ -44,7 +44,10 @@ class Notifier
     private const XML_PATH_ADMIN_ESCALATION_ENABLED = 'digital_signature/reminders/admin_enabled';
     private const XML_PATH_ADMIN_ESCALATION_TEMPLATE = 'digital_signature/reminders/admin_template';
 
-    /** Fallback per l'indirizzo admin quando il campo dedicato è vuoto */
+    private const XML_PATH_WEBHOOK_FAILURE_ENABLED = 'digital_signature/webhooks/failure_notification_enabled';
+    private const XML_PATH_WEBHOOK_FAILURE_TEMPLATE = 'digital_signature/webhooks/failure_notification_template';
+
+    /** Fallback for the admin address when the dedicated field is empty */
     private const XML_PATH_GENERAL_EMAIL = 'trans_email/ident_general/email';
 
     public function __construct(
@@ -58,8 +61,8 @@ class Notifier
     }
 
     /**
-     * Documento pronto per la firma: avviso al cliente (opzionale, spesso il
-     * provider invia già il proprio invito a firmare).
+     * Document ready for signature: notice to the customer (optional, the
+     * provider often already sends its own signing invitation).
      */
     public function notifyDocumentReady(DocumentInterface $document): void
     {
@@ -71,7 +74,7 @@ class Notifier
     }
 
     /**
-     * Documento firmato: il cliente trova il PDF nell'area "i miei ordini".
+     * Document signed: the customer finds the PDF in the "my orders" area.
      */
     public function notifyDocumentSigned(DocumentInterface $document): void
     {
@@ -83,7 +86,7 @@ class Notifier
     }
 
     /**
-     * Documento scaduto o rifiutato: avviso all'admin e, se abilitato, al cliente.
+     * Document expired or declined: notice to the admin and, if enabled, to the customer.
      */
     public function notifyDocumentOutcome(DocumentInterface $document): void
     {
@@ -97,7 +100,7 @@ class Notifier
     }
 
     /**
-     * Errore definitivo nell'elaborazione: avviso all'admin per intervento manuale.
+     * Definitive processing error: notice to the admin for manual intervention.
      */
     public function notifyDocumentError(DocumentInterface $document, string $message): void
     {
@@ -109,7 +112,7 @@ class Notifier
     }
 
     /**
-     * Sollecito al cliente per documento in firma.
+     * Reminder to the customer for a document pending signature.
      */
     public function notifyDocumentReminder(DocumentInterface $document): void
     {
@@ -121,7 +124,7 @@ class Notifier
     }
 
     /**
-     * Escalation all'admin per documento fermo in firma.
+     * Escalation to the admin for a document stuck pending signature.
      */
     public function notifyDocumentEscalation(DocumentInterface $document): void
     {
@@ -130,6 +133,40 @@ class Notifier
             return;
         }
         $this->sendToAdmin($document, self::XML_PATH_ADMIN_ESCALATION_TEMPLATE, $storeId);
+    }
+
+    /**
+     * Webhook delivery definitively failed (attempts exhausted): notice to admin.
+     */
+    public function notifyWebhookFailure(DocumentInterface $document, string $targetUrl, string $message): void
+    {
+        $storeId = $this->storeId($document);
+        if (!$this->isEnabled(self::XML_PATH_WEBHOOK_FAILURE_ENABLED, $storeId)) {
+            return;
+        }
+        $vars = $this->buildVars($document, $storeId);
+        $vars['error_message'] = sprintf('Webhook verso %s fallito: %s', $targetUrl, $message);
+        $recipient = (string)$this->scopeConfig->getValue(
+            self::XML_PATH_ADMIN_RECIPIENT,
+            ScopeInterface::SCOPE_STORE,
+            $storeId
+        );
+        if ($recipient === '') {
+            $recipient = (string)$this->scopeConfig->getValue(
+                self::XML_PATH_GENERAL_EMAIL,
+                ScopeInterface::SCOPE_STORE,
+                $storeId
+            );
+        }
+        if ($recipient === '') {
+            return;
+        }
+        $this->dispatch(
+            $this->scopeConfig->getValue(self::XML_PATH_WEBHOOK_FAILURE_TEMPLATE, ScopeInterface::SCOPE_STORE, $storeId),
+            $storeId,
+            $vars,
+            $recipient
+        );
     }
 
     private function sendToCustomer(DocumentInterface $document, string $templatePath, int $storeId): void

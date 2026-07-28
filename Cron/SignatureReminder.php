@@ -92,7 +92,7 @@ class SignatureReminder
                     'reminder_sent',
                     Status::SENT,
                     Status::SENT,
-                    (string)__('Inviato sollecito cliente (sollecito %1 di %2).', $document->getReminderCount(), $customerMaxReminders)
+                    (string)__('Customer reminder sent (reminder %1 of %2).', $document->getReminderCount(), $customerMaxReminders)
                 );
             }
 
@@ -113,7 +113,7 @@ class SignatureReminder
                     'escalation_sent',
                     Status::SENT,
                     Status::SENT,
-                    (string)__('Inviata email di escalation all\'admin per documento in attesa di firma.')
+                    (string)__('Admin escalation email sent for document pending signature.')
                 );
             }
 

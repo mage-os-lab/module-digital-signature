@@ -19,9 +19,9 @@ use Magento\Framework\Math\Random;
 use Psr\Log\LoggerInterface;
 
 /**
- * Orchestratore del ciclo di vita del documento: generazione PDF dal template,
- * avvio firma presso il provider, aggiornamento stato da polling.
- * Eseguito SOLO dai consumer della coda (mai in richiesta web).
+ * Orchestrator of the document lifecycle: PDF generation from the template,
+ * starting the signature at the provider, status update from polling.
+ * Executed ONLY by the queue consumers (never in a web request).
  */
 class DocumentProcessor
 {
@@ -41,7 +41,7 @@ class DocumentProcessor
     }
 
     /**
-     * Porta un documento pending fino allo stato "sent" (genera + invia).
+     * Takes a pending document all the way to the "sent" status (generates + sends).
      *
      * @throws LocalizedException|ProviderException
      */
@@ -56,7 +56,7 @@ class DocumentProcessor
     }
 
     /**
-     * Genera il PDF dal template sostituendo i tag con i dati del firmatario.
+     * Generates the PDF from the template replacing the tags with the signer's data.
      *
      * @throws LocalizedException
      */
@@ -64,21 +64,21 @@ class DocumentProcessor
     {
         $templateId = $document->getTemplateId();
         if ($templateId === null) {
-            throw new LocalizedException(__('Il documento non ha un template associato.'));
+            throw new LocalizedException(__('The document has no associated template.'));
         }
         $email = (string)($document->getSignerEmail() ?? '');
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            throw new LocalizedException(__('Email del firmatario mancante o non valida.'));
+            throw new LocalizedException(__('Signer email missing or invalid.'));
         }
 
         $fileRow = $this->templateResource->getPdfPathForStore($templateId, (int)($document->getStoreId() ?? 0));
         if ($fileRow === null) {
-            throw new LocalizedException(__('Il template %1 non ha un file PDF caricato.', $templateId));
+            throw new LocalizedException(__('Template %1 has no uploaded PDF file.', $templateId));
         }
         [, $templatePdfPath] = $fileRow;
         $mediaDir = $this->filesystem->getDirectoryRead(DirectoryList::MEDIA);
         if (!$mediaDir->isExist($templatePdfPath)) {
-            throw new LocalizedException(__('File PDF del template non trovato: %1', $templatePdfPath));
+            throw new LocalizedException(__('Template PDF file not found: %1', $templatePdfPath));
         }
 
         $order = $this->orderRepository->get($document->getOrderId());
@@ -126,7 +126,7 @@ class DocumentProcessor
     }
 
     /**
-     * Invia il PDF generato al provider e avvia il processo di firma.
+     * Sends the generated PDF to the provider and starts the signature process.
      *
      * @throws LocalizedException|ProviderException
      */
@@ -134,11 +134,11 @@ class DocumentProcessor
     {
         $pdfPath = $document->getPdfPath();
         if ($pdfPath === null) {
-            throw new LocalizedException(__('Il documento non ha un PDF generato da inviare.'));
+            throw new LocalizedException(__('The document has no generated PDF to send.'));
         }
         $provider = $this->providerPool->get($document->getProviderCode());
 
-        // Token in chiaro solo transiente: in DB va l'hash
+        // Plaintext token only transient: the hash goes into the DB
         $callbackToken = $this->random->getRandomString(40);
         $document->setCallbackTokenHash(hash('sha256', $callbackToken));
         $this->documentRepository->save($document);
@@ -159,12 +159,12 @@ class DocumentProcessor
             $result->getRawResponse()
         );
 
-        // Documento pronto per la firma: avviso al cliente (se abilitato)
+        // Document ready for signature: notification to the customer (if enabled)
         $this->notifier->notifyDocumentReady($document);
     }
 
     /**
-     * Interroga il provider e riallinea lo stato interno (callback/polling).
+     * Queries the provider and realigns the internal status (callback/polling).
      *
      * @throws ProviderException
      */
@@ -179,7 +179,7 @@ class DocumentProcessor
         $mapped = $provider->mapStatus($rawStatus);
 
         if ($mapped === null) {
-            // Stato sconosciuto: si logga e si attende la mappatura in config
+            // Unknown status: log it and wait for the mapping in the config
             $this->logger->warning(
                 sprintf(
                     'DigitalSignature: stato provider non mappato "%s" (documento %d, provider %s)',
@@ -200,7 +200,7 @@ class DocumentProcessor
             return;
         }
         if ($mapped === $document->getStatus() || !Status::isFinal($mapped)) {
-            // Nessuna transizione utile: il documento resta in attesa
+            // No useful transition: the document remains pending
             return;
         }
 
@@ -226,7 +226,7 @@ class DocumentProcessor
             $statusResult->getRawResponse()
         );
 
-        // Notifiche legate all'esito finale del processo di firma
+        // Notifications tied to the final outcome of the signature process
         if ($mapped === Status::SIGNED) {
             $this->notifier->notifyDocumentSigned($document);
         } elseif ($mapped === Status::DECLINED || $mapped === Status::EXPIRED) {

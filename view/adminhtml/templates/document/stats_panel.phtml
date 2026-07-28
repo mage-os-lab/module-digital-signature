@@ -7,10 +7,10 @@ $options = $block->getPeriodOptions();
 <div class="digitalsignature-stats-container" style="margin-bottom:20px;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,sans-serif;">
     <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;flex-wrap:wrap;gap:12px;">
         <h3 style="margin:0;font-size:1.4em;font-weight:600;color:#2c3e50;">
-            <?= $block->escapeHtml(__('Metriche e performance documenti')) ?>
+            <?= $block->escapeHtml(__('Document metrics and performance')) ?>
         </h3>
         <form action="<?= $block->escapeUrl($block->getActionUrl()) ?>" method="get" style="display:flex;align-items:center;gap:8px;">
-            <label for="stats_period" style="font-size:0.9em;color:#555;font-weight:600;"><?= $block->escapeHtml(__('Periodo di analisi:')) ?></label>
+            <label for="stats_period" style="font-size:0.9em;color:#555;font-weight:600;"><?= $block->escapeHtml(__('Analysis period:')) ?></label>
             <select name="stats_period" id="stats_period" onchange="this.form.submit()" style="padding:6px 12px;border:1px solid #ccc;border-radius:4px;font-size:0.9em;background-color:#fff;cursor:pointer;">
                 <?php foreach ($options as $value => $label): ?>
                     <option value="<?= $block->escapeHtmlAttr($value) ?>" <?= $value === $activePeriod ? 'selected' : '' ?>>
@@ -25,7 +25,7 @@ $options = $block->getPeriodOptions();
         <!-- Card 1: Totale Generati -->
         <div style="padding:16px;background-color:#f9fafb;border:1px solid #e5e7eb;border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,0.05);display:flex;flex-direction:column;justify-content:space-between;min-height:90px;">
             <span style="font-size:0.85em;font-weight:600;color:#6b7280;text-transform:uppercase;letter-spacing:0.05em;display:block;margin-bottom:8px;">
-                <?= $block->escapeHtml(__('Totale generati')) ?>
+                <?= $block->escapeHtml(__('Total generated')) ?>
             </span>
             <strong style="font-size:2em;font-weight:700;color:#111827;line-height:1;">
                 <?= (int)$summary->getTotalGenerated() ?>
@@ -35,7 +35,7 @@ $options = $block->getPeriodOptions();
         <!-- Card 2: Firmati -->
         <div style="padding:16px;background-color:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,0.05);display:flex;flex-direction:column;justify-content:space-between;min-height:90px;">
             <span style="font-size:0.85em;font-weight:600;color:#15803d;text-transform:uppercase;letter-spacing:0.05em;display:block;margin-bottom:8px;">
-                <?= $block->escapeHtml(__('Firmati')) ?>
+                <?= $block->escapeHtml(__('Signed')) ?>
             </span>
             <div style="display:flex;align-items:baseline;justify-content:space-between;gap:8px;">
                 <strong style="font-size:2em;font-weight:700;color:#166534;line-height:1;">
@@ -50,7 +50,7 @@ $options = $block->getPeriodOptions();
         <!-- Card 3: In attesa -->
         <div style="padding:16px;background-color:#f0f9ff;border:1px solid #bae6fd;border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,0.05);display:flex;flex-direction:column;justify-content:space-between;min-height:90px;">
             <span style="font-size:0.85em;font-weight:600;color:#0369a1;text-transform:uppercase;letter-spacing:0.05em;display:block;margin-bottom:8px;">
-                <?= $block->escapeHtml(__('In attesa di firma')) ?>
+                <?= $block->escapeHtml(__('Pending signature')) ?>
             </span>
             <strong style="font-size:2em;font-weight:700;color:#075985;line-height:1;">
                 <?= (int)$summary->getPendingCount() ?>
@@ -60,7 +60,7 @@ $options = $block->getPeriodOptions();
         <!-- Card 4: Scaduti/Rifiutati -->
         <div style="padding:16px;background-color:#fef2f2;border:1px solid #fecaca;border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,0.05);display:flex;flex-direction:column;justify-content:space-between;min-height:90px;">
             <span style="font-size:0.85em;font-weight:600;color:#b91c1c;text-transform:uppercase;letter-spacing:0.05em;display:block;margin-bottom:8px;">
-                <?= $block->escapeHtml(__('Scaduti o Rifiutati')) ?>
+                <?= $block->escapeHtml(__('Expired or Declined')) ?>
             </span>
             <div style="display:flex;align-items:baseline;justify-content:space-between;gap:8px;">
                 <strong style="font-size:2em;font-weight:700;color:#991b1b;line-height:1;">
@@ -75,10 +75,10 @@ $options = $block->getPeriodOptions();
         <!-- Card 5: Tempo Medio di Firma -->
         <div style="padding:16px;background-color:#faf5ff;border:1px solid #e9d5ff;border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,0.05);display:flex;flex-direction:column;justify-content:space-between;min-height:90px;">
             <span style="font-size:0.85em;font-weight:600;color:#6b21a8;text-transform:uppercase;letter-spacing:0.05em;display:block;margin-bottom:8px;">
-                <?= $block->escapeHtml(__('Tempo medio firma')) ?>
+                <?= $block->escapeHtml(__('Avg signing time')) ?>
             </span>
             <strong style="font-size:2em;font-weight:700;color:#581c87;line-height:1;">
-                <?= $summary->getAvgSigningTimeDays() ?> <span style="font-size:0.45em;font-weight:600;color:#6b21a8;"><?= $summary->getAvgSigningTimeDays() == 1 ? $block->escapeHtml(__('giorno')) : $block->escapeHtml(__('giorni')) ?></span>
+                <?= $summary->getAvgSigningTimeDays() ?> <span style="font-size:0.45em;font-weight:600;color:#6b21a8;"><?= $summary->getAvgSigningTimeDays() == 1 ? $block->escapeHtml(__('day')) : $block->escapeHtml(__('days')) ?></span>
             </strong>
         </div>
     </div>

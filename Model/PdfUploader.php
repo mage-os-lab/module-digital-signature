@@ -15,11 +15,11 @@ use Magento\Store\Model\StoreManagerInterface;
 use Psr\Log\LoggerInterface;
 
 /**
- * Upload PDF dei template firma. Logica presa da Magento\Catalog\Model\ImageUploader, ma come
- * classe propria del modulo: Magento\MediaGalleryCatalogIntegration registra un plugin globale
- * su ImageUploader che tenta di importare come asset immagine (thumbnail) qualunque file
- * spostato da moveFileFromTmp, e su un PDF questo fallisce interrompendo il salvataggio del
- * template. Essendo una classe distinta, nessun plugin core la intercetta.
+ * PDF upload for signature templates. Logic taken from Magento\Catalog\Model\ImageUploader, but as
+ * the module's own class: Magento\MediaGalleryCatalogIntegration registers a global plugin
+ * on ImageUploader that tries to import as an image asset (thumbnail) any file
+ * moved by moveFileFromTmp, and on a PDF this fails, interrupting the template save.
+ * Being a distinct class, no core plugin intercepts it.
  */
 class PdfUploader
 {

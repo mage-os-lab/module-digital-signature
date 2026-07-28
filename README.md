@@ -16,6 +16,34 @@ The core module (`src/`) works with the **Luma** theme. For **Hyvä** (Tailwind/
 the `src-hyva/` satellite module is available: it only replaces the frontend templates and
 reuses the same backend.
 
+## Why agencies choose this module
+
+- **A sellable feature, not just a technical add-on.** Digital signature on orders/contracts
+  (B2B, financing, rentals, warranties) is something you can resell to your own clients as a
+  service, not only a plugin you install.
+- **No vendor lock-in.** The provider integration is pluggable: WsSign is the native, recommended
+  connector, DocuSign and Adobe Sign are already implemented, and a documented pattern lets you
+  build a custom connector for any regional/local provider — see the
+  [sign provider integration guide](docs/sign-provider-integration.md). If a client's signature
+  vendor changes, you don't rewrite the integration.
+- **eIDAS compliance out of the box.** Each provider exposes its legal signature level (Simple/
+  Advanced/Qualified) directly in the admin, with a disclaimer — a real objection-handler in
+  front of legally cautious clients, especially in the EU/Italian market.
+- **GDPR by design.** A configurable retention cron deletes PDFs and personal data (email/phone)
+  of closed documents past the retention period, keeping only the audit trail — an easy line in a
+  commercial proposal.
+- **Low maintenance risk.** The suite has 240+ automated unit tests and runs standalone without a
+  full Magento installation, which means fewer silent breakages after a Magento/dependency
+  upgrade and fewer non-billable support hours.
+- **End-client UX already built.** A visual PDF builder (click-to-place signature tag), a document
+  statistics dashboard and automatic signature reminders are features you'd otherwise have to
+  build from scratch to justify the price to a client.
+- **Multi-language ready.** All strings are translated into 8 locales (it_IT, en_US, es_ES, fr_FR,
+  de_DE, nl_NL, pt_BR, zh_Hans_CN), which matters for agencies serving multi-market clients.
+- **Try before you commit.** The bundled `Dummy` provider simulates a full signature flow locally,
+  with no real credentials, so you can evaluate or demo the module end-to-end before configuring
+  a real provider.
+
 ## Features
 
 - PDF document generation from a template with dynamic placeholders, validated on upload.

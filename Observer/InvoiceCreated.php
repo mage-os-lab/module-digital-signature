@@ -24,7 +24,7 @@ class InvoiceCreated implements ObserverInterface
         if (!$invoice instanceof Invoice) {
             return;
         }
-        // Solo alla prima creazione: i salvataggi successivi non sono "creazione fattura"
+        // Only on first creation: subsequent saves are not "invoice creation"
         if (!$invoice->isObjectNew() && $invoice->getOrigData('entity_id')) {
             return;
         }

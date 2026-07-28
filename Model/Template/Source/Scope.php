@@ -11,8 +11,8 @@ class Scope implements OptionSourceInterface
     public function toOptionArray(): array
     {
         return [
-            ['value' => TemplateInterface::SCOPE_CART, 'label' => __('Carrello/Ordine')],
-            ['value' => TemplateInterface::SCOPE_PRODUCT, 'label' => __('Prodotto')],
+            ['value' => TemplateInterface::SCOPE_CART, 'label' => __('Cart/Order')],
+            ['value' => TemplateInterface::SCOPE_PRODUCT, 'label' => __('Product')],
         ];
     }
 }

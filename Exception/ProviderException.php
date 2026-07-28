@@ -7,8 +7,8 @@ use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Phrase;
 
 /**
- * Errore di un connettore di firma. Distingue gli errori che ha senso
- * ritentare (rete, 5xx) da quelli permanenti (configurazione, dati invalidi).
+ * Error from a signature connector. Distinguishes errors that are worth
+ * retrying (network, 5xx) from permanent ones (configuration, invalid data).
  */
 class ProviderException extends LocalizedException
 {

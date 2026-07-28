@@ -9,8 +9,8 @@ use Magento\Framework\Controller\Result\RedirectFactory;
 use Magento\Framework\Message\ManagerInterface;
 
 /**
- * Pagina di rientro post-firma (redirectUrl del provider).
- * Nessun dato personale esposto: solo un messaggio generico.
+ * Post-signature return page (provider's redirectUrl).
+ * No personal data exposed: only a generic message.
  */
 class Thankyou implements HttpGetActionInterface
 {
@@ -23,7 +23,7 @@ class Thankyou implements HttpGetActionInterface
     public function execute(): Redirect
     {
         $this->messageManager->addSuccessMessage(
-            (string)__('Grazie! La firma è stata acquisita. Riceverai conferma quando il documento sarà disponibile nel tuo account.')
+            (string)__('Thank you! The signature has been received. You will get a confirmation once the document is available in your account.')
         );
 
         return $this->redirectFactory->create()->setPath('/');

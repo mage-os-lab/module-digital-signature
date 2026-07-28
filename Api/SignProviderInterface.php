@@ -9,11 +9,11 @@ use MageOS\DigitalSignature\Model\Provider\Result\StartResult;
 use MageOS\DigitalSignature\Model\Provider\Result\StatusResult;
 
 /**
- * Contratto dei connettori di firma digitale (pattern pluggable tipo payment method).
+ * Contract for digital signature connectors (pluggable pattern, similar to payment methods).
  *
- * I connettori NON modificano il documento e NON accedono allo storage: ricevono
- * i contenuti come stringhe binarie e restituiscono risultati; la persistenza è
- * responsabilità del servizio chiamante.
+ * Connectors do NOT modify the document and do NOT access the storage: they receive
+ * the contents as binary strings and return results; persistence is the
+ * responsibility of the calling service.
  */
 interface SignProviderInterface
 {
@@ -24,39 +24,39 @@ interface SignProviderInterface
     public function isEnabled(?int $storeId = null): bool;
 
     /**
-     * Carica il PDF presso il provider e avvia il processo di firma.
+     * Uploads the PDF to the provider and starts the signing process.
      *
-     * @param string $pdfContent contenuto binario del PDF generato
-     * @param string $callbackToken token in chiaro da inserire nell'URL di callback
+     * @param string $pdfContent binary content of the generated PDF
+     * @param string $callbackToken plaintext token to include in the callback URL
      * @throws ProviderException
      */
     public function start(DocumentInterface $document, string $pdfContent, string $callbackToken): StartResult;
 
     /**
-     * Interroga lo stato del processo presso il provider (polling).
+     * Queries the process status from the provider (polling).
      *
      * @throws ProviderException
      */
     public function fetchStatus(DocumentInterface $document): StatusResult;
 
     /**
-     * Scarica il PDF firmato (contenuto binario).
+     * Downloads the signed PDF (binary content).
      *
      * @throws ProviderException
      */
     public function downloadSignedPdf(DocumentInterface $document): string;
 
     /**
-     * Annulla/elimina il processo presso il provider (per rigenerazione/reinvio).
-     * Non deve fallire se il processo non esiste più.
+     * Cancels/deletes the process at the provider (for regeneration/resend).
+     * Must not fail if the process no longer exists.
      *
      * @throws ProviderException
      */
     public function cancel(DocumentInterface $document): void;
 
     /**
-     * Mappa lo stato grezzo del provider su uno stato interno
-     * (Model\Document\Status::*). Null = stato sconosciuto (da loggare).
+     * Maps the provider's raw status to an internal status
+     * (Model\Document\Status::*). Null = unknown status (to be logged).
      */
     public function mapStatus(string $providerStatus): ?string;
 }

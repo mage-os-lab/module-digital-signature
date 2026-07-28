@@ -11,9 +11,9 @@ use Magento\Quote\Api\CartRepositoryInterface;
 use Psr\Log\LoggerInterface;
 
 /**
- * Persiste sul quote la scelta cliente "voglio il contratto da firmare".
- * Chiamato in AJAX (POST, form key) dal checkbox di Luma e Hyva su carrello/
- * minicart/checkout. La validazione finale resta server-side al place ordine.
+ * Persists on the quote the customer's choice "I want the contract to sign".
+ * Called via AJAX (POST, form key) from the Luma and Hyva checkbox on cart/
+ * minicart/checkout. The final validation remains server-side at order placement.
  */
 class SetRequested implements HttpPostActionInterface
 {
@@ -35,7 +35,7 @@ class SetRequested implements HttpPostActionInterface
         try {
             $quote = $this->checkoutSession->getQuote();
             if (!$quote->getId()) {
-                return $result->setData(['success' => false, 'message' => __('Carrello non disponibile.')]);
+                return $result->setData(['success' => false, 'message' => __('Cart not available.')]);
             }
             $quote->setData('digitalsignature_requested', $requested ? 1 : 0);
             $this->quoteRepository->save($quote);
@@ -44,7 +44,7 @@ class SetRequested implements HttpPostActionInterface
         } catch (\Exception $e) {
             $this->logger->error('DigitalSignature: errore salvataggio opt-in firma: ' . $e->getMessage());
 
-            return $result->setData(['success' => false, 'message' => __('Impossibile salvare la scelta.')]);
+            return $result->setData(['success' => false, 'message' => __('Unable to save your choice.')]);
         }
     }
 }

@@ -1,303 +1,303 @@
-"Voglio ricevere il contratto da firmare digitalmente","Quiero recibir el contrato para firmarlo digitalmente"
-"Per i prodotti nel carrello la firma del contratto è obbligatoria.","Para los productos del carrito, la firma del contrato es obligatoria."
-"Carrello non disponibile.","Carrito no disponible."
-"Impossibile salvare la scelta.","No se pudo guardar la selección."
-"Per procedere devi accettare la firma digitale del contratto.","Para continuar debes aceptar la firma digital del contrato."
-"Documenti firma","Documentos de firma"
-"ID ordine","ID de pedido"
-"Email firmatario","Correo electrónico del firmante"
-"Vedi ordine","Ver pedido"
-"Scarica firmato","Descargar firmado"
-"Scarica generato","Descargar generado"
-"PDF non disponibile per questo documento.","PDF no disponible para este documento."
-"Impossibile scaricare il PDF: %1","No se puede descargar el PDF: %1"
-"Genera documenti firma","Generar documentos de firma"
-"Generare i documenti firma per gli ordini selezionati?","¿Generar los documentos de firma para los pedidos seleccionados?"
-"Generazione documenti firma presa in carico per %1 ordine/i.","Generación de documentos de firma en curso para %1 pedido(s)."
-"Impossibile prendere in carico %1 ordine/i (vedi log).","No se pudieron encolar %1 pedido(s) (ver registro)."
-"Contratti firmati","Contratos firmados"
-"Scarica i contratti firmati digitalmente per questo ordine.","Descargue los contratos firmados digitalmente para este pedido."
-"Scarica PDF firmato","Descargar PDF firmado"
-"Contratto d'ordine","Contrato del pedido"
-Contratto,Contrato
-"Notifiche email","Notificaciones por correo electrónico"
-"Email inviate al cliente e all'admin sugli eventi del documento firma.","Correos enviados al cliente y al administrador sobre eventos del documento de firma."
-Mittente,Remitente
-"Email destinatario admin","Correo electrónico del destinatario administrador"
-"Per le notifiche di errore ed esito negativo. Vuoto = contatto generale dello store.","Para notificaciones de error y resultado negativo. Vacío = contacto general de la tienda."
-"Avvisa il cliente quando il documento è pronto","Avisar al cliente cuando el documento esté listo"
-"Spesso il provider invia già il proprio invito a firmare: disattivato di default.","El proveedor a menudo ya envía su propia invitación a firmar: desactivado por defecto."
-"Template ""documento pronto"" (cliente)","Plantilla ""documento listo"" (cliente)"
-"Avvisa il cliente quando il documento è firmato","Avisar al cliente cuando el documento esté firmado"
-"Template ""documento firmato"" (cliente)","Plantilla ""documento firmado"" (cliente)"
-"Avvisa il cliente se il documento scade o viene rifiutato","Avisar al cliente si el documento caduca o es rechazado"
-"Disattivato di default per evitare allarmismi: valutare caso per caso.","Desactivado por defecto para evitar alarmismos: evaluar caso por caso."
-"Template ""scaduto/rifiutato"" (cliente)","Plantilla ""caducado/rechazado"" (cliente)"
-"Avvisa l'admin in caso di errore definitivo","Avisar al administrador en caso de error definitivo"
-"Template ""errore documento"" (admin)","Plantilla ""error de documento"" (administrador)"
-"Avvisa l'admin se il documento scade o viene rifiutato","Avisar al administrador si el documento caduca o es rechazado"
-"Template ""scaduto/rifiutato"" (admin)","Plantilla ""caducado/rechazado"" (administrador)"
-"Il tuo contratto da firmare digitalmente è pronto (ordine %increment_id)","Su contrato para firmar digitalmente está listo (pedido %increment_id)"
-"Ciao %name,","Hola %name,"
-"il contratto relativo al tuo ordine #%increment_id è pronto per essere firmato digitalmente.","el contrato de su pedido #%increment_id está listo para ser firmado digitalmente."
-"A breve riceverai (o hai già ricevuto) le istruzioni dal servizio di firma all'indirizzo %email. Segui quel processo per completare la firma.","En breve recibirá (o ya ha recibido) las instrucciones del servicio de firma en %email. Siga ese proceso para completar la firma."
-"Puoi consultare lo stato del tuo ordine qui: <a href=""%url"">I miei ordini</a>","Puede consultar el estado de su pedido aquí: <a href=""%url"">Mis pedidos</a>"
-"Il tuo contratto firmato è disponibile (ordine %increment_id)","Su contrato firmado está disponible (pedido %increment_id)"
-"il contratto relativo al tuo ordine #%increment_id è stato firmato digitalmente con successo.","el contrato de su pedido #%increment_id se ha firmado digitalmente con éxito."
-"Puoi scaricare il documento firmato dalla tua area clienti: <a href=""%url"">Vai all'ordine</a>","Puede descargar el documento firmado desde su área de cliente: <a href=""%url"">Ir al pedido</a>"
-"Aggiornamento sul contratto da firmare (ordine %increment_id)","Actualización sobre el contrato a firmar (pedido %increment_id)"
-"il processo di firma del contratto relativo al tuo ordine #%increment_id si è concluso con esito: %status.","el proceso de firma del contrato de su pedido #%increment_id ha finalizado con el resultado: %status."
-"Se ritieni che si tratti di un errore, contatta il nostro servizio clienti. Puoi consultare il tuo ordine qui: <a href=""%url"">I miei ordini</a>","Si cree que se trata de un error, contacte con nuestro servicio de atención al cliente. Puede consultar su pedido aquí: <a href=""%url"">Mis pedidos</a>"
-"[Firma Digitale] Errore documento #%document_id (ordine %increment_id)","[Firma Digital] Error de documento #%document_id (pedido %increment_id)"
-"L'elaborazione di un documento firma è terminata in errore e richiede un intervento manuale.","El procesamiento de un documento de firma ha terminado en error y requiere intervención manual."
-"Documento: #%document_id","Documento: #%document_id"
-"Ordine: #%increment_id","Pedido: #%increment_id"
-"Provider: %provider","Proveedor: %provider"
-"Firmatario: %email","Firmante: %email"
-"Errore: %message","Error: %message"
-"Vai all'ordine in backend: <a href=""%url"">%url</a>","Abrir el pedido en el backend: <a href=""%url"">%url</a>"
-"[Firma Digitale] Documento #%document_id %status (ordine %increment_id)","[Firma Digital] Documento #%document_id %status (pedido %increment_id)"
-"Il processo di firma di un documento si è concluso con esito negativo.","El proceso de firma de un documento ha finalizado con un resultado negativo."
-"Esito: %status","Resultado: %status"
-"In attesa",Pendiente
-Generato,Generado
-"Inviato in firma","Enviado a firma"
-Firmato,Firmado
-Rifiutato,Rechazado
-Scaduto,Caducado
-Errore,Error
-Annullato,Cancelado
-"Salvataggio in corso...",Guardando...
-"Preferenza salvata.","Preferencia guardada."
-"Non è stato possibile salvare la preferenza. Riprova.","No se pudo guardar la preferencia. Vuelva a intentarlo."
-"Attenzione: la firma resta obbligatoria per completare l'ordine.","Atención: la firma sigue siendo obligatoria para completar el pedido."
-"Mage-OS","Mage-OS"
-"Firma Digitale","Firma digital"
-"Generale","General"
-"Abilitato","Habilitado"
-"Presa d'atto GDPR (modalità produzione)","Reconocimiento RGPD (modo producción)"
-"Trigger di generazione predefinito","Disparador de generación predeterminado"
-"Provider di firma attivo","Proveedor de firma activo"
-"Tentativi massimi","Intentos máximos"
-"Limite documenti per riconciliazione","Límite de documentos por conciliación"
-"Provider di firma","Proveedor de firma"
-"WsSign","WsSign"
-"Platform URL","URL de la plataforma"
-"Tenant","Tenant"
-"Username (owner)","Usuario (owner)"
-"Password","Contraseña"
-"Tipo firma","Tipo de firma"
-"Scadenza firma (giorni)","Caducidad de la firma (días)"
-"Prefisso telefonico di default","Prefijo telefónico predeterminado"
-"Messaggio per il firmatario","Mensaje para el firmante"
-"Email notifier (opzionale)","Email del notificador (opcional)"
-"Allowlist IP callback","Lista blanca de IP para el callback"
-"Mappatura stati","Mapeo de estados"
-"Dummy (solo test)","Dummy (solo pruebas)"
-"Consenti provider dummy","Permitir proveedor dummy"
-"Ritardo auto-firma (secondi)","Retraso de firma automática (segundos)"
-"Conservazione documenti (GDPR)","Retención de documentos (RGPD)"
-"Elimina automaticamente oltre il periodo di conservazione","Eliminar automáticamente tras el período de retención"
-"Giorni di conservazione","Días de retención"
-"Limite documenti per esecuzione","Límite de documentos por ejecución"
-"Spuntare SOLO dopo aver stipulato un DPA (Data Processing Agreement) con il provider di firma selezionato e aver aggiornato la privacy policy dello store, indicando l'invio di dati personali del cliente (email, telefono) a un fornitore terzo per il processo di firma. Finché non è spuntato, tutti i nuovi documenti vengono generati con il provider dummy (test), indipendentemente dal provider configurato sotto.","Marca esta casilla SOLO después de firmar un DPA (Acuerdo de Tratamiento de Datos) con el proveedor de firma seleccionado y de haber actualizado la política de privacidad de la tienda, indicando el envío de datos personales del cliente (email, teléfono) a un proveedor externo para el proceso de firma. Hasta que no se marque, todos los documentos nuevos se generarán con el proveedor dummy (pruebas), independientemente del proveedor configurado abajo."
-"Usato quando il template non specifica un trigger proprio.","Se usa cuando la plantilla no especifica su propio disparador."
-"Il connettore usato per i nuovi documenti quando la modalità produzione è confermata sopra. Configura le credenziali nel gruppo del provider.","El conector usado para los nuevos documentos una vez confirmado el modo producción arriba. Configura las credenciales en el grupo del proveedor."
-"Numero massimo di tentativi per errori temporanei (rete/servizio) prima dello stato di errore.","Número máximo de intentos para errores temporales (red/servicio) antes del estado de error."
-"Cap di documenti accodati a ogni run del cron (throttling verso il provider).","Límite de documentos encolados por cada ejecución del cron (limitación hacia el proveedor)."
-"Es. https://demo.wsign.cloud (solo HTTPS).","Ej. https://demo.wsign.cloud (solo HTTPS)."
-"Email dell'account owner WsSign.","Email de la cuenta owner de WsSign."
-"Default OTP_SMS: richiede il telefono del firmatario.","Por defecto OTP_SMS: requiere el teléfono del firmante."
-"Inviato dal provider nell'invito a firmare.","Enviado por el proveedor en la invitación a firmar."
-"Indirizzo notificato da WsSign sugli eventi del processo.","Dirección notificada por WsSign sobre los eventos del proceso."
-"IP separati da virgola; vuoto = nessun filtro IP (resta il token segreto).","IPs separadas por comas; vacío = sin filtro de IP (el token secreto sigue aplicando)."
-"Stato grezzo restituito da WsSign → stato interno del documento. Gli stati non mappati vengono registrati nel log per essere aggiunti qui.","Estado en bruto devuelto por WsSign → estado interno del documento. Los estados no mapeados se registran en el log para poder añadirlos aquí."
-"Provider fittizio che simula la firma in locale. NON usare in produzione.","Proveedor ficticio que simula la firma en local. NO usar en producción."
-"ATTENZIONE: abilitare solo in ambienti di test/sviluppo.","ATENCIÓN: habilitar solo en entornos de prueba/desarrollo."
-"Dopo questo tempo il documento risulta firmato.","Transcurrido este tiempo, el documento se marca como firmado."
-"Cron giornaliero che, se attivo, elimina PDF e dati personali (email/telefono) dei documenti conclusi (firmato/rifiutato/scaduto/annullato) oltre il periodo di conservazione. Il record e lo storico stato restano per finalità di audit/fiscali, senza PDF né PII.","Cron diario que, si está activo, elimina los PDF y los datos personales (email/teléfono) de los documentos concluidos (firmado/rechazado/caducado/cancelado) que superan el período de retención. El registro y el historial de estados se conservan con fines de auditoría/fiscales, sin PDF ni datos personales."
-"Disattivato di default: la cancellazione è distruttiva, va attivata consapevolmente dopo aver definito i tempi di conservazione richiesti (fiscali/legali).","Desactivado por defecto: la eliminación es destructiva y debe activarse conscientemente tras definir los períodos de retención requeridos (fiscales/legales)."
-"Dall'ultimo cambio di stato del documento concluso. Default 3650 (10 anni, indicativo: verificare i termini fiscali/legali applicabili).","A partir del último cambio de estado del documento concluido. Por defecto 3650 (10 años, indicativo: verifica los plazos fiscales/legales aplicables)."
-"Cap di documenti elaborati a ogni run del cron.","Límite de documentos procesados por cada ejecución del cron."
-"Template documenti","Plantillas de documentos"
-"Configurazione","Configuración"
-"Conferma ordine","Confirmación del pedido"
-"Creazione fattura","Creación de factura"
-"Fattura pagata","Factura pagada"
-"Manuale da backend","Manual desde el backend"
-"-- Nessuno --","-- Ninguno --"
-"-- Usa default globale --","-- Usar valor global predeterminado --"
-"Aggiungi mappatura","Añadir mapeo"
-"Carrello / Ordine","Carrito / Pedido"
-"Carrello/Ordine","Carrito/Pedido"
-"Documentazione API (nel repository del modulo)","Documentación de la API (en el repositorio del módulo)"
-"Documento annullato per rigenerazione manuale.","Documento cancelado para regeneración manual."
-"Documento con id ""%1"" inesistente.","El documento con id «%1» no existe."
-"Documento rigenerato (sostituisce #%1).","Documento regenerado (sustituye a #%1)."
-"Documento rigenerato: nuovo documento #%1 in elaborazione.","Documento regenerado: el nuevo documento #%1 se está procesando."
-"Dummy: PDF generato non trovato nello storage.","Dummy: PDF generado no encontrado en el almacenamiento."
-"Dummy: il contenuto da inviare non è un PDF.","Dummy: el contenido a enviar no es un PDF."
-"Dummy: il documento non ha un PDF generato.","Dummy: el documento no tiene un PDF generado."
-"Dummy: process id assente o non riconosciuto.","Dummy: id de proceso ausente o no reconocido."
-"Elimina","Eliminar"
-"Elimina template","Eliminar plantilla"
-"Eliminare il template ""%1""?","¿Eliminar la plantilla «%1»?"
-"Eliminare questo template? I documenti già generati restano in storico.","¿Eliminar esta plantilla? Los documentos ya generados permanecen en el historial."
-"Email del firmatario mancante o non valida.","Email del firmante ausente o no válido."
-"Errore durante il salvataggio del template.","Error al guardar la plantilla."
-"File PDF del template non trovato: %1","Archivo PDF de la plantilla no encontrado: %1"
-"File documento non trovato nello storage: %1","Archivo del documento no encontrado en el almacenamiento: %1"
-"Grazie! La firma è stata acquisita. Riceverai conferma quando il documento sarà disponibile nel tuo account.","¡Gracias! Se ha recibido la firma. Recibirás una confirmación cuando el documento esté disponible en tu cuenta."
-"ID","ID"
-"Il PDF supera la dimensione massima di 10 MB.","El PDF supera el tamaño máximo de 10 MB."
-"Il documento #%1 non è attivo: usa quello attivo per rigenerare.","El documento #%1 no está activo: usa el activo para regenerar."
-"Il documento non ha un PDF generato da inviare.","El documento no tiene un PDF generado para enviar."
-"Il documento non ha un template associato.","El documento no tiene una plantilla asociada."
-"Il file caricato non è un PDF valido.","El archivo cargado no es un PDF válido."
-"Il file template non è un PDF.","El archivo de la plantilla no es un PDF."
-"Il nome del template è obbligatorio.","El nombre de la plantilla es obligatorio."
-"Il provider dummy non è abilitato: attivalo esplicitamente in configurazione (solo ambienti di test).","El proveedor dummy no está habilitado: actívalo explícitamente en la configuración (solo entornos de prueba)."
-"Il template %1 non ha un file PDF caricato.","La plantilla %1 no tiene un archivo PDF cargado."
-"Impossibile eliminare il template: %1","No se ha podido eliminar la plantilla: %1"
-"Impossibile generare i documenti firma: %1","No se han podido generar los documentos de firma: %1"
-"Impossibile rigenerare il documento: %1","No se ha podido regenerar el documento: %1"
-"Impossibile salvare il documento: %1","No se ha podido guardar el documento: %1"
-"Impossibile salvare il template: %1","No se ha podido guardar la plantilla: %1"
-"Indietro","Atrás"
-"Modifica","Editar"
-"Modifica template ""%1""","Editar plantilla «%1»"
-"Nessun tag firma trovato nel PDF template: impossibile inserire i dati del firmatario.","No se ha encontrado ninguna etiqueta de firma en el PDF de la plantilla: no se pueden insertar los datos del firmante."
-"Nessun tag firma trovato nel PDF. Inserisci nel documento almeno un tag nel formato {WSIGN#larghezza,altezza#email-placeholder}.","No se ha encontrado ninguna etiqueta de firma en el PDF. Añade al documento al menos una etiqueta con el formato {WSIGN#ancho,alto#email-placeholder}."
-"Nessun template selezionato.","Ninguna plantilla seleccionada."
-"Nome","Nombre"
-"Nuovo template documento","Nueva plantilla de documento"
-"PDF e dati personali eliminati per fine periodo di conservazione.","PDF y datos personales eliminados al finalizar el período de retención."
-"PDF non supportato: cross-reference table classica non trovata (salvare come PDF 1.4).","PDF no compatible: no se ha encontrado la tabla de referencias cruzadas clásica (guarda como PDF 1.4)."
-"PDF non supportato: startxref non trovato.","PDF no compatible: no se ha encontrado startxref."
-"PDF non supportato: trailer privo di Size/Root.","PDF no compatible: el trailer no tiene Size/Root."
-"PDF non supportato: usa una cross-reference table classica. Salva/esporta il documento come ""PDF 1.4"" e ricarica il file.","PDF no compatible: usa una tabla de referencias cruzadas clásica. Guarda/exporta el documento como «PDF 1.4» y vuelve a cargar el archivo."
-"Piattaforma di firma elettronica avanzata (OTP via SMS o email). Il connettore carica il PDF generato dal template, avvia la richiesta di firma verso il firmatario e riceve gli aggiornamenti di stato tramite callback autenticata. Richiede un account WsSign attivo (tenant, utente owner, password) fornito dal team WsSign.","Plataforma de firma electrónica avanzada (OTP por SMS o email). El conector carga el PDF generado a partir de la plantilla, inicia la solicitud de firma al firmante y recibe las actualizaciones de estado mediante un callback autenticado. Requiere una cuenta WsSign activa (tenant, usuario owner, contraseña) proporcionada por el equipo de WsSign."
-"Prezzo","Precio"
-"Prodotto","Producto"
-"Provider di firma ""%1"" non registrato.","El proveedor de firma «%1» no está registrado."
-"Provider fittizio incluso nel modulo: non contatta nessun servizio esterno. Simula una firma riuscita dopo il ritardo configurato sotto, restituendo il PDF originale come ""firmato"". Utile per collaudare l'intero flusso (template, trigger, notifiche, area cliente) senza credenziali di un provider reale. Da NON abilitare in produzione.","Proveedor ficticio incluido en el módulo: no contacta con ningún servicio externo. Simula una firma exitosa tras el retraso configurado abajo, devolviendo el PDF original como «firmado». Útil para probar todo el flujo (plantillas, disparadores, notificaciones, área de cliente) sin credenciales de un proveedor real. NO habilitar en producción."
-"Questo template non esiste più.","Esta plantilla ya no existe."
-"Richiesta di generazione documenti firma presa in carico.","Se ha aceptado la solicitud de generación de documentos de firma."
-"SKU","SKU"
-"Salva template","Guardar plantilla"
-"Stato interno","Estado interno"
-"Stato provider","Estado del proveedor"
-"Telefono del firmatario mancante: richiesto da WsSign per l'OTP via SMS.","Falta el teléfono del firmante: requerido por WsSign para el OTP por SMS."
-"Telefono del firmatario non valido.","El teléfono del firmante no es válido."
-"Template con id ""%1"" inesistente.","La plantilla con id «%1» no existe."
-"Template documenti firma","Plantillas de documentos de firma"
-"Template eliminato.","Plantilla eliminada."
-"Template salvato.","Plantilla guardada."
-"Ti chiediamo di firmare digitalmente il documento relativo al tuo ordine.","Te pedimos que firmes digitalmente el documento relacionado con tu pedido."
-"WsSign: GUID non presente nella risposta di upload.","WsSign: falta el GUID en la respuesta de carga."
-"WsSign: autenticazione fallita, verifica credenziali e tenant.","WsSign: fallo de autenticación, verifica las credenciales y el tenant."
-"WsSign: caricamento documento rifiutato (%1).","WsSign: carga del documento rechazada (%1)."
-"WsSign: credenziali o tenant non configurati.","WsSign: credenciales o tenant no configurados."
-"WsSign: errore di rete durante ""%1"": %2","WsSign: error de red durante «%1»: %2"
-"WsSign: errore temporaneo del servizio durante ""%1"" (HTTP %2).","WsSign: error temporal del servicio durante «%1» (HTTP %2)."
-"WsSign: il contenuto scaricato non è un PDF valido.","WsSign: el contenido descargado no es un PDF válido."
-"WsSign: il documento non ha un processo avviato.","WsSign: el documento no tiene un proceso iniciado."
-"WsSign: platform URL non configurato o non HTTPS.","WsSign: URL de la plataforma no configurada o no es HTTPS."
-"WsSign: richiesta rifiutata durante ""%1"" (HTTP %2).","WsSign: solicitud rechazada durante «%1» (HTTP %2)."
-"WsSign: risposta non-JSON durante ""%1"".","WsSign: respuesta no JSON durante «%1»."
-"WsSign: stato assente nella risposta del provider.","WsSign: falta el estado en la respuesta del proveedor."
-"WsSign: store del documento non valido.","WsSign: store del documento no válido."
-"WsSign: struttura risposta inattesa durante ""%1"".","WsSign: estructura de respuesta inesperada durante «%1»."
-"PDF non supportato: sezione cross-reference classica non trovata alla posizione attesa.","PDF no compatible: no se encontró la sección de referencia cruzada clásica en la posición esperada."
-"PDF non supportato: trailer non trovato dopo la tabella cross-reference.","PDF no compatible: no se encontró el trailer después de la tabla de referencia cruzada."
-"PDF non supportato: oggetto cross-reference stream non riconosciuto.","PDF no compatible: objeto de flujo de referencia cruzada no reconocido."
-"PDF non supportato: stream cross-reference non riconosciuto.","PDF no compatible: flujo de referencia cruzada no reconocido."
-"PDF non supportato: stream cross-reference incompleto.","PDF no compatible: flujo de referencia cruzada incompleto."
-"PDF non supportato: atteso un oggetto /Type /XRef.","PDF no compatible: se esperaba un objeto de /Type /XRef."
-"PDF non supportato: dizionario cross-reference stream incompleto.","PDF no compatible: diccionario del flujo de referencia cruzada incompleto."
-"PDF non supportato: stream cross-reference non decomprimibile.","PDF no compatible: no se pudo descomprimir el flujo de referencia cruzada."
-"PDF non supportato: predictor cross-reference stream non gestito (valore %1).","PDF no compatible: predictor del flujo de referencia cruzada no compatible (valor %1)."
-"PDF non supportato: parametri di predizione cross-reference stream non gestiti.","PDF no compatible: parámetros de predicción del flujo de referencia cruzada no compatibles."
-"PDF non supportato: larghezze /W cross-reference stream non valide.","PDF no compatible: anchos /W del flujo de referencia cruzada no válidos."
-"PDF non supportato: stream cross-reference troppo corto per le voci dichiarate.","PDF no compatible: flujo de referencia cruzada demasiado corto para las entradas declaradas."
-"PDF non supportato: stream cross-reference con predizione PNG malformato.","PDF no compatible: flujo de referencia cruzada con predicción PNG malformada."
-"PDF non supportato: filtro PNG riga cross-reference stream non riconosciuto (%1).","PDF no compatible: filtro PNG de fila no reconocido en el flujo de referencia cruzada (%1)."
-"PDF non supportato: catena cross-reference con troppe revisioni collegate (max %1).","PDF no compatible: la cadena de referencia cruzada tiene demasiadas revisiones enlazadas (máx. %1)."
-"PDF cifrati non sono supportati: rimuovi la protezione/password dal documento e ricarica il file.","Los PDF cifrados no son compatibles: elimina la protección/contraseña del documento y vuelve a cargar el archivo."
-"PDF non supportato: usa compressione a oggetti (object stream), non gestita in questa versione. Disabilita la compressione degli oggetti in fase di esportazione e ricarica il file.","PDF no compatible: utiliza compresión de objetos (object streams), no compatible en esta versión. Desactiva la compresión de objetos al exportar y vuelve a cargar el archivo."
-"Il template non ha un file PDF caricato per questa vista.","La plantilla no tiene un archivo PDF cargado para esta vista de tienda."
-"File PDF del template non trovato.","No se encontró el archivo PDF de la plantilla."
-"Impossibile generare l'anteprima: %1","No se pudo generar la vista previa: %1"
-"Scarica anteprima elaborata","Descargar vista previa procesada"
-"Reminder automatici","Recordatorios automáticos"
-"Solleciti per documenti in attesa di firma.","Recordatorios de documentos pendientes de firma."
-"Invia solleciti al cliente","Enviar recordatorios al cliente"
-"Invia email periodiche al cliente per ricordargli di firmare. Disattivato di default.","Enviar correos electrónicos periódicos al cliente para recordarle que firme. Desactivado por defecto."
-"Template sollecito (cliente)","Plantilla de recordatorio (cliente)"
-"Giorni prima del primo sollecito","Días antes del primer recordatorio"
-"Giorni trascorsi dall'invio prima del primo reminder cliente.","Días transcurridos desde el envío antes del primer recordatorio al cliente."
-"Giorni tra solleciti successivi","Días entre recordatorios sucesivos"
-"Giorni da attendere tra un reminder e il successivo.","Días a esperar entre un recordatorio y el siguiente."
-"Numero massimo di solleciti cliente","Número máximo de recordatorios al cliente"
-"Quante volte al massimo sollecitare il cliente.","Número máximo de veces que se puede recordar al cliente."
-"Invia escalation all'admin","Enviar escalamiento al administrador"
-"Invia una notifica all'admin se il documento rimane non firmato. Abilitato di default.","Enviar una notificación al administrador si el documento permanece sin firmar. Habilitado por defecto."
-"Template escalation (admin)","Plantilla de escalamiento (administrador)"
-"Giorni prima dell'escalation admin","Días antes del escalamiento al administrador"
-"Giorni trascorsi dall'invio prima di allertare l'admin.","Días transcurridos desde el envío antes de alertar al administrador."
-"Promemoria: Firma il tuo contratto (ordine %increment_id)","Recordatorio: Firma tu contrato (pedido %increment_id)"
-"ti ricordiamo che il contratto relativo al tuo ordine #%increment_id è ancora in attesa di firma digitale.","le recordamos que el contrato relativo a su pedido #%increment_id aún está pendiente de firma digital."
-"Per completare l'ordine, ti invitiamo a seguire le istruzioni ricevute all'indirizzo %email dal provider di firma.","Para completar el pedido, le invitamos a seguir las instrucciones recibidas en %email por parte del proveedor de firma."
-"[Firma Digitale] Sollecito: Documento #%document_id in attesa di firma (ordine %increment_id)","[Firma Digital] Recordatorio: Documento #%document_id pendiente de firma (pedido %increment_id)"
-"Il seguente documento è in attesa di firma digitale da oltre il periodo configurato di escalation.","El siguiente documento está pendiente de firma digital más allá del período de escalamiento configurado."
-"Gestisci l'ordine in backend: <a href=\"\"%url\"\">%url</a>","Gestionar el pedido en el backend: <a href=\"\"%url\"\">%url</a>"
-"Inviato sollecito cliente (sollecito %1 di %2).","Recordatorio enviado al cliente (%1 de %2)."
-"Inviata email di escalation all'admin per documento in attesa di firma.","Correo electrónico de escalamiento enviado al administrador para el documento pendiente de firma."
-"Nessuna validità legale — solo test/sviluppo","Sin validez legal — solo test/desarrollo"
-"Firma Elettronica Avanzata (AES)","Firma Electrónica Avanzada (AES)"
-"Nota: La classificazione del livello di firma si basa sulle specifiche dichiarate dal fornitore. Il modulo non garantisce l'adeguatezza legale o la conformità per scopi specifici.","Nota: La clasificación del nivel de firma se basa en las especificaciones declaradas por el proveedor. El módulo no garantiza la adecuación legal o la conformidad para fines específicos."
-"Connettori Aggiuntivi & Pianificati","Conectores Adicionales y Planificados"
-"Adobe Acrobat Sign","Adobe Acrobat Sign"
-"Connettore per integrare le firme digitali ed elettroniche di Adobe Acrobat Sign. Consente l'autenticazione OAuth2 ed il tracciamento asincrono del processo di firma.","Conector para integrar las firmas digitales y electrónicas de Adobe Acrobat Sign. Permite la autenticación OAuth2 y el seguimiento asíncrono del proceso de firma."
-"Sito ufficiale del provider","Sitio oficial del proveedor"
-"Vuoi integrare un provider differente?","¿Quieres integrar un proveedor diferente?"
-"Il modulo è progettato per essere esteso in modo modulare. Puoi implementare un connettore personalizzato per qualsiasi provider di firma digitale (es. DocuSign, Namirial, InfoCert) seguendo la nostra guida.","El módulo está diseñado para extenderse de forma modular. Puede implementar un conector personalizado para cualquier proveedor de firma digital (por ejemplo, DocuSign, Namirial, InfoCert) siguiendo nuestra guía."
-"Guida all'integrazione dei provider di firma","Guía para la integración de proveedores de firma"
-"In sviluppo","En desarrollo"
-"Disponibile","Disponible"
-"Connettori aggiuntivi","Conectores adicionales"
-"Metriche e performance documenti","Métricas y rendimiento de documentos"
-"Periodo di analisi:","Periodo de análisis:"
-"Ultimi 30 giorni","Últimos 30 días"
-"Ultimi 90 giorni","Últimos 90 días"
-"Ultimo anno","Último año"
-"Sempre","Siempre"
-"Totale generati","Total generados"
-"Firmati","Firmados"
-"In attesa di firma","Pendientes de firma"
-"Scaduti o Rifiutati","Expirados o Rechazados"
-"Tempo medio firma","Tiempo medio de firma"
-"giorno","día"
-"giorni","días"
-"Posiziona la firma sul PDF","Coloque la firma en el PDF"
-"Indietro","Atrás"
-"Pagina","Página"
-"di","de"
-"Avanti","Siguiente"
-"Zoom -","Zoom -"
-"Zoom +","Zoom +"
-"Seleziona la firma trascinando il mouse per tracciare un riquadro sulla pagina del PDF.","Seleccione la posición de la firma arrastrando para dibujar un cuadro en la página PDF."
-"Annulla","Cancelar"
-"Conferma Posizione","Confirmar posición"
-"Traccia un riquadro sul PDF prima di confermare.","Dibuje un cuadro de selección en el PDF antes de confirmar."
-"Errore durante il salvataggio delle coordinate.","Error al guardar las coordenadas."
-"Impossibile caricare il PDF temporaneo.","No se pudo cargar el PDF temporal."
-"Sorgente Libreria pdf.js","Origen de la biblioteca pdf.js"
-"URL CDN pdf.js","URL de CDN para pdf.js"
-"Locale (Consigliato)","Local (Recomendado)"
-"CDN","CDN"
-"File non specificato.","Archivo no especificado."
-"Il file temporaneo richiesto non esiste.","El archivo temporal solicitado no existe."
-"Parametri di firma non validi.","Parámetros de firma no válidos."
-"Il file temporaneo non esiste.","El archivo temporal no existe."
-"Operazione annullata.","Operación cancelada."
+"""Document error"" template (admin)","Plantilla ""error de documento"" (administrador)"
+"""Document ready"" template (customer)","Plantilla ""documento listo"" (cliente)"
+"""Document signed"" template (customer)","Plantilla ""documento firmado"" (cliente)"
+"""Expired/rejected"" template (admin)","Plantilla ""caducado/rechazado"" (administrador)"
+"""Expired/rejected"" template (customer)","Plantilla ""caducado/rechazado"" (cliente)"
+-- None --,-- Ninguno --
+-- Use global default --,-- Usar valor global predeterminado --
+API documentation (in the module repository),Documentación de la API (en el repositorio del módulo)
+Active signature provider,Proveedor de firma activo
+Add mapping,Añadir mapeo
+Additional & Planned Connectors,Conectores Adicionales y Planificados
+Additional connectors,Conectores adicionales
+Address notified by WsSign about process events.,Dirección notificada por WsSign sobre los eventos del proceso.
+Admin escalation email sent for document pending signature.,Correo electrónico de escalamiento enviado al administrador para el documento pendiente de firma.
+Admin recipient email,Correo electrónico del destinatario administrador
+Adobe Acrobat Sign,Adobe Acrobat Sign
+Advanced Electronic Signature (AES),Firma Electrónica Avanzada (AES)
+"Advanced electronic signature platform (OTP via SMS or email). The connector uploads the PDF generated from the template, starts the signing request to the signer, and receives status updates via an authenticated callback. Requires an active WsSign account (tenant, owner user, password) provided by the WsSign team.","Plataforma de firma electrónica avanzada (OTP por SMS o email). El conector carga el PDF generado a partir de la plantilla, inicia la solicitud de firma al firmante y recibe las actualizaciones de estado mediante un callback autenticado. Requiere una cuenta WsSign activa (tenant, usuario owner, contraseña) proporcionada por el equipo de WsSign."
+After this time the document is marked as signed.,"Transcurrido este tiempo, el documento se marca como firmado."
+All time,Siempre
+Allow dummy provider,Permitir proveedor dummy
+Analysis period:,Periodo de análisis:
+Auto-sign delay (seconds),Retraso de firma automática (segundos)
+Automatic reminders,Recordatorios automáticos
+Automatically delete past the retention period,Eliminar automáticamente tras el período de retención
+Available,Disponible
+Avg signing time,Tiempo medio de firma
+CDN,CDN
+Callback IP allowlist,Lista blanca de IP para el callback
+Cancel,Cancelar
+Canceled,Cancelado
+Cap on documents processed at each cron run.,Límite de documentos procesados por cada ejecución del cron.
+Cap on documents queued at each cron run (throttling towards the provider).,Límite de documentos encolados por cada ejecución del cron (limitación hacia el proveedor).
+Cart / Order,Carrito / Pedido
+Cart not available.,Carrito no disponible.
+Cart/Order,Carrito/Pedido
+"Check this ONLY after signing a DPA (Data Processing Agreement) with the selected signature provider and updating the store's privacy policy to disclose that customer personal data (email, phone) is sent to a third-party provider for the signing process. Until this is checked, all new documents are generated with the dummy (test) provider, regardless of the provider configured below.","Marca esta casilla SOLO después de firmar un DPA (Acuerdo de Tratamiento de Datos) con el proveedor de firma seleccionado y de haber actualizado la política de privacidad de la tienda, indicando el envío de datos personales del cliente (email, teléfono) a un proveedor externo para el proceso de firma. Hasta que no se marque, todos los documentos nuevos se generarán con el proveedor dummy (pruebas), independientemente del proveedor configurado abajo."
+Comma-separated IPs; empty = no IP filtering (the secret token still applies).,IPs separadas por comas; vacío = sin filtro de IP (el token secreto sigue aplicando).
+Configuration,Configuración
+Confirm Position,Confirmar posición
+Connector to integrate digital and electronic signatures from Adobe Acrobat Sign. Supports OAuth2 authentication and asynchronous signature process tracking.,Conector para integrar las firmas digitales y electrónicas de Adobe Acrobat Sign. Permite la autenticación OAuth2 y el seguimiento asíncrono del proceso de firma.
+Contract,Contrato
+Could not queue %1 order(s) (see log).,No se pudieron encolar %1 pedido(s) (ver registro).
+Customer reminder sent (reminder %1 of %2).,Recordatorio enviado al cliente (%1 de %2).
+"Daily cron that, when active, deletes PDFs and personal data (email/phone) of completed documents (signed/rejected/expired/cancelled) past the retention period. The record and status history are kept for audit/tax purposes, without the PDF or PII.","Cron diario que, si está activo, elimina los PDF y los datos personales (email/teléfono) de los documentos concluidos (firmado/rechazado/caducado/cancelado) que superan el período de retención. El registro y el historial de estados se conservan con fines de auditoría/fiscales, sin PDF ni datos personales."
+Days before admin escalation,Días antes del escalamiento al administrador
+Days before the first reminder,Días antes del primer recordatorio
+Days between subsequent reminders,Días entre recordatorios sucesivos
+Days elapsed since sending before alerting the admin.,Días transcurridos desde el envío antes de alertar al administrador.
+Days elapsed since sending before the first customer reminder.,Días transcurridos desde el envío antes del primer recordatorio al cliente.
+Days to wait between one reminder and the next.,Días a esperar entre un recordatorio y el siguiente.
+Declined,Rechazado
+Default OTP_SMS: requires the signer's phone number.,Por defecto OTP_SMS: requiere el teléfono del firmante.
+Default generation trigger,Disparador de generación predeterminado
+Default phone prefix,Prefijo telefónico predeterminado
+Delete,Eliminar
+Delete template,Eliminar plantilla
+"Delete the template ""%1""?",¿Eliminar la plantilla «%1»?
+Delete this template? Documents already generated remain in the history.,¿Eliminar esta plantilla? Los documentos ya generados permanecen en el historial.
+Digital Signature,Firma digital
+Disabled by default to avoid alarming customers: evaluate on a case-by-case basis.,Desactivado por defecto para evitar alarmismos: evaluar caso por caso.
+Disabled by default: deletion is destructive and should be enabled deliberately after defining the required retention periods (tax/legal).,Desactivado por defecto: la eliminación es destructiva y debe activarse conscientemente tras definir los períodos de retención requeridos (fiscales/legales).
+Document #%1 is not active: use the active one to regenerate.,El documento #%1 no está activo: usa el activo para regenerar.
+Document canceled for manual regeneration.,Documento cancelado para regeneración manual.
+Document file not found in storage: %1,Archivo del documento no encontrado en el almacenamiento: %1
+Document metrics and performance,Métricas y rendimiento de documentos
+Document regenerated (replaces #%1).,Documento regenerado (sustituye a #%1).
+Document regenerated: new document #%1 is being processed.,Documento regenerado: el nuevo documento #%1 se está procesando.
+Document retention (GDPR),Retención de documentos (RGPD)
+Document templates,Plantillas de documentos
+"Document with id ""%1"" does not exist.",El documento con id «%1» no existe.
+Document: #%document_id,Documento: #%document_id
+Documents per reconciliation limit,Límite de documentos por conciliación
+Documents per run limit,Límite de documentos por ejecución
+Download generated,Descargar generado
+Download processed preview,Descargar vista previa procesada
+Download signed,Descargar firmado
+Download signed PDF,Descargar PDF firmado
+Download the digitally signed contracts for this order.,Descargue los contratos firmados digitalmente para este pedido.
+Draw a box on the PDF before confirming.,Dibuje un cuadro de selección en el PDF antes de confirmar.
+Dummy (test only),Dummy (solo pruebas)
+"Dummy provider included with the module: it does not contact any external service. It simulates a successful signature after the delay configured below, returning the original PDF as ""signed"". Useful for testing the whole flow (templates, triggers, notifications, customer area) without a real provider's credentials. Do NOT enable in production.","Proveedor ficticio incluido en el módulo: no contacta con ningún servicio externo. Simula una firma exitosa tras el retraso configurado abajo, devolviendo el PDF original como «firmado». Útil para probar todo el flujo (plantillas, disparadores, notificaciones, área de cliente) sin credenciales de un proveedor real. NO habilitar en producción."
+Dummy: generated PDF not found in storage.,Dummy: PDF generado no encontrado en el almacenamiento.
+Dummy: missing or unrecognized process id.,Dummy: id de proceso ausente o no reconocido.
+Dummy: the content to send is not a PDF.,Dummy: el contenido a enviar no es un PDF.
+Dummy: the document has no generated PDF.,Dummy: el documento no tiene un PDF generado.
+E.g. https://demo.wsign.cloud (HTTPS only).,Ej. https://demo.wsign.cloud (solo HTTPS).
+Edit,Editar
+"Edit template ""%1""",Editar plantilla «%1»
+Email notifications,Notificaciones por correo electrónico
+Email of the WsSign owner account.,Email de la cuenta owner de WsSign.
+Emails sent to the customer and admin about signature document events.,Correos enviados al cliente y al administrador sobre eventos del documento de firma.
+Enabled,Habilitado
+Encrypted PDFs are not supported: remove the protection/password from the document and re-upload the file.,Los PDF cifrados no son compatibles: elimina la protección/contraseña del documento y vuelve a cargar el archivo.
+Error,Error
+Error saving coordinates.,Error al guardar las coordenadas.
+Error while saving the template.,Error al guardar la plantilla.
+Error: %message,Error: %message
+Escalation template (admin),Plantilla de escalamiento (administrador)
+Expired,Caducado
+Expired or Declined,Expirados o Rechazados
+Fake provider that simulates signing locally. Do NOT use in production.,Proveedor ficticio que simula la firma en local. NO usar en producción.
+File not specified.,Archivo no especificado.
+For error and negative outcome notifications. Empty = store's general contact.,Para notificaciones de error y resultado negativo. Vacío = contacto general de la tienda.
+"From the last status change of the completed document. Default 3650 (10 years, indicative: check the applicable tax/legal terms).","A partir del último cambio de estado del documento concluido. Por defecto 3650 (10 años, indicativo: verifica los plazos fiscales/legales aplicables)."
+GDPR acknowledgement (production mode),Reconocimiento RGPD (modo producción)
+General,General
+Generate signature documents,Generar documentos de firma
+Generate signature documents for the selected orders?,¿Generar los documentos de firma para los pedidos seleccionados?
+Generated,Generado
+Guide to integrating signature providers,Guía para la integración de proveedores de firma
+"Hello %name,","Hola %name,"
+I want to receive the contract to sign digitally,Quiero recibir el contrato para firmarlo digitalmente
+ID,ID
+"If you believe this is a mistake, contact our customer service. You can check your order here: <a href=""%url"">My orders</a>","Si cree que se trata de un error, contacte con nuestro servicio de atención al cliente. Puede consultar su pedido aquí: <a href=""%url"">Mis pedidos</a>"
+In development,En desarrollo
+Internal status,Estado interno
+Invalid signature parameters.,Parámetros de firma no válidos.
+Invoice creation,Creación de factura
+Invoice paid,Factura pagada
+Last 30 days,Últimos 30 días
+Last 90 days,Últimos 90 días
+Last year,Último año
+Local (Recommended),Local (Recomendado)
+Mage-OS,Mage-OS
+"Manage the order in backend: <a href=\\""%url\""\"">%url</a>""","Gestionar el pedido en el backend: <a href=\\""%url\""\"">%url</a>"""
+Manual from backend,Manual desde el backend
+Maximum number of customer reminders,Número máximo de recordatorios al cliente
+Maximum number of retries for temporary errors (network/service) before reaching the error state.,Número máximo de intentos para errores temporales (red/servicio) antes del estado de error.
+Maximum number of times to remind the customer.,Número máximo de veces que se puede recordar al cliente.
+Maximum retries,Intentos máximos
+Message for the signer,Mensaje para el firmante
+Name,Nombre
+New document template,Nueva plantilla de documento
+Next,Siguiente
+No legal validity — test/development only,Sin validez legal — solo test/desarrollo
+"No signature tag found in the PDF. Add at least one tag to the document in the format {WSIGN#width,height#email-placeholder}.","No se ha encontrado ninguna etiqueta de firma en el PDF. Añade al documento al menos una etiqueta con el formato {WSIGN#ancho,alto#email-placeholder}."
+No signature tag found in the template PDF: unable to insert the signer\'s data.,No se ha encontrado ninguna etiqueta de firma en el PDF de la plantilla: no se pueden insertar los datos del firmante.
+No template selected.,Ninguna plantilla seleccionada.
+Note: The classification of the signature level is based on the specifications declared by the provider. The module does not guarantee legal adequacy or compliance for specific purposes.,Nota: La clasificación del nivel de firma se basa en las especificaciones declaradas por el proveedor. El módulo no garantiza la adecuación legal o la conformidad para fines específicos.
+Notifier email (optional),Email del notificador (opcional)
+Notify the admin if the document expires or is rejected,Avisar al administrador si el documento caduca o es rechazado
+Notify the admin on a definitive error,Avisar al administrador en caso de error definitivo
+Notify the customer if the document expires or is rejected,Avisar al cliente si el documento caduca o es rechazado
+Notify the customer when the document is ready,Avisar al cliente cuando el documento esté listo
+Notify the customer when the document is signed,Avisar al cliente cuando el documento esté firmado
+Official provider website,Sitio oficial del proveedor
+"Open the order in backend: <a href=""%url"">%url</a>","Abrir el pedido en el backend: <a href=""%url"">%url</a>"
+Operation cancelled.,Operación cancelada.
+Order ID,ID de pedido
+Order confirmation,Confirmación del pedido
+Order contract,Contrato del pedido
+Order: #%increment_id,Pedido: #%increment_id
+Outcome: %status,Resultado: %status
+PDF and personal data deleted at the end of the retention period.,PDF y datos personales eliminados al finalizar el período de retención.
+PDF not available for this document.,PDF no disponible para este documento.
+Page,Página
+Password,Contraseña
+Pending,Pendiente
+Pending signature,Pendientes de firma
+Platform URL,URL de la plataforma
+Position signature on PDF,Coloque la firma en el PDF
+Preference saved.,Preferencia guardada.
+Previous,Atrás
+Previous,Atrás
+Price,Precio
+Processing of a signature document ended in error and requires manual intervention.,El procesamiento de un documento de firma ha terminado en error y requiere intervención manual.
+Product,Producto
+Provider status,Estado del proveedor
+Provider: %provider,Proveedor: %provider
+Raw status returned by WsSign → internal document status. Unmapped statuses are logged so they can be added here.,Estado en bruto devuelto por WsSign → estado interno del documento. Los estados no mapeados se registran en el log para poder añadirlos aquí.
+Reminder template (customer),Plantilla de recordatorio (cliente)
+Reminder: Sign your contract (order %increment_id),Recordatorio: Firma tu contrato (pedido %increment_id)
+Reminders for documents awaiting signature.,Recordatorios de documentos pendientes de firma.
+Retention days,Días de retención
+SKU,SKU
+Save template,Guardar plantilla
+Saving...,Guardando...
+Select signature position by dragging the mouse to draw a box on the PDF page.,Seleccione la posición de la firma arrastrando para dibujar un cuadro en la página PDF.
+Send escalation to the admin,Enviar escalamiento al administrador
+Send reminders to the customer,Enviar recordatorios al cliente
+Sender,Remitente
+Sends a notification to the admin if the document remains unsigned. Enabled by default.,Enviar una notificación al administrador si el documento permanece sin firmar. Habilitado por defecto.
+Sends periodic emails to the customer to remind them to sign. Disabled by default.,Enviar correos electrónicos periódicos al cliente para recordarle que firme. Desactivado por defecto.
+Sent by the provider in the signing invitation.,Enviado por el proveedor en la invitación a firmar.
+Sent for signature,Enviado a firma
+Signature document generation queued for %1 order(s).,Generación de documentos de firma en curso para %1 pedido(s).
+Signature document generation request has been queued.,Se ha aceptado la solicitud de generación de documentos de firma.
+Signature document templates,Plantillas de documentos de firma
+Signature documents,Documentos de firma
+Signature expiration (days),Caducidad de la firma (días)
+"Signature provider ""%1"" is not registered.",El proveedor de firma «%1» no está registrado.
+Signature providers,Proveedor de firma
+Signature type,Tipo de firma
+Signed,Firmado
+Signed,Firmados
+Signed contracts,Contratos firmados
+Signer email,Correo electrónico del firmante
+Signer email missing or invalid.,Email del firmante ausente o no válido.
+Signer's phone number missing: required by WsSign for OTP via SMS.,Falta el teléfono del firmante: requerido por WsSign para el OTP por SMS.
+Signer: %email,Firmante: %email
+Signer\'s phone number is invalid.,El teléfono del firmante no es válido.
+Signing the contract is mandatory for the products in your cart.,"Para los productos del carrito, la firma del contrato es obligatoria."
+Status mapping,Mapeo de estados
+Template %1 has no uploaded PDF file.,La plantilla %1 no tiene un archivo PDF cargado.
+Template PDF file not found.,No se encontró el archivo PDF de la plantilla.
+Template PDF file not found: %1,Archivo PDF de la plantilla no encontrado: %1
+Template deleted.,Plantilla eliminada.
+Template saved.,Plantilla guardada.
+"Template with id ""%1"" does not exist.",La plantilla con id «%1» no existe.
+Tenant,Tenant
+Thank you! The signature has been received. You will get a confirmation once the document is available in your account.,¡Gracias! Se ha recibido la firma. Recibirás una confirmación cuando el documento esté disponible en tu cuenta.
+The PDF exceeds the maximum size of 10 MB.,El PDF supera el tamaño máximo de 10 MB.
+The connector used for new documents once production mode is confirmed above. Configure the credentials in the provider's group.,El conector usado para los nuevos documentos una vez confirmado el modo producción arriba. Configura las credenciales en el grupo del proveedor.
+The document has no associated template.,El documento no tiene una plantilla asociada.
+The document has no generated PDF to send.,El documento no tiene un PDF generado para enviar.
+The dummy provider is not enabled: enable it explicitly in the configuration (test environments only).,El proveedor dummy no está habilitado: actívalo explícitamente en la configuración (solo entornos de prueba).
+The following document is pending digital signature beyond the configured escalation period.,El siguiente documento está pendiente de firma digital más allá del período de escalamiento configurado.
+"The module is designed to be extended modularly. You can implement a custom connector for any digital signature provider (e.g. DocuSign, Namirial, InfoCert) by following our guide.","El módulo está diseñado para extenderse de forma modular. Puede implementar un conector personalizado para cualquier proveedor de firma digital (por ejemplo, DocuSign, Namirial, InfoCert) siguiendo nuestra guía."
+The provider often already sends its own signing invitation: disabled by default.,El proveedor a menudo ya envía su propia invitación a firmar: desactivado por defecto.
+The requested temporary file does not exist.,El archivo temporal solicitado no existe.
+The signing process of a document ended with a negative outcome.,El proceso de firma de un documento ha finalizado con un resultado negativo.
+The template file is not a PDF.,El archivo de la plantilla no es un PDF.
+The template has no PDF file uploaded for this store view.,La plantilla no tiene un archivo PDF cargado para esta vista de tienda.
+The template name is required.,El nombre de la plantilla es obligatorio.
+The temporary file does not exist.,El archivo temporal no existe.
+The uploaded file is not a valid PDF.,El archivo cargado no es un PDF válido.
+This template no longer exists.,Esta plantilla ya no existe.
+"To complete the order, we invite you to follow the instructions received at %email from the signature provider.","Para completar el pedido, le invitamos a seguir las instrucciones recibidas en %email por parte del proveedor de firma."
+Total generated,Total generados
+Unable to delete the template: %1,No se ha podido eliminar la plantilla: %1
+Unable to download the PDF: %1,No se puede descargar el PDF: %1
+Unable to generate the preview: %1,No se pudo generar la vista previa: %1
+Unable to generate the signature documents: %1,No se han podido generar los documentos de firma: %1
+Unable to load temporary PDF.,No se pudo cargar el PDF temporal.
+Unable to regenerate the document: %1,No se ha podido regenerar el documento: %1
+Unable to save the document: %1,No se ha podido guardar el documento: %1
+Unable to save the template: %1,No se ha podido guardar la plantilla: %1
+Unable to save your choice.,No se pudo guardar la selección.
+Unsupported PDF: classic cross-reference section not found at the expected position.,PDF no compatible: no se encontró la sección de referencia cruzada clásica en la posición esperada.
+Unsupported PDF: classic cross-reference table not found (save as PDF 1.4).,PDF no compatible: no se ha encontrado la tabla de referencias cruzadas clásica (guarda como PDF 1.4).
+Unsupported PDF: cross-reference chain has too many linked revisions (max %1).,PDF no compatible: la cadena de referencia cruzada tiene demasiadas revisiones enlazadas (máx. %1).
+Unsupported PDF: cross-reference stream could not be decompressed.,PDF no compatible: no se pudo descomprimir el flujo de referencia cruzada.
+Unsupported PDF: cross-reference stream not recognized.,PDF no compatible: flujo de referencia cruzada no reconocido.
+Unsupported PDF: cross-reference stream object not recognized.,PDF no compatible: objeto de flujo de referencia cruzada no reconocido.
+Unsupported PDF: cross-reference stream prediction parameters not handled.,PDF no compatible: parámetros de predicción del flujo de referencia cruzada no compatibles.
+Unsupported PDF: cross-reference stream predictor not handled (value %1).,PDF no compatible: predictor del flujo de referencia cruzada no compatible (valor %1).
+Unsupported PDF: cross-reference stream too short for the declared entries.,PDF no compatible: flujo de referencia cruzada demasiado corto para las entradas declaradas.
+Unsupported PDF: cross-reference stream with malformed PNG prediction.,PDF no compatible: flujo de referencia cruzada con predicción PNG malformada.
+Unsupported PDF: expected an object of /Type /XRef.,PDF no compatible: se esperaba un objeto de /Type /XRef.
+Unsupported PDF: incomplete cross-reference stream dictionary.,PDF no compatible: diccionario del flujo de referencia cruzada incompleto.
+Unsupported PDF: incomplete cross-reference stream.,PDF no compatible: flujo de referencia cruzada incompleto.
+Unsupported PDF: invalid cross-reference stream /W widths.,PDF no compatible: anchos /W del flujo de referencia cruzada no válidos.
+"Unsupported PDF: it uses object compression (object streams), not handled in this version. Disable object compression when exporting and re-upload the file.","PDF no compatible: utiliza compresión de objetos (object streams), no compatible en esta versión. Desactiva la compresión de objetos al exportar y vuelve a cargar el archivo."
+Unsupported PDF: startxref not found.,PDF no compatible: no se ha encontrado startxref.
+Unsupported PDF: trailer missing Size/Root.,PDF no compatible: el trailer no tiene Size/Root.
+Unsupported PDF: trailer not found after the cross-reference table.,PDF no compatible: no se encontró el trailer después de la tabla de referencia cruzada.
+Unsupported PDF: unrecognized PNG row filter in cross-reference stream (%1).,PDF no compatible: filtro PNG de fila no reconocido en el flujo de referencia cruzada (%1).
+"Unsupported PDF: use a classic cross-reference table. Save/export the document as ""PDF 1.4"" and re-upload the file.",PDF no compatible: usa una tabla de referencias cruzadas clásica. Guarda/exporta el documento como «PDF 1.4» y vuelve a cargar el archivo.
+Update on the contract to sign (order %increment_id),Actualización sobre el contrato a firmar (pedido %increment_id)
+Used when the template does not specify its own trigger.,Se usa cuando la plantilla no especifica su propio disparador.
+Username (owner),Usuario (owner)
+View order,Ver pedido
+WARNING: enable only in test/development environments.,ATENCIÓN: habilitar solo en entornos de prueba/desarrollo.
+Want to integrate a different provider?,¿Quieres integrar un proveedor diferente?
+Warning: the signature is still required to complete the order.,Atención: la firma sigue siendo obligatoria para completar el pedido.
+We couldn't save your preference. Please try again.,No se pudo guardar la preferencia. Vuelva a intentarlo.
+We kindly ask you to digitally sign the document related to your order.,Te pedimos que firmes digitalmente el documento relacionado con tu pedido.
+WsSign,WsSign
+WsSign: GUID missing from the upload response.,WsSign: falta el GUID en la respuesta de carga.
+"WsSign: authentication failed, check the credentials and tenant.","WsSign: fallo de autenticación, verifica las credenciales y el tenant."
+WsSign: credentials or tenant not configured.,WsSign: credenciales o tenant no configurados.
+WsSign: document upload rejected (%1).,WsSign: carga del documento rechazada (%1).
+WsSign: invalid document store.,WsSign: store del documento no válido.
+"WsSign: network error during ""%1"": %2",WsSign: error de red durante «%1»: %2
+"WsSign: non-JSON response during ""%1"".",WsSign: respuesta no JSON durante «%1».
+WsSign: platform URL not configured or not HTTPS.,WsSign: URL de la plataforma no configurada o no es HTTPS.
+"WsSign: request rejected during ""%1"" (HTTP %2).",WsSign: solicitud rechazada durante «%1» (HTTP %2).
+WsSign: status missing from the provider\'s response.,WsSign: falta el estado en la respuesta del proveedor.
+"WsSign: temporary service error during ""%1"" (HTTP %2).",WsSign: error temporal del servicio durante «%1» (HTTP %2).
+WsSign: the document has no started process.,WsSign: el documento no tiene un proceso iniciado.
+WsSign: the downloaded content is not a valid PDF.,WsSign: el contenido descargado no es un PDF válido.
+"WsSign: unexpected response structure during ""%1"".",WsSign: estructura de respuesta inesperada durante «%1».
+"You can check your order status here: <a href=""%url"">My orders</a>","Puede consultar el estado de su pedido aquí: <a href=""%url"">Mis pedidos</a>"
+"You can download the signed document from your account area: <a href=""%url"">Go to the order</a>","Puede descargar el documento firmado desde su área de cliente: <a href=""%url"">Ir al pedido</a>"
+You must accept the digital signature of the contract to proceed.,Para continuar debes aceptar la firma digital del contrato.
+You will soon receive (or have already received) instructions from the signature service at %email. Follow that process to complete the signature.,En breve recibirá (o ya ha recibido) las instrucciones del servicio de firma en %email. Siga ese proceso para completar la firma.
+Your contract to sign digitally is ready (order %increment_id),Su contrato para firmar digitalmente está listo (pedido %increment_id)
+Your signed contract is available (order %increment_id),Su contrato firmado está disponible (pedido %increment_id)
+Zoom +,Zoom +
+Zoom -,Zoom -
+[Digital Signature] Document #%document_id %status (order %increment_id),[Firma Digital] Documento #%document_id %status (pedido %increment_id)
+[Digital Signature] Document error #%document_id (order %increment_id),[Firma Digital] Error de documento #%document_id (pedido %increment_id)
+[Digital Signature] Reminder: Document #%document_id pending signature (order %increment_id),[Firma Digital] Recordatorio: Documento #%document_id pendiente de firma (pedido %increment_id)
+day,día
+days,días
+of,de
+pdf.js CDN URL,URL de CDN para pdf.js
+pdf.js library source,Origen de la biblioteca pdf.js
+the contract for your order #%increment_id has been signed digitally successfully.,el contrato de su pedido #%increment_id se ha firmado digitalmente con éxito.
+the contract for your order #%increment_id is ready to be signed digitally.,el contrato de su pedido #%increment_id está listo para ser firmado digitalmente.
+the signing process for the contract of your order #%increment_id ended with outcome: %status.,el proceso de firma del contrato de su pedido #%increment_id ha finalizado con el resultado: %status.
+we remind you that the contract for your order #%increment_id is still pending digital signature.,le recordamos que el contrato relativo a su pedido #%increment_id aún está pendiente de firma digital.

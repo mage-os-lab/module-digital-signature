@@ -18,7 +18,7 @@ class WsSign implements SignProviderInterface
 {
     public const CODE = 'wssign';
 
-    /** Stato sintetico usato quando il provider risponde 404 sul processo */
+    /** Synthetic status used when the provider responds 404 on the process */
     public const RAW_STATUS_NOT_FOUND = 'NOT_FOUND';
 
     public function __construct(
@@ -74,7 +74,7 @@ class WsSign implements SignProviderInterface
                 ],
             ],
             'notes' => (string)($this->config->get(self::CODE, 'notes', $storeId)
-                ?? __('Ti chiediamo di firmare digitalmente il documento relativo al tuo ordine.')),
+                ?? __('We kindly ask you to digitally sign the document related to your order.')),
             'expirationDate' => date('Y-m-d', strtotime('+' . $expirationDays . ' days')),
             'signatureType' => (string)($this->config->get(self::CODE, 'signature_type', $storeId) ?? 'OTP_SMS'),
             'notifyOwner' => false,
@@ -101,12 +101,12 @@ class WsSign implements SignProviderInterface
 
         $data = $this->client->getDocument($this->getPlatformUrl($storeId), $token, $guid);
         if ($data === null) {
-            // 404: scaduto o cancellato lato provider
+            // 404: expired or cancelled on the provider side
             return new StatusResult(self::RAW_STATUS_NOT_FOUND);
         }
         $rawStatus = (string)($data['data']['status'] ?? '');
         if ($rawStatus === '') {
-            throw ProviderException::permanent(__('WsSign: stato assente nella risposta del provider.'));
+            throw ProviderException::permanent(__('WsSign: status missing from the provider\'s response.'));
         }
 
         return new StatusResult($rawStatus, $this->json->serialize($data));
@@ -134,7 +134,7 @@ class WsSign implements SignProviderInterface
 
     public function mapStatus(string $providerStatus): ?string
     {
-        // Mappatura configurabile da admin (righe dinamiche provider_status → internal_status)
+        // Mapping configurable by admin (dynamic rows provider_status → internal_status)
         foreach ($this->config->getSerialized(self::CODE, 'status_mapping') as $row) {
             if (!is_array($row)) {
                 continue;
@@ -145,7 +145,7 @@ class WsSign implements SignProviderInterface
                 return array_key_exists($internal, Status::getLabels()) ? $internal : null;
             }
         }
-        // Fallback minimo: 404 sul processo = scaduto/cancellato lato provider
+        // Minimal fallback: 404 on the process = expired/cancelled on the provider side
         if ($providerStatus === self::RAW_STATUS_NOT_FOUND) {
             return Status::EXPIRED;
         }
@@ -159,7 +159,7 @@ class WsSign implements SignProviderInterface
         $password = (string)($this->config->getSecret(self::CODE, 'password', $storeId) ?? '');
         $tenant = (string)($this->config->get(self::CODE, 'tenant', $storeId) ?? '');
         if ($username === '' || $password === '' || $tenant === '') {
-            throw ProviderException::permanent(__('WsSign: credenziali o tenant non configurati.'));
+            throw ProviderException::permanent(__('WsSign: credentials or tenant not configured.'));
         }
 
         return $this->client->fetchToken($this->getPlatformUrl($storeId), $tenant, $username, $password);
@@ -169,7 +169,7 @@ class WsSign implements SignProviderInterface
     {
         $url = (string)($this->config->get(self::CODE, 'platform_url', $storeId) ?? '');
         if (!$this->urlValidator->isValid($url) || !str_starts_with($url, 'https://')) {
-            throw ProviderException::permanent(__('WsSign: platform URL non configurato o non HTTPS.'));
+            throw ProviderException::permanent(__('WsSign: platform URL not configured or not HTTPS.'));
         }
 
         return $url;
@@ -180,7 +180,7 @@ class WsSign implements SignProviderInterface
         try {
             return $this->storeManager->getStore($storeId)->getBaseUrl();
         } catch (\Exception $e) {
-            throw ProviderException::permanent(__('WsSign: store del documento non valido.'), $e);
+            throw ProviderException::permanent(__('WsSign: invalid document store.'), $e);
         }
     }
 
@@ -188,7 +188,7 @@ class WsSign implements SignProviderInterface
     {
         $processId = $document->getProviderProcessId();
         if ($processId === null) {
-            throw ProviderException::permanent(__('WsSign: il documento non ha un processo avviato.'));
+            throw ProviderException::permanent(__('WsSign: the document has no started process.'));
         }
 
         return $processId;
@@ -197,9 +197,9 @@ class WsSign implements SignProviderInterface
     private function requireValidEmail(DocumentInterface $document): string
     {
         $email = (string)($document->getSignerEmail() ?? '');
-        // Input che attraversa il PDF e l'API provider: validazione stretta
+        // Input that flows through the PDF and the provider API: strict validation
         if (!filter_var($email, FILTER_VALIDATE_EMAIL) || preg_match('/[\x00-\x1F\x7F]/', $email)) {
-            throw ProviderException::permanent(__('Email del firmatario mancante o non valida.'));
+            throw ProviderException::permanent(__('Signer email missing or invalid.'));
         }
 
         return $email;
@@ -213,13 +213,13 @@ class WsSign implements SignProviderInterface
         $raw = trim((string)($document->getSignerPhone() ?? ''));
         if ($raw === '') {
             throw ProviderException::permanent(
-                __('Telefono del firmatario mancante: richiesto da WsSign per l\'OTP via SMS.')
+                __('Signer\'s phone number missing: required by WsSign for OTP via SMS.')
             );
         }
         $defaultPrefix = (string)($this->config->get(self::CODE, 'default_phone_prefix', $storeId) ?? '+39');
         $prefix = $defaultPrefix;
         if (str_starts_with($raw, '+')) {
-            // Separa prefisso internazionale (1-3 cifre) dal resto
+            // Separates international prefix (1-3 digits) from the rest
             if (preg_match('/^\+(\d{1,3})(.+)$/', $raw, $matches)) {
                 $prefix = '+' . $matches[1];
                 $raw = $matches[2];
@@ -227,7 +227,7 @@ class WsSign implements SignProviderInterface
         }
         $number = preg_replace('/\D/', '', $raw) ?? '';
         if (strlen($number) < 6) {
-            throw ProviderException::permanent(__('Telefono del firmatario non valido.'));
+            throw ProviderException::permanent(__('Signer\'s phone number is invalid.'));
         }
 
         return ['prefix' => $prefix, 'number' => $number];

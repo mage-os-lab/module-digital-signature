@@ -26,7 +26,7 @@ class Pool implements MergeFieldPoolInterface
     public function get(string $code): MergeFieldProviderInterface
     {
         if (!$this->has($code)) {
-            throw new LocalizedException(__('Merge field "%1" non registrato.', $code));
+            throw new LocalizedException(__('Merge field "%1" is not registered.', $code));
         }
 
         return $this->providers[$code];

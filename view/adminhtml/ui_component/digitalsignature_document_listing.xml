@@ -48,7 +48,7 @@
         <column name="order_id" sortOrder="20">
             <settings>
                 <filter>textRange</filter>
-                <label translate="true">ID ordine</label>
+                <label translate="true">Order ID</label>
             </settings>
         </column>
         <column name="provider_code" sortOrder="30">
@@ -62,7 +62,7 @@
                 <filter>select</filter>
                 <options class="MageOS\DigitalSignature\Model\Document\Status"/>
                 <dataType>select</dataType>
-                <label translate="true">Stato</label>
+                <label translate="true">Status</label>
             </settings>
         </column>
         <column name="trigger_code" component="Magento_Ui/js/grid/columns/select" sortOrder="50">
@@ -76,13 +76,13 @@
         <column name="signer_email" sortOrder="60">
             <settings>
                 <filter>text</filter>
-                <label translate="true">Email firmatario</label>
+                <label translate="true">Signer Email</label>
             </settings>
         </column>
         <column name="provider_process_id" sortOrder="70">
             <settings>
                 <filter>text</filter>
-                <label translate="true">ID processo</label>
+                <label translate="true">Process ID</label>
             </settings>
         </column>
         <column name="is_active" component="Magento_Ui/js/grid/columns/select" sortOrder="80">
@@ -90,7 +90,7 @@
                 <filter>select</filter>
                 <options class="Magento\Config\Model\Config\Source\Yesno"/>
                 <dataType>select</dataType>
-                <label translate="true">Attivo</label>
+                <label translate="true">Active</label>
             </settings>
         </column>
         <column name="created_at" class="Magento\Ui\Component\Listing\Columns\Date"
@@ -98,7 +98,7 @@
             <settings>
                 <filter>dateRange</filter>
                 <dataType>date</dataType>
-                <label translate="true">Creato il</label>
+                <label translate="true">Created On</label>
             </settings>
         </column>
         <actionsColumn name="actions" class="MageOS\DigitalSignature\Ui\Component\Listing\Column\DocumentActions"

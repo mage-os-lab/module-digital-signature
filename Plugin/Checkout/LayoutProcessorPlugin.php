@@ -9,10 +9,11 @@ use Magento\Framework\Data\Form\FormKey;
 use Magento\Framework\UrlInterface;
 
 /**
- * Inietta il checkbox opt-in firma nel checkout one-page (Luma), nell'area
- * "afterMethods" dello step di pagamento (subito sopra il place order). La
- * config arriva server-side da SignatureCartContext, coerente con cart e
- * minicart; la persistenza usa lo stesso endpoint AJAX digitalsignature/cart.
+ * Injects the signature opt-in checkbox into the one-page checkout (Luma),
+ * in the "afterMethods" area of the payment step (right above the place
+ * order button). The config comes server-side from SignatureCartContext,
+ * consistent with cart and minicart; persistence uses the same
+ * digitalsignature/cart AJAX endpoint.
  */
 class LayoutProcessorPlugin
 {

@@ -1,0 +1,93 @@
+<?xml version="1.0"?>
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">digitalsignature_webhooksubscription_listing.digitalsignature_webhooksubscription_listing_data_source</item>
+        </item>
+    </argument>
+    <settings>
+        <buttons>
+            <button name="add">
+                <url path="*/*/new"/>
+                <class>primary</class>
+                <label translate="true">New Webhook Subscription</label>
+            </button>
+        </buttons>
+        <spinner>digitalsignature_webhooksubscription_columns</spinner>
+        <deps>
+            <dep>digitalsignature_webhooksubscription_listing.digitalsignature_webhooksubscription_listing_data_source</dep>
+        </deps>
+    </settings>
+    <dataSource name="digitalsignature_webhooksubscription_listing_data_source" component="Magento_Ui/js/grid/provider">
+        <settings>
+            <storageConfig>
+                <param name="indexField" xsi:type="string">subscription_id</param>
+            </storageConfig>
+            <updateUrl path="mui/index/render"/>
+        </settings>
+        <aclResource>MageOS_DigitalSignature::webhook_subscription</aclResource>
+        <dataProvider class="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider"
+                      name="digitalsignature_webhooksubscription_listing_data_source">
+            <settings>
+                <requestFieldName>subscription_id</requestFieldName>
+                <primaryFieldName>subscription_id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+    <listingToolbar name="listing_top">
+        <settings>
+            <sticky>true</sticky>
+        </settings>
+        <bookmark name="bookmarks"/>
+        <columnsControls name="columns_controls"/>
+        <filters name="listing_filters"/>
+        <paging name="listing_paging"/>
+    </listingToolbar>
+    <columns name="digitalsignature_webhooksubscription_columns">
+        <column name="subscription_id" sortOrder="10">
+            <settings>
+                <filter>textRange</filter>
+                <sorting>asc</sorting>
+                <label translate="true">ID</label>
+            </settings>
+        </column>
+        <column name="target_url" sortOrder="20">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Target URL</label>
+            </settings>
+        </column>
+        <column name="store_id" component="Magento_Ui/js/grid/columns/select" sortOrder="30">
+            <settings>
+                <filter>select</filter>
+                <options class="Magento\Config\Model\Config\Source\Store"/>
+                <dataType>select</dataType>
+                <label translate="true">Store view</label>
+            </settings>
+        </column>
+        <column name="enabled" component="Magento_Ui/js/grid/columns/select" sortOrder="40">
+            <settings>
+                <filter>select</filter>
+                <options class="Magento\Config\Model\Config\Source\Yesno"/>
+                <dataType>select</dataType>
+                <label translate="true">Enabled</label>
+            </settings>
+        </column>
+        <column name="created_at" component="Magento_Ui/js/grid/columns/date" sortOrder="50">
+            <settings>
+                <filter>dateRange</filter>
+                <dataType>date</dataType>
+                <label translate="true">Created On</label>
+            </settings>
+        </column>
+        <actionsColumn name="actions" class="MageOS\DigitalSignature\Ui\Component\Listing\Column\WebhookSubscriptionActions"
+                       sortOrder="100">
+            <settings>
+                <indexField>subscription_id</indexField>
+                <resizeEnabled>false</resizeEnabled>
+                <resizeDefaultWidth>107</resizeDefaultWidth>
+            </settings>
+        </actionsColumn>
+    </columns>
+</listing>

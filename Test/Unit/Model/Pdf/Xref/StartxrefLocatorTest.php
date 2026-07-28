@@ -19,7 +19,7 @@ class StartxrefLocatorTest extends TestCase
     public function testThrowsWhenMissing(): void
     {
         $this->expectException(LocalizedException::class);
-        $this->expectExceptionMessageMatches('/startxref non trovato/');
+        $this->expectExceptionMessageMatches('/startxref not found/');
 
         StartxrefLocator::locate("%PDF-1.4\nsenza xref\n");
     }

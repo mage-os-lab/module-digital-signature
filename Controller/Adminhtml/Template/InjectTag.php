@@ -37,7 +37,7 @@ class InjectTag extends Action implements HttpPostActionInterface
         try {
             $fileName = basename((string)$this->getRequest()->getParam('file', ''));
             if ($fileName === '') {
-                throw new LocalizedException(__('File non specificato.'));
+                throw new LocalizedException(__('File not specified.'));
             }
 
             $page = (int)$this->getRequest()->getParam('page', 0);
@@ -47,14 +47,14 @@ class InjectTag extends Action implements HttpPostActionInterface
             $h = (float)$this->getRequest()->getParam('h', 0);
 
             if ($page <= 0 || $w <= 0 || $h <= 0) {
-                throw new LocalizedException(__('Parametri di firma non validi.'));
+                throw new LocalizedException(__('Invalid signature parameters.'));
             }
 
             $mediaDirectory = $this->filesystem->getDirectoryWrite(DirectoryList::MEDIA);
             $relativePath = self::BASE_TMP_PATH . '/' . $fileName;
 
             if (!$mediaDirectory->isFile($relativePath)) {
-                throw new LocalizedException(__('Il file temporaneo non esiste.'));
+                throw new LocalizedException(__('The temporary file does not exist.'));
             }
 
             $pdfContent = $mediaDirectory->readFile($relativePath);

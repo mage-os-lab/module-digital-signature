@@ -7,6 +7,9 @@
                 <resource id="MageOS_DigitalSignature::digitalsignature" title="Firma Digitale" sortOrder="80">
                     <resource id="MageOS_DigitalSignature::template" title="Template documenti" sortOrder="10"/>
                     <resource id="MageOS_DigitalSignature::document" title="Documenti firma" sortOrder="20"/>
+                    <resource id="MageOS_DigitalSignature::document_action" title="Azioni sui documenti (API)" sortOrder="21"/>
+                    <resource id="MageOS_DigitalSignature::api_consumer" title="Integrazioni API" sortOrder="25"/>
+                    <resource id="MageOS_DigitalSignature::webhook_subscription" title="Sottoscrizioni Webhook" sortOrder="26"/>
                     <resource id="MageOS_DigitalSignature::config" title="Configurazione" sortOrder="30"/>
                 </resource>
             </resource>

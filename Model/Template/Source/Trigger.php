@@ -15,10 +15,10 @@ class Trigger implements OptionSourceInterface
     public function toOptionArray(): array
     {
         return [
-            ['value' => self::ORDER_PLACED, 'label' => __('Conferma ordine')],
-            ['value' => self::INVOICE_CREATED, 'label' => __('Creazione fattura')],
-            ['value' => self::INVOICE_PAID, 'label' => __('Fattura pagata')],
-            ['value' => self::MANUAL, 'label' => __('Manuale da backend')],
+            ['value' => self::ORDER_PLACED, 'label' => __('Order confirmation')],
+            ['value' => self::INVOICE_CREATED, 'label' => __('Invoice creation')],
+            ['value' => self::INVOICE_PAID, 'label' => __('Invoice paid')],
+            ['value' => self::MANUAL, 'label' => __('Manual from backend')],
         ];
     }
 }

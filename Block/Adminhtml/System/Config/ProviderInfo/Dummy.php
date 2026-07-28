@@ -12,22 +12,19 @@ class Dummy extends AbstractProviderInfo
 
     public function getProviderName(): string
     {
-        return (string)__('Dummy (solo test)');
+        return (string)__('Dummy (test only)');
     }
 
     public function getDescription(): string
     {
         return (string)__(
-            'Provider fittizio incluso nel modulo: non contatta nessun servizio esterno. Simula una firma '
-            . 'riuscita dopo il ritardo configurato sotto, restituendo il PDF originale come "firmato". '
-            . 'Utile per collaudare l\'intero flusso (template, trigger, notifiche, area cliente) senza '
-            . 'credenziali di un provider reale. Da NON abilitare in produzione.'
+            'Dummy provider included with the module: it does not contact any external service. It simulates a successful signature after the delay configured below, returning the original PDF as "signed". Useful for testing the whole flow (templates, triggers, notifications, customer area) without a real provider\'s credentials. Do NOT enable in production.'
         );
     }
 
     public function getLegalLevel(): string
     {
-        return (string)__('Nessuna validità legale — solo test/sviluppo');
+        return (string)__('No legal validity — test/development only');
     }
 
     public function getLinks(): array

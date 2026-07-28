@@ -38,7 +38,7 @@ class TemplateValidatorTest extends TestCase
     public function testRejectsOversizedFile(): void
     {
         $this->expectException(LocalizedException::class);
-        $this->expectExceptionMessageMatches('/dimensione massima/');
+        $this->expectExceptionMessageMatches('/maximum size/');
 
         $this->validator->validate(str_repeat('a', 10485761));
     }
@@ -46,7 +46,7 @@ class TemplateValidatorTest extends TestCase
     public function testRejectsNonPdfContent(): void
     {
         $this->expectException(LocalizedException::class);
-        $this->expectExceptionMessageMatches('/non è un PDF/');
+        $this->expectExceptionMessageMatches('/not a valid PDF/');
 
         $this->validator->validate('<html>non pdf</html>');
     }
@@ -61,16 +61,16 @@ class TemplateValidatorTest extends TestCase
 
     public function testRejectsPdfWithoutSignatureTag(): void
     {
-        // Offset di xref calcolato dinamicamente: un valore statico (com'era nel
-        // vecchio fixture) rischia di disallinearsi dalla reale posizione della
-        // keyword "xref" e far fallire il resolver per un motivo diverso da
-        // quello che il test intende esercitare.
+        // Dynamically computed xref offset: a static value (as it was in the
+        // old fixture) risks getting misaligned from the real position of the
+        // "xref" keyword and making the resolver fail for a reason different
+        // from the one the test is meant to exercise.
         $header = "%PDF-1.4\ncontenuto\n";
         $xrefOffset = strlen($header);
         $pdf = $header . "xref\n0 1\n0000000000 65535 f \ntrailer\n<</Size 1 /Root 1 0 R>>\nstartxref\n{$xrefOffset}\n%%EOF\n";
 
         $this->expectException(LocalizedException::class);
-        $this->expectExceptionMessageMatches('/Nessun tag firma/');
+        $this->expectExceptionMessageMatches('/No signature tag found/');
 
         $this->validator->validate($pdf);
     }
@@ -114,9 +114,9 @@ class TemplateValidatorTest extends TestCase
         $obj1 = "1 0 obj\n<</Length " . strlen($content) . ">>\nstream\n{$content}\nendstream\nendobj\n";
         $xrefOffset = strlen($header . $obj1);
 
-        // riga 1: oggetto 1 dichiarato compresso in un object stream (tipo 2);
-        // riga 2: l'oggetto xref stream stesso. Il validator deve rifiutare
-        // a prescindere dall'esistenza reale di un container.
+        // row 1: object 1 declared as compressed in an object stream (type 2);
+        // row 2: the xref stream object itself. The validator must reject
+        // regardless of whether a container actually exists.
         $rows = $this->buildXrefStreamRows([[2, 5, 0], [1, $xrefOffset, 0]], 1, 4, 2);
         $xrefObj = "2 0 obj\n<</Type /XRef /Size 3 /Root 1 0 R /W [1 4 2] /Index [1 2]"
             . ' /Length ' . strlen($rows) . ">>\nstream\n{$rows}\nendstream\nendobj\n";
@@ -130,10 +130,10 @@ class TemplateValidatorTest extends TestCase
     }
 
     /**
-     * Fixture reali (prodotte da LibreOffice + pikepdf/qpdf, non costruite a
-     * mano byte-per-byte) con un tag firma iniettato in un content stream
-     * FlateDecode genuino: coprono il gap "nessuna fixture PDF reale" segnalato
-     * dalla review finale del branch. Vedi src/Test/Unit/Model/Pdf/_fixtures/.
+     * Real fixtures (produced by LibreOffice + pikepdf/qpdf, not hand-built
+     * byte-by-byte) with a signature tag injected into a genuine FlateDecode
+     * content stream: they cover the "no real PDF fixture" gap flagged
+     * by the branch's final review. See src/Test/Unit/Model/Pdf/_fixtures/.
      */
     public function testAcceptsRealLibreOfficeClassicXrefTemplate(): void
     {
@@ -176,7 +176,7 @@ class TemplateValidatorTest extends TestCase
         $pdf = $header . $obj1 . $xrefObj . "startxref\n{$xrefOffset}\n%%EOF\n";
 
         $this->expectException(LocalizedException::class);
-        $this->expectExceptionMessageMatches('/cifrati/');
+        $this->expectExceptionMessageMatches('/[Ee]ncrypted/');
 
         $this->validator->validate($pdf);
     }

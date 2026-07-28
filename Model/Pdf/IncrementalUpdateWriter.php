@@ -9,12 +9,12 @@ use MageOS\DigitalSignature\Model\Pdf\Xref\XrefInfo;
 use Magento\Framework\Exception\LocalizedException;
 
 /**
- * Scrittura di un "incremental update" PDF: appende oggetti nuovi/modificati
- * in coda al file e una nuova sezione cross-reference (tabella classica o
- * xref stream, secondo il formato della revisione più recente del
- * sorgente), collegata alla precedente tramite /Prev. Condiviso tra
- * TagReplacer (sostituzione di oggetti esistenti) e SignatureTagInjector
- * (introduzione di oggetti mai usati prima, es. un font).
+ * Writes a PDF "incremental update": appends new/modified objects at the end
+ * of the file and a new cross-reference section (classic table or xref
+ * stream, according to the format of the most recent revision of the
+ * source), linked to the previous one via /Prev. Shared between TagReplacer
+ * (replacement of existing objects) and SignatureTagInjector (introduction
+ * of objects never used before, e.g. a font).
  */
 class IncrementalUpdateWriter
 {
@@ -33,13 +33,13 @@ class IncrementalUpdateWriter
     }
 
     /**
-     * Appende gli oggetti modificati/nuovi con una nuova sezione xref collegata
-     * alla precedente (/Prev), secondo il meccanismo di incremental update. Il
-     * formato della nuova sezione (tabella classica o xref stream) segue quello
-     * della revisione più recente di $originalPdf.
+     * Appends the modified/new objects with a new xref section linked to the
+     * previous one (/Prev), following the incremental update mechanism. The
+     * format of the new section (classic table or xref stream) follows that
+     * of the most recent revision of $originalPdf.
      *
-     * @param array<int, array{number: int, body: string}> $modifiedObjects numeri
-     *        oggetto esistenti (riscritti) o mai usati prima (nuovi, es. un font)
+     * @param array<int, array{number: int, body: string}> $modifiedObjects existing
+     *        object numbers (rewritten) or never used before (new, e.g. a font)
      * @throws LocalizedException
      */
     public function append(string $pdf, string $originalPdf, array $modifiedObjects): string
@@ -54,9 +54,9 @@ class IncrementalUpdateWriter
             $output .= $object['body'];
         }
 
-        // Prossimo numero oggetto libero: oltre /Size dichiarato in origine, o
-        // oltre il più alto numero già usato in $modifiedObjects (un oggetto
-        // nuovo, es. un font, può già occupare esattamente $info->size).
+        // Next free object number: beyond the /Size originally declared, or
+        // beyond the highest number already used in $modifiedObjects (a new
+        // object, e.g. a font, may already occupy exactly $info->size).
         $usedNumbers = array_map(static fn (array $o): int => $o['number'] + 1, $modifiedObjects);
         $nextFreeNumber = max(array_merge([$info->size], $usedNumbers));
 
@@ -82,7 +82,7 @@ class IncrementalUpdateWriter
     }
 
     /**
-     * @param array<int, int> $offsets numero oggetto => offset nel file
+     * @param array<int, int> $offsets object number => offset in the file
      */
     private function buildXrefStreamUpdate(
         string $outputSoFar,

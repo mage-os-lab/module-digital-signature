@@ -16,7 +16,7 @@ class Status implements OptionSourceInterface
     public const ERROR = 'error';
     public const CANCELED = 'canceled';
 
-    /** Stati dai quali il documento non evolve più da solo */
+    /** States from which the document no longer evolves on its own */
     public const FINAL_STATES = [self::SIGNED, self::DECLINED, self::EXPIRED, self::CANCELED];
 
     public function toOptionArray(): array
@@ -35,14 +35,14 @@ class Status implements OptionSourceInterface
     public static function getLabels(): array
     {
         return [
-            self::PENDING => __('In attesa'),
-            self::GENERATED => __('Generato'),
-            self::SENT => __('Inviato in firma'),
-            self::SIGNED => __('Firmato'),
-            self::DECLINED => __('Rifiutato'),
-            self::EXPIRED => __('Scaduto'),
-            self::ERROR => __('Errore'),
-            self::CANCELED => __('Annullato'),
+            self::PENDING => __('Pending'),
+            self::GENERATED => __('Generated'),
+            self::SENT => __('Sent for signature'),
+            self::SIGNED => __('Signed'),
+            self::DECLINED => __('Declined'),
+            self::EXPIRED => __('Expired'),
+            self::ERROR => __('Error'),
+            self::CANCELED => __('Canceled'),
         ];
     }
 

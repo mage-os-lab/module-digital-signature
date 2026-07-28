@@ -17,7 +17,7 @@ class AvailableConnectorsCatalog
                 'adobe_sign',
                 (string)__('Adobe Acrobat Sign'),
                 'in_development',
-                (string)__('Connettore per integrare le firme digitali ed elettroniche di Adobe Acrobat Sign. Consente l\'autenticazione OAuth2 ed il tracciamento asincrono del processo di firma.'),
+                (string)__('Connector to integrate digital and electronic signatures from Adobe Acrobat Sign. Supports OAuth2 authentication and asynchronous signature process tracking.'),
                 'https://www.adobe.com/sign.html'
             )
         ];

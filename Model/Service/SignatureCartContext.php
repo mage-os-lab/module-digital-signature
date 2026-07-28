@@ -9,17 +9,17 @@ use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Store\Model\ScopeInterface;
 
 /**
- * Logica condivisa (ViewModel Luma/Hyva + customer-data section minicart) che
- * decide, per il carrello corrente, se l'opt-in firma è applicabile, se è
- * obbligatorio e qual è lo stato della scelta cliente. Stessa logica di
- * applicabilità usata server-side dal TriggerHandler.
+ * Shared logic (Luma/Hyva ViewModel + customer-data minicart section) that
+ * decides, for the current cart, whether the signature opt-in is applicable,
+ * whether it is mandatory, and what the customer's choice status is. Same
+ * applicability logic used server-side by TriggerHandler.
  */
 class SignatureCartContext
 {
     private const XML_PATH_ENABLED = 'digital_signature/general/enabled';
     private const XML_PATH_PROVIDER = 'digital_signature/general/provider';
 
-    /** Cache per-request dell'analisi del carrello */
+    /** Per-request cache of the cart analysis */
     private ?array $analysis = null;
 
     public function __construct(
@@ -30,7 +30,7 @@ class SignatureCartContext
     }
 
     /**
-     * Modulo attivo e provider configurato sullo store corrente.
+     * Module active and provider configured on the current store.
      */
     public function isEnabled(): bool
     {
@@ -42,8 +42,8 @@ class SignatureCartContext
     }
 
     /**
-     * Esiste almeno un template (obbligatorio o facoltativo) applicabile al
-     * carrello corrente.
+     * At least one template (mandatory or optional) applicable to the
+     * current cart exists.
      */
     public function isApplicable(): bool
     {
@@ -56,8 +56,8 @@ class SignatureCartContext
     }
 
     /**
-     * Almeno un template applicabile è obbligatorio (checkbox informativo,
-     * spuntato e non deselezionabile). Enforcement comunque server-side.
+     * At least one applicable template is mandatory (informational checkbox,
+     * checked and not deselectable). Enforcement is still server-side.
      */
     public function isMandatory(): bool
     {
@@ -65,10 +65,10 @@ class SignatureCartContext
     }
 
     /**
-     * Stato corrente della spunta (tri-stato sul quote):
-     * - NULL/'' (mai espressa): obbligatori pre-spuntati, facoltativi no;
-     * - 0: deselezionata esplicitamente dal cliente → resta deselezionata;
-     * - 1: selezionata.
+     * Current status of the checkbox (tri-state on the quote):
+     * - NULL/'' (never expressed): mandatory pre-checked, optional not;
+     * - 0: explicitly unchecked by the customer → stays unchecked;
+     * - 1: checked.
      */
     public function isRequested(): bool
     {
@@ -86,12 +86,12 @@ class SignatureCartContext
 
     public function getLabel(): string
     {
-        return (string)__('Voglio ricevere il contratto da firmare digitalmente');
+        return (string)__('I want to receive the contract to sign digitally');
     }
 
     public function getNote(): string
     {
-        return (string)__('Per i prodotti nel carrello la firma del contratto è obbligatoria.');
+        return (string)__('Signing the contract is mandatory for the products in your cart.');
     }
 
     /**
@@ -130,7 +130,7 @@ class SignatureCartContext
                 }
             }
         } catch (\Exception $e) {
-            // In caso di errore non mostriamo nulla
+            // In case of error we show nothing
         }
 
         return $this->analysis = ['hasOptional' => $hasOptional, 'hasRequired' => $hasRequired];

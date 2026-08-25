@@ -28,7 +28,7 @@ class OrderPlaced implements ObserverInterface
             $this->triggerHandler->handle($order, Trigger::ORDER_PLACED);
         } catch (\Exception $e) {
             // Never block order placement because of a module error
-            $this->logger->error('DigitalSignature: errore trigger conferma ordine: ' . $e->getMessage());
+            $this->logger->error('DigitalSignature: order placed trigger error: ' . $e->getMessage());
         }
     }
 }

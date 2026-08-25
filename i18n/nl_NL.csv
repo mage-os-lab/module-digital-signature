@@ -1,11 +1,24 @@
 """Document error"" template (admin)","Sjabloon ""documentfout"" (beheerder)"
 """Document ready"" template (customer)","Sjabloon ""document klaar"" (klant)"
 """Document signed"" template (customer)","Sjabloon ""document ondertekend"" (klant)"
+"""Expired/declined"" template (admin)","""Expired/declined"" template (admin)"
+"""Expired/declined"" template (customer)","""Expired/declined"" template (customer)"
 """Expired/rejected"" template (admin)","Sjabloon ""verlopen/geweigerd"" (beheerder)"
 """Expired/rejected"" template (customer)","Sjabloon ""verlopen/geweigerd"" (klant)"
+-- All Store Views --,-- All Store Views --
 -- None --,-- Geen --
 -- Use global default --,-- Gebruik globale standaard --
+A document signing process has ended with a negative outcome.,A document signing process has ended with a negative outcome.
+API Access Point,API Access Point
+API Account ID,API Account ID
+API Integration,API Integration
+API Integrations,API Integrations
+API User ID (GUID),API User ID (GUID)
 API documentation (in the module repository),API-documentatie (in de module-repository)
+"API integration with id ""%1"" does not exist.","API integration with id ""%1"" does not exist."
+Account ID visible in the Apps and Keys section.,Account ID visible in the Apps and Keys section.
+Actions,Actions
+Active,Active
 Active signature provider,Actieve handtekeningprovider
 Add mapping,Toewijzing toevoegen
 Additional & Planned Connectors,Aanvullende & Geplande Connectoren
@@ -14,55 +27,127 @@ Address notified by WsSign about process events.,Adres dat door WsSign wordt gen
 Admin escalation email sent for document pending signature.,Admin escalatie e-mail verzonden voor document dat wacht op handtekening.
 Admin recipient email,E-mailadres beheerder ontvanger
 Adobe Acrobat Sign,Adobe Acrobat Sign
+Adobe Acrobat Sign Developer Guide,Adobe Acrobat Sign Developer Guide
+"Adobe Acrobat Sign: agreement creation failed, no ID received.","Adobe Acrobat Sign: agreement creation failed, no ID received."
+Adobe Acrobat Sign: document upload succeeded but is missing transientDocumentId.,Adobe Acrobat Sign: document upload succeeded but is missing transientDocumentId.
+Adobe Acrobat Sign: downloaded PDF content is empty.,Adobe Acrobat Sign: downloaded PDF content is empty.
+Adobe Acrobat Sign: network error during %1: %2,Adobe Acrobat Sign: network error during %1: %2
+Adobe Acrobat Sign: non-JSON response during %1.,Adobe Acrobat Sign: non-JSON response during %1.
+Adobe Acrobat Sign: signer email is missing or invalid.,Adobe Acrobat Sign: signer email is missing or invalid.
+Adobe Acrobat Sign: status response is missing the status field.,Adobe Acrobat Sign: status response is missing the status field.
+Adobe Acrobat Sign: temporary service error during %1 (HTTP %2).,Adobe Acrobat Sign: temporary service error during %1 (HTTP %2).
+Adobe Acrobat Sign: the document has no started process (agreement).,Adobe Acrobat Sign: the document has no started process (agreement).
+Adobe Acrobat Sign: valid refresh response but missing access token.,Adobe Acrobat Sign: valid refresh response but missing access token.
+Adobe Developer Console,Adobe Developer Console
 Advanced Electronic Signature (AES),Geavanceerde elektronische handtekening (AES)
 "Advanced electronic signature platform (OTP via SMS or email). The connector uploads the PDF generated from the template, starts the signing request to the signer, and receives status updates via an authenticated callback. Requires an active WsSign account (tenant, owner user, password) provided by the WsSign team.","Platform voor geavanceerde elektronische handtekeningen (OTP via sms of e-mail). De connector uploadt de uit de sjabloon gegenereerde pdf, start het ondertekeningsverzoek naar de ondertekenaar en ontvangt statusupdates via een geauthenticeerde callback. Vereist een actief WsSign-account (tenant, owner-gebruiker, wachtwoord) van het WsSign-team."
 After this time the document is marked as signed.,Na deze tijd wordt het document als ondertekend beschouwd.
+"After this time, the document is marked as signed.","After this time, the document is marked as signed."
+Agreement expiration (days),Agreement expiration (days)
+Alert Threshold (%),Alert Threshold (%)
 All time,Altijd
+Allow dispatch and log warning,Allow dispatch and log warning
 Allow dummy provider,Dummy-provider toestaan
 Analysis period:,Analyseperiode:
+Annual Allowance (Commitment),Annual Allowance (Commitment)
+Application ID (Client ID),Application ID (Client ID)
+Application ID retrieved from the Adobe Developer Console.,Application ID retrieved from the Adobe Developer Console.
+Are you sure you want to delete this webhook subscription?,Are you sure you want to delete this webhook subscription?
+Assigned Products,Assigned Products
 Auto-sign delay (seconds),Vertraging automatische ondertekening (seconden)
 Automatic reminders,Automatische herinneringen
 Automatically delete past the retention period,Automatisch verwijderen na de bewaarperiode
 Available,Beschikbaar
 Avg signing time,Gemiddelde tekentijd
+Back,Back
+Black,Black
+Block new signature requests,Block new signature requests
 CDN,CDN
 Callback IP allowlist,IP-allowlist voor callback
 Cancel,Annuleren
 Canceled,Geannuleerd
+Cap on deliveries processed at each reconciliation cron run.,Cap on deliveries processed at each reconciliation cron run.
+Cap on deliveries processed per reconciliation cron run.,Cap on deliveries processed per reconciliation cron run.
 Cap on documents processed at each cron run.,Limiet voor per cron-run verwerkte documenten.
+Cap on documents processed per cron run.,Cap on documents processed per cron run.
 Cap on documents queued at each cron run (throttling towards the provider).,Limiet voor in de wachtrij geplaatste documenten per cron-run (drosseling richting de provider).
+Cap on documents queued per cron run (throttling toward the provider).,Cap on documents queued per cron run (throttling toward the provider).
 Cart / Order,Winkelwagen / Bestelling
 Cart not available.,Winkelwagen niet beschikbaar.
 Cart/Order,Winkelwagen/Bestelling
 "Check this ONLY after signing a DPA (Data Processing Agreement) with the selected signature provider and updating the store's privacy policy to disclose that customer personal data (email, phone) is sent to a third-party provider for the signing process. Until this is checked, all new documents are generated with the dummy (test) provider, regardless of the provider configured below.","Vink dit vakje PAS aan nadat u een DPA (verwerkersovereenkomst) heeft gesloten met de gekozen handtekeningprovider en het privacybeleid van de winkel heeft bijgewerkt om te vermelden dat persoonsgegevens van de klant (e-mail, telefoon) naar een externe provider worden gestuurd voor het ondertekeningsproces. Zolang dit niet is aangevinkt, worden alle nieuwe documenten gegenereerd met de dummy-provider (test), ongeacht de hieronder geconfigureerde provider."
+"Check this box ONLY after signing a DPA (Data Processing Agreement) with the selected signature provider and updating the store's privacy policy to disclose that customer personal data (email, phone) is sent to a third-party provider for the signing process. Until checked, all new documents are generated with the dummy (test) provider, regardless of the provider configured below.","Check this box ONLY after signing a DPA (Data Processing Agreement) with the selected signature provider and updating the store's privacy policy to disclose that customer personal data (email, phone) is sent to a third-party provider for the signing process. Until checked, all new documents are generated with the dummy (test) provider, regardless of the provider configured below."
+Client Secret,Client Secret
+"Color used to print the signature tag on the actual document generated for the order. Select ""White (Invisible)"" to hide it beneath the digital signature.","Color used to print the signature tag on the actual document generated for the order. Select ""White (Invisible)"" to hide it beneath the digital signature."
+Comma-separated IPs; empty = no IP filter (the secret token still applies).,Comma-separated IPs; empty = no IP filter (the secret token still applies).
 Comma-separated IPs; empty = no IP filtering (the secret token still applies).,Door komma's gescheiden IP's; leeg = geen IP-filter (het geheime token blijft van toepassing).
 Configuration,Configuratie
 Confirm Position,Bevestig positie
 Connector to integrate digital and electronic signatures from Adobe Acrobat Sign. Supports OAuth2 authentication and asynchronous signature process tracking.,Connector om digitale en elektronische handtekeningen van Adobe Acrobat Sign te integreren. Ondersteunt OAuth2-authenticatie en asynchrone tracking van het handtekeningproces.
+Consigliato,Consigliato
 Contract,Contract
+Contract PDF,Contract PDF
+Copy and paste the complete RSA private key generated on DocuSign (including the BEGIN/END PRIVATE KEY tags).,Copy and paste the complete RSA private key generated on DocuSign (including the BEGIN/END PRIVATE KEY tags).
 Could not queue %1 order(s) (see log).,Kon %1 bestelling(en) niet in behandeling nemen (zie logboek).
+"Counted from the last status change of the completed document. Default 3650 (10 years, indicative: check the applicable fiscal/legal terms).","Counted from the last status change of the completed document. Default 3650 (10 years, indicative: check the applicable fiscal/legal terms)."
+Created,Created
+Created On,Created On
 Customer reminder sent (reminder %1 of %2).,Klantherinnering verzonden (herinnering %1 van %2).
 "Daily cron that, when active, deletes PDFs and personal data (email/phone) of completed documents (signed/rejected/expired/cancelled) past the retention period. The record and status history are kept for audit/tax purposes, without the PDF or PII.","Dagelijkse cron die, indien ingeschakeld, de pdf's en persoonsgegevens (e-mail/telefoon) verwijdert van afgeronde documenten (ondertekend/geweigerd/verlopen/geannuleerd) na de bewaarperiode. Het record en de statusgeschiedenis blijven bewaard voor audit-/fiscale doeleinden, zonder pdf's of persoonsgegevens."
+"Daily cron that, when enabled, deletes the PDFs and personal data (email/phone) of completed documents (signed/declined/expired/canceled) past the retention period. The record and status history remain for audit/fiscal purposes, without PDFs or PII.","Daily cron that, when enabled, deletes the PDFs and personal data (email/phone) of completed documents (signed/declined/expired/canceled) past the retention period. The record and status history remain for audit/fiscal purposes, without PDFs or PII."
 Days before admin escalation,Dagen voor admin-escalatie
+Days before first reminder,Days before first reminder
 Days before the first reminder,Dagen voor de eerste herinnering
 Days between subsequent reminders,Dagen tussen opeenvolgende herinneringen
 Days elapsed since sending before alerting the admin.,Verstreken dagen sinds verzending voordat de admin wordt gewaarschuwd.
 Days elapsed since sending before the first customer reminder.,Verstreken dagen sinds verzending voor de eerste klantherinnering.
+Days to wait between a reminder and the next.,Days to wait between a reminder and the next.
 Days to wait between one reminder and the next.,Dagen om te wachten tussen een herinnering en de volgende.
 Declined,Geweigerd
 Default OTP_SMS: requires the signer's phone number.,Standaard OTP_SMS: vereist het telefoonnummer van de ondertekenaar.
 Default generation trigger,Standaard trigger voor generatie
 Default phone prefix,Standaard telefoonprefix
 Delete,Verwijderen
+Delete Webhook subscription,Delete Webhook subscription
+Delete integration,Delete integration
 Delete template,Sjabloon verwijderen
+"Delete the Webhook subscription ""%1""?","Delete the Webhook subscription ""%1""?"
+"Delete the integration ""%1""?","Delete the integration ""%1""?"
 "Delete the template ""%1""?","Sjabloon ""%1"" verwijderen?"
+Delete this integration?,Delete this integration?
 Delete this template? Documents already generated remain in the history.,Deze sjabloon verwijderen? Reeds gegenereerde documenten blijven in de geschiedenis staan.
+Deliveries limit per run,Deliveries limit per run
+Deliveries per run limit,Deliveries per run limit
+Delivery attempts before marking the webhook as permanently failed.,Delivery attempts before marking the webhook as permanently failed.
+Demo / Sandbox,Demo / Sandbox
+Detail: %error_message,Detail: %error_message
+Details: %error_message,Details: %error_message
 Digital Signature,Digitale handtekening
 Disabled by default to avoid alarming customers: evaluate on a case-by-case basis.,Standaard uitgeschakeld om onnodige ongerustheid te vermijden: per geval beoordelen.
 Disabled by default: deletion is destructive and should be enabled deliberately after defining the required retention periods (tax/legal).,Standaard uitgeschakeld: verwijderen is destructief en moet bewust worden ingeschakeld nadat de vereiste (fiscale/wettelijke) bewaartermijnen zijn vastgesteld.
+DocuSign,DocuSign
+DocuSign Apps and Keys Panel,DocuSign Apps and Keys Panel
+DocuSign Developer Center,DocuSign Developer Center
+DocuSign: downloaded PDF content is empty.,DocuSign: downloaded PDF content is empty.
+"DocuSign: envelope creation failed, no ID received.","DocuSign: envelope creation failed, no ID received."
+DocuSign: error generating the JWT assertion: %1,DocuSign: error generating the JWT assertion: %1
+DocuSign: invalid document store.,DocuSign: invalid document store.
+"DocuSign: network error during ""%1"": %2","DocuSign: network error during ""%1"": %2"
+DocuSign: no account associated with the provided credentials.,DocuSign: no account associated with the provided credentials.
+"DocuSign: non-JSON response during ""%1"".","DocuSign: non-JSON response during ""%1""."
+DocuSign: signer email is missing or invalid.,DocuSign: signer email is missing or invalid.
+DocuSign: status response is missing the status field.,DocuSign: status response is missing the status field.
+"DocuSign: temporary service error during ""%1"" (HTTP %2).","DocuSign: temporary service error during ""%1"" (HTTP %2)."
+DocuSign: the document has no started process (envelope).,DocuSign: the document has no started process (envelope).
+DocuSign: valid OAuth response but missing access token.,DocuSign: valid OAuth response but missing access token.
 Document #%1 is not active: use the active one to regenerate.,Document #%1 is niet actief: gebruik het actieve document om opnieuw te genereren.
+Document actions (API),Documentacties (API)
+Document ID,Document ID
+Document Template,Document Template
 Document canceled for manual regeneration.,Document geannuleerd voor handmatige regeneratie.
 Document file not found in storage: %1,Documentbestand niet gevonden in opslag: %1
+Document limit per reconciliation run,Document limit per reconciliation run
+Document limit per run,Document limit per run
 Document metrics and performance,Documentstatistieken en prestaties
 Document regenerated (replaces #%1).,Document opnieuw gegenereerd (vervangt #%1).
 Document regenerated: new document #%1 is being processed.,Document opnieuw gegenereerd: nieuw document #%1 wordt verwerkt.
@@ -78,23 +163,40 @@ Download signed,Ondertekend document downloaden
 Download signed PDF,Ondertekende PDF downloaden
 Download the digitally signed contracts for this order.,Download de digitaal ondertekende contracten voor deze bestelling.
 Draw a box on the PDF before confirming.,Teken een selectievak op de PDF voordat u bevestigt.
+Draw a selection box on the PDF before confirming.,Draw a selection box on the PDF before confirming.
 Dummy (test only),Dummy (alleen test)
 "Dummy provider included with the module: it does not contact any external service. It simulates a successful signature after the delay configured below, returning the original PDF as ""signed"". Useful for testing the whole flow (templates, triggers, notifications, customer area) without a real provider's credentials. Do NOT enable in production.","Dummy-provider die bij de module wordt geleverd: er wordt geen enkele externe service benaderd. Simuleert een geslaagde ondertekening na de hieronder ingestelde vertraging en retourneert de originele pdf als ""ondertekend"". Handig om de volledige flow (sjablonen, triggers, meldingen, klantaccount) te testen zonder inloggegevens van een echte provider. NIET inschakelen in productie."
+Dummy provider that simulates signing locally. DO NOT use in production.,Dummy provider that simulates signing locally. DO NOT use in production.
 Dummy: generated PDF not found in storage.,Dummy: gegenereerde pdf niet gevonden in opslag.
 Dummy: missing or unrecognized process id.,Dummy: proces-id ontbreekt of wordt niet herkend.
 Dummy: the content to send is not a PDF.,Dummy: de te verzenden inhoud is geen pdf.
 Dummy: the document has no generated PDF.,Dummy: het document heeft geen gegenereerde pdf.
+E.g. https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/,E.g. https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/
 E.g. https://demo.wsign.cloud (HTTPS only).,Bijv. https://demo.wsign.cloud (alleen HTTPS).
+EXHAUSTED,EXHAUSTED
 Edit,Bewerken
+"Edit Webhook Subscription ""%1""","Edit Webhook Subscription ""%1"""
+"Edit integration ""%1""","Edit integration ""%1"""
 "Edit template ""%1""","Sjabloon ""%1"" bewerken"
+Email message for the signer,Email message for the signer
 Email notifications,E-mailmeldingen
 Email of the WsSign owner account.,E-mail van het WsSign owner-account.
 Emails sent to the customer and admin about signature document events.,E-mails verzonden naar de klant en de beheerder over gebeurtenissen van het ondertekeningsdocument.
+Emails sent to the customer and the admin about signature document events.,Emails sent to the customer and the admin about signature document events.
+Enable Quota Tracking,Enable Quota Tracking
+Enable webhooks,Enable webhooks
 Enabled,Ingeschakeld
 Encrypted PDFs are not supported: remove the protection/password from the document and re-upload the file.,Versleutelde PDF's worden niet ondersteund: verwijder de beveiliging/het wachtwoord uit het document en upload het bestand opnieuw.
+Envelope expiration (days),Envelope expiration (days)
+Environment,Environment
 Error,Fout
+Error message,Error message
 Error saving coordinates.,Fout bij het opslaan van coördinaten.
+Error while deleting the subscription: %1,Error while deleting the subscription: %1
+Error while saving coordinates.,Error while saving coordinates.
+Error while saving the integration.,Error while saving the integration.
 Error while saving the template.,Fout bij het opslaan van de sjabloon.
+Error while saving the webhook subscription.,Error while saving the webhook subscription.
 Error: %message,Fout: %message
 Escalation template (admin),Escalatiesjabloon (admin)
 Expired,Verlopen
@@ -102,106 +204,187 @@ Expired or Declined,Verlopen of Geweigerd
 Fake provider that simulates signing locally. Do NOT use in production.,Dummy-provider die het ondertekenen lokaal simuleert. NIET gebruiken in productie.
 File not specified.,Bestand niet gespecificeerd.
 For error and negative outcome notifications. Empty = store's general contact.,Voor meldingen van fouten en negatieve uitkomsten. Leeg = algemeen contact van de winkel.
+For error and negative-outcome notifications. Empty = store general contact.,For error and negative-outcome notifications. Empty = store general contact.
 "From the last status change of the completed document. Default 3650 (10 years, indicative: check the applicable tax/legal terms).","Vanaf de laatste statuswijziging van het afgeronde document. Standaard 3650 (10 jaar, indicatief: controleer de toepasselijke fiscale/wettelijke termijnen)."
 GDPR acknowledgement (production mode),GDPR-bevestiging (productiemodus)
 General,Algemeen
 Generate signature documents,Ondertekeningsdocumenten genereren
+Generate signature documents (manual),Generate signature documents (manual)
 Generate signature documents for the selected orders?,Ondertekeningsdocumenten genereren voor de geselecteerde bestellingen?
+Generate template documents with manual trigger,Generate template documents with manual trigger
 Generated,Gegenereerd
 Guide to integrating signature providers,Gids voor het integreren van handtekeningproviders
+HMAC Secret,HMAC Secret
+HTTP/HTTPS endpoint where JSON webhook push notifications will be sent.,HTTP/HTTPS endpoint where JSON webhook push notifications will be sent.
 "Hello %name,","Hallo %name,"
+Historical,Historical
 I want to receive the contract to sign digitally,Ik wil het contract ontvangen om digitaal te ondertekenen
 ID,ID
 "If you believe this is a mistake, contact our customer service. You can check your order here: <a href=""%url"">My orders</a>","Als u denkt dat dit een vergissing is, neem dan contact op met onze klantenservice. U kunt uw bestelling hier bekijken: <a href=""%url"">Mijn bestellingen</a>"
 In development,In ontwikkeling
+Integration,Integration
+Integration ID,Integration ID
+Integration deleted.,Integration deleted.
+Integration key retrieved from the DocuSign Console.,Integration key retrieved from the DocuSign Console.
+Integration saved.,Integration saved.
+Integration with the Adobe Acrobat Sign platform.,Integration with the Adobe Acrobat Sign platform.
+Integration with the DocuSign platform.,Integration with the DocuSign platform.
 Internal status,Interne status
+Invalid page number %1: the PDF has %2.,Invalid page number %1: the PDF has %2.
 Invalid signature parameters.,Ongeldige handtekeningparameters.
 Invoice creation,Factuur aanmaken
 Invoice paid,Factuur betaald
+Item,Item
+LOW QUOTA,LOW QUOTA
 Last 30 days,Laatste 30 dagen
 Last 90 days,Laatste 90 dagen
 Last year,Afgelopen jaar
 Local (Recommended),Lokaal (Aanbevolen)
+Long-lived refresh token used to generate API Access Tokens.,Long-lived refresh token used to generate API Access Tokens.
 Mage-OS,Mage-OS
 "Manage the order in backend: <a href=\\""%url\""\"">%url</a>""","Beheer de bestelling in backend: <a href=\\""%url\""\"">%url</a>"""
 Manual from backend,Handmatig vanuit backend
+Maximum attempts,Maximum attempts
+Maximum number of attempts,Maximum number of attempts
+Maximum number of attempts for temporary errors (network/service) before the error state.,Maximum number of attempts for temporary errors (network/service) before the error state.
 Maximum number of customer reminders,Maximum aantal klantherinneringen
 Maximum number of retries for temporary errors (network/service) before reaching the error state.,Maximaal aantal pogingen bij tijdelijke fouten (netwerk/service) voordat de foutstatus intreedt.
 Maximum number of times to remind the customer.,Maximum aantal keren om de klant te herinneren.
 Maximum retries,Maximaal aantal pogingen
+"Merge field ""%1"" is not registered.","Merge field ""%1"" is not registered."
 Message for the signer,Bericht voor de ondertekenaar
+Monthly Allowance,Monthly Allowance
 Name,Naam
+New API integration,New API integration
+New Webhook Subscription,New Webhook Subscription
 New document template,Nieuwe documentsjabloon
+New integration,New integration
 Next,Volgende
+"No API integration mapped for integration ""%1"".","No API integration mapped for integration ""%1""."
+No integration selected.,No integration selected.
 No legal validity — test/development only,Geen juridische geldigheid — alleen test/ontwikkeling
+No signature documents for this order.,No signature documents for this order.
 "No signature tag found in the PDF. Add at least one tag to the document in the format {WSIGN#width,height#email-placeholder}.","Geen handtekeningtag gevonden in de pdf. Voeg minstens één tag toe aan het document in het formaat {WSIGN#breedte,hoogte#email-placeholder}."
+No signature tag found in the template PDF: unable to insert the signer's data.,No signature tag found in the template PDF: unable to insert the signer's data.
 No signature tag found in the template PDF: unable to insert the signer\'s data.,Geen handtekeningtag gevonden in de sjabloon-pdf: kan de gegevens van de ondertekenaar niet invoegen.
 No template selected.,Geen sjabloon geselecteerd.
 Note: The classification of the signature level is based on the specifications declared by the provider. The module does not guarantee legal adequacy or compliance for specific purposes.,Opmerking: De classificatie van het handtekeningniveau is gebaseerd op de specificaties die door de provider zijn verklaard. De module garandeert geen juridische geschiktheid of naleving voor specifieke doeleinden.
 Notifier email (optional),E-mail van de notifier (optioneel)
+Notify admin on permanent failure,Notify admin on permanent failure
+Notify the admin if the document expires or is declined,Notify the admin if the document expires or is declined
 Notify the admin if the document expires or is rejected,Beheerder waarschuwen als het document verloopt of wordt geweigerd
 Notify the admin on a definitive error,Beheerder waarschuwen bij definitieve fout
+Notify the admin on definitive error,Notify the admin on definitive error
+Notify the customer if the document expires or is declined,Notify the customer if the document expires or is declined
 Notify the customer if the document expires or is rejected,Klant waarschuwen als het document verloopt of wordt geweigerd
 Notify the customer when the document is ready,Klant waarschuwen wanneer het document klaar is
 Notify the customer when the document is signed,Klant waarschuwen wanneer het document is ondertekend
+Numeric ID of the integration already created under System > Integrations.,Numeric ID of the integration already created under System > Integrations.
+Off by default to avoid alarm: evaluate case by case.,Off by default to avoid alarm: evaluate case by case.
+Off by default: deletion is destructive and should be enabled deliberately after defining the required (fiscal/legal) retention periods.,Off by default: deletion is destructive and should be enabled deliberately after defining the required (fiscal/legal) retention periods.
 Official provider website,Officiële website van de provider
 "Open the order in backend: <a href=""%url"">%url</a>","Bestelling openen in backend: <a href=""%url"">%url</a>"
 Operation cancelled.,Bewerking geannuleerd.
 Order ID,Bestel-ID
 Order confirmation,Orderbevestiging
 Order contract,Bestelcontract
+Order link,Order link
+Order number,Order number
+"Order with id ""%1"" does not exist.","Order with id ""%1"" does not exist."
 Order: #%increment_id,Bestelling: #%increment_id
+Outbound notifications to external systems about document events.,Outbound notifications to external systems about document events.
+Outbound notifications to external systems on document events.,Outbound notifications to external systems on document events.
 Outcome: %status,Resultaat: %status
 PDF and personal data deleted at the end of the retention period.,Pdf en persoonsgegevens verwijderd na afloop van de bewaarperiode.
+PDF loading error.,PDF loading error.
 PDF not available for this document.,PDF niet beschikbaar voor dit document.
 Page,Pagina
 Password,Wachtwoord
 Pending,In afwachting
 Pending signature,Wacht op handtekening
+Place signature on PDF,Place signature on PDF
 Platform URL,Platform-URL
 Position signature on PDF,Plaats handtekening op de PDF
 Preference saved.,Voorkeur opgeslagen.
-Previous,Terug
+Prepaid Credit Package (Pool),Prepaid Credit Package (Pool)
 Previous,Terug
 Price,Prijs
+Process ID,Process ID
 Processing of a signature document ended in error and requires manual intervention.,De verwerking van een ondertekeningsdocument is met een fout beëindigd en vereist handmatige interventie.
 Product,Product
+Provider Quotas & Consumption,Provider Quotas & Consumption
 Provider status,Providerstatus
 Provider: %provider,Provider: %provider
+Quota Model,Quota Model
+Quota tracking disabled.,Quota tracking disabled.
+RSA Private Key,RSA Private Key
+RSA Private Key (PEM),RSA Private Key (PEM)
 Raw status returned by WsSign → internal document status. Unmapped statuses are logged so they can be added here.,Ruwe status geretourneerd door WsSign → interne documentstatus. Niet-gekoppelde statussen worden gelogd zodat ze hier kunnen worden toegevoegd.
+Regenerate / Resend,Regenerate / Resend
+Regenerate and resend this document?,Regenerate and resend this document?
+Remaining:,Remaining:
 Reminder template (customer),Herinneringssjabloon (klant)
 Reminder: Sign your contract (order %increment_id),Herinnering: Onderteken uw contract (bestelling %increment_id)
 Reminders for documents awaiting signature.,Herinneringen voor documenten die wachten op handtekening.
+Reminders for documents pending signature.,Reminders for documents pending signature.
+Required for Service Account JWT authentication.,Required for Service Account JWT authentication.
 Retention days,Bewaardagen
 SKU,SKU
+Save integration,Save integration
+Save subscription,Save subscription
 Save template,Sjabloon opslaan
 Saving...,Bezig met opslaan...
+"Secret key used to sign the X-Signature header, whose value is sha256= followed by the HMAC-SHA256 hex digest. On edit, leave empty to keep the current secret.","Secret key used to sign the X-Signature header, whose value is sha256= followed by the HMAC-SHA256 hex digest. On edit, leave empty to keep the current secret."
 Select signature position by dragging the mouse to draw a box on the PDF page.,Selecteer de handtekeningpositie door te slepen om een vak op de PDF-pagina te tekenen.
+Select signature position by dragging to draw a box on the PDF page.,Select signature position by dragging to draw a box on the PDF page.
+Select the Store View to receive webhooks for (leave empty for all stores).,Select the Store View to receive webhooks for (leave empty for all stores).
+Send a notification to the admin if the document remains unsigned. Enabled by default.,Send a notification to the admin if the document remains unsigned. Enabled by default.
+Send an email to the admin when a webhook delivery exhausts its attempts. Enabled by default.,Send an email to the admin when a webhook delivery exhausts its attempts. Enabled by default.
+Send configured webhooks to active subscriptions. Disabled by default.,Send configured webhooks to active subscriptions. Disabled by default.
+Send escalation to admin,Send escalation to admin
 Send escalation to the admin,Stuur escalatie naar admin
+Send periodic emails to the customer to remind them to sign. Disabled by default.,Send periodic emails to the customer to remind them to sign. Disabled by default.
+Send reminders to customer,Send reminders to customer
 Send reminders to the customer,Stuur herinneringen naar klant
+Send warning notification when remaining quota drops below this percentage (e.g. 15).,Send warning notification when remaining quota drops below this percentage (e.g. 15).
 Sender,Afzender
 Sends a notification to the admin if the document remains unsigned. Enabled by default.,Stuur een melding naar de admin als het document niet ondertekend blijft. Standaard ingeschakeld.
+Sends an email to the admin when a webhook delivery exhausts its attempts. Enabled by default.,Sends an email to the admin when a webhook delivery exhausts its attempts. Enabled by default.
 Sends periodic emails to the customer to remind them to sign. Disabled by default.,Stuur periodieke e-mails naar de klant om hen te herinneren te ondertekenen. Standaard uitgeschakeld.
+Sends the configured webhooks to active subscriptions. Disabled by default.,Sends the configured webhooks to active subscriptions. Disabled by default.
 Sent by the provider in the signing invitation.,Verzonden door de provider in de ondertekeningsuitnodiging.
 Sent for signature,Verzonden voor ondertekening
+Sent in the Adobe Acrobat Sign notification email.,Sent in the Adobe Acrobat Sign notification email.
+Sent in the body of the DocuSign notification email.,Sent in the body of the DocuSign notification email.
+Sign contract for order #%1,Sign contract for order #%1
+Signature API Consumers,Signature API Consumers
+Signature Provider Quota Warning: %1,Signature Provider Quota Warning: %1
 Signature document generation queued for %1 order(s).,Genereren van ondertekeningsdocumenten in behandeling voor %1 bestelling(en).
 Signature document generation request has been queued.,Het verzoek voor het genereren van handtekeningdocumenten is in behandeling genomen.
 Signature document templates,Handtekeningdocumentsjablonen
 Signature documents,Ondertekeningsdocumenten
 Signature expiration (days),Vervaldatum handtekening (dagen)
+Signature provider,Signature provider
 "Signature provider ""%1"" is not registered.","Handtekeningprovider ""%1"" is niet geregistreerd."
 Signature providers,Handtekeningprovider
+Signature tag color (PDF Builder),Signature tag color (PDF Builder)
 Signature type,Type handtekening
-Signed,Ondertekend
 Signed,Ondertekend
 Signed contracts,Ondertekende contracten
 Signer email,E-mail ondertekenaar
 Signer email missing or invalid.,E-mail van de ondertekenaar ontbreekt of is ongeldig.
+Signer's phone number is invalid.,Signer's phone number is invalid.
 Signer's phone number missing: required by WsSign for OTP via SMS.,Telefoonnummer van de ondertekenaar ontbreekt: vereist door WsSign voor OTP via sms.
 Signer: %email,Ondertekenaar: %email
 Signer\'s phone number is invalid.,Telefoonnummer van de ondertekenaar is ongeldig.
+Signer\'s phone number missing: required by WsSign for OTP via SMS.,Signer\'s phone number missing: required by WsSign for OTP via SMS.
 Signing the contract is mandatory for the products in your cart.,Voor de producten in de winkelwagen is het ondertekenen van het contract verplicht.
+"Simple (SES), Advanced (AES), Qualified (QES) Electronic Signature","Simple (SES), Advanced (AES), Qualified (QES) Electronic Signature"
+Status,Status
 Status mapping,Statustoewijzing
+Store view,Store view
+Store views this integration is authorized to operate on via API.,Store views this integration is authorized to operate on via API.
+Target URL,Target URL
 Template %1 has no uploaded PDF file.,Sjabloon %1 heeft geen geüpload pdf-bestand.
 Template PDF file not found.,PDF-bestand van de template niet gevonden.
 Template PDF file not found: %1,Pdf-bestand van sjabloon niet gevonden: %1
@@ -210,14 +393,22 @@ Template saved.,Sjabloon opgeslagen.
 "Template with id ""%1"" does not exist.","Sjabloon met id ""%1"" bestaat niet."
 Tenant,Tenant
 Thank you! The signature has been received. You will get a confirmation once the document is available in your account.,Bedankt! De handtekening is ontvangen. U ontvangt een bevestiging zodra het document beschikbaar is in uw account.
+The HMAC secret is required for new subscriptions.,The HMAC secret is required for new subscriptions.
+The Integration ID is required.,The Integration ID is required.
 The PDF exceeds the maximum size of 10 MB.,De pdf overschrijdt de maximale grootte van 10 MB.
+The Target URL is required.,The Target URL is required.
+The Target URL must use the http or https scheme.,The Target URL must use the http or https scheme.
 The connector used for new documents once production mode is confirmed above. Configure the credentials in the provider's group.,De connector die wordt gebruikt voor nieuwe documenten zodra de productiemodus hierboven is bevestigd. Configureer de inloggegevens in de groep van de provider.
 The document has no associated template.,Aan het document is geen sjabloon gekoppeld.
 The document has no generated PDF to send.,Het document heeft geen gegenereerde pdf om te verzenden.
 The dummy provider is not enabled: enable it explicitly in the configuration (test environments only).,De dummy-provider is niet ingeschakeld: schakel deze expliciet in via de configuratie (alleen testomgevingen).
+The entered Target URL is invalid.,The entered Target URL is invalid.
 The following document is pending digital signature beyond the configured escalation period.,Het volgende document wacht op digitale handtekening buiten de geconfigureerde escalatieperiode.
+"The merge field tag ""{FIELD:%1}"" is not supported or registered.","The merge field tag ""{FIELD:%1}"" is not supported or registered."
 "The module is designed to be extended modularly. You can implement a custom connector for any digital signature provider (e.g. DocuSign, Namirial, InfoCert) by following our guide.","De module is ontworpen om modulair te worden uitgebreid. U kunt een aangepaste connector implementeren voor elke digitale handtekeningprovider (bijv. DocuSign, Namirial, InfoCert) door onze gids te volgen."
+The name is required.,The name is required.
 The provider often already sends its own signing invitation: disabled by default.,De provider stuurt vaak al zijn eigen uitnodiging om te ondertekenen: standaard uitgeschakeld.
+The provider often already sends its own signing invitation: off by default.,The provider often already sends its own signing invitation: off by default.
 The requested temporary file does not exist.,Het gevraagde tijdelijke bestand bestaat niet.
 The signing process of a document ended with a negative outcome.,Het ondertekeningsproces van een document is afgesloten met een negatief resultaat.
 The template file is not a PDF.,Het sjabloonbestand is geen pdf.
@@ -225,18 +416,33 @@ The template has no PDF file uploaded for this store view.,De template heeft gee
 The template name is required.,De naam van de sjabloon is verplicht.
 The temporary file does not exist.,Het tijdelijke bestand bestaat niet.
 The uploaded file is not a valid PDF.,Het geüploade bestand is geen geldige pdf.
+This integration no longer exists.,This integration no longer exists.
+This subscription no longer exists.,This subscription no longer exists.
 This template no longer exists.,Deze sjabloon bestaat niet meer.
 "To complete the order, we invite you to follow the instructions received at %email from the signature provider.","Om de bestelling te voltooien, nodigen we u uit om de instructies te volgen die u op %email van de handtekeningprovider hebt ontvangen."
+Total Quota / Included Signatures,Total Quota / Included Signatures
 Total generated,Totaal gegenereerd
+Total signatures included in prepaid package or monthly/annual allowance (e.g. 500).,Total signatures included in prepaid package or monthly/annual allowance (e.g. 500).
+Track signature credit consumption and send warning notifications when approaching limits.,Track signature credit consumption and send warning notifications when approaching limits.
+Unable to complete file validation.,Unable to complete file validation.
+Unable to delete Webhook subscription: %1,Unable to delete Webhook subscription: %1
+Unable to delete the API integration: %1,Unable to delete the API integration: %1
 Unable to delete the template: %1,Kan sjabloon niet verwijderen: %1
 Unable to download the PDF: %1,Kan de PDF niet downloaden: %1
+Unable to find the subscription to delete.,Unable to find the subscription to delete.
 Unable to generate the preview: %1,Kan de voorbeeldweergave niet genereren: %1
 Unable to generate the signature documents: %1,Kan handtekeningdocumenten niet genereren: %1
 Unable to load temporary PDF.,Kan de tijdelijke PDF niet laden.
+Unable to load the temporary PDF.,Unable to load the temporary PDF.
 Unable to regenerate the document: %1,Kan document niet opnieuw genereren: %1
+Unable to save Webhook subscription: %1,Unable to save Webhook subscription: %1
+Unable to save the API integration: %1,Unable to save the API integration: %1
 Unable to save the document: %1,Kan document niet opslaan: %1
 Unable to save the template: %1,Kan sjabloon niet opslaan: %1
 Unable to save your choice.,Kon de keuze niet opslaan.
+Unsupported PDF: /Pages is missing /Kids.,Unsupported PDF: /Pages is missing /Kids.
+Unsupported PDF: /Resources not found for the update.,Unsupported PDF: /Resources not found for the update.
+Unsupported PDF: catalog is missing /Pages.,Unsupported PDF: catalog is missing /Pages.
 Unsupported PDF: classic cross-reference section not found at the expected position.,Niet-ondersteunde PDF: klassieke cross-reference-sectie niet gevonden op de verwachte positie.
 Unsupported PDF: classic cross-reference table not found (save as PDF 1.4).,Niet-ondersteunde pdf: klassieke cross-reference-tabel niet gevonden (opslaan als PDF 1.4).
 Unsupported PDF: cross-reference chain has too many linked revisions (max %1).,Niet-ondersteunde PDF: de cross-reference-keten heeft te veel gekoppelde revisies (max %1).
@@ -252,20 +458,40 @@ Unsupported PDF: incomplete cross-reference stream dictionary.,Niet-ondersteunde
 Unsupported PDF: incomplete cross-reference stream.,Niet-ondersteunde PDF: onvolledige cross-reference-stream.
 Unsupported PDF: invalid cross-reference stream /W widths.,Niet-ondersteunde PDF: ongeldige /W-breedtes van de cross-reference-stream.
 "Unsupported PDF: it uses object compression (object streams), not handled in this version. Disable object compression when exporting and re-upload the file.","Niet-ondersteunde PDF: gebruikt objectcompressie (object streams), niet ondersteund in deze versie. Schakel objectcompressie uit bij het exporteren en upload het bestand opnieuw."
+Unsupported PDF: nested page structure not handled by the builder.,Unsupported PDF: nested page structure not handled by the builder.
+Unsupported PDF: object %1 could not be resolved in the cross-reference table.,Unsupported PDF: object %1 could not be resolved in the cross-reference table.
+Unsupported PDF: object %1 is missing endobj.,Unsupported PDF: object %1 is missing endobj.
+Unsupported PDF: object %1 not recognized at the expected position.,Unsupported PDF: object %1 not recognized at the expected position.
+Unsupported PDF: page /Contents not recognized for tag insertion.,Unsupported PDF: page /Contents not recognized for tag insertion.
+Unsupported PDF: page content stream could not be resolved.,Unsupported PDF: page content stream could not be resolved.
+Unsupported PDF: page has no declared /Resources.,Unsupported PDF: page has no declared /Resources.
+Unsupported PDF: page is missing /Contents.,Unsupported PDF: page is missing /Contents.
+Unsupported PDF: rotated page (/Rotate %1) not handled by the builder.,Unsupported PDF: rotated page (/Rotate %1) not handled by the builder.
 Unsupported PDF: startxref not found.,Niet-ondersteunde pdf: startxref niet gevonden.
 Unsupported PDF: trailer missing Size/Root.,Niet-ondersteunde pdf: trailer zonder Size/Root.
 Unsupported PDF: trailer not found after the cross-reference table.,Niet-ondersteunde PDF: trailer niet gevonden na de cross-reference-tabel.
+Unsupported PDF: unbalanced dictionary (missing closing delimiter).,Unsupported PDF: unbalanced dictionary (missing closing delimiter).
 Unsupported PDF: unrecognized PNG row filter in cross-reference stream (%1).,Niet-ondersteunde PDF: niet-herkend PNG-rijfilter in de cross-reference-stream (%1).
 "Unsupported PDF: use a classic cross-reference table. Save/export the document as ""PDF 1.4"" and re-upload the file.","Niet-ondersteunde pdf: gebruik een klassieke cross-reference-tabel. Sla het document op/exporteer het als ""PDF 1.4"" en upload het bestand opnieuw."
 Update on the contract to sign (order %increment_id),Update over het te ondertekenen contract (bestelling %increment_id)
 Used when the template does not specify its own trigger.,Wordt gebruikt wanneer de sjabloon geen eigen trigger opgeeft.
 Username (owner),Gebruikersnaam (owner)
+Validation Error,Validation Error
 View order,Bestelling bekijken
 WARNING: enable only in test/development environments.,LET OP: alleen inschakelen in test-/ontwikkelomgevingen.
 Want to integrate a different provider?,Wilt u een andere provider integreren?
 Warning: the signature is still required to complete the order.,Let op: ondertekening blijft verplicht om de bestelling te voltooien.
 We couldn't save your preference. Please try again.,De voorkeur kon niet worden opgeslagen. Probeer het opnieuw.
 We kindly ask you to digitally sign the document related to your order.,Wij vragen u het document met betrekking tot uw bestelling digitaal te ondertekenen.
+Webhook,Webhook
+Webhook Outbound Logs,Webhook Outbound Logs
+Webhook Subscriptions,Webhook Subscriptions
+Webhook delivery failed for document #%document_id (order #%order_increment_id).,Webhook delivery failed for document #%document_id (order #%order_increment_id).
+Webhook failure notification template,Webhook failure notification template
+Webhook subscription deleted successfully.,Webhook subscription deleted successfully.
+Webhook subscription not found.,Webhook subscription not found.
+Webhook subscription saved.,Webhook subscription saved.
+"Webhook subscription with id ""%1"" does not exist.","Webhook subscription with id ""%1"" does not exist."
 WsSign,WsSign
 WsSign: GUID missing from the upload response.,WsSign: GUID ontbreekt in het uploadantwoord.
 "WsSign: authentication failed, check the credentials and tenant.","WsSign: authenticatie mislukt, controleer de inloggegevens en de tenant."
@@ -276,6 +502,7 @@ WsSign: invalid document store.,WsSign: ongeldige store van het document.
 "WsSign: non-JSON response during ""%1"".","WsSign: niet-JSON-antwoord tijdens ""%1""."
 WsSign: platform URL not configured or not HTTPS.,WsSign: platform-URL niet geconfigureerd of geen HTTPS.
 "WsSign: request rejected during ""%1"" (HTTP %2).","WsSign: verzoek geweigerd tijdens ""%1"" (HTTP %2)."
+WsSign: status missing from the provider's response.,WsSign: status missing from the provider's response.
 WsSign: status missing from the provider\'s response.,WsSign: status ontbreekt in het antwoord van de provider.
 "WsSign: temporary service error during ""%1"" (HTTP %2).","WsSign: tijdelijke servicefout tijdens ""%1"" (HTTP %2)."
 WsSign: the document has no started process.,WsSign: voor het document is geen proces gestart.
@@ -292,11 +519,18 @@ Zoom -,Zoom -
 [Digital Signature] Document #%document_id %status (order %increment_id),[Digitale ondertekening] Document #%document_id %status (bestelling %increment_id)
 [Digital Signature] Document error #%document_id (order %increment_id),[Digitale ondertekening] Documentfout #%document_id (bestelling %increment_id)
 [Digital Signature] Reminder: Document #%document_id pending signature (order %increment_id),[Digitale Handtekening] Herinnering: Document #%document_id wacht op handtekening (bestelling %increment_id)
+[Digital Signature] Webhook failed: document #%document_id (order %order_increment_id),[Digital Signature] Webhook failed: document #%document_id (order %order_increment_id)
 day,dag
 days,dagen
+historical,historical
+network error,network error
 of,van
 pdf.js CDN URL,CDN-URL voor pdf.js
+pdf.js Library Source,pdf.js Library Source
 pdf.js library source,Bron van pdf.js-bibliotheek
+permanent error,permanent error
+provider down,provider down
+temporary error,temporary error
 the contract for your order #%increment_id has been signed digitally successfully.,het contract voor uw bestelling #%increment_id is succesvol digitaal ondertekend.
 the contract for your order #%increment_id is ready to be signed digitally.,het contract voor uw bestelling #%increment_id is klaar om digitaal te worden ondertekend.
 the signing process for the contract of your order #%increment_id ended with outcome: %status.,het ondertekeningsproces van het contract voor uw bestelling #%increment_id is afgesloten met resultaat: %status.

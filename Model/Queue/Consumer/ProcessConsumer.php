@@ -60,7 +60,7 @@ class ProcessConsumer
         $maxRetries = max(1, (int)$this->scopeConfig->getValue(self::XML_PATH_MAX_RETRIES));
         $document->setRetryCount($document->getRetryCount() + 1);
         if ($document->getRetryCount() >= $maxRetries) {
-            $this->fail($document, $message . ' (tentativi esauriti)');
+            $this->fail($document, $message . ' (retries exhausted)');
 
             return;
         }
@@ -71,10 +71,10 @@ class ProcessConsumer
             'retry',
             null,
             null,
-            sprintf('Errore temporaneo (tentativo %d): %s', $document->getRetryCount(), $message)
+            sprintf('Temporary error (attempt %d): %s', $document->getRetryCount(), $message)
         );
         $this->logger->warning(
-            sprintf('DigitalSignature: retry documento %d: %s', (int)$document->getDocumentId(), $message)
+            sprintf('DigitalSignature: retrying document %d: %s', (int)$document->getDocumentId(), $message)
         );
     }
 
@@ -86,7 +86,7 @@ class ProcessConsumer
         $this->documentRepository->save($document);
         $this->documentRepository->addLog($document, 'error', $previousStatus, Status::ERROR, $message);
         $this->logger->error(
-            sprintf('DigitalSignature: documento %d in errore: %s', (int)$document->getDocumentId(), $message)
+            sprintf('DigitalSignature: document %d in error: %s', (int)$document->getDocumentId(), $message)
         );
         $this->notifier->notifyDocumentError($document, $message);
     }

@@ -26,6 +26,7 @@ interface DocumentInterface
     public const REMINDER_COUNT = 'reminder_count';
     public const LAST_REMINDER_AT = 'last_reminder_at';
     public const ESCALATION_SENT_AT = 'escalation_sent_at';
+    public const CREATED_AT = 'created_at';
 
     /** order_item_id = 0 indicates a cart-scope document */
     public const ITEM_ID_CART_SCOPE = 0;

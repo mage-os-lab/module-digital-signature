@@ -47,7 +47,7 @@ class Index implements HttpPostActionInterface, HttpGetActionInterface, CsrfAwar
             $this->handle();
         } catch (\Exception $e) {
             // Never expose details externally; the detail is in the logs
-            $this->logger->warning('DigitalSignature: errore callback: ' . $e->getMessage());
+            $this->logger->warning('DigitalSignature: callback error: ' . $e->getMessage());
         }
 
         return $this->jsonFactory->create()->setData(['status' => 'ok']);
@@ -73,7 +73,7 @@ class Index implements HttpPostActionInterface, HttpGetActionInterface, CsrfAwar
         }
         if (!$this->isIpAllowed($document->getProviderCode())) {
             $this->logger->warning(
-                'DigitalSignature: callback bloccata da allowlist IP per documento ' . $documentId
+                'DigitalSignature: callback blocked by IP allowlist for document ' . $documentId
             );
 
             return;

@@ -1,0 +1,21 @@
+<!--@subject {{trans "[Digital Signature] Provider Quota Warning: %provider (%remaining signatures remaining)" provider=$provider_code remaining=$remaining_quota}} @-->
+<!--@vars {
+"var provider_code":"Provider",
+"var total_quota":"Total quota",
+"var used_quota":"Used quota",
+"var remaining_quota":"Remaining quota",
+"var percentage_used":"Percentage used"
+} @-->
+{{template config_path="design/email/header_template"}}
+
+<p>{{trans "Signature provider <strong>%provider</strong> is reaching its quota limit." provider=$provider_code}}</p>
+
+<ul>
+    <li>{{trans "Provider: %provider" provider=$provider_code}}</li>
+    <li>{{trans "Used signatures: %used / %total (%percent%)" used=$used_quota total=$total_quota percent=$percentage_used}}</li>
+    <li>{{trans "Remaining signatures: %remaining" remaining=$remaining_quota}}</li>
+</ul>
+
+<p>{{trans "Please review your provider package or billing plan to prevent signature dispatches from failing."}}</p>
+
+{{template config_path="design/email/footer_template"}}

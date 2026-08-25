@@ -54,7 +54,7 @@ class WebhookConsumer
             $this->deliveryResource->markFailed(
                 $id,
                 (int)$row['attempts'],
-                'Sottoscrizione rimossa o disabilitata.'
+                'Subscription removed or disabled.'
             );
 
             return;
@@ -90,7 +90,7 @@ class WebhookConsumer
         } catch (\Throwable $e) {
             // Without this catch the row would remain "in processing" forever
             // and the cron would re-queue it infinitely without incrementing attempts.
-            $this->handleFailure($id, $row, $subscription, 'Errore interno: ' . $e->getMessage(), true);
+            $this->handleFailure($id, $row, $subscription, 'Internal error: ' . $e->getMessage(), true);
         }
     }
 
@@ -120,7 +120,7 @@ class WebhookConsumer
             $this->deliveryResource->markFailed($deliveryId, $attempts, $error);
             $this->notifyFailure((int)$row['document_id'], (string)$subscription['target_url'], $error);
             $this->logger->error(sprintf(
-                'DigitalSignature: consegna webhook %d fallita definitivamente verso %s: %s',
+                'DigitalSignature: webhook delivery %d permanently failed to %s: %s',
                 $deliveryId,
                 (string)$subscription['target_url'],
                 $error

@@ -1,11 +1,24 @@
 """Document error"" template (admin)","""文档错误""邮件模板（管理员）"
 """Document ready"" template (customer)","""文档就绪""邮件模板（客户）"
 """Document signed"" template (customer)","""文档已签署""邮件模板（客户）"
+"""Expired/declined"" template (admin)","""Expired/declined"" template (admin)"
+"""Expired/declined"" template (customer)","""Expired/declined"" template (customer)"
 """Expired/rejected"" template (admin)","""已过期/已拒绝""邮件模板（管理员）"
 """Expired/rejected"" template (customer)","""已过期/已拒绝""邮件模板（客户）"
+-- All Store Views --,-- All Store Views --
 -- None --,-- 无 --
 -- Use global default --,-- 使用全局默认值 --
+A document signing process has ended with a negative outcome.,A document signing process has ended with a negative outcome.
+API Access Point,API Access Point
+API Account ID,API Account ID
+API Integration,API Integration
+API Integrations,API Integrations
+API User ID (GUID),API User ID (GUID)
 API documentation (in the module repository),API 文档（位于模块代码仓库中）
+"API integration with id ""%1"" does not exist.","API integration with id ""%1"" does not exist."
+Account ID visible in the Apps and Keys section.,Account ID visible in the Apps and Keys section.
+Actions,Actions
+Active,Active
 Active signature provider,当前签名提供商
 Add mapping,添加映射
 Additional & Planned Connectors,附加和计划中的连接器
@@ -14,55 +27,127 @@ Address notified by WsSign about process events.,WsSign 用于通知流程事件
 Admin escalation email sent for document pending signature.,已就等待签署的文档向管理员发送升级电子邮件。
 Admin recipient email,管理员收件邮箱
 Adobe Acrobat Sign,Adobe Acrobat Sign
+Adobe Acrobat Sign Developer Guide,Adobe Acrobat Sign Developer Guide
+"Adobe Acrobat Sign: agreement creation failed, no ID received.","Adobe Acrobat Sign: agreement creation failed, no ID received."
+Adobe Acrobat Sign: document upload succeeded but is missing transientDocumentId.,Adobe Acrobat Sign: document upload succeeded but is missing transientDocumentId.
+Adobe Acrobat Sign: downloaded PDF content is empty.,Adobe Acrobat Sign: downloaded PDF content is empty.
+Adobe Acrobat Sign: network error during %1: %2,Adobe Acrobat Sign: network error during %1: %2
+Adobe Acrobat Sign: non-JSON response during %1.,Adobe Acrobat Sign: non-JSON response during %1.
+Adobe Acrobat Sign: signer email is missing or invalid.,Adobe Acrobat Sign: signer email is missing or invalid.
+Adobe Acrobat Sign: status response is missing the status field.,Adobe Acrobat Sign: status response is missing the status field.
+Adobe Acrobat Sign: temporary service error during %1 (HTTP %2).,Adobe Acrobat Sign: temporary service error during %1 (HTTP %2).
+Adobe Acrobat Sign: the document has no started process (agreement).,Adobe Acrobat Sign: the document has no started process (agreement).
+Adobe Acrobat Sign: valid refresh response but missing access token.,Adobe Acrobat Sign: valid refresh response but missing access token.
+Adobe Developer Console,Adobe Developer Console
 Advanced Electronic Signature (AES),高级电子签名 (AES)
 "Advanced electronic signature platform (OTP via SMS or email). The connector uploads the PDF generated from the template, starts the signing request to the signer, and receives status updates via an authenticated callback. Requires an active WsSign account (tenant, owner user, password) provided by the WsSign team.",高级电子签名平台（通过短信或邮件发送 OTP）。该连接器上传由模板生成的 PDF，向签署人发起签名请求，并通过经身份验证的回调接收状态更新。需要 WsSign 团队提供的有效 WsSign 账户（租户、owner 用户名、密码）。
 After this time the document is marked as signed.,经过此时间后，文档将被标记为已签名。
+"After this time, the document is marked as signed.","After this time, the document is marked as signed."
+Agreement expiration (days),Agreement expiration (days)
+Alert Threshold (%),Alert Threshold (%)
 All time,所有时间
+Allow dispatch and log warning,Allow dispatch and log warning
 Allow dummy provider,允许使用 Dummy 提供商
 Analysis period:,分析周期：
+Annual Allowance (Commitment),Annual Allowance (Commitment)
+Application ID (Client ID),Application ID (Client ID)
+Application ID retrieved from the Adobe Developer Console.,Application ID retrieved from the Adobe Developer Console.
+Are you sure you want to delete this webhook subscription?,Are you sure you want to delete this webhook subscription?
+Assigned Products,Assigned Products
 Auto-sign delay (seconds),自动签名延迟（秒）
 Automatic reminders,自动催签
 Automatically delete past the retention period,超过保留期后自动删除
 Available,可用
 Avg signing time,平均签署时间
+Back,Back
+Black,Black
+Block new signature requests,Block new signature requests
 CDN,CDN
 Callback IP allowlist,回调 IP 白名单
 Cancel,取消
 Canceled,已取消
+Cap on deliveries processed at each reconciliation cron run.,Cap on deliveries processed at each reconciliation cron run.
+Cap on deliveries processed per reconciliation cron run.,Cap on deliveries processed per reconciliation cron run.
 Cap on documents processed at each cron run.,每次 cron 运行处理的文档数量上限。
+Cap on documents processed per cron run.,Cap on documents processed per cron run.
 Cap on documents queued at each cron run (throttling towards the provider).,每次 cron 运行排队的文档数量上限（对提供商的限流）。
+Cap on documents queued per cron run (throttling toward the provider).,Cap on documents queued per cron run (throttling toward the provider).
 Cart / Order,购物车/订单
 Cart not available.,购物车不可用。
 Cart/Order,购物车/订单
 "Check this ONLY after signing a DPA (Data Processing Agreement) with the selected signature provider and updating the store's privacy policy to disclose that customer personal data (email, phone) is sent to a third-party provider for the signing process. Until this is checked, all new documents are generated with the dummy (test) provider, regardless of the provider configured below.",仅在与所选签名提供商签订 DPA（数据处理协议）并更新商店隐私政策（说明将客户个人数据如邮箱、电话发送给第三方提供商用于签名流程）后才勾选此项。未勾选前，无论下方配置了哪个提供商，所有新文档都将使用 dummy（测试）提供商生成。
+"Check this box ONLY after signing a DPA (Data Processing Agreement) with the selected signature provider and updating the store's privacy policy to disclose that customer personal data (email, phone) is sent to a third-party provider for the signing process. Until checked, all new documents are generated with the dummy (test) provider, regardless of the provider configured below.","Check this box ONLY after signing a DPA (Data Processing Agreement) with the selected signature provider and updating the store's privacy policy to disclose that customer personal data (email, phone) is sent to a third-party provider for the signing process. Until checked, all new documents are generated with the dummy (test) provider, regardless of the provider configured below."
+Client Secret,Client Secret
+"Color used to print the signature tag on the actual document generated for the order. Select ""White (Invisible)"" to hide it beneath the digital signature.","Color used to print the signature tag on the actual document generated for the order. Select ""White (Invisible)"" to hide it beneath the digital signature."
+Comma-separated IPs; empty = no IP filter (the secret token still applies).,Comma-separated IPs; empty = no IP filter (the secret token still applies).
 Comma-separated IPs; empty = no IP filtering (the secret token still applies).,以逗号分隔的 IP 列表；留空 = 不做 IP 过滤（仍会校验密钥令牌）。
 Configuration,配置
 Confirm Position,确认位置
 Connector to integrate digital and electronic signatures from Adobe Acrobat Sign. Supports OAuth2 authentication and asynchronous signature process tracking.,用于集成 Adobe Acrobat Sign 电子和数字签名的连接器。支持 OAuth2 认证和异步签署流程追踪。
+Consigliato,Consigliato
 Contract,合同
+Contract PDF,Contract PDF
+Copy and paste the complete RSA private key generated on DocuSign (including the BEGIN/END PRIVATE KEY tags).,Copy and paste the complete RSA private key generated on DocuSign (including the BEGIN/END PRIVATE KEY tags).
 Could not queue %1 order(s) (see log).,无法将%1个订单加入队列（详见日志）。
+"Counted from the last status change of the completed document. Default 3650 (10 years, indicative: check the applicable fiscal/legal terms).","Counted from the last status change of the completed document. Default 3650 (10 years, indicative: check the applicable fiscal/legal terms)."
+Created,Created
+Created On,Created On
 Customer reminder sent (reminder %1 of %2).,已发送客户催签（第 %1 次催签，共 %2 次）。
 "Daily cron that, when active, deletes PDFs and personal data (email/phone) of completed documents (signed/rejected/expired/cancelled) past the retention period. The record and status history are kept for audit/tax purposes, without the PDF or PII.",每日定时任务：启用后会删除超过保留期的已完成文档（已签名/已拒绝/已过期/已取消）的 PDF 及个人数据（邮箱/电话）。记录及状态历史会为审计/财务目的保留，但不含 PDF 或个人身份信息。
+"Daily cron that, when enabled, deletes the PDFs and personal data (email/phone) of completed documents (signed/declined/expired/canceled) past the retention period. The record and status history remain for audit/fiscal purposes, without PDFs or PII.","Daily cron that, when enabled, deletes the PDFs and personal data (email/phone) of completed documents (signed/declined/expired/canceled) past the retention period. The record and status history remain for audit/fiscal purposes, without PDFs or PII."
 Days before admin escalation,管理员升级前的天数
+Days before first reminder,Days before first reminder
 Days before the first reminder,首次催签前的天数
 Days between subsequent reminders,后续催签之间的间隔天数
 Days elapsed since sending before alerting the admin.,发送后警示管理员前经过的天数。
 Days elapsed since sending before the first customer reminder.,发送后首次向客户发送催签前经过的天数。
+Days to wait between a reminder and the next.,Days to wait between a reminder and the next.
 Days to wait between one reminder and the next.,两次催签之间需要等待的天数。
 Declined,已拒绝
 Default OTP_SMS: requires the signer's phone number.,默认 OTP_SMS：需要签署人的电话号码。
 Default generation trigger,默认生成触发器
 Default phone prefix,默认电话区号
 Delete,删除
+Delete Webhook subscription,Delete Webhook subscription
+Delete integration,Delete integration
 Delete template,删除模板
+"Delete the Webhook subscription ""%1""?","Delete the Webhook subscription ""%1""?"
+"Delete the integration ""%1""?","Delete the integration ""%1""?"
 "Delete the template ""%1""?",确定删除模板“%1”吗？
+Delete this integration?,Delete this integration?
 Delete this template? Documents already generated remain in the history.,确定删除此模板吗？已生成的文档仍会保留在历史记录中。
+Deliveries limit per run,Deliveries limit per run
+Deliveries per run limit,Deliveries per run limit
+Delivery attempts before marking the webhook as permanently failed.,Delivery attempts before marking the webhook as permanently failed.
+Demo / Sandbox,Demo / Sandbox
+Detail: %error_message,Detail: %error_message
+Details: %error_message,Details: %error_message
 Digital Signature,数字签名
 Disabled by default to avoid alarming customers: evaluate on a case-by-case basis.,默认关闭，以避免不必要的担忧：请根据具体情况评估。
 Disabled by default: deletion is destructive and should be enabled deliberately after defining the required retention periods (tax/legal).,默认关闭：删除操作具有破坏性，应在明确所需的（财务/法律）保留期限后再谨慎启用。
+DocuSign,DocuSign
+DocuSign Apps and Keys Panel,DocuSign Apps and Keys Panel
+DocuSign Developer Center,DocuSign Developer Center
+DocuSign: downloaded PDF content is empty.,DocuSign: downloaded PDF content is empty.
+"DocuSign: envelope creation failed, no ID received.","DocuSign: envelope creation failed, no ID received."
+DocuSign: error generating the JWT assertion: %1,DocuSign: error generating the JWT assertion: %1
+DocuSign: invalid document store.,DocuSign: invalid document store.
+"DocuSign: network error during ""%1"": %2","DocuSign: network error during ""%1"": %2"
+DocuSign: no account associated with the provided credentials.,DocuSign: no account associated with the provided credentials.
+"DocuSign: non-JSON response during ""%1"".","DocuSign: non-JSON response during ""%1""."
+DocuSign: signer email is missing or invalid.,DocuSign: signer email is missing or invalid.
+DocuSign: status response is missing the status field.,DocuSign: status response is missing the status field.
+"DocuSign: temporary service error during ""%1"" (HTTP %2).","DocuSign: temporary service error during ""%1"" (HTTP %2)."
+DocuSign: the document has no started process (envelope).,DocuSign: the document has no started process (envelope).
+DocuSign: valid OAuth response but missing access token.,DocuSign: valid OAuth response but missing access token.
 Document #%1 is not active: use the active one to regenerate.,文档 #%1 未处于激活状态：请使用激活的文档进行重新生成。
+Document actions (API),文档操作（API）
+Document ID,Document ID
+Document Template,Document Template
 Document canceled for manual regeneration.,文档已取消以便手动重新生成。
 Document file not found in storage: %1,在存储中未找到文档文件：%1
+Document limit per reconciliation run,Document limit per reconciliation run
+Document limit per run,Document limit per run
 Document metrics and performance,文档指标和性能
 Document regenerated (replaces #%1).,文档已重新生成（替代 #%1）。
 Document regenerated: new document #%1 is being processed.,文档已重新生成：新文档 #%1 正在处理中。
@@ -78,23 +163,40 @@ Download signed,下载已签名文件
 Download signed PDF,下载已签名PDF
 Download the digitally signed contracts for this order.,下载此订单的电子签名合同。
 Draw a box on the PDF before confirming.,确认前请在PDF上画一个选择框。
+Draw a selection box on the PDF before confirming.,Draw a selection box on the PDF before confirming.
 Dummy (test only),Dummy（仅测试）
 "Dummy provider included with the module: it does not contact any external service. It simulates a successful signature after the delay configured below, returning the original PDF as ""signed"". Useful for testing the whole flow (templates, triggers, notifications, customer area) without a real provider's credentials. Do NOT enable in production.",模块内置的虚拟提供商：不会联系任何外部服务。在下方配置的延迟后模拟成功签名，将原始 PDF 作为“已签名”返回。适用于在没有真实提供商凭据的情况下测试整个流程（模板、触发器、通知、客户区域）。请勿在生产环境中启用。
+Dummy provider that simulates signing locally. DO NOT use in production.,Dummy provider that simulates signing locally. DO NOT use in production.
 Dummy: generated PDF not found in storage.,Dummy：在存储中未找到生成的 PDF。
 Dummy: missing or unrecognized process id.,Dummy：流程 ID 缺失或无法识别。
 Dummy: the content to send is not a PDF.,Dummy：待发送的内容不是 PDF。
 Dummy: the document has no generated PDF.,Dummy：该文档没有已生成的 PDF。
+E.g. https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/,E.g. https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/
 E.g. https://demo.wsign.cloud (HTTPS only).,例如 https://demo.wsign.cloud（仅支持 HTTPS）。
+EXHAUSTED,EXHAUSTED
 Edit,编辑
+"Edit Webhook Subscription ""%1""","Edit Webhook Subscription ""%1"""
+"Edit integration ""%1""","Edit integration ""%1"""
 "Edit template ""%1""",编辑模板“%1”
+Email message for the signer,Email message for the signer
 Email notifications,邮件通知
 Email of the WsSign owner account.,WsSign 所有者账户的电子邮箱。
 Emails sent to the customer and admin about signature document events.,发送给客户和管理员的签名文档事件邮件。
+Emails sent to the customer and the admin about signature document events.,Emails sent to the customer and the admin about signature document events.
+Enable Quota Tracking,Enable Quota Tracking
+Enable webhooks,Enable webhooks
 Enabled,已启用
 Encrypted PDFs are not supported: remove the protection/password from the document and re-upload the file.,不支持加密的 PDF：请移除文档的保护/密码后重新上传文件。
+Envelope expiration (days),Envelope expiration (days)
+Environment,Environment
 Error,错误
+Error message,Error message
 Error saving coordinates.,保存坐标时出错。
+Error while deleting the subscription: %1,Error while deleting the subscription: %1
+Error while saving coordinates.,Error while saving coordinates.
+Error while saving the integration.,Error while saving the integration.
 Error while saving the template.,保存模板时出错。
+Error while saving the webhook subscription.,Error while saving the webhook subscription.
 Error: %message,错误：%message
 Escalation template (admin),升级模板（管理员）
 Expired,已过期
@@ -102,106 +204,187 @@ Expired or Declined,已过期或已拒绝
 Fake provider that simulates signing locally. Do NOT use in production.,在本地模拟签名的虚拟提供商。请勿在生产环境中使用。
 File not specified.,未指定文件。
 For error and negative outcome notifications. Empty = store's general contact.,用于错误和负面结果通知。留空 = 商店的通用联系方式。
+For error and negative-outcome notifications. Empty = store general contact.,For error and negative-outcome notifications. Empty = store general contact.
 "From the last status change of the completed document. Default 3650 (10 years, indicative: check the applicable tax/legal terms).",自已完成文档的最后一次状态变更起计算。默认 3650（10 年，仅供参考：请核实适用的财务/法律期限）。
 GDPR acknowledgement (production mode),GDPR 确认（生产模式）
 General,常规
 Generate signature documents,生成签名文档
+Generate signature documents (manual),Generate signature documents (manual)
 Generate signature documents for the selected orders?,是否为所选订单生成签名文档？
+Generate template documents with manual trigger,Generate template documents with manual trigger
 Generated,已生成
 Guide to integrating signature providers,电子签名服务商集成指南
+HMAC Secret,HMAC Secret
+HTTP/HTTPS endpoint where JSON webhook push notifications will be sent.,HTTP/HTTPS endpoint where JSON webhook push notifications will be sent.
 "Hello %name,",您好 %name，
+Historical,Historical
 I want to receive the contract to sign digitally,我希望收到需要电子签名的合同
 ID,ID
 "If you believe this is a mistake, contact our customer service. You can check your order here: <a href=""%url"">My orders</a>","如果您认为这是错误，请联系我们的客服。您可以在此查看订单：<a href=""%url"">我的订单</a>"
 In development,开发中
+Integration,Integration
+Integration ID,Integration ID
+Integration deleted.,Integration deleted.
+Integration key retrieved from the DocuSign Console.,Integration key retrieved from the DocuSign Console.
+Integration saved.,Integration saved.
+Integration with the Adobe Acrobat Sign platform.,Integration with the Adobe Acrobat Sign platform.
+Integration with the DocuSign platform.,Integration with the DocuSign platform.
 Internal status,内部状态
+Invalid page number %1: the PDF has %2.,Invalid page number %1: the PDF has %2.
 Invalid signature parameters.,签名参数无效。
 Invoice creation,发票创建
 Invoice paid,发票已付款
+Item,Item
+LOW QUOTA,LOW QUOTA
 Last 30 days,最近30天
 Last 90 days,最近90天
 Last year,最近一年
 Local (Recommended),本地（推荐）
+Long-lived refresh token used to generate API Access Tokens.,Long-lived refresh token used to generate API Access Tokens.
 Mage-OS,Mage-OS
 "Manage the order in backend: <a href=\\""%url\""\"">%url</a>""","在后台管理订单：<a href=\\""%url\""\"">%url</a>"""
 Manual from backend,后台手动触发
+Maximum attempts,Maximum attempts
+Maximum number of attempts,Maximum number of attempts
+Maximum number of attempts for temporary errors (network/service) before the error state.,Maximum number of attempts for temporary errors (network/service) before the error state.
 Maximum number of customer reminders,客户最大催签次数
 Maximum number of retries for temporary errors (network/service) before reaching the error state.,在进入错误状态前，针对临时性错误（网络/服务）的最大重试次数。
 Maximum number of times to remind the customer.,提醒客户的最大次数。
 Maximum retries,最大尝试次数
+"Merge field ""%1"" is not registered.","Merge field ""%1"" is not registered."
 Message for the signer,给签署人的信息
+Monthly Allowance,Monthly Allowance
 Name,名称
+New API integration,New API integration
+New Webhook Subscription,New Webhook Subscription
 New document template,新建文档模板
+New integration,New integration
 Next,下一页
+"No API integration mapped for integration ""%1"".","No API integration mapped for integration ""%1""."
+No integration selected.,No integration selected.
 No legal validity — test/development only,无法律效力 — 仅限测试/开发
+No signature documents for this order.,No signature documents for this order.
 "No signature tag found in the PDF. Add at least one tag to the document in the format {WSIGN#width,height#email-placeholder}.","在 PDF 中未找到签名标签。请在文档中至少添加一个格式为 {WSIGN#宽度,高度#email-placeholder} 的标签。"
+No signature tag found in the template PDF: unable to insert the signer's data.,No signature tag found in the template PDF: unable to insert the signer's data.
 No signature tag found in the template PDF: unable to insert the signer\'s data.,在模板 PDF 中未找到签名标签：无法插入签署人的数据。
 No template selected.,未选择模板。
 Note: The classification of the signature level is based on the specifications declared by the provider. The module does not guarantee legal adequacy or compliance for specific purposes.,注：签名级别的分类基于服务商声明的技术规范。本模块不保证特定用途的法律适用性或合规性。
 Notifier email (optional),通知邮箱（可选）
+Notify admin on permanent failure,Notify admin on permanent failure
+Notify the admin if the document expires or is declined,Notify the admin if the document expires or is declined
 Notify the admin if the document expires or is rejected,文档过期或被拒绝时通知管理员
 Notify the admin on a definitive error,出现最终错误时通知管理员
+Notify the admin on definitive error,Notify the admin on definitive error
+Notify the customer if the document expires or is declined,Notify the customer if the document expires or is declined
 Notify the customer if the document expires or is rejected,文档过期或被拒绝时通知客户
 Notify the customer when the document is ready,文档就绪时通知客户
 Notify the customer when the document is signed,文档签署完成时通知客户
+Numeric ID of the integration already created under System > Integrations.,Numeric ID of the integration already created under System > Integrations.
+Off by default to avoid alarm: evaluate case by case.,Off by default to avoid alarm: evaluate case by case.
+Off by default: deletion is destructive and should be enabled deliberately after defining the required (fiscal/legal) retention periods.,Off by default: deletion is destructive and should be enabled deliberately after defining the required (fiscal/legal) retention periods.
 Official provider website,服务商官方网站
 "Open the order in backend: <a href=""%url"">%url</a>","在后台打开订单：<a href=""%url"">%url</a>"
 Operation cancelled.,操作已取消。
 Order ID,订单编号
 Order confirmation,订单确认
 Order contract,订单合同
+Order link,Order link
+Order number,Order number
+"Order with id ""%1"" does not exist.","Order with id ""%1"" does not exist."
 Order: #%increment_id,订单：#%increment_id
+Outbound notifications to external systems about document events.,Outbound notifications to external systems about document events.
+Outbound notifications to external systems on document events.,Outbound notifications to external systems on document events.
 Outcome: %status,结果：%status
 PDF and personal data deleted at the end of the retention period.,保留期结束后，PDF 及个人数据已删除。
+PDF loading error.,PDF loading error.
 PDF not available for this document.,此文档没有可用的PDF。
 Page,页码
 Password,密码
 Pending,待处理
 Pending signature,待签署
+Place signature on PDF,Place signature on PDF
 Platform URL,平台 URL
 Position signature on PDF,在PDF上放置签名
 Preference saved.,偏好设置已保存。
-Previous,返回
+Prepaid Credit Package (Pool),Prepaid Credit Package (Pool)
 Previous,返回
 Price,价格
+Process ID,Process ID
 Processing of a signature document ended in error and requires manual intervention.,一份签名文档的处理已出错，需要人工干预。
 Product,产品
+Provider Quotas & Consumption,Provider Quotas & Consumption
 Provider status,提供商状态
 Provider: %provider,服务商：%provider
+Quota Model,Quota Model
+Quota tracking disabled.,Quota tracking disabled.
+RSA Private Key,RSA Private Key
+RSA Private Key (PEM),RSA Private Key (PEM)
 Raw status returned by WsSign → internal document status. Unmapped statuses are logged so they can be added here.,WsSign 返回的原始状态 → 文档内部状态。未映射的状态会记录到日志中，以便在此处补充。
+Regenerate / Resend,Regenerate / Resend
+Regenerate and resend this document?,Regenerate and resend this document?
+Remaining:,Remaining:
 Reminder template (customer),催签模板（客户）
 Reminder: Sign your contract (order %increment_id),提醒：签署您的合同（订单 %increment_id）
 Reminders for documents awaiting signature.,待签署文档的催签。
+Reminders for documents pending signature.,Reminders for documents pending signature.
+Required for Service Account JWT authentication.,Required for Service Account JWT authentication.
 Retention days,保留天数
 SKU,SKU
+Save integration,Save integration
+Save subscription,Save subscription
 Save template,保存模板
 Saving...,正在保存……
+"Secret key used to sign the X-Signature header, whose value is sha256= followed by the HMAC-SHA256 hex digest. On edit, leave empty to keep the current secret.","Secret key used to sign the X-Signature header, whose value is sha256= followed by the HMAC-SHA256 hex digest. On edit, leave empty to keep the current secret."
 Select signature position by dragging the mouse to draw a box on the PDF page.,通过拖拽鼠标在PDF页面上画一个方框来选择签名位置。
+Select signature position by dragging to draw a box on the PDF page.,Select signature position by dragging to draw a box on the PDF page.
+Select the Store View to receive webhooks for (leave empty for all stores).,Select the Store View to receive webhooks for (leave empty for all stores).
+Send a notification to the admin if the document remains unsigned. Enabled by default.,Send a notification to the admin if the document remains unsigned. Enabled by default.
+Send an email to the admin when a webhook delivery exhausts its attempts. Enabled by default.,Send an email to the admin when a webhook delivery exhausts its attempts. Enabled by default.
+Send configured webhooks to active subscriptions. Disabled by default.,Send configured webhooks to active subscriptions. Disabled by default.
+Send escalation to admin,Send escalation to admin
 Send escalation to the admin,向管理员发送升级通知
+Send periodic emails to the customer to remind them to sign. Disabled by default.,Send periodic emails to the customer to remind them to sign. Disabled by default.
+Send reminders to customer,Send reminders to customer
 Send reminders to the customer,向客户发送催签邮件
+Send warning notification when remaining quota drops below this percentage (e.g. 15).,Send warning notification when remaining quota drops below this percentage (e.g. 15).
 Sender,发件人
 Sends a notification to the admin if the document remains unsigned. Enabled by default.,如果文档保持未签署状态，则向管理员发送通知。默认启用。
+Sends an email to the admin when a webhook delivery exhausts its attempts. Enabled by default.,Sends an email to the admin when a webhook delivery exhausts its attempts. Enabled by default.
 Sends periodic emails to the customer to remind them to sign. Disabled by default.,定期向客户发送电子邮件以提醒他们签署。默认禁用。
+Sends the configured webhooks to active subscriptions. Disabled by default.,Sends the configured webhooks to active subscriptions. Disabled by default.
 Sent by the provider in the signing invitation.,由提供商在签名邀请中发送。
 Sent for signature,已发送签名
+Sent in the Adobe Acrobat Sign notification email.,Sent in the Adobe Acrobat Sign notification email.
+Sent in the body of the DocuSign notification email.,Sent in the body of the DocuSign notification email.
+Sign contract for order #%1,Sign contract for order #%1
+Signature API Consumers,Signature API Consumers
+Signature Provider Quota Warning: %1,Signature Provider Quota Warning: %1
 Signature document generation queued for %1 order(s).,已为%1个订单加入签名文档生成队列。
 Signature document generation request has been queued.,签名文档生成请求已受理。
 Signature document templates,签名文档模板
 Signature documents,签名文档
 Signature expiration (days),签名过期时间（天）
+Signature provider,Signature provider
 "Signature provider ""%1"" is not registered.",签名提供商“%1”未注册。
 Signature providers,签名提供商
+Signature tag color (PDF Builder),Signature tag color (PDF Builder)
 Signature type,签名类型
-Signed,已签名
 Signed,已签署
 Signed contracts,已签名合同
 Signer email,签署人邮箱
 Signer email missing or invalid.,签署人邮箱缺失或无效。
+Signer's phone number is invalid.,Signer's phone number is invalid.
 Signer's phone number missing: required by WsSign for OTP via SMS.,缺少签署人电话号码：WsSign 的短信 OTP 需要此信息。
 Signer: %email,签署人：%email
 Signer\'s phone number is invalid.,签署人电话号码无效。
+Signer\'s phone number missing: required by WsSign for OTP via SMS.,Signer\'s phone number missing: required by WsSign for OTP via SMS.
 Signing the contract is mandatory for the products in your cart.,购物车中的商品必须签署合同。
+"Simple (SES), Advanced (AES), Qualified (QES) Electronic Signature","Simple (SES), Advanced (AES), Qualified (QES) Electronic Signature"
+Status,Status
 Status mapping,状态映射
+Store view,Store view
+Store views this integration is authorized to operate on via API.,Store views this integration is authorized to operate on via API.
+Target URL,Target URL
 Template %1 has no uploaded PDF file.,模板 %1 没有已上传的 PDF 文件。
 Template PDF file not found.,未找到模板的 PDF 文件。
 Template PDF file not found: %1,未找到模板 PDF 文件：%1
@@ -210,14 +393,22 @@ Template saved.,模板已保存。
 "Template with id ""%1"" does not exist.",ID 为“%1”的模板不存在。
 Tenant,租户
 Thank you! The signature has been received. You will get a confirmation once the document is available in your account.,感谢！签名已收到。文档在您的账户中可用后，您将收到确认通知。
+The HMAC secret is required for new subscriptions.,The HMAC secret is required for new subscriptions.
+The Integration ID is required.,The Integration ID is required.
 The PDF exceeds the maximum size of 10 MB.,PDF 超过最大 10 MB 的限制。
+The Target URL is required.,The Target URL is required.
+The Target URL must use the http or https scheme.,The Target URL must use the http or https scheme.
 The connector used for new documents once production mode is confirmed above. Configure the credentials in the provider's group.,在上方确认生产模式后用于新文档的连接器。请在对应提供商分组中配置凭据。
 The document has no associated template.,该文档没有关联的模板。
 The document has no generated PDF to send.,该文档没有可供发送的已生成 PDF。
 The dummy provider is not enabled: enable it explicitly in the configuration (test environments only).,Dummy 提供商未启用：请在配置中显式启用（仅限测试环境）。
+The entered Target URL is invalid.,The entered Target URL is invalid.
 The following document is pending digital signature beyond the configured escalation period.,以下文档在超出配置的升级期限后仍在等待电子签署。
+"The merge field tag ""{FIELD:%1}"" is not supported or registered.","The merge field tag ""{FIELD:%1}"" is not supported or registered."
 "The module is designed to be extended modularly. You can implement a custom connector for any digital signature provider (e.g. DocuSign, Namirial, InfoCert) by following our guide.",该模块设计为模块化扩展。您可以按照我们的指南为任何电子签名服务商（例如 DocuSign、Namirial、InfoCert）实现自定义连接器。
+The name is required.,The name is required.
 The provider often already sends its own signing invitation: disabled by default.,服务商通常已经发送了自己的签名邀请：默认关闭。
+The provider often already sends its own signing invitation: off by default.,The provider often already sends its own signing invitation: off by default.
 The requested temporary file does not exist.,请求的临时文件不存在。
 The signing process of a document ended with a negative outcome.,文档的签名流程已以负面结果结束。
 The template file is not a PDF.,模板文件不是 PDF。
@@ -225,18 +416,33 @@ The template has no PDF file uploaded for this store view.,该模板在此商店
 The template name is required.,模板名称为必填项。
 The temporary file does not exist.,临时文件不存在。
 The uploaded file is not a valid PDF.,上传的文件不是有效的 PDF。
+This integration no longer exists.,This integration no longer exists.
+This subscription no longer exists.,This subscription no longer exists.
 This template no longer exists.,此模板已不存在。
 "To complete the order, we invite you to follow the instructions received at %email from the signature provider.",要完成订单，请按照签署服务商发送到 %email 的说明进行操作。
+Total Quota / Included Signatures,Total Quota / Included Signatures
 Total generated,生成总数
+Total signatures included in prepaid package or monthly/annual allowance (e.g. 500).,Total signatures included in prepaid package or monthly/annual allowance (e.g. 500).
+Track signature credit consumption and send warning notifications when approaching limits.,Track signature credit consumption and send warning notifications when approaching limits.
+Unable to complete file validation.,Unable to complete file validation.
+Unable to delete Webhook subscription: %1,Unable to delete Webhook subscription: %1
+Unable to delete the API integration: %1,Unable to delete the API integration: %1
 Unable to delete the template: %1,无法删除模板：%1
 Unable to download the PDF: %1,无法下载PDF：%1
+Unable to find the subscription to delete.,Unable to find the subscription to delete.
 Unable to generate the preview: %1,无法生成预览：%1
 Unable to generate the signature documents: %1,无法生成签名文档：%1
 Unable to load temporary PDF.,无法加载临时PDF文件。
+Unable to load the temporary PDF.,Unable to load the temporary PDF.
 Unable to regenerate the document: %1,无法重新生成文档：%1
+Unable to save Webhook subscription: %1,Unable to save Webhook subscription: %1
+Unable to save the API integration: %1,Unable to save the API integration: %1
 Unable to save the document: %1,无法保存文档：%1
 Unable to save the template: %1,无法保存模板：%1
 Unable to save your choice.,无法保存您的选择。
+Unsupported PDF: /Pages is missing /Kids.,Unsupported PDF: /Pages is missing /Kids.
+Unsupported PDF: /Resources not found for the update.,Unsupported PDF: /Resources not found for the update.
+Unsupported PDF: catalog is missing /Pages.,Unsupported PDF: catalog is missing /Pages.
 Unsupported PDF: classic cross-reference section not found at the expected position.,不支持的 PDF：在预期位置未找到经典交叉引用表。
 Unsupported PDF: classic cross-reference table not found (save as PDF 1.4).,不支持的 PDF：未找到经典交叉引用表（请另存为 PDF 1.4）。
 Unsupported PDF: cross-reference chain has too many linked revisions (max %1).,不支持的 PDF：交叉引用链接的修订版本过多（最多 %1 个）。
@@ -252,20 +458,40 @@ Unsupported PDF: incomplete cross-reference stream dictionary.,不支持的 PDF�
 Unsupported PDF: incomplete cross-reference stream.,不支持的 PDF：交叉引用流不完整。
 Unsupported PDF: invalid cross-reference stream /W widths.,不支持的 PDF：交叉引用流 /W 宽度无效。
 "Unsupported PDF: it uses object compression (object streams), not handled in this version. Disable object compression when exporting and re-upload the file.",不支持的 PDF：使用了对象压缩（object stream），此版本尚不支持。请在导出时禁用对象压缩后重新上传文件。
+Unsupported PDF: nested page structure not handled by the builder.,Unsupported PDF: nested page structure not handled by the builder.
+Unsupported PDF: object %1 could not be resolved in the cross-reference table.,Unsupported PDF: object %1 could not be resolved in the cross-reference table.
+Unsupported PDF: object %1 is missing endobj.,Unsupported PDF: object %1 is missing endobj.
+Unsupported PDF: object %1 not recognized at the expected position.,Unsupported PDF: object %1 not recognized at the expected position.
+Unsupported PDF: page /Contents not recognized for tag insertion.,Unsupported PDF: page /Contents not recognized for tag insertion.
+Unsupported PDF: page content stream could not be resolved.,Unsupported PDF: page content stream could not be resolved.
+Unsupported PDF: page has no declared /Resources.,Unsupported PDF: page has no declared /Resources.
+Unsupported PDF: page is missing /Contents.,Unsupported PDF: page is missing /Contents.
+Unsupported PDF: rotated page (/Rotate %1) not handled by the builder.,Unsupported PDF: rotated page (/Rotate %1) not handled by the builder.
 Unsupported PDF: startxref not found.,不支持的 PDF：未找到 startxref。
 Unsupported PDF: trailer missing Size/Root.,不支持的 PDF：trailer 缺少 Size/Root。
 Unsupported PDF: trailer not found after the cross-reference table.,不支持的 PDF：在交叉引用表之后未找到 trailer。
+Unsupported PDF: unbalanced dictionary (missing closing delimiter).,Unsupported PDF: unbalanced dictionary (missing closing delimiter).
 Unsupported PDF: unrecognized PNG row filter in cross-reference stream (%1).,不支持的 PDF：交叉引用流中无法识别的 PNG 行过滤器（%1）。
 "Unsupported PDF: use a classic cross-reference table. Save/export the document as ""PDF 1.4"" and re-upload the file.",不支持的 PDF：请使用经典交叉引用表。将文档另存为/导出为“PDF 1.4”后重新上传。
 Update on the contract to sign (order %increment_id),关于待签合同的更新（订单 %increment_id）
 Used when the template does not specify its own trigger.,当模板未指定自己的触发器时使用。
 Username (owner),用户名（所有者）
+Validation Error,Validation Error
 View order,查看订单
 WARNING: enable only in test/development environments.,注意：仅可在测试/开发环境中启用。
 Want to integrate a different provider?,想要集成不同的服务商？
 Warning: the signature is still required to complete the order.,注意：完成订单仍需签名。
 We couldn't save your preference. Please try again.,无法保存偏好设置，请重试。
 We kindly ask you to digitally sign the document related to your order.,请对您订单相关的文档进行数字签名。
+Webhook,Webhook
+Webhook Outbound Logs,Webhook Outbound Logs
+Webhook Subscriptions,Webhook Subscriptions
+Webhook delivery failed for document #%document_id (order #%order_increment_id).,Webhook delivery failed for document #%document_id (order #%order_increment_id).
+Webhook failure notification template,Webhook failure notification template
+Webhook subscription deleted successfully.,Webhook subscription deleted successfully.
+Webhook subscription not found.,Webhook subscription not found.
+Webhook subscription saved.,Webhook subscription saved.
+"Webhook subscription with id ""%1"" does not exist.","Webhook subscription with id ""%1"" does not exist."
 WsSign,WsSign
 WsSign: GUID missing from the upload response.,WsSign：上传响应中缺少 GUID。
 "WsSign: authentication failed, check the credentials and tenant.",WsSign：身份验证失败，请检查凭据和租户设置。
@@ -276,6 +502,7 @@ WsSign: invalid document store.,WsSign：文档所属店铺无效。
 "WsSign: non-JSON response during ""%1"".",WsSign：在“%1”期间返回了非 JSON 响应。
 WsSign: platform URL not configured or not HTTPS.,WsSign：平台 URL 未配置或非 HTTPS。
 "WsSign: request rejected during ""%1"" (HTTP %2).",WsSign：在“%1”期间请求被拒绝（HTTP %2）。
+WsSign: status missing from the provider's response.,WsSign: status missing from the provider's response.
 WsSign: status missing from the provider\'s response.,WsSign：提供商响应中缺少状态信息。
 "WsSign: temporary service error during ""%1"" (HTTP %2).",WsSign：在“%1”期间发生临时服务错误（HTTP %2）。
 WsSign: the document has no started process.,WsSign：该文档尚未启动流程。
@@ -292,11 +519,18 @@ Zoom -,缩小
 [Digital Signature] Document #%document_id %status (order %increment_id),[电子签名] 文档 #%document_id %status（订单 %increment_id）
 [Digital Signature] Document error #%document_id (order %increment_id),[电子签名] 文档错误 #%document_id（订单 %increment_id）
 [Digital Signature] Reminder: Document #%document_id pending signature (order %increment_id),[电子签署] 提醒：文档 #%document_id 等待签署（订单 %increment_id）
+[Digital Signature] Webhook failed: document #%document_id (order %order_increment_id),[Digital Signature] Webhook failed: document #%document_id (order %order_increment_id)
 day,天
 days,天
+historical,historical
+network error,network error
 of,/
 pdf.js CDN URL,pdf.js CDN 地址
+pdf.js Library Source,pdf.js Library Source
 pdf.js library source,pdf.js 库来源
+permanent error,permanent error
+provider down,provider down
+temporary error,temporary error
 the contract for your order #%increment_id has been signed digitally successfully.,您的订单 #%increment_id 的合同已成功完成电子签名。
 the contract for your order #%increment_id is ready to be signed digitally.,您的订单 #%increment_id 的合同已准备好进行电子签名。
 the signing process for the contract of your order #%increment_id ended with outcome: %status.,您订单 #%increment_id 合同的签名流程已结束，结果为：%status。

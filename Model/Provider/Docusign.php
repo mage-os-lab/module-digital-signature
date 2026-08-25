@@ -158,7 +158,7 @@ class Docusign implements SignProviderInterface
             return;
         }
         $storeId = $document->getStoreId();
-        $this->client->voidEnvelope($storeId, $envelopeId, 'Richiesta annullamento/rigenerazione da Mage-OS.');
+        $this->client->voidEnvelope($storeId, $envelopeId, 'Cancellation/regeneration requested from Mage-OS.');
     }
 
     public function mapStatus(string $providerStatus): ?string

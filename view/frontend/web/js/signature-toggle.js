@@ -1,6 +1,6 @@
 /**
- * Invia in AJAX la scelta opt-in firma digitale al cambiare del checkbox.
- * Usato dal tema Luma (Hyva usa Alpine inline nel proprio template).
+ * Sends the digital signature opt-in choice via AJAX when the checkbox changes.
+ * Used by the Luma theme (Hyva uses inline Alpine in its own template).
  */
 define(['jquery', 'Magento_Ui/js/modal/alert', 'mage/translate'], function ($, alert, $t) {
     'use strict';

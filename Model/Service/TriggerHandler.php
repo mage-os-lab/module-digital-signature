@@ -165,7 +165,7 @@ class TriggerHandler
             ) {
                 return;
             }
-            $this->logger->error('DigitalSignature: errore creazione documento: ' . $e->getMessage());
+            $this->logger->error('DigitalSignature: error creating document: ' . $e->getMessage());
 
             return;
         }
@@ -175,7 +175,7 @@ class TriggerHandler
             'status_change',
             null,
             Status::PENDING,
-            sprintf('Documento creato dal trigger "%s"', $triggerCode)
+            sprintf('Document created by trigger "%s"', $triggerCode)
         );
         $this->publisher->publishProcess((int)$document->getDocumentId());
     }

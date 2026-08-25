@@ -78,7 +78,7 @@ class Client
 
         if (($data['message'] ?? '') !== 'DOCUMENT_ADDED') {
             throw ProviderException::permanent(
-                __('WsSign: document upload rejected (%1).', (string)($data['message'] ?? 'risposta sconosciuta'))
+                __('WsSign: document upload rejected (%1).', (string)($data['message'] ?? 'unknown response'))
             );
         }
         $guid = $data['data']['documents'][0]['guid'] ?? null;

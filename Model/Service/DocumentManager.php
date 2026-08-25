@@ -114,7 +114,7 @@ class DocumentManager
                 'error',
                 null,
                 null,
-                'Annullamento lato provider non riuscito: ' . $e->getMessage()
+                'Provider-side cancellation failed: ' . $e->getMessage()
             );
         }
     }

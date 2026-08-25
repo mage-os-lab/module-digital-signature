@@ -2,6 +2,8 @@
 
 Digital signature of order contracts through external providers (WsSign and others)
 
+**[View the presentation page →](https://mageos-digitalsignature.sthdev04.myvdc.it/)**
+
 ---
 
 ## Overview
@@ -131,4 +133,4 @@ Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed re
 
 ## License
 
-The MIT License (MIT). Please see [License File](src/LICENSE) for more information.
+The MIT License (MIT). Please see [License File](LICENSE) for more information.

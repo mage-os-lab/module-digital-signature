@@ -325,6 +325,33 @@
                         <backend_model>Magento\Config\Model\Config\Backend\Serialized\ArraySerialized</backend_model>
                         <depends><field id="enabled">1</field></depends>
                     </field>
+                    <field id="quota_enabled" translate="label comment" type="select" sortOrder="200"
+                           showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Enable Quota Tracking</label>
+                        <comment>Track signature credit consumption and send warning notifications when approaching limits.</comment>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        <depends><field id="enabled">1</field></depends>
+                    </field>
+                    <field id="quota_type" translate="label comment" type="select" sortOrder="210"
+                           showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Quota Model</label>
+                        <source_model>MageOS\DigitalSignature\Model\Config\Source\QuotaType</source_model>
+                        <depends><field id="quota_enabled">1</field></depends>
+                    </field>
+                    <field id="total_quota" translate="label comment" type="text" sortOrder="220"
+                           showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Total Quota / Included Signatures</label>
+                        <comment>Total signatures included in prepaid package or monthly/annual allowance (e.g. 500).</comment>
+                        <validate>validate-digits</validate>
+                        <depends><field id="quota_enabled">1</field></depends>
+                    </field>
+                    <field id="alert_threshold_percent" translate="label comment" type="text" sortOrder="230"
+                           showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Alert Threshold (%)</label>
+                        <comment>Send warning notification when remaining quota drops below this percentage (e.g. 15).</comment>
+                        <validate>validate-digits</validate>
+                        <depends><field id="quota_enabled">1</field></depends>
+                    </field>
                 </group>
                 <group id="docusign" translate="label comment" type="text" sortOrder="12"
                        showInDefault="1" showInWebsite="1" showInStore="1">
@@ -390,6 +417,33 @@
                         <comment>Sent in the body of the DocuSign notification email.</comment>
                         <depends><field id="enabled">1</field></depends>
                     </field>
+                    <field id="quota_enabled" translate="label comment" type="select" sortOrder="200"
+                           showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Enable Quota Tracking</label>
+                        <comment>Track signature credit consumption and send warning notifications when approaching limits.</comment>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        <depends><field id="enabled">1</field></depends>
+                    </field>
+                    <field id="quota_type" translate="label comment" type="select" sortOrder="210"
+                           showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Quota Model</label>
+                        <source_model>MageOS\DigitalSignature\Model\Config\Source\QuotaType</source_model>
+                        <depends><field id="quota_enabled">1</field></depends>
+                    </field>
+                    <field id="total_quota" translate="label comment" type="text" sortOrder="220"
+                           showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Total Quota / Included Signatures</label>
+                        <comment>Total signatures included in prepaid package or monthly/annual allowance (e.g. 500).</comment>
+                        <validate>validate-digits</validate>
+                        <depends><field id="quota_enabled">1</field></depends>
+                    </field>
+                    <field id="alert_threshold_percent" translate="label comment" type="text" sortOrder="230"
+                           showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Alert Threshold (%)</label>
+                        <comment>Send warning notification when remaining quota drops below this percentage (e.g. 15).</comment>
+                        <validate>validate-digits</validate>
+                        <depends><field id="quota_enabled">1</field></depends>
+                    </field>
                 </group>
                 <group id="adobesign" translate="label comment" type="text" sortOrder="14"
                        showInDefault="1" showInWebsite="1" showInStore="1">
@@ -445,6 +499,33 @@
                         <label>Message for the signer</label>
                         <comment>Sent in the Adobe Acrobat Sign notification email.</comment>
                         <depends><field id="enabled">1</field></depends>
+                    </field>
+                    <field id="quota_enabled" translate="label comment" type="select" sortOrder="200"
+                           showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Enable Quota Tracking</label>
+                        <comment>Track signature credit consumption and send warning notifications when approaching limits.</comment>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        <depends><field id="enabled">1</field></depends>
+                    </field>
+                    <field id="quota_type" translate="label comment" type="select" sortOrder="210"
+                           showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Quota Model</label>
+                        <source_model>MageOS\DigitalSignature\Model\Config\Source\QuotaType</source_model>
+                        <depends><field id="quota_enabled">1</field></depends>
+                    </field>
+                    <field id="total_quota" translate="label comment" type="text" sortOrder="220"
+                           showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Total Quota / Included Signatures</label>
+                        <comment>Total signatures included in prepaid package or monthly/annual allowance (e.g. 500).</comment>
+                        <validate>validate-digits</validate>
+                        <depends><field id="quota_enabled">1</field></depends>
+                    </field>
+                    <field id="alert_threshold_percent" translate="label comment" type="text" sortOrder="230"
+                           showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Alert Threshold (%)</label>
+                        <comment>Send warning notification when remaining quota drops below this percentage (e.g. 15).</comment>
+                        <validate>validate-digits</validate>
+                        <depends><field id="quota_enabled">1</field></depends>
                     </field>
                 </group>
                 <group id="dummy" translate="label comment" type="text" sortOrder="20"

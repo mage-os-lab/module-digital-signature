@@ -8,9 +8,12 @@ use MageOS\DigitalSignature\Api\DocumentRepositoryInterface;
 use MageOS\DigitalSignature\Api\DocumentStorageInterface;
 use MageOS\DigitalSignature\Api\SignProviderPoolInterface;
 use MageOS\DigitalSignature\Exception\ProviderException;
+use MageOS\DigitalSignature\Model\Config\Source\ExceededBehavior;
 use MageOS\DigitalSignature\Model\Document\Status;
 use MageOS\DigitalSignature\Model\Notification\Notifier;
 use MageOS\DigitalSignature\Model\Pdf\TagReplacer;
+use MageOS\DigitalSignature\Model\Provider\ProviderConfig;
+use MageOS\DigitalSignature\Model\Quota\Calculator;
 use MageOS\DigitalSignature\Model\ResourceModel\Template as TemplateResource;
 use Magento\Framework\App\Filesystem\DirectoryList;
 use Magento\Framework\Exception\LocalizedException;
@@ -36,7 +39,9 @@ class DocumentProcessor
         private readonly Notifier $notifier,
         private readonly LoggerInterface $logger,
         private readonly \Magento\Sales\Api\OrderRepositoryInterface $orderRepository,
-        private readonly \Magento\Sales\Model\ResourceModel\Order\Invoice\CollectionFactory $invoiceCollectionFactory
+        private readonly \Magento\Sales\Model\ResourceModel\Order\Invoice\CollectionFactory $invoiceCollectionFactory,
+        private readonly Calculator $quotaCalculator,
+        private readonly ProviderConfig $providerConfig
     ) {
     }
 
@@ -121,7 +126,7 @@ class DocumentProcessor
             'status_change',
             $previousStatus,
             Status::GENERATED,
-            'PDF generato dal template'
+            'PDF generated from the template'
         );
     }
 
@@ -136,6 +141,7 @@ class DocumentProcessor
         if ($pdfPath === null) {
             throw new LocalizedException(__('The document has no generated PDF to send.'));
         }
+        $this->assertQuotaAvailable($document);
         $provider = $this->providerPool->get($document->getProviderCode());
 
         // Plaintext token only transient: the hash goes into the DB
@@ -155,12 +161,43 @@ class DocumentProcessor
             'status_change',
             $previousStatus,
             Status::SENT,
-            'Processo di firma avviato presso ' . $document->getProviderCode(),
+            'Signature process started at ' . $document->getProviderCode(),
             $result->getRawResponse()
         );
 
         // Document ready for signature: notification to the customer (if enabled)
         $this->notifier->notifyDocumentReady($document);
+    }
+
+    /**
+     * Blocks dispatch when the provider quota is exhausted and configured to
+     * block (`exceeded_behavior = block_dispatch`). Documents are counted by
+     * DB status (see Calculator), so the just-generated document itself is
+     * not yet counted: this check only sees consumption from prior sends.
+     *
+     * @throws ProviderException
+     */
+    private function assertQuotaAvailable(DocumentInterface $document): void
+    {
+        $providerCode = $document->getProviderCode();
+        $status = $this->quotaCalculator->calculate($providerCode, (int)$document->getStoreId());
+        if (!$status->isQuotaEnabled() || !$status->isExhausted()) {
+            return;
+        }
+
+        $behavior = (string)($this->providerConfig->get($providerCode, 'exceeded_behavior', (int)$document->getStoreId())
+            ?: ExceededBehavior::ALLOW_AND_LOG);
+        if ($behavior !== ExceededBehavior::BLOCK_DISPATCH) {
+            return;
+        }
+
+        throw ProviderException::permanent(
+            __(
+                'Signature request blocked: provider "%1" has exhausted its quota (%2).',
+                $providerCode,
+                $status->getFormattedMessage()
+            )
+        );
     }
 
     /**
@@ -182,7 +219,7 @@ class DocumentProcessor
             // Unknown status: log it and wait for the mapping in the config
             $this->logger->warning(
                 sprintf(
-                    'DigitalSignature: stato provider non mappato "%s" (documento %d, provider %s)',
+                    'DigitalSignature: unmapped provider status "%s" (document %d, provider %s)',
                     $rawStatus,
                     (int)$document->getDocumentId(),
                     $document->getProviderCode()
@@ -193,7 +230,7 @@ class DocumentProcessor
                 'callback',
                 null,
                 null,
-                'Stato provider non mappato: ' . $rawStatus,
+                'Unmapped provider status: ' . $rawStatus,
                 $statusResult->getRawResponse()
             );
 
@@ -222,7 +259,7 @@ class DocumentProcessor
             'status_change',
             $previousStatus,
             $mapped,
-            'Stato aggiornato dal provider (raw: ' . $rawStatus . ')',
+            'Status updated by the provider (raw: ' . $rawStatus . ')',
             $statusResult->getRawResponse()
         );
 

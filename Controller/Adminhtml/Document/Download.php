@@ -64,7 +64,7 @@ class Download extends Action implements HttpGetActionInterface
 
             return $result;
         } catch (\Exception $e) {
-            $this->logger->error('DigitalSignature: download documento fallito: ' . $e->getMessage());
+            $this->logger->error('DigitalSignature: document download failed: ' . $e->getMessage());
             $this->messageManager->addErrorMessage(
                 __('Unable to download the PDF: %1', $e->getMessage())
             );

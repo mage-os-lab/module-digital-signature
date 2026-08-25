@@ -72,7 +72,7 @@ $options = $block->getPeriodOptions();
             </div>
         </div>
 
-        <!-- Card 5: Tempo Medio di Firma -->
+        <!-- Card 5: Avg Signing Time -->
         <div style="padding:16px;background-color:#faf5ff;border:1px solid #e9d5ff;border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,0.05);display:flex;flex-direction:column;justify-content:space-between;min-height:90px;">
             <span style="font-size:0.85em;font-weight:600;color:#6b21a8;text-transform:uppercase;letter-spacing:0.05em;display:block;margin-bottom:8px;">
                 <?= $block->escapeHtml(__('Avg signing time')) ?>
@@ -82,4 +82,60 @@ $options = $block->getPeriodOptions();
             </strong>
         </div>
     </div>
+
+    <?php $quotaStatuses = $block->getQuotaStatuses(); ?>
+    <?php if (!empty($quotaStatuses)): ?>
+        <div style="margin-top:20px;">
+            <h4 style="margin:0 0 12px 0;font-size:1.1em;font-weight:600;color:#2c3e50;">
+                <?= $block->escapeHtml(__('Provider Quotas & Consumption')) ?>
+            </h4>
+            <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(240px, 1fr));gap:16px;">
+                <?php foreach ($quotaStatuses as $status): ?>
+                    <?php
+                    $percent = $status->getPercentageUsed();
+                    $barColor = '#22c55e'; // Green
+                    $bgColor = '#f0fdf4';
+                    $borderColor = '#bbf7d0';
+                    $textColor = '#15803d';
+
+                    if ($percent >= 90.0 || $status->isExhausted()) {
+                        $barColor = '#ef4444'; // Red
+                        $bgColor = '#fef2f2';
+                        $borderColor = '#fecaca';
+                        $textColor = '#b91c1c';
+                    } elseif ($percent >= 70.0 || $status->isWarningThreshold()) {
+                        $barColor = '#f59e0b'; // Yellow
+                        $bgColor = '#fffbeb';
+                        $borderColor = '#fef3c7';
+                        $textColor = '#b45309';
+                    }
+                    ?>
+                    <div style="padding:16px;background-color:<?= $bgColor ?>;border:1px solid <?= $borderColor ?>;border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,0.05);">
+                        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
+                            <span style="font-weight:700;font-size:1em;color:<?= $textColor ?>;text-transform:uppercase;letter-spacing:0.05em;">
+                                <?= $block->escapeHtml(strtoupper($status->getProviderCode())) ?>
+                            </span>
+                            <span style="font-size:0.85em;font-weight:700;color:<?= $textColor ?>;">
+                                <?= $status->getUsedQuota() ?> / <?= $status->getTotalQuota() ?> (<?= $status->getPercentageUsed() ?>%)
+                            </span>
+                        </div>
+
+                        <!-- Progress Bar -->
+                        <div style="width:100%;background-color:#e5e7eb;height:8px;border-radius:4px;overflow:hidden;margin-bottom:8px;">
+                            <div style="width:<?= min(100.0, $status->getPercentageUsed()) ?>%;background-color:<?= $barColor ?>;height:100%;border-radius:4px;"></div>
+                        </div>
+
+                        <div style="font-size:0.85em;color:#555;display:flex;justify-content:space-between;">
+                            <span><?= $block->escapeHtml(__('Remaining:')) ?> <strong><?= $status->getRemainingQuota() ?></strong></span>
+                            <?php if ($status->isExhausted()): ?>
+                                <strong style="color:#b91c1c;"><?= $block->escapeHtml(__('EXHAUSTED')) ?></strong>
+                            <?php elseif ($status->isWarningThreshold()): ?>
+                                <strong style="color:#b45309;"><?= $block->escapeHtml(__('LOW QUOTA')) ?></strong>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+        </div>
+    <?php endif; ?>
 </div>

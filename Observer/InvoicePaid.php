@@ -25,10 +25,10 @@ class InvoicePaid implements ObserverInterface
             return;
         }
         try {
-            // sales_order_invoice_pay copre capture online e fatture offline (analisi §4)
+            // sales_order_invoice_pay covers both online capture and offline invoices (see §4 analysis)
             $this->triggerHandler->handle($invoice->getOrder(), Trigger::INVOICE_PAID);
         } catch (\Exception $e) {
-            $this->logger->error('DigitalSignature: errore trigger fattura pagata: ' . $e->getMessage());
+            $this->logger->error('DigitalSignature: invoice paid trigger error: ' . $e->getMessage());
         }
     }
 }

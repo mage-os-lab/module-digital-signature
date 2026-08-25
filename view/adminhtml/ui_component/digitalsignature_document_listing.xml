@@ -34,10 +34,36 @@
         </settings>
         <bookmark name="bookmarks"/>
         <columnsControls name="columns_controls"/>
+        <exportButton name="export_button">
+            <settings>
+                <options>
+                    <option name="csv" xsi:type="array">
+                        <item name="value" xsi:type="string">csv</item>
+                        <item name="label" xsi:type="string" translate="true">CSV</item>
+                        <item name="url" xsi:type="string">mui/export/gridToCsv</item>
+                    </option>
+                    <option name="xml" xsi:type="array">
+                        <item name="value" xsi:type="string">xml</item>
+                        <item name="label" xsi:type="string" translate="true">Excel XML</item>
+                        <item name="url" xsi:type="string">mui/export/gridToXml</item>
+                    </option>
+                    <option name="xlsx" xsi:type="array">
+                        <item name="value" xsi:type="string">xlsx</item>
+                        <item name="label" xsi:type="string" translate="true">Excel XLSX</item>
+                        <item name="url" xsi:type="string">digitalsignature/document/exportXlsx</item>
+                    </option>
+                </options>
+            </settings>
+        </exportButton>
         <filters name="listing_filters"/>
         <paging name="listing_paging"/>
     </listingToolbar>
     <columns name="digitalsignature_document_columns">
+        <selectionsColumn name="ids" sortOrder="0">
+            <settings>
+                <indexField>document_id</indexField>
+            </settings>
+        </selectionsColumn>
         <column name="document_id" sortOrder="10">
             <settings>
                 <filter>textRange</filter>

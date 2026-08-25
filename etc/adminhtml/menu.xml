@@ -2,20 +2,20 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="urn:magento:framework:Menu/etc/menu.xsd">
     <menu>
-        <add id="MageOS_DigitalSignature::digitalsignature" title="Firma Digitale" translate="title"
+        <add id="MageOS_DigitalSignature::digitalsignature" title="Digital Signature" translate="title"
              module="MageOS_DigitalSignature" sortOrder="55"
              resource="MageOS_DigitalSignature::digitalsignature"/>
-        <add id="MageOS_DigitalSignature::template" title="Template documenti" translate="title"
+        <add id="MageOS_DigitalSignature::template" title="Document templates" translate="title"
              module="MageOS_DigitalSignature" sortOrder="10"
              parent="MageOS_DigitalSignature::digitalsignature"
              action="digitalsignature/template/index"
              resource="MageOS_DigitalSignature::template"/>
-        <add id="MageOS_DigitalSignature::document" title="Documenti firma" translate="title"
+        <add id="MageOS_DigitalSignature::document" title="Signature documents" translate="title"
              module="MageOS_DigitalSignature" sortOrder="20"
              parent="MageOS_DigitalSignature::digitalsignature"
              action="digitalsignature/document/index"
              resource="MageOS_DigitalSignature::document"/>
-        <add id="MageOS_DigitalSignature::api_consumer" title="Integrazioni API" translate="title"
+        <add id="MageOS_DigitalSignature::api_consumer" title="API Integrations" translate="title"
              module="MageOS_DigitalSignature" sortOrder="25"
              parent="MageOS_DigitalSignature::digitalsignature"
              action="digitalsignature/apiconsumer/index"
@@ -25,7 +25,7 @@
              parent="MageOS_DigitalSignature::digitalsignature"
              action="digitalsignature/webhooksubscription/index"
              resource="MageOS_DigitalSignature::webhook_subscription"/>
-        <add id="MageOS_DigitalSignature::config" title="Configurazione" translate="title"
+        <add id="MageOS_DigitalSignature::config" title="Configuration" translate="title"
              module="MageOS_DigitalSignature" sortOrder="90"
              parent="MageOS_DigitalSignature::digitalsignature"
              action="adminhtml/system_config/edit/section/digital_signature"

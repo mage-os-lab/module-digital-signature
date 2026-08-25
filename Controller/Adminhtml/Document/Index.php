@@ -9,7 +9,7 @@ use Magento\Framework\App\Action\HttpGetActionInterface;
 use Magento\Framework\View\Result\PageFactory;
 
 /**
- * Signature documents grid (menu Firma Digitale > Documenti): list of all
+ * Signature documents grid (menu Digital Signature > Documents): list of all
  * documents generated for orders, with filters by status/provider/trigger.
  */
 class Index extends Action implements HttpGetActionInterface

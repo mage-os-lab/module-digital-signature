@@ -8,7 +8,7 @@ use Magento\Framework\DataObject;
 use Magento\Framework\Exception\LocalizedException;
 
 /**
- * Righe dinamiche "stato provider → stato interno" in configurazione.
+ * Dynamic "provider status → internal status" rows in configuration.
  */
 class StatusMapping extends AbstractFieldArray
 {

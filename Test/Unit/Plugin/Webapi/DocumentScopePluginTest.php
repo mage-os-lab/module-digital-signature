@@ -129,6 +129,16 @@ class DocumentScopePluginTest extends TestCase
 
                 return $this;
             }
+
+            public function setCurrentPage($currentPage)
+            {
+                return $this;
+            }
+
+            public function setPageSize($pageSize)
+            {
+                return $this;
+            }
         };
     }
 }

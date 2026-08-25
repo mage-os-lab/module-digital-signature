@@ -1,7 +1,7 @@
 /**
- * Componente KO della minicart (tema Luma): mostra il checkbox opt-in firma
- * leggendo la customer-data section digitalsignature-signature e ne persiste la
- * scelta tramite l'endpoint AJAX, ricaricando la section.
+ * KO component of the minicart (Luma theme): shows the signature opt-in checkbox
+ * by reading the digitalsignature-signature customer-data section, and persists the
+ * choice via the AJAX endpoint, reloading the section.
  */
 define([
     'ko',

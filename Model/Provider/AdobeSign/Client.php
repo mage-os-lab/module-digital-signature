@@ -49,9 +49,9 @@ class Client
         $curl->addHeader('Content-Type', 'application/json');
 
         $payload = $this->json->serialize($agreementData);
-        $body = $this->execute($curl, 'POST', $url, $payload, 'creazione accordo');
+        $body = $this->execute($curl, 'POST', $url, $payload, 'agreement creation');
 
-        return $this->decodeJson($body, 'creazione accordo');
+        return $this->decodeJson($body, 'agreement creation');
     }
 
     /**
@@ -288,7 +288,7 @@ class Client
 
         throw ProviderException::permanent(
             __(
-                'Adobe Acrobat Sign: richiesta rifiutata durante "%1" (HTTP %2). Risposta: %3',
+                'Adobe Acrobat Sign: request rejected during "%1" (HTTP %2). Response: %3',
                 $operation,
                 $status,
                 $curl->getBody()
@@ -311,7 +311,7 @@ class Client
         }
         if (!is_array($data)) {
             throw ProviderException::permanent(
-                __('Adobe Acrobat Sign: struttura risposta inattesa durante "%1".', $operation)
+                __('Adobe Acrobat Sign: unexpected response structure during "%1".', $operation)
             );
         }
 

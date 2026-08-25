@@ -84,7 +84,7 @@ class DownloadSigned extends Action implements HttpGetActionInterface
 
             return $result;
         } catch (\Exception $e) {
-            $this->logger->error('DigitalSignature: download cliente fallito: ' . $e->getMessage());
+            $this->logger->error('DigitalSignature: customer download failed: ' . $e->getMessage());
 
             return $this->notFound();
         }

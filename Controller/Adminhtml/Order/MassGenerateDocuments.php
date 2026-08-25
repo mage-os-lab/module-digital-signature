@@ -44,7 +44,7 @@ class MassGenerateDocuments extends AbstractMassAction
                 $failed++;
                 $this->logger->error(
                     sprintf(
-                        'DigitalSignature: mass action ordine #%s fallita: %s',
+                        'DigitalSignature: mass action failed for order #%s: %s',
                         $order->getId(),
                         $e->getMessage()
                     )

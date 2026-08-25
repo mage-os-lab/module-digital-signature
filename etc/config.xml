@@ -52,19 +52,31 @@
                     <signature_type>OTP_SMS</signature_type>
                     <expiration_days>7</expiration_days>
                     <default_phone_prefix>+39</default_phone_prefix>
+                    <quota_enabled>0</quota_enabled>
+                    <quota_type>prepaid_pool</quota_type>
+                    <alert_threshold_percent>15</alert_threshold_percent>
                 </wssign>
                 <docusign>
                     <enabled>0</enabled>
                     <environment>demo</environment>
                     <expiration_days>7</expiration_days>
+                    <quota_enabled>0</quota_enabled>
+                    <quota_type>monthly_allowance</quota_type>
+                    <alert_threshold_percent>15</alert_threshold_percent>
                 </docusign>
                 <adobesign>
                     <enabled>0</enabled>
                     <expiration_days>7</expiration_days>
+                    <quota_enabled>0</quota_enabled>
+                    <quota_type>annual_allowance</quota_type>
+                    <alert_threshold_percent>15</alert_threshold_percent>
                 </adobesign>
                 <dummy>
                     <allow>0</allow>
                     <auto_sign_delay>60</auto_sign_delay>
+                    <quota_enabled>0</quota_enabled>
+                    <quota_type>prepaid_pool</quota_type>
+                    <alert_threshold_percent>15</alert_threshold_percent>
                 </dummy>
             </providers>
             <retention>

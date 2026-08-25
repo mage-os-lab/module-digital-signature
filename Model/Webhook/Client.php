@@ -42,7 +42,7 @@ class Client
         try {
             $curl->post($url, $payload);
         } catch (\Exception $e) {
-            return DeliveryResult::failure('Errore di rete: ' . $e->getMessage());
+            return DeliveryResult::failure('Network error: ' . $e->getMessage());
         }
 
         $status = $curl->getStatus();

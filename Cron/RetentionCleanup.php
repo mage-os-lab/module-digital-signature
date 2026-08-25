@@ -97,7 +97,7 @@ class RetentionCleanup
         try {
             $this->storage->delete($path);
         } catch (FileSystemException $e) {
-            $this->logger->error('DigitalSignature retention: errore eliminazione file: ' . $e->getMessage());
+            $this->logger->error('DigitalSignature retention: file deletion error: ' . $e->getMessage());
         }
     }
 }

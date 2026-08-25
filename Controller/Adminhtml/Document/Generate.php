@@ -39,7 +39,7 @@ class Generate extends Action implements HttpPostActionInterface
                 __('Signature document generation request has been queued.')
             );
         } catch (\Exception $e) {
-            $this->logger->error('DigitalSignature: generazione manuale fallita: ' . $e->getMessage());
+            $this->logger->error('DigitalSignature: manual generation failed: ' . $e->getMessage());
             $this->messageManager->addErrorMessage(
                 __('Unable to generate the signature documents: %1', $e->getMessage())
             );

@@ -74,7 +74,7 @@ class Preview extends Action implements HttpGetActionInterface
 
             return $result;
         } catch (\Exception $e) {
-            $this->logger->error('DigitalSignature: anteprima template fallita: ' . $e->getMessage());
+            $this->logger->error('DigitalSignature: template preview failed: ' . $e->getMessage());
             $this->messageManager->addErrorMessage(
                 __('Unable to generate the preview: %1', $e->getMessage())
             );

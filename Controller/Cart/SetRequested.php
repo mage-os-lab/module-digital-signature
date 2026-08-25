@@ -42,7 +42,7 @@ class SetRequested implements HttpPostActionInterface
 
             return $result->setData(['success' => true, 'requested' => $requested]);
         } catch (\Exception $e) {
-            $this->logger->error('DigitalSignature: errore salvataggio opt-in firma: ' . $e->getMessage());
+            $this->logger->error('DigitalSignature: error saving signature opt-in: ' . $e->getMessage());
 
             return $result->setData(['success' => false, 'message' => __('Unable to save your choice.')]);
         }

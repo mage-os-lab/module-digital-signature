@@ -14,5 +14,8 @@
         <job name="digitalsignature_reminder" instance="MageOS\DigitalSignature\Cron\SignatureReminder" method="execute">
             <schedule>0 2 * * *</schedule>
         </job>
+        <job name="digitalsignature_quota_check" instance="MageOS\DigitalSignature\Cron\QuotaCheck" method="execute">
+            <schedule>0 4 * * *</schedule>
+        </job>
     </group>
 </config>

@@ -42,9 +42,9 @@ class Client
         $curl->addHeader('Content-Type', 'application/json');
 
         $payload = $this->json->serialize($envelopeData);
-        $body = $this->execute($curl, 'POST', $url, $payload, 'creazione busta');
+        $body = $this->execute($curl, 'POST', $url, $payload, 'envelope creation');
 
-        return $this->decodeJson($body, 'creazione busta');
+        return $this->decodeJson($body, 'envelope creation');
     }
 
     /**
@@ -58,9 +58,9 @@ class Client
         $url = $session['base_url'] . '/restapi/v2.1/accounts/' . $session['account_id'] . '/envelopes/' . rawurlencode($envelopeId);
 
         $curl = $this->createCurlWithAuth($session['access_token']);
-        $body = $this->execute($curl, 'GET', $url, null, 'lettura stato busta');
+        $body = $this->execute($curl, 'GET', $url, null, 'envelope status reading');
 
-        return $this->decodeJson($body, 'lettura stato busta');
+        return $this->decodeJson($body, 'envelope status reading');
     }
 
     /**
@@ -103,7 +103,7 @@ class Client
             'voidedReason' => $reason
         ]);
 
-        $this->execute($curl, 'PUT', $url, $payload, 'annullamento busta', [404]);
+        $this->execute($curl, 'PUT', $url, $payload, 'envelope voiding', [404]);
     }
 
     /**
@@ -149,7 +149,7 @@ class Client
 
         if (empty($integrationKey) || empty($userId) || empty($privateKeyPem)) {
             throw ProviderException::permanent(
-                __('DocuSign: configurazione incompleta (Integration Key, User ID o Chiave Privata mancante).')
+                __('DocuSign: incomplete configuration (missing Integration Key, User ID or Private Key).')
             );
         }
 
@@ -173,8 +173,8 @@ class Client
             'assertion' => $jwt
         ]);
 
-        $tokenBody = $this->execute($curl, 'POST', $url, $payload, 'richiesta token OAuth');
-        $tokenData = $this->decodeJson($tokenBody, 'richiesta token OAuth');
+        $tokenBody = $this->execute($curl, 'POST', $url, $payload, 'OAuth token request');
+        $tokenData = $this->decodeJson($tokenBody, 'OAuth token request');
         $accessToken = $tokenData['access_token'] ?? null;
 
         if (!$accessToken) {
@@ -188,8 +188,8 @@ class Client
         $curlUserInfo->addHeader('Authorization', 'Bearer ' . $accessToken);
         $userInfoUrl = 'https://' . $authServer . '/oauth/userinfo';
 
-        $userInfoBody = $this->execute($curlUserInfo, 'GET', $userInfoUrl, null, 'lettura info utente');
-        $userInfoData = $this->decodeJson($userInfoBody, 'lettura info utente');
+        $userInfoBody = $this->execute($curlUserInfo, 'GET', $userInfoUrl, null, 'user info reading');
+        $userInfoData = $this->decodeJson($userInfoBody, 'user info reading');
 
         $accounts = $userInfoData['accounts'] ?? [];
         if (!is_array($accounts) || empty($accounts)) {
@@ -263,7 +263,7 @@ class Client
 
         $signature = '';
         if (!openssl_sign($signatureInput, $signature, $privateKey, OPENSSL_ALGO_SHA256)) {
-            throw new \RuntimeException('Errore nella firma OpenSSL del token JWT.');
+            throw new \RuntimeException('OpenSSL signing of the JWT token failed.');
         }
 
         $base64UrlSignature = $this->base64UrlEncode($signature);
@@ -342,7 +342,7 @@ class Client
 
         // 4xx: permanent error (wrong credentials, malformed payload, etc.)
         throw ProviderException::permanent(
-            __('DocuSign: richiesta rifiutata durante "%1" (HTTP %2). Risposta: %3', $operation, $status, $curl->getBody())
+            __('DocuSign: request rejected during "%1" (HTTP %2). Response: %3', $operation, $status, $curl->getBody())
         );
     }
 
@@ -360,7 +360,7 @@ class Client
             );
         }
         if (!is_array($data)) {
-            throw ProviderException::permanent(__('DocuSign: struttura risposta inattesa durante "%1".', $operation));
+            throw ProviderException::permanent(__('DocuSign: unexpected response structure during "%1".', $operation));
         }
 
         return $data;

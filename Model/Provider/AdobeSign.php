@@ -108,7 +108,7 @@ class AdobeSign implements SignProviderInterface
             return;
         }
         $storeId = $document->getStoreId();
-        $this->client->cancelAgreement($storeId, $agreementId, 'Richiesta annullamento/rigenerazione da Mage-OS.');
+        $this->client->cancelAgreement($storeId, $agreementId, 'Cancellation/regeneration requested from Mage-OS.');
     }
 
     public function mapStatus(string $providerStatus): ?string

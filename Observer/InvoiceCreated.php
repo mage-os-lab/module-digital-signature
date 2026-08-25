@@ -31,7 +31,7 @@ class InvoiceCreated implements ObserverInterface
         try {
             $this->triggerHandler->handle($invoice->getOrder(), Trigger::INVOICE_CREATED);
         } catch (\Exception $e) {
-            $this->logger->error('DigitalSignature: errore trigger creazione fattura: ' . $e->getMessage());
+            $this->logger->error('DigitalSignature: invoice creation trigger error: ' . $e->getMessage());
         }
     }
 }

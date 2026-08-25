@@ -6,6 +6,56 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [0.4.0] - 2026-08-24
+### Added
+- **Provider cost & quota tracking**: a `Quota\Calculator` computes consumed/remaining quota per
+  provider (WsSign, DocuSign, Adobe Sign, Dummy) from configurable quota type and limit, exposed
+  via `QuotaStatusInterface`; a `Provider Quotas & Consumption` panel on the Signature Documents
+  stats page shows a color-coded progress bar per provider (green/yellow/red) plus days remaining
+  until cycle reset. A daily/hourly `digitalsignature_quota_check` cron job raises an admin
+  notification and sends a `quota_warning` email once a provider crosses the warning or exhausted
+  threshold, with configurable behavior when quota is exceeded (`ExceededBehavior`): when set to
+  "Block new signature requests", `DocumentProcessor` refuses to dispatch to the provider once its
+  quota is exhausted, failing the document with a permanent error instead of silently overshooting.
+- **Document grid export**: an "Export ▾" dropdown on the Signature Documents admin grid exports the
+  currently filtered/searched rows to CSV, XML, or XLSX. All three formats share the grid's column
+  set and always exclude the generated/signed PDF paths and the callback token hash.
+
+### Fixed
+- **Remaining Italian comments and strings** (#1): translated the last leftover Italian text from the
+  EN codebase standardization pass — an untranslated `__()` error message in the DocuSign client, and
+  internal log/exception messages across 25 files (queue consumers, provider clients, controllers,
+  observers, notifier) that were missed because they are plain internal strings rather than `__()`
+  calls. User-facing translatable strings (`__()`, admin UI, email templates) were already fully
+  translated in 0.3.0; this closes out the remaining internal-only Italian text.
+- **Magento 2.4.5 compatibility**: `Controller/Adminhtml/WebhookSubscription/Edit.php` declared
+  `execute(): Page|Redirect`, a union return type. Magento 2.4.5's DI compiler
+  (`Interceptor::getReturnTypeValue()`) unconditionally calls `ReflectionType::getName()`, a
+  method `ReflectionUnionType` doesn't implement, so `setup:di:compile` crashed on this class —
+  and on 2.4.5 any admin controller with a union return type hits the same crash, since admin
+  controllers are routinely intercepted by core plugins. Changed the return type to
+  `\Magento\Framework\Controller\ResultInterface`, the interface both `Page` and `Redirect`
+  implement — Magento's own recommended pattern for controller `execute()` methods, and
+  unaffected by the compiler bug. Verified: `setup:di:compile` now completes cleanly against a
+  real Magento 2.4.5 install with this module installed.
+- **Document grid export (CSV/XML/XLSX)** (0.4.0 regression): all three formats failed with a
+  generic server error. CSV/XML (core Magento grid export) were broken by a missing
+  `selectionsColumn` on the listing, which the export button's JS needs to build its request;
+  XLSX (this module's own controller) declared itself GET-only while the grid always POSTs,
+  so `HttpMethodValidator` rejected every request before `execute()` ran.
+- **`composer.json` made the module uninstallable on every real Magento release** (found while
+  investigating backward compatibility): a single `>=103.0.4` floor had been copy-pasted onto
+  every `magento/module-*` dependency, but each of those packages versions independently of the
+  others — `magento/module-checkout`, `-config`, `-email`, `-media-storage`, `-quote`, `-store`
+  and `-ui` never reach 103.x on any Magento release, including the latest (2.4.9). Replaced with
+  per-package floors verified against the real Magento 2.4.4-2.4.9 dependency trees
+  (repo.magento.com); `composer require` now resolves cleanly across that whole range.
+
+### Verified
+- **Backward compatibility**: confirmed against real Magento installs across the whole
+  2.4.5-2.4.9 range (Composer resolution, `setup:install`, `setup:di:compile`, `setup:upgrade`,
+  storefront) — see the fixes above for the one real module bug this surfaced.
+
 ## [0.3.0]
 ### Added
 - **REST API for signature documents**: `getById`/`getList` (with standard search criteria) plus

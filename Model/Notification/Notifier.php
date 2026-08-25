@@ -145,7 +145,7 @@ class Notifier
             return;
         }
         $vars = $this->buildVars($document, $storeId);
-        $vars['error_message'] = sprintf('Webhook verso %s fallito: %s', $targetUrl, $message);
+        $vars['error_message'] = sprintf('Webhook to %s failed: %s', $targetUrl, $message);
         $recipient = (string)$this->scopeConfig->getValue(
             self::XML_PATH_ADMIN_RECIPIENT,
             ScopeInterface::SCOPE_STORE,
@@ -167,6 +167,24 @@ class Notifier
             $vars,
             $recipient
         );
+    }
+
+    /**
+     * Provider quota warning or exhaustion: notice to admin.
+     */
+    public function sendQuotaAlertEmail(\MageOS\DigitalSignature\Api\Data\QuotaStatusInterface $status, string $recipientEmail, int $storeId = 0): void
+    {
+        if ($recipientEmail === '') {
+            return;
+        }
+        $vars = [
+            'provider_code' => $status->getProviderCode(),
+            'total_quota' => $status->getTotalQuota(),
+            'used_quota' => $status->getUsedQuota(),
+            'remaining_quota' => $status->getRemainingQuota(),
+            'percentage_used' => $status->getPercentageUsed()
+        ];
+        $this->dispatch('digital_signature_notifications_quota_warning_template', $storeId, $vars, $recipientEmail);
     }
 
     private function sendToCustomer(DocumentInterface $document, string $templatePath, int $storeId): void
@@ -248,7 +266,7 @@ class Notifier
             $transport->sendMessage();
         } catch (\Throwable $e) {
             $this->logger->error(
-                sprintf('DigitalSignature: invio email "%s" fallito: %s', (string)$templateId, $e->getMessage())
+                sprintf('DigitalSignature: sending email "%s" failed: %s', (string)$templateId, $e->getMessage())
             );
         } finally {
             $this->inlineTranslation->resume();

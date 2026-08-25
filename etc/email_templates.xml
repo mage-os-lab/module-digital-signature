@@ -44,8 +44,14 @@
               module="MageOS_DigitalSignature"
               area="frontend"/>
     <template id="digital_signature_webhooks_failure_notification_template"
-              label="Digital Signature - Webhook consegna fallita"
+              label="Digital Signature - Webhook delivery failed"
               file="webhook_failure.html"
+              type="html"
+              module="MageOS_DigitalSignature"
+              area="frontend"/>
+    <template id="digital_signature_notifications_quota_warning_template"
+              label="Digital Signature - Provider Quota Warning (admin)"
+              file="quota_warning.html"
               type="html"
               module="MageOS_DigitalSignature"
               area="frontend"/>

@@ -39,11 +39,11 @@ class RefreshConsumer
                 'error',
                 null,
                 null,
-                'Errore aggiornamento stato: ' . $e->getMessage()
+                'Status refresh error: ' . $e->getMessage()
             );
             $this->logger->warning(
                 sprintf(
-                    'DigitalSignature: refresh documento %d fallito: %s',
+                    'DigitalSignature: refresh failed for document %d: %s',
                     (int)$document->getDocumentId(),
                     $e->getMessage()
                 )

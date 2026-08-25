@@ -44,9 +44,12 @@ Advanced Electronic Signature (AES),Advanced Electronic Signature (AES)
 After this time the document is marked as signed.,After this time the document is marked as signed.
 "After this time, the document is marked as signed.","After this time, the document is marked as signed."
 Agreement expiration (days),Agreement expiration (days)
+Alert Threshold (%),Alert Threshold (%)
 All time,All time
+Allow dispatch and log warning,Allow dispatch and log warning
 Allow dummy provider,Allow dummy provider
 Analysis period:,Analysis period:
+Annual Allowance (Commitment),Annual Allowance (Commitment)
 Application ID (Client ID),Application ID (Client ID)
 Application ID retrieved from the Adobe Developer Console.,Application ID retrieved from the Adobe Developer Console.
 Are you sure you want to delete this webhook subscription?,Are you sure you want to delete this webhook subscription?
@@ -58,6 +61,7 @@ Available,Available
 Avg signing time,Avg signing time
 Back,Back
 Black,Black
+Block new signature requests,Block new signature requests
 CDN,CDN
 Callback IP allowlist,Callback IP allowlist
 Cancel,Cancel
@@ -137,6 +141,7 @@ DocuSign: status response is missing the status field.,DocuSign: status response
 DocuSign: the document has no started process (envelope).,DocuSign: the document has no started process (envelope).
 DocuSign: valid OAuth response but missing access token.,DocuSign: valid OAuth response but missing access token.
 Document #%1 is not active: use the active one to regenerate.,Document #%1 is not active: use the active one to regenerate.
+Document actions (API),Document actions (API)
 Document ID,Document ID
 Document Template,Document Template
 Document canceled for manual regeneration.,Document canceled for manual regeneration.
@@ -168,6 +173,7 @@ Dummy: the content to send is not a PDF.,Dummy: the content to send is not a PDF
 Dummy: the document has no generated PDF.,Dummy: the document has no generated PDF.
 E.g. https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/,E.g. https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/
 E.g. https://demo.wsign.cloud (HTTPS only).,E.g. https://demo.wsign.cloud (HTTPS only).
+EXHAUSTED,EXHAUSTED
 Edit,Edit
 "Edit Webhook Subscription ""%1""","Edit Webhook Subscription ""%1"""
 "Edit integration ""%1""","Edit integration ""%1"""
@@ -177,6 +183,7 @@ Email notifications,Email notifications
 Email of the WsSign owner account.,Email of the WsSign owner account.
 Emails sent to the customer and admin about signature document events.,Emails sent to the customer and admin about signature document events.
 Emails sent to the customer and the admin about signature document events.,Emails sent to the customer and the admin about signature document events.
+Enable Quota Tracking,Enable Quota Tracking
 Enable webhooks,Enable webhooks
 Enabled,Enabled
 Encrypted PDFs are not supported: remove the protection/password from the document and re-upload the file.,Encrypted PDFs are not supported: remove the protection/password from the document and re-upload the file.
@@ -228,6 +235,7 @@ Invalid signature parameters.,Invalid signature parameters.
 Invoice creation,Invoice creation
 Invoice paid,Invoice paid
 Item,Item
+LOW QUOTA,LOW QUOTA
 Last 30 days,Last 30 days
 Last 90 days,Last 90 days
 Last year,Last year
@@ -245,6 +253,7 @@ Maximum number of times to remind the customer.,Maximum number of times to remin
 Maximum retries,Maximum retries
 "Merge field ""%1"" is not registered.","Merge field ""%1"" is not registered."
 Message for the signer,Message for the signer
+Monthly Allowance,Monthly Allowance
 Name,Name
 New API integration,New API integration
 New Webhook Subscription,New Webhook Subscription
@@ -297,18 +306,23 @@ Place signature on PDF,Place signature on PDF
 Platform URL,Platform URL
 Position signature on PDF,Position signature on PDF
 Preference saved.,Preference saved.
+Prepaid Credit Package (Pool),Prepaid Credit Package (Pool)
 Previous,Previous
 Price,Price
 Process ID,Process ID
 Processing of a signature document ended in error and requires manual intervention.,Processing of a signature document ended in error and requires manual intervention.
 Product,Product
+Provider Quotas & Consumption,Provider Quotas & Consumption
 Provider status,Provider status
 Provider: %provider,Provider: %provider
+Quota Model,Quota Model
+Quota tracking disabled.,Quota tracking disabled.
 RSA Private Key,RSA Private Key
 RSA Private Key (PEM),RSA Private Key (PEM)
 Raw status returned by WsSign → internal document status. Unmapped statuses are logged so they can be added here.,Raw status returned by WsSign → internal document status. Unmapped statuses are logged so they can be added here.
 Regenerate / Resend,Regenerate / Resend
 Regenerate and resend this document?,Regenerate and resend this document?
+Remaining:,Remaining:
 Reminder template (customer),Reminder template (customer)
 Reminder: Sign your contract (order %increment_id),Reminder: Sign your contract (order %increment_id)
 Reminders for documents awaiting signature.,Reminders for documents awaiting signature.
@@ -332,6 +346,7 @@ Send escalation to the admin,Send escalation to the admin
 Send periodic emails to the customer to remind them to sign. Disabled by default.,Send periodic emails to the customer to remind them to sign. Disabled by default.
 Send reminders to customer,Send reminders to customer
 Send reminders to the customer,Send reminders to the customer
+Send warning notification when remaining quota drops below this percentage (e.g. 15).,Send warning notification when remaining quota drops below this percentage (e.g. 15).
 Sender,Sender
 Sends a notification to the admin if the document remains unsigned. Enabled by default.,Sends a notification to the admin if the document remains unsigned. Enabled by default.
 Sends an email to the admin when a webhook delivery exhausts its attempts. Enabled by default.,Sends an email to the admin when a webhook delivery exhausts its attempts. Enabled by default.
@@ -343,6 +358,7 @@ Sent in the Adobe Acrobat Sign notification email.,Sent in the Adobe Acrobat Sig
 Sent in the body of the DocuSign notification email.,Sent in the body of the DocuSign notification email.
 Sign contract for order #%1,Sign contract for order #%1
 Signature API Consumers,Signature API Consumers
+Signature Provider Quota Warning: %1,Signature Provider Quota Warning: %1
 Signature document generation queued for %1 order(s).,Signature document generation queued for %1 order(s).
 Signature document generation request has been queued.,Signature document generation request has been queued.
 Signature document templates,Signature document templates
@@ -404,7 +420,10 @@ This integration no longer exists.,This integration no longer exists.
 This subscription no longer exists.,This subscription no longer exists.
 This template no longer exists.,This template no longer exists.
 "To complete the order, we invite you to follow the instructions received at %email from the signature provider.","To complete the order, we invite you to follow the instructions received at %email from the signature provider."
+Total Quota / Included Signatures,Total Quota / Included Signatures
 Total generated,Total generated
+Total signatures included in prepaid package or monthly/annual allowance (e.g. 500).,Total signatures included in prepaid package or monthly/annual allowance (e.g. 500).
+Track signature credit consumption and send warning notifications when approaching limits.,Track signature credit consumption and send warning notifications when approaching limits.
 Unable to complete file validation.,Unable to complete file validation.
 Unable to delete Webhook subscription: %1,Unable to delete Webhook subscription: %1
 Unable to delete the API integration: %1,Unable to delete the API integration: %1

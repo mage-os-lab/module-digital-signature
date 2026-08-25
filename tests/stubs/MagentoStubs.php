@@ -203,6 +203,12 @@ namespace Magento\Framework\Api {
 
         /** @return $this */
         public function setFilterGroups(array $filterGroups);
+
+        /** @return $this */
+        public function setCurrentPage($currentPage);
+
+        /** @return $this */
+        public function setPageSize($pageSize);
     }
 }
 
@@ -250,12 +256,114 @@ namespace Magento\Framework\Api\Search {
     }
 }
 
+namespace Magento\Ui\Component\MassAction {
+    class Filter
+    {
+        public function getComponent()
+        {
+        }
+
+        public function prepareComponent($component)
+        {
+        }
+
+        public function applySelectionOnTargetProvider()
+        {
+        }
+    }
+}
+
+namespace Magento\Ui\Model\Export {
+    class MetadataProvider
+    {
+        public function getFields($component)
+        {
+        }
+
+        public function getOptions()
+        {
+        }
+
+        public function getHeaders($component)
+        {
+        }
+
+        public function getRowData($item, $fields, $options)
+        {
+        }
+
+        public function convertDate($item, $componentName)
+        {
+        }
+    }
+}
+
 namespace Magento\Framework\App {
     interface CacheInterface
     {
         public function load($identifier);
 
         public function save($data, $identifier, array $tags = [], $lifeTime = null);
+    }
+}
+
+namespace Magento\Framework\App\Filesystem {
+    class DirectoryList
+    {
+        public const MEDIA = 'media';
+        public const VAR_DIR = 'var';
+    }
+}
+
+namespace Magento\Framework\Filesystem\Directory {
+    interface ReadInterface
+    {
+        public function isExist($path);
+
+        public function readFile($path);
+    }
+}
+
+namespace Magento\Framework\Filesystem\Directory {
+    interface WriteInterface
+    {
+        public function create($path);
+
+        public function writeFile($path, $content);
+
+        public function getAbsolutePath($path);
+    }
+}
+
+namespace Magento\Framework {
+    class Filesystem
+    {
+        public function getDirectoryRead($directoryCode)
+        {
+        }
+
+        public function getDirectoryWrite($directoryCode)
+        {
+        }
+    }
+}
+
+namespace Magento\Framework\Math {
+    class Random
+    {
+        public function getRandomString($length, $chars = null)
+        {
+            return str_repeat('a', $length);
+        }
+    }
+}
+
+namespace Magento\Sales\Model\ResourceModel\Order\Invoice {
+    class CollectionFactory
+    {
+        public function create()
+        {
+        }
     }
 }
 
@@ -601,6 +709,49 @@ namespace Magento\Framework\Event {
     interface ObserverInterface
     {
         public function execute(Observer $observer);
+    }
+}
+
+namespace Magento\AdminNotification\Model {
+    class Inbox
+    {
+        public function addNotice($title, $description): self
+        {
+            return $this;
+        }
+    }
+
+    class InboxFactory
+    {
+        public function create(): Inbox
+        {
+            return new Inbox();
+        }
+    }
+}
+
+namespace Magento\Framework\Model\ResourceModel\Db\Collection {
+    abstract class AbstractCollection
+    {
+        public function addFieldToFilter($field, $condition = null)
+        {
+            return $this;
+        }
+
+        public function getSize(): int
+        {
+            return 0;
+        }
+    }
+}
+
+namespace MageOS\DigitalSignature\Model\ResourceModel\Document {
+    class CollectionFactory
+    {
+        public function create(): \MageOS\DigitalSignature\Model\ResourceModel\Document\Collection
+        {
+            return new \MageOS\DigitalSignature\Model\ResourceModel\Document\Collection();
+        }
     }
 }
 

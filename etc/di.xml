@@ -28,7 +28,7 @@
     <preference for="MageOS\DigitalSignature\Api\DocumentGenerationManagementInterface"
                 type="MageOS\DigitalSignature\Model\Service\DocumentGenerationManagement"/>
 
-    <!-- Registro dei connettori di firma: i nuovi provider si aggiungono qui -->
+    <!-- Signature connector registry: new providers are added here -->
     <type name="MageOS\DigitalSignature\Model\Provider\Pool">
         <arguments>
             <argument name="providers" xsi:type="array">
@@ -40,7 +40,7 @@
         </arguments>
     </type>
 
-    <!-- Registro dei merge field: i nuovi campi si aggiungono qui -->
+    <!-- Merge field registry: new fields are added here -->
     <type name="MageOS\DigitalSignature\Model\MergeField\Pool">
         <arguments>
             <argument name="providers" xsi:type="array">
@@ -54,10 +54,10 @@
     </type>
 
     <!--
-        Uploader PDF template: classe propria (non virtualType di Magento\Catalog\Model\ImageUploader)
-        per non ereditare il plugin core Media Gallery che, dopo ogni spostamento file, tenta di
-        importarlo come asset immagine (thumbnail) e fallisce su un PDF interrompendo il salvataggio
-        del template prima che pdf_path venga persistito.
+        PDF template uploader: its own class (not a virtualType of Magento\Catalog\Model\ImageUploader)
+        so as not to inherit the core Media Gallery plugin, which, after every file move, tries to
+        import it as an image asset (thumbnail) and fails on a PDF, interrupting the template save
+        before pdf_path is persisted.
     -->
     <type name="MageOS\DigitalSignature\Model\PdfUploader">
         <arguments>
@@ -72,7 +72,7 @@
         </arguments>
     </type>
 
-    <!-- Data source griglia template -->
+    <!-- Template grid data source -->
     <virtualType name="MageOS\DigitalSignature\Model\ResourceModel\Template\Grid\Collection"
                  type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
         <arguments>
@@ -81,7 +81,7 @@
         </arguments>
     </virtualType>
 
-    <!-- Data source griglia documenti firma -->
+    <!-- Signature documents grid data source -->
     <virtualType name="MageOS\DigitalSignature\Model\ResourceModel\Document\Grid\Collection"
                  type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
         <arguments>
@@ -89,7 +89,7 @@
             <argument name="resourceModel" xsi:type="string">MageOS\DigitalSignature\Model\ResourceModel\Document</argument>
         </arguments>
     </virtualType>
-    <!-- Data source griglia integrazioni API -->
+    <!-- API integrations grid data source -->
     <virtualType name="MageOS\DigitalSignature\Model\ResourceModel\ApiConsumer\Grid\Collection"
                  type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
         <arguments>
@@ -97,7 +97,7 @@
             <argument name="resourceModel" xsi:type="string">MageOS\DigitalSignature\Model\ResourceModel\ApiConsumer</argument>
         </arguments>
     </virtualType>
-    <!-- Data source griglia sottoscrizioni Webhook -->
+    <!-- Webhook subscriptions grid data source -->
     <virtualType name="MageOS\DigitalSignature\Model\ResourceModel\WebhookSubscription\Grid\Collection"
                  type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
         <arguments>

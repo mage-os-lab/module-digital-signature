@@ -2,7 +2,7 @@
 <schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
 
-    <!-- Template documento: PDF con tag placeholder, caricato dal merchant -->
+    <!-- Document template: PDF with placeholder tags, uploaded by the merchant -->
     <table name="mageos_digitalsignature_template" resource="default" engine="innodb"
            comment="DigitalSignature Document Template">
         <column xsi:type="int" name="template_id" unsigned="true" nullable="false" identity="true"
@@ -28,7 +28,7 @@
         </index>
     </table>
 
-    <!-- File PDF del template, per store view (store_id=0 => default) -->
+    <!-- Template PDF file, per store view (store_id=0 => default) -->
     <table name="mageos_digitalsignature_template_file" resource="default" engine="innodb"
            comment="DigitalSignature Template PDF per Store View">
         <column xsi:type="int" name="file_id" unsigned="true" nullable="false" identity="true" comment="File ID"/>
@@ -52,7 +52,7 @@
                     referenceTable="store" referenceColumn="store_id" onDelete="CASCADE"/>
     </table>
 
-    <!-- Assegnazione template (scope=product) ai prodotti -->
+    <!-- Template assignment (scope=product) to products -->
     <table name="mageos_digitalsignature_template_product" resource="default" engine="innodb"
            comment="DigitalSignature Template to Product Assignment">
         <column xsi:type="int" name="template_id" unsigned="true" nullable="false" comment="Template ID"/>
@@ -76,7 +76,7 @@
         </index>
     </table>
 
-    <!-- Documento firma: 1 record per processo di firma (riga ordine o ordine intero) -->
+    <!-- Signature document: 1 record per signature process (order item or whole order) -->
     <table name="mageos_digitalsignature_document" resource="default" engine="innodb"
            comment="DigitalSignature Signature Document">
         <column xsi:type="int" name="document_id" unsigned="true" nullable="false" identity="true"
@@ -150,7 +150,7 @@
         </index>
     </table>
 
-    <!-- Log eventi documento: storico stati, callback, errori -->
+    <!-- Document event log: status history, callbacks, errors -->
     <table name="mageos_digitalsignature_document_log" resource="default" engine="innodb"
            comment="DigitalSignature Document Event Log">
         <column xsi:type="bigint" name="log_id" unsigned="true" nullable="false" identity="true" comment="Log ID"/>
@@ -175,7 +175,7 @@
         </index>
     </table>
 
-    <!-- API Consumer: registrazione consumer API per accesso OAuth -->
+    <!-- API Consumer: API consumer registration for OAuth access -->
     <table name="mageos_digitalsignature_api_consumer" resource="default" engine="innodb"
            comment="DigitalSignature API Consumer (store scope mapping)">
         <column xsi:type="int" name="consumer_id" unsigned="true" nullable="false" identity="true"
@@ -195,7 +195,7 @@
         </constraint>
     </table>
 
-    <!-- API Consumer Store Mapping: associazione consumer ai store -->
+    <!-- API Consumer Store Mapping: consumer-to-store association -->
     <table name="mageos_digitalsignature_api_consumer_store" resource="default" engine="innodb"
            comment="DigitalSignature API Consumer Store Mapping">
         <column xsi:type="int" name="consumer_id" unsigned="true" nullable="false" comment="Consumer ID"/>
@@ -211,12 +211,12 @@
                     onDelete="CASCADE"/>
     </table>
 
-    <!-- Opt-in cliente: scelta "voglio il contratto da firmare" sul carrello.
-         Propagata a sales_order alla conversione quote->order (vedi fieldset.xml).
-         Letta server-side da TriggerHandler per i template facoltativi. -->
-    <!-- Tri-stato: NULL = scelta mai espressa (gli obbligatori partono pre-spuntati,
-         i facoltativi no), 0 = deselezionata esplicitamente, 1 = selezionata.
-         Nullable per distinguere "mai toccato" da "tolta dall'utente". -->
+    <!-- Customer opt-in: "I want the contract to sign" choice on the cart.
+         Propagated to sales_order on quote->order conversion (see fieldset.xml).
+         Read server-side by TriggerHandler for optional templates. -->
+    <!-- Tri-state: NULL = choice never expressed (mandatory ones start pre-checked,
+         optional ones don't), 0 = explicitly deselected, 1 = selected.
+         Nullable to distinguish "never touched" from "unchecked by the user". -->
     <table name="quote" resource="checkout" engine="innodb">
         <column xsi:type="smallint" name="digitalsignature_requested" unsigned="true" nullable="true"
                 comment="Customer requested digital signature (NULL=unset)"/>
@@ -226,7 +226,7 @@
                 comment="Customer requested digital signature (NULL=unset)"/>
     </table>
 
-    <!-- Webhook Subscription: registrazioni per notifiche push outbound -->
+    <!-- Webhook Subscription: registrations for outbound push notifications -->
     <table name="mageos_digitalsignature_webhook_subscription" resource="default" engine="innodb"
            comment="DigitalSignature Webhook Subscription">
         <column xsi:type="int" name="subscription_id" unsigned="true" nullable="false" identity="true"
@@ -243,7 +243,7 @@
         </constraint>
     </table>
 
-    <!-- Webhook Delivery: registro tentativi di invio webhook -->
+    <!-- Webhook Delivery: log of webhook delivery attempts -->
     <table name="mageos_digitalsignature_webhook_delivery" resource="default" engine="innodb"
            comment="DigitalSignature Webhook Delivery Attempt">
         <column xsi:type="int" name="delivery_id" unsigned="true" nullable="false" identity="true"

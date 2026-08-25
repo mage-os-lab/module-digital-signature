@@ -17,6 +17,7 @@ class StatsPanel extends Template
         Context $context,
         private readonly Aggregator $aggregator,
         private readonly PeriodSource $periodSource,
+        private readonly \MageOS\DigitalSignature\Model\Quota\Calculator $quotaCalculator,
         array $data = []
     ) {
         parent::__construct($context, $data);
@@ -39,6 +40,24 @@ class StatsPanel extends Template
         $period = $this->getActivePeriod();
         $range = $this->periodSource->getDateRange($period);
         return $this->aggregator->getSummary($range['from'], $range['to']);
+    }
+
+    /**
+     * Returns quota status results for enabled providers.
+     *
+     * @return \MageOS\DigitalSignature\Api\Data\QuotaStatusInterface[]
+     */
+    public function getQuotaStatuses(): array
+    {
+        $providers = ['wssign', 'docusign', 'adobesign', 'dummy'];
+        $statuses = [];
+        foreach ($providers as $providerCode) {
+            $status = $this->quotaCalculator->calculate($providerCode);
+            if ($status->isQuotaEnabled()) {
+                $statuses[] = $status;
+            }
+        }
+        return $statuses;
     }
 
     public function getActionUrl(): string

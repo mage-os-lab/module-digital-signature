@@ -36,7 +36,7 @@ class Regenerate extends Action implements HttpPostActionInterface
                 __('Document regenerated: new document #%1 is being processed.', $newId)
             );
         } catch (\Exception $e) {
-            $this->logger->error('DigitalSignature: rigenerazione fallita: ' . $e->getMessage());
+            $this->logger->error('DigitalSignature: regeneration failed: ' . $e->getMessage());
             $this->messageManager->addErrorMessage(
                 __('Unable to regenerate the document: %1', $e->getMessage())
             );

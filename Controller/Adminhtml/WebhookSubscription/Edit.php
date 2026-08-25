@@ -7,8 +7,8 @@ use MageOS\DigitalSignature\Api\WebhookSubscriptionRepositoryInterface;
 use Magento\Backend\App\Action;
 use Magento\Framework\App\Action\HttpGetActionInterface;
 use Magento\Framework\Controller\Result\Redirect;
+use Magento\Framework\Controller\ResultInterface;
 use Magento\Framework\Exception\NoSuchEntityException;
-use Magento\Framework\View\Result\Page;
 use Magento\Framework\View\Result\PageFactory;
 
 class Edit extends Action implements HttpGetActionInterface
@@ -23,7 +23,7 @@ class Edit extends Action implements HttpGetActionInterface
         parent::__construct($context);
     }
 
-    public function execute(): Page|Redirect
+    public function execute(): ResultInterface
     {
         $id = (int)$this->getRequest()->getParam('subscription_id');
         $resultPage = $this->resultPageFactory->create();

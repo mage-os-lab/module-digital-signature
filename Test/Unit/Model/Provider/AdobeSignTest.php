@@ -228,4 +228,20 @@ class AdobeSignTest extends TestCase
     {
         self::assertNull($this->provider->mapStatus('qualcosa-di-nuovo'));
     }
+
+    public function testMapStatusConfiguredMappingWinsOverHardcodedDefault(): void
+    {
+        $this->config->method('mapConfiguredStatus')->with(AdobeSign::CODE, 'SIGNED')
+            ->willReturn(Status::CANCELED);
+
+        self::assertSame(Status::CANCELED, $this->provider->mapStatus('SIGNED'));
+    }
+
+    public function testMapStatusUsesConfiguredMappingForNewStatus(): void
+    {
+        $this->config->method('mapConfiguredStatus')->with(AdobeSign::CODE, 'delegated')
+            ->willReturn(Status::SENT);
+
+        self::assertSame(Status::SENT, $this->provider->mapStatus('delegated'));
+    }
 }

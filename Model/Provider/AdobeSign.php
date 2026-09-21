@@ -113,6 +113,11 @@ class AdobeSign implements SignProviderInterface
 
     public function mapStatus(string $providerStatus): ?string
     {
+        $configured = $this->config->mapConfiguredStatus(self::CODE, $providerStatus);
+        if ($configured !== null) {
+            return $configured;
+        }
+
         // Mapping of Adobe Acrobat Sign agreement statuses to internal statuses
         return match ($providerStatus) {
             'OUT_FOR_SIGNATURE' => Status::SENT,

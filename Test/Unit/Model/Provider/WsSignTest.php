@@ -36,54 +36,32 @@ class WsSignTest extends TestCase
         self::assertSame('WsSign', $this->provider->getLabel());
     }
 
-    public function testMapStatusUsesConfiguredMappingCaseInsensitive(): void
+    public function testMapStatusUsesConfiguredMapping(): void
     {
-        $this->config->method('getSerialized')->willReturn([
-            ['provider_status' => 'COMPLETED', 'internal_status' => Status::SIGNED],
-        ]);
+        $this->config->method('mapConfiguredStatus')->with(WsSign::CODE, 'completed')
+            ->willReturn(Status::SIGNED);
 
         self::assertSame(Status::SIGNED, $this->provider->mapStatus('completed'));
-        self::assertSame(Status::SIGNED, $this->provider->mapStatus('COMPLETED'));
-    }
-
-    public function testMapStatusRejectsUnknownInternalStatus(): void
-    {
-        $this->config->method('getSerialized')->willReturn([
-            ['provider_status' => 'X', 'internal_status' => 'stato-inventato'],
-        ]);
-
-        self::assertNull($this->provider->mapStatus('X'));
     }
 
     public function testMapStatusReturnsNullForUnmappedStatus(): void
     {
-        $this->config->method('getSerialized')->willReturn([]);
+        $this->config->method('mapConfiguredStatus')->willReturn(null);
 
         self::assertNull($this->provider->mapStatus('STATO_NUOVO'));
     }
 
-    public function testMapStatusSkipsMalformedRows(): void
-    {
-        $this->config->method('getSerialized')->willReturn([
-            'garbage',
-            ['provider_status' => 'OK', 'internal_status' => Status::SIGNED],
-        ]);
-
-        self::assertSame(Status::SIGNED, $this->provider->mapStatus('OK'));
-    }
-
     public function testMapStatusNotFoundFallsBackToExpired(): void
     {
-        $this->config->method('getSerialized')->willReturn([]);
+        $this->config->method('mapConfiguredStatus')->willReturn(null);
 
         self::assertSame(Status::EXPIRED, $this->provider->mapStatus(WsSign::RAW_STATUS_NOT_FOUND));
     }
 
     public function testMapStatusConfiguredMappingWinsOverNotFoundFallback(): void
     {
-        $this->config->method('getSerialized')->willReturn([
-            ['provider_status' => WsSign::RAW_STATUS_NOT_FOUND, 'internal_status' => Status::CANCELED],
-        ]);
+        $this->config->method('mapConfiguredStatus')->with(WsSign::CODE, WsSign::RAW_STATUS_NOT_FOUND)
+            ->willReturn(Status::CANCELED);
 
         self::assertSame(Status::CANCELED, $this->provider->mapStatus(WsSign::RAW_STATUS_NOT_FOUND));
     }

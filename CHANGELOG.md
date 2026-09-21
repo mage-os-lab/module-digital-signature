@@ -6,6 +6,33 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [0.4.1] - 2026-09-21
+### Added
+- **Mage-OS 3.5.0 compatibility verified** (Magento 2.4.9 base, PHP 8.5): clean `composer require`,
+  `setup:install`, `setup:di:compile`, idempotent `setup:upgrade`, static content deploy and
+  module disable/enable, no errors in the logs, storefront (home, login, cart) working, the full
+  PHPUnit suite (312 tests) green on PHP 8.1 and PHP 8.5, and the Playwright admin flow passing.
+  No changes to the module code were required for this. A "Compatibility" section in the README now
+  lists the Magento, Mage-OS and PHP versions tested (Mage-OS 3.4.0 was verified natively earlier).
+- **Admin-configurable status mapping for DocuSign and Adobe Sign**: both connectors now resolve
+  the provider status to the internal status through `ProviderConfig::mapConfiguredStatus()` first
+  (the same grid WsSign already had), falling back to the built-in pairs only when nothing is
+  configured. The target is validated against the known internal statuses, so an admin can support
+  a new provider status without a code deploy, and a connector can no longer reference a
+  non-existent status constant.
+- **Warning when DocuSign is in Demo/Sandbox mode**: the DocuSign box in the provider configuration
+  shows a banner whenever the environment is not explicitly set to Production, every time the
+  section is opened (not only at save time).
+- Regression test asserting the cart signature checkbox stays wired to the current `cart.summary`
+  container.
+
+### Changed
+- **E2E script is now locale-independent**: `tests/e2e/pdf-builder-flow.js` matches admin labels
+  in both Italian and English (sign-in, menu, "New template", "Confirm Position", "Save", preview
+  download) instead of Italian only, so it runs against any admin language. New optional
+  environment variables `DS_E2E_CHROMIUM_PATH` and `DS_E2E_HOST_MAP` select a specific Chromium
+  build and map the test domain to a local port without editing `/etc/hosts`.
+
 ## [0.4.0] - 2026-08-24
 ### Added
 - **Provider cost & quota tracking**: a `Quota\Calculator` computes consumed/remaining quota per

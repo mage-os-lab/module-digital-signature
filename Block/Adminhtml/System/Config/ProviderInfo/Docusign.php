@@ -3,8 +3,24 @@ declare(strict_types=1);
 
 namespace MageOS\DigitalSignature\Block\Adminhtml\System\Config\ProviderInfo;
 
+use MageOS\DigitalSignature\Model\Provider\Docusign\EnvironmentWarning;
+use Magento\Backend\Block\Template\Context;
+
 class Docusign extends AbstractProviderInfo
 {
+    public function __construct(
+        Context $context,
+        private readonly EnvironmentWarning $environmentWarning,
+        array $data = []
+    ) {
+        parent::__construct($context, $data);
+    }
+
+    public function getDemoWarning(): ?string
+    {
+        return $this->environmentWarning->getMessage();
+    }
+
     /**
      * @return string
      */

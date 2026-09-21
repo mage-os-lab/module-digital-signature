@@ -417,6 +417,14 @@
                         <comment>Sent in the body of the DocuSign notification email.</comment>
                         <depends><field id="enabled">1</field></depends>
                     </field>
+                    <field id="status_mapping" translate="label comment" sortOrder="120"
+                           showInDefault="1" showInWebsite="0" showInStore="0">
+                        <label>Status mapping</label>
+                        <comment>Raw status returned by DocuSign → internal document status. Unmapped statuses are logged so they can be added here.</comment>
+                        <frontend_model>MageOS\DigitalSignature\Block\Adminhtml\Form\Field\StatusMapping</frontend_model>
+                        <backend_model>Magento\Config\Model\Config\Backend\Serialized\ArraySerialized</backend_model>
+                        <depends><field id="enabled">1</field></depends>
+                    </field>
                     <field id="quota_enabled" translate="label comment" type="select" sortOrder="200"
                            showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Enable Quota Tracking</label>
@@ -498,6 +506,14 @@
                            showInDefault="1" showInWebsite="1" showInStore="1">
                         <label>Message for the signer</label>
                         <comment>Sent in the Adobe Acrobat Sign notification email.</comment>
+                        <depends><field id="enabled">1</field></depends>
+                    </field>
+                    <field id="status_mapping" translate="label comment" sortOrder="120"
+                           showInDefault="1" showInWebsite="0" showInStore="0">
+                        <label>Status mapping</label>
+                        <comment>Raw status returned by Adobe Acrobat Sign → internal document status. Unmapped statuses are logged so they can be added here.</comment>
+                        <frontend_model>MageOS\DigitalSignature\Block\Adminhtml\Form\Field\StatusMapping</frontend_model>
+                        <backend_model>Magento\Config\Model\Config\Backend\Serialized\ArraySerialized</backend_model>
                         <depends><field id="enabled">1</field></depends>
                     </field>
                     <field id="quota_enabled" translate="label comment" type="select" sortOrder="200"

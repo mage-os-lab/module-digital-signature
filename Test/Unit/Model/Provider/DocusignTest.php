@@ -349,4 +349,20 @@ class DocusignTest extends TestCase
     {
         self::assertNull($this->provider->mapStatus('qualcosa-di-nuovo'));
     }
+
+    public function testMapStatusConfiguredMappingWinsOverHardcodedDefault(): void
+    {
+        $this->config->method('mapConfiguredStatus')->with(Docusign::CODE, 'completed')
+            ->willReturn(Status::CANCELED);
+
+        self::assertSame(Status::CANCELED, $this->provider->mapStatus('completed'));
+    }
+
+    public function testMapStatusUsesConfiguredMappingForNewStatus(): void
+    {
+        $this->config->method('mapConfiguredStatus')->with(Docusign::CODE, 'corrected')
+            ->willReturn(Status::SENT);
+
+        self::assertSame(Status::SENT, $this->provider->mapStatus('corrected'));
+    }
 }

@@ -163,6 +163,11 @@ class Docusign implements SignProviderInterface
 
     public function mapStatus(string $providerStatus): ?string
     {
+        $configured = $this->config->mapConfiguredStatus(self::CODE, $providerStatus);
+        if ($configured !== null) {
+            return $configured;
+        }
+
         return match ($providerStatus) {
             'sent' => Status::SENT,
             'delivered' => Status::SENT,

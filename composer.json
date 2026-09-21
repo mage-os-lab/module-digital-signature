@@ -3,7 +3,7 @@
     "description": "Digital signature of order contracts through external providers (WsSign, ...)",
     "type": "magento2-module",
     "license": "MIT",
-    "version": "0.4.0",
+    "version": "0.4.1",
     "authors": [
         {
             "name": "Nino Aratari",

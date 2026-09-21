@@ -62,4 +62,13 @@ abstract class AbstractProviderInfo extends Field
     {
         return null;
     }
+
+    /**
+     * Warning shown in the box when the provider is configured in a non-production
+     * environment (e.g. DocuSign demo/sandbox). Null = no warning for this provider.
+     */
+    public function getDemoWarning(): ?string
+    {
+        return null;
+    }
 }

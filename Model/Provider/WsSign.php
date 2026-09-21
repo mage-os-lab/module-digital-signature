@@ -134,16 +134,9 @@ class WsSign implements SignProviderInterface
 
     public function mapStatus(string $providerStatus): ?string
     {
-        // Mapping configurable by admin (dynamic rows provider_status → internal_status)
-        foreach ($this->config->getSerialized(self::CODE, 'status_mapping') as $row) {
-            if (!is_array($row)) {
-                continue;
-            }
-            if (strcasecmp((string)($row['provider_status'] ?? ''), $providerStatus) === 0) {
-                $internal = (string)($row['internal_status'] ?? '');
-
-                return array_key_exists($internal, Status::getLabels()) ? $internal : null;
-            }
+        $configured = $this->config->mapConfiguredStatus(self::CODE, $providerStatus);
+        if ($configured !== null) {
+            return $configured;
         }
         // Minimal fallback: 404 on the process = expired/cancelled on the provider side
         if ($providerStatus === self::RAW_STATUS_NOT_FOUND) {

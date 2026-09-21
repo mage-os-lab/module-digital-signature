@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace MageOS\DigitalSignature\Model\Provider;
 
+use MageOS\DigitalSignature\Model\Document\Status;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\Encryption\EncryptorInterface;
 use Magento\Framework\Serialize\Serializer\Json;
@@ -73,5 +74,27 @@ class ProviderConfig
         }
 
         return is_array($decoded) ? $decoded : [];
+    }
+
+    /**
+     * Looks up the admin-configured "status_mapping" rows for a provider status.
+     *
+     * Case-insensitive match on provider_status; the internal_status is validated
+     * against Status::getLabels() so a config typo cannot surface an invalid status.
+     */
+    public function mapConfiguredStatus(string $providerCode, string $providerStatus, ?int $storeId = null): ?string
+    {
+        foreach ($this->getSerialized($providerCode, 'status_mapping', $storeId) as $row) {
+            if (!is_array($row)) {
+                continue;
+            }
+            if (strcasecmp((string)($row['provider_status'] ?? ''), $providerStatus) === 0) {
+                $internal = (string)($row['internal_status'] ?? '');
+
+                return array_key_exists($internal, Status::getLabels()) ? $internal : null;
+            }
+        }
+
+        return null;
     }
 }

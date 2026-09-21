@@ -3,6 +3,7 @@
 $links = $block->getLinks();
 $isRecommended = $block->isRecommended();
 $recommendationText = $block->getRecommendationText();
+$demoWarning = $block->getDemoWarning();
 ?>
 <div class="digitalsignature-provider-info" style="display:flex;align-items:flex-start;gap:16px;padding:12px;max-width:760px;<?php if ($isRecommended): ?>border:1px solid #79a22e;border-radius:6px;background-color:#f6faf0;<?php endif; ?>">
     <span style="display:flex;align-items:center;justify-content:center;width:64px;height:64px;flex:0 0 auto;overflow:hidden;border-radius:4px;">
@@ -24,6 +25,11 @@ $recommendationText = $block->getRecommendationText();
         </div>
         <?php if ($isRecommended && $recommendationText): ?>
             <p style="margin:6px 0;font-weight:bold;color:#3d5115;"><?= $block->escapeHtml($recommendationText) ?></p>
+        <?php endif; ?>
+        <?php if ($demoWarning): ?>
+            <p style="margin:6px 0;font-size:0.9em;font-weight:bold;color:#8a6d3b;background-color:#fcf2df;border:1px solid #f0d9a8;border-radius:4px;padding:6px 10px;">
+                &#9888; <?= $block->escapeHtml($demoWarning) ?>
+            </p>
         <?php endif; ?>
         <p style="margin:6px 0;"><?= $block->escapeHtml($block->getDescription()) ?></p>
         <?php if ($links): ?>

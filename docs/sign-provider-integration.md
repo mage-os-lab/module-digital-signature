@@ -1,19 +1,17 @@
-# Guida per agenzie terze: sviluppare un nuovo provider di firma
+# Building a signature provider connector
 
-Questo documento spiega come un'agenzia terza può realizzare un connettore per un
-proprio servizio di firma elettronica/digitale (analogo a DocuSign, YouSign,
-Namirial, ecc.) compatibile con **MageOS_DigitalSignature**, senza modificare il
-codice del modulo core.
+This guide explains how to connect `MageOS_DigitalSignature` to another electronic/digital
+signature service (Namirial, InfoCert, Yousign, a regional provider...) without modifying the
+core module.
 
-L'architettura dei provider segue lo stesso pattern "pluggable" usato dai metodi
-di pagamento in Magento: un'interfaccia comune, un pool di connettori registrato
-via `di.xml`, e un modulo satellite indipendente per ogni nuovo provider.
+Providers follow the same pluggable pattern as Magento payment methods: one interface, a pool
+registered through `di.xml`, and an independent satellite module per provider. The core ships
+four connectors: `wssign`, `docusign`, `adobesign` and `dummy` (see
+[available-connectors.md](available-connectors.md)).
 
-Se cerchi invece l'elenco dei connettori già integrati o pianificati (come Adobe Acrobat Sign), consulta il documento [Connettori di Firma Digitale Disponibili e Pianificati](available-connectors.md).
+## 1. The contract: `SignProviderInterface`
 
-## 1. Il contratto: `SignProviderInterface`
-
-File di riferimento: `src/Api/SignProviderInterface.php`.
+`MageOS\DigitalSignature\Api\SignProviderInterface`:
 
 ```php
 interface SignProviderInterface
@@ -30,152 +28,244 @@ interface SignProviderInterface
 }
 ```
 
-**Vincolo architetturale fondamentale** (dal docblock dell'interfaccia): *i
-connettori NON modificano il documento e NON accedono allo storage*. Ricevono
-contenuti come stringhe binarie e restituiscono DTO di risultato; salvare lo
-stato, il PDF firmato, ecc. è responsabilità del servizio chiamante
-(`DocumentProcessor`), non del provider. Un'agenzia terza non deve mai scrivere
-direttamente su `DocumentInterface` o sullo storage — solo leggere i dati del
-documento (email firmatario, id processo, store) e restituire i DTO richiesti.
+**Key rule: connectors never modify the document and never access the storage.** They receive
+content as binary strings and return result DTOs. Saving the status, the signed PDF and the
+history is the job of the calling service (`DocumentProcessor`). A connector only reads
+document data (signer email and phone, process id, store) and returns the requested DTOs.
 
-### Semantica attesa di ogni metodo
+### What each method must do
 
-| Metodo | Quando viene chiamato | Cosa deve fare |
+| Method | Called | Must |
 |---|---|---|
-| `getCode()` | Sempre | Ritorna l'identificativo univoco (es. `"miofornitore"`), usato come chiave nel pool e come prefisso della configurazione (`digital_signature/providers/miofornitore/*`). |
-| `getLabel()` | UI admin (select provider) | Etichetta leggibile, tradotta. |
-| `isEnabled()` | Prima di ogni operazione | Deve verificare che il provider sia configurato/abilitato (flag `enabled` + credenziali presenti). |
-| `start()` | Quando un documento passa da `GENERATED` a `SENT` | Carica il PDF (parametro `$pdfContent`, binario), avvia il processo di firma, **deve incorporare l'URL di callback** (vedi §6) nella richiesta al servizio esterno. Ritorna `StartResult` con l'id di processo remoto. |
-| `fetchStatus()` | Polling (refresh/reconcile) | Interroga lo stato presso il servizio esterno, ritorna `StatusResult` con lo stato grezzo (stringa specifica del provider). |
-| `downloadSignedPdf()` | Solo quando `mapStatus()` risolve a `Status::SIGNED` | Scarica e ritorna il PDF firmato (binario). |
-| `cancel()` | Rigenerazione/reinvio di un documento attivo | Annulla il processo remoto. **Deve essere idempotente**: non deve fallire se il processo non esiste più (già cancellato/scaduto lato provider). |
-| `mapStatus()` | Dopo ogni `fetchStatus()` e nella callback | Traduce lo stato grezzo del provider in una delle costanti `Model\Document\Status::*`. Ritorna `null` se lo stato non è riconosciuto (verrà loggato, nessuna transizione applicata). |
+| `getCode()` | Always | Return the unique code (e.g. `acmesign`), used as pool key and config prefix `digital_signature/providers/acmesign/*` |
+| `getLabel()` | Admin provider select | Return a translated, human-readable label |
+| `isEnabled()` | Before every operation | Check that the provider is enabled and its credentials are present |
+| `start()` | Document moving from `generated` to `sent` | Upload `$pdfContent` (binary), start the signature process, **pass the callback URL** (§6) to the service, return `StartResult` with the remote process id |
+| `fetchStatus()` | After a callback and on reconcile polling | Query the service, return `StatusResult` with the raw provider status |
+| `downloadSignedPdf()` | Only when `mapStatus()` resolves to `signed` | Return the signed PDF (binary) |
+| `cancel()` | Regeneration of an active document | Cancel the remote process. **Must be idempotent**: no error if the process no longer exists |
+| `mapStatus()` | After every `fetchStatus()` | Translate the raw status to a `Model\Document\Status` constant, or `null` when unknown (logged, no transition) |
 
-### DTO di ritorno
+### Result DTOs
 
-- `Model/Provider/Result/StartResult.php` — immutabile, espone `getProcessId()` (id
-  del processo lato provider, salvato su `providerProcessId`) e
-  `getRawResponse()` (per audit/log).
-- `Model/Provider/Result/StatusResult.php` — espone `getRawStatus()` (stringa da
-  passare a `mapStatus()`) e `getRawResponse()`.
+- `MageOS\DigitalSignature\Model\Provider\Result\StartResult`: immutable, exposes
+  `getProcessId()` (saved as `provider_process_id`) and `getRawResponse()` (kept in the
+  history for audit).
+- `MageOS\DigitalSignature\Model\Provider\Result\StatusResult`: exposes `getRawStatus()`
+  (passed to `mapStatus()`) and `getRawResponse()`.
 
-## 2. Registrazione nel Pool (`di.xml`)
-
-`src/Api/SignProviderPoolInterface.php`:
+## 2. Register the connector in the pool (`di.xml`)
 
 ```php
 interface SignProviderPoolInterface
 {
-    /** @return SignProviderInterface[] indicizzati per codice */
+    /** @return SignProviderInterface[] indexed by code */
     public function getProviders(): array;
 
-    /** @throws NoSuchEntityException se il codice non è registrato */
+    /** @throws NoSuchEntityException when the code is not registered */
     public function get(string $code): SignProviderInterface;
 }
 ```
 
-L'implementazione (`Model/Provider/Pool.php`) valida a runtime che ogni elemento
-iniettato implementi `SignProviderInterface`, altrimenti lancia
-`\InvalidArgumentException` — utile per intercettare subito un errore di
-configurazione nel proprio modulo.
+`Model\Provider\Pool` checks at runtime that every injected item implements
+`SignProviderInterface` and throws `\InvalidArgumentException` otherwise, so a wiring mistake in
+your module shows up immediately.
 
-I provider **core** sono registrati in `src/etc/di.xml`:
+The core registers its connectors in `etc/di.xml`:
 
 ```xml
 <type name="MageOS\DigitalSignature\Model\Provider\Pool">
     <arguments>
         <argument name="providers" xsi:type="array">
             <item name="wssign" xsi:type="object">MageOS\DigitalSignature\Model\Provider\WsSign</item>
+            <item name="docusign" xsi:type="object">MageOS\DigitalSignature\Model\Provider\Docusign</item>
+            <item name="adobesign" xsi:type="object">MageOS\DigitalSignature\Model\Provider\AdobeSign</item>
             <item name="dummy" xsi:type="object">MageOS\DigitalSignature\Model\Provider\Dummy</item>
         </argument>
     </arguments>
 </type>
 ```
 
-Un'agenzia terza **non modifica questo file**: nel `di.xml` del proprio modulo
-satellite aggiunge lo stesso `<type>` con un `<item>` aggiuntivo (Magento
-unisce gli array `di.xml` di più moduli sullo stesso nodo):
+Do not edit that file. In your satellite module, declare the same `<type>` with one more
+`<item>`; Magento merges `di.xml` arrays across modules:
 
 ```xml
-<!-- Vendor/ModuloMioFornitore/etc/di.xml -->
+<!-- Vendor/AcmeSign/etc/di.xml -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
     <type name="MageOS\DigitalSignature\Model\Provider\Pool">
         <arguments>
             <argument name="providers" xsi:type="array">
-                <item name="miofornitore" xsi:type="object">Vendor\ModuloMioFornitore\Model\Provider\MioFornitore</item>
+                <item name="acmesign" xsi:type="object">Vendor\AcmeSign\Model\Provider\AcmeSign</item>
             </argument>
         </arguments>
     </type>
 </config>
 ```
 
-Il modulo satellite deve dichiarare una dipendenza (`<sequence>`) su
-`MageOS_DigitalSignature` in `module.xml`, così l'interfaccia e le classi base
-sono già caricate.
+The satellite module declares `<sequence><module name="MageOS_DigitalSignature"/></sequence>`
+in `etc/module.xml`, so the interfaces and base classes are loaded first. The item name must
+equal `getCode()`.
 
-## 3. Esempio minimo da cui partire: il provider `Dummy`
+## 3. Minimal example: the `Dummy` provider
 
-`src/Model/Provider/Dummy.php` è il connettore più semplice del modulo (nessuna
-chiamata di rete reale) ed è il punto di partenza consigliato per capire lo
-scheletro di un provider:
+`Model/Provider/Dummy.php` makes no network calls and is the best skeleton to start from:
 
-- `const CODE = 'dummy'` — costante di codice, coerente con la chiave nel pool.
-- Stati grezzi propri (`RAW_IN_PROGRESS`, `RAW_SIGNED`) — ogni provider ha i
-  **propri** stati grezzi arbitrari, non esiste un vocabolario condiviso: la
-  traduzione verso gli stati interni avviene solo in `mapStatus()`.
-- `start()` valida il contenuto ricevuto, genera un process id sintetico e
-  ritorna `new StartResult($processId, $rawResponse)`.
-- `fetchStatus()` decide lo stato grezzo attuale e ritorna `new
-  StatusResult($rawStatus, $rawResponse)`.
-- `downloadSignedPdf()` ritorna il contenuto binario del PDF firmato.
-- `cancel()` è un no-op (nessuno stato remoto reale da annullare) — un provider
-  reale invece deve chiamare l'API di cancellazione del servizio esterno.
-- `mapStatus()` usa un semplice `match` esplicito.
-- Guardia `assertAllowed()` privata, chiamata da ogni metodo pubblico tranne i
-  getter/`isEnabled()`/`mapStatus()`: lancia `ProviderException::permanent()` se
-  il provider non è esplicitamente abilitato in configurazione.
+- `const CODE = 'dummy'`, matching the pool key.
+- Its own raw statuses (`DUMMY_IN_PROGRESS`, `DUMMY_SIGNED`). There is no shared vocabulary:
+  each provider has its own raw statuses, translated only in `mapStatus()`.
+- `start()` validates the content, builds a process id and returns
+  `new StartResult($processId)`.
+- `fetchStatus()` decides the current raw status and returns `new StatusResult($rawStatus)`.
+- `downloadSignedPdf()` returns the binary PDF.
+- `cancel()` is a no-op (no remote state); a real provider calls the service's cancel API.
+- A private `assertAllowed()` guard, called by every public method except the getters,
+  `isEnabled()` and `mapStatus()`, throws `ProviderException::permanent()` when the provider is
+  not explicitly enabled.
 
-## 4. Esempio production-grade: `WsSign` + `Client`
-
-Per un connettore reale (chiamate HTTP a un servizio esterno), il riferimento è
-`src/Model/Provider/WsSign.php` + `src/Model/Provider/WsSign/Client.php`. Punti
-di hardening che ogni nuovo provider dovrebbe replicare (dal docblock del
-Client):
-
-- **TLS verify sempre attivo** (`CURLOPT_SSL_VERIFYPEER`/`VERIFYHOST`).
-- **Nessun follow di redirect** (`CURLOPT_FOLLOWLOCATION = false`) — un
-  redirect malevolo/compromesso potrebbe altrimenti dirottare token/credenziali
-  verso un host diverso.
-- **Timeout stretti** (connect + totale) per non bloccare i consumer di coda.
-- **Risposte JSON validate strutturalmente** prima dell'uso (mai fidarsi
-  ciecamente del body: il provider è un confine di fiducia esterno).
-- **Nessun segreto nei messaggi d'errore** (né nei log, né nelle eccezioni
-  mostrate all'utente).
-- URL della piattaforma validato e **obbligatoriamente `https://`** a livello
-  applicativo, non solo affidandosi al TLS del client HTTP.
-
-`WsSign::start()` costruisce l'URL di callback così:
+A skeleton for a new provider:
 
 ```php
-$callBackUrl = $baseUrl . 'digitalsignature/callback/index/id/' . $document->getId()
+<?php
+declare(strict_types=1);
+
+namespace Vendor\AcmeSign\Model\Provider;
+
+use MageOS\DigitalSignature\Api\Data\DocumentInterface;
+use MageOS\DigitalSignature\Api\SignProviderInterface;
+use MageOS\DigitalSignature\Exception\ProviderException;
+use MageOS\DigitalSignature\Model\Document\Status;
+use MageOS\DigitalSignature\Model\Provider\ProviderConfig;
+use MageOS\DigitalSignature\Model\Provider\Result\StartResult;
+use MageOS\DigitalSignature\Model\Provider\Result\StatusResult;
+use Magento\Store\Model\StoreManagerInterface;
+use Vendor\AcmeSign\Model\Provider\AcmeSign\Client;
+
+class AcmeSign implements SignProviderInterface
+{
+    public const CODE = 'acmesign';
+
+    public function __construct(
+        private readonly ProviderConfig $config,
+        private readonly StoreManagerInterface $storeManager,
+        private readonly Client $client
+    ) {
+    }
+
+    public function getCode(): string
+    {
+        return self::CODE;
+    }
+
+    public function getLabel(): string
+    {
+        return (string)__('Acme Sign');
+    }
+
+    public function isEnabled(?int $storeId = null): bool
+    {
+        return $this->config->isSetFlag(self::CODE, 'enabled', $storeId)
+            && (string)$this->config->getSecret(self::CODE, 'api_key', $storeId) !== '';
+    }
+
+    public function start(DocumentInterface $document, string $pdfContent, string $callbackToken): StartResult
+    {
+        $storeId = (int)$document->getStoreId();
+        if (!$this->isEnabled($storeId)) {
+            throw ProviderException::permanent(__('Acme Sign is not configured.'));
+        }
+        $baseUrl = $this->storeManager->getStore($storeId)->getBaseUrl();
+        $callbackUrl = $baseUrl . 'digitalsignature/callback/index/id/'
+            . (int)$document->getDocumentId() . '/token/' . $callbackToken;
+
+        $response = $this->client->createEnvelope(
+            $pdfContent,
+            (string)$document->getSignerEmail(),
+            $callbackUrl,
+            $storeId
+        );
+
+        return new StartResult($response['id'], json_encode($response) ?: null);
+    }
+
+    public function fetchStatus(DocumentInterface $document): StatusResult
+    {
+        $response = $this->client->getEnvelope(
+            (string)$document->getProviderProcessId(),
+            (int)$document->getStoreId()
+        );
+
+        return new StatusResult($response['status'], json_encode($response) ?: null);
+    }
+
+    public function downloadSignedPdf(DocumentInterface $document): string
+    {
+        return $this->client->downloadSigned(
+            (string)$document->getProviderProcessId(),
+            (int)$document->getStoreId()
+        );
+    }
+
+    public function cancel(DocumentInterface $document): void
+    {
+        // Must not fail when the envelope is already gone (404 tolerated by the client).
+        $this->client->cancelEnvelope(
+            (string)$document->getProviderProcessId(),
+            (int)$document->getStoreId()
+        );
+    }
+
+    public function mapStatus(string $providerStatus): ?string
+    {
+        // Admin-configured mapping first, so new statuses need no deploy.
+        $configured = $this->config->mapConfiguredStatus(self::CODE, $providerStatus);
+        if ($configured !== null) {
+            return $configured;
+        }
+
+        return match ($providerStatus) {
+            'completed' => Status::SIGNED,
+            'rejected' => Status::DECLINED,
+            'expired' => Status::EXPIRED,
+            'voided' => Status::CANCELED,
+            'created', 'delivered' => Status::SENT,
+            default => null,
+        };
+    }
+}
+```
+
+## 4. Production-grade example: `WsSign` + `Client`
+
+For a real HTTP connector, `Model/Provider/WsSign.php` and `Model/Provider/WsSign/Client.php`
+are the reference. Hardening every provider should replicate:
+
+- **TLS verification always on** (`CURLOPT_SSL_VERIFYPEER` / `CURLOPT_SSL_VERIFYHOST`).
+- **No redirects followed** (`CURLOPT_FOLLOWLOCATION = false`): a malicious or compromised
+  redirect could send tokens or credentials to another host.
+- **Tight timeouts** (connect and total), so queue consumers are never blocked.
+- **JSON responses validated structurally** before use: the provider is an external trust
+  boundary.
+- **No secrets in error messages**, logs or exceptions shown to users.
+- **Platform URL validated as `https://`** in the application, not only through the HTTP
+  client's TLS.
+
+Callback URL, built in `start()`:
+
+```php
+$callbackUrl = $baseUrl . 'digitalsignature/callback/index/id/' . (int)$document->getDocumentId()
     . '/token/' . $callbackToken;
 ```
 
-Questo è il pattern che **ogni** provider deve seguire: l'URL di callback (§6)
-va costruito con l'id del documento e il `$callbackToken` ricevuto come
-parametro di `start()`, e passato al servizio esterno perché lo richiami a
-processo concluso/variato.
+Every provider must follow this pattern: build the callback URL from the document id and the
+`$callbackToken` received by `start()`, and pass it to the external service so it calls back
+when the process changes.
 
-Validazione dati firmatario specifica del provider (non nell'interfaccia
-generica — ogni provider decide da sé cosa richiede):
-`requireValidEmail()` (regex + `FILTER_VALIDATE_EMAIL` + controllo caratteri di
-controllo) e `requireValidPhone()` (normalizzazione prefisso internazionale,
-fallback a un prefisso di default configurabile, minimo 6 cifre).
+Signer data validation is provider-specific (not part of the generic interface): wSign, for
+example, validates the email and normalizes the phone number with an international prefix,
+falling back to the configurable `default_phone_prefix`.
 
-## 5. Gestione errori: `ProviderException`
-
-`src/Exception/ProviderException.php`:
+## 5. Errors: `ProviderException`
 
 ```php
 class ProviderException extends LocalizedException
@@ -186,60 +276,45 @@ class ProviderException extends LocalizedException
 }
 ```
 
-Non esistono sottoclassi: la distinzione avviene tramite i due factory method.
-**Regola per un provider terzo**:
+There are no subclasses; the two factories carry the distinction:
 
-- `ProviderException::retryable(...)` → errori di rete, timeout, HTTP 5xx/429,
-  qualunque cosa transitoria che ha senso ritentare automaticamente.
-- `ProviderException::permanent(...)` → dati non validi (email/telefono),
-  configurazione mancante, HTTP 4xx (eccetto 429), errori che non si
-  risolverebbero ritentando.
+- `ProviderException::retryable(...)`: network errors, timeouts, HTTP 5xx/429, anything
+  transient that is worth retrying automatically.
+- `ProviderException::permanent(...)`: invalid data (email/phone), missing configuration, HTTP
+  4xx except 429, anything a retry would not fix.
 
-Questa distinzione guida il retry/backoff nei consumer di coda
-(`Model/Queue/Consumer/ProcessConsumer.php`): un errore `retryable` incrementa
-`retry_count` fino a `max_retries` (config), un errore `permanent` porta subito
-il documento in `Status::ERROR` con notifica admin.
+The queue consumer (`Model/Queue/Consumer/ProcessConsumer.php`) retries a `retryable` error up
+to `digital_signature/general/max_retries`; a `permanent` error moves the document to `error`
+immediately and notifies the admin.
 
-## 6. Il flusso di callback HTTP
+## 6. The HTTP callback flow
 
-Il controller `src/Controller/Callback/Index.php` è **condiviso da tutti i
-provider** (non c'è un controller per provider) e implementa un pattern
-volutamente minimale:
+`Controller/Callback/Index.php` is **shared by all providers** and deliberately minimal:
 
-- **La callback è un ping, non un payload**: il body della richiesta **non
-  viene mai letto**. L'unico contratto sono due parametri nell'URL, già
-  incorporati nell'URL costruito da `start()`:
+- **The callback is a ping, not a payload.** The request body is never read. The only contract
+  is the two URL parameters built in `start()`:
   `digitalsignature/callback/index/id/<documentId>/token/<callbackToken>`.
-- Il `<callbackToken>` viene verificato con confronto a tempo costante contro
-  l'hash SHA-256 salvato sul documento (il token in chiaro non è mai
-  persistito).
-- Allowlist IP opzionale per provider (`allowed_ips` in configurazione),
-  confrontata solo su `$_SERVER['REMOTE_ADDR']` (mai header spoofabili come
-  `X-Forwarded-For`).
-- Se i controlli passano, il controller **non chiama il provider
-  direttamente**: accoda un job di refresh asincrono
-  (`Publisher::publishRefresh($documentId)`), che sarà processato da
-  `RefreshConsumer` → `DocumentProcessor::refreshStatus()` →
+- The token is compared in constant time with the SHA-256 hash stored on the document; the
+  plaintext token is never persisted.
+- Optional per-provider IP allowlist (`allowed_ips`), checked against `REMOTE_ADDR` only, never
+  spoofable headers such as `X-Forwarded-For`.
+- When the checks pass, the controller does **not** call the provider. It queues an
+  asynchronous refresh, processed by `RefreshConsumer` → `DocumentProcessor::refreshStatus()` →
   **`provider->fetchStatus()`**.
-- Risposta sempre `HTTP 200` uniforme (nessun oracolo sulla validità di
-  id/token, per non facilitare enumerazione), CSRF disabilitato di proposito
-  (endpoint server-to-server).
+- The response is always a uniform `HTTP 200` (no oracle on id/token validity), and CSRF
+  validation is disabled on purpose (server-to-server endpoint).
 
-**Implicazione pratica per l'agenzia terza**: il proprio servizio di firma deve
-poter chiamare (GET o POST, il body è ignorato) l'URL di callback ricevuto in
-`start()` quando lo stato del processo cambia. Non serve implementare un
-formato di payload specifico: la callback serve solo a innescare un
-`fetchStatus()` — è **fetchStatus()**, non la callback, l'unica fonte di
-verità sullo stato.
+In practice your service must be able to call the callback URL (GET or POST, body ignored)
+when the process status changes. No payload format is required: the callback only triggers a
+`fetchStatus()`, which is the single source of truth.
 
-Se il proprio servizio non supporta un vero meccanismo di callback/webhook, il
-provider funziona comunque tramite il **cron di riconciliazione**
-(`Cron\Reconcile`, ogni 5 minuti) che ripubblica `refresh` per i documenti
-`SENT` fermi da più di 15 minuti — più lento ma nessuna funzionalità persa.
+If your service has no callback mechanism at all, the connector still works through the
+reconcile cron (`Cron\Reconcile`, every 5 minutes), which refreshes documents idle in `sent`
+for more than 15 minutes: slower, but nothing is lost.
 
-## 7. Stati interni del documento
+## 7. Internal document statuses
 
-`src/Model/Document/Status.php`:
+`MageOS\DigitalSignature\Model\Document\Status`:
 
 ```php
 public const PENDING   = 'pending';
@@ -254,109 +329,104 @@ public const CANCELED  = 'canceled';
 public const FINAL_STATES = [self::SIGNED, self::DECLINED, self::EXPIRED, self::CANCELED];
 ```
 
-`mapStatus()` **deve sempre** ritornare una di queste costanti (o `null`).
-Nota: `DocumentProcessor::refreshStatus()` applica una transizione **solo**
-se lo stato mappato è diverso da quello attuale **e** è uno stato finale
-(`Status::isFinal()`) — stati intermedi grezzi del provider (es. "in corso di
-firma", "in attesa OTP") possono essere mappati a `null` (ignorati) oppure a
-uno stato non finale, che comunque non genera transizione: il documento resta
-visivamente `SENT` finché non arriva un esito finale.
+`mapStatus()` must always return one of these constants or `null`. Never reference a constant
+that does not exist on this class: an unknown status must fall through to `null`, not throw.
 
-`ERROR` **non** è incluso in `FINAL_STATES` — può essere ripreso per un nuovo
-tentativo (retry/rigenerazione manuale).
+`DocumentProcessor::refreshStatus()` applies a transition **only** when the mapped status
+differs from the current one **and** is final (`Status::isFinal()`). Intermediate provider
+statuses ("waiting for OTP", "in progress") can map to `null` or to `sent`; either way the
+document stays `sent` until a final outcome arrives.
 
-## 8. Configurazione: `system.xml`
+`error` is not final: the document can be retried or regenerated.
 
-Pattern da replicare (vedi `src/etc/adminhtml/system.xml`, gruppo
-`providers`): un sotto-gruppo per provider, dentro `<group id="providers">`:
+## 8. Configuration: `system.xml`
+
+Add one group per provider inside the `providers` group of section `digital_signature`:
 
 ```xml
-<group id="miofornitore" translate="label" type="text" sortOrder="30"
-       showInDefault="1" showInWebsite="1" showInStore="1">
-    <label>Mio Fornitore</label>
-    <field id="enabled" type="select" sortOrder="10" ...>
-        <label>Abilitato</label>
-        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
-    </field>
-    <field id="api_key" type="obscure" sortOrder="20" ...>
-        <label>API Key</label>
-        <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
-        <depends><field id="enabled">1</field></depends>
-    </field>
-    <!-- ... altri campi, tutti con <depends><field id="enabled">1</field></depends> -->
-    <field id="status_mapping" sortOrder="90" ...>
-        <label>Mappatura stati</label>
-        <frontend_model>MageOS\DigitalSignature\Block\Adminhtml\Form\Field\StatusMapping</frontend_model>
-        <backend_model>Magento\Config\Model\Config\Backend\Serialized\ArraySerialized</backend_model>
-    </field>
-</group>
+<!-- Vendor/AcmeSign/etc/adminhtml/system.xml -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="digital_signature">
+            <group id="providers">
+                <group id="acmesign" translate="label" type="text" sortOrder="50"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Acme Sign</label>
+                    <field id="enabled" translate="label" type="select" sortOrder="10"
+                           showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Enabled</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                    <field id="api_key" translate="label" type="obscure" sortOrder="20"
+                           showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>API Key</label>
+                        <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+                        <depends><field id="enabled">1</field></depends>
+                    </field>
+                    <field id="status_mapping" translate="label" sortOrder="90"
+                           showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Status mapping</label>
+                        <frontend_model>MageOS\DigitalSignature\Block\Adminhtml\Form\Field\StatusMapping</frontend_model>
+                        <backend_model>Magento\Config\Model\Config\Backend\Serialized\ArraySerialized</backend_model>
+                        <depends><field id="enabled">1</field></depends>
+                    </field>
+                </group>
+            </group>
+        </section>
+    </system>
+</config>
 ```
 
-Regole importanti:
+Rules:
 
-- **Path risultante**: `digital_signature/providers/miofornitore/<campo>` — letto
-  tramite l'helper `Model/Provider/ProviderConfig.php` (metodi `get()`,
-  `isSetFlag()`, `getSecret()` per campi `Encrypted`, `getSerialized()` per
-  `ArraySerialized`). Un provider terzo può iniettare `ProviderConfig` e
-  chiamare questi metodi passando il proprio codice provider.
-- **Credenziali sempre con `backend_model =
-  Magento\Config\Model\Config\Backend\Encrypted`** (mai testo in chiaro nel
-  DB).
-- **Mappatura stati a righe dinamiche** (opzionale ma consigliata se il
-  servizio esterno usa nomi di stato non prevedibili a priori): riusa lo stesso
-  `frontend_model`/`backend_model` di WsSign, così l'admin ha un editor a
-  righe "stato grezzo → stato interno" senza bisogno di deploy per ogni nuovo
-  stato scoperto in produzione.
-- **Riquadro logo/descrizione/link** (introdotto per WsSign/Dummy): aggiungere
-  un campo `info` in cima al proprio gruppo, con `frontend_model` che estende
+- **Resulting paths**: `digital_signature/providers/acmesign/<field>`. Read them through
+  `MageOS\DigitalSignature\Model\Provider\ProviderConfig`: `get()`, `isSetFlag()`,
+  `getSecret()` for `Encrypted` fields, `getSerialized()` for `ArraySerialized` fields, and
+  `mapConfiguredStatus()` for the status mapping grid. Pass your provider code to each call.
+- **Credentials always use** `Magento\Config\Model\Config\Backend\Encrypted`, never plain text
+  in the database.
+- **Status mapping grid**: reuse the same `frontend_model`/`backend_model`, and call
+  `mapConfiguredStatus()` first in `mapStatus()`. Admins can then support a new raw status by
+  adding a row, without a code deploy. The grid only offers valid internal statuses.
+- **Provider info box** (logo, description, links, legal level): add an `info` field at the
+  top of the group whose `frontend_model` extends
   `MageOS\DigitalSignature\Block\Adminhtml\System\Config\ProviderInfo\AbstractProviderInfo`
-  (vedi `Block/Adminhtml/System/Config/ProviderInfo/WsSign.php` come esempio):
+  (see `Block/Adminhtml/System/Config/ProviderInfo/WsSign.php`):
 
   ```xml
   <field id="info" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
-      <frontend_model>Vendor\ModuloMioFornitore\Block\Adminhtml\System\Config\ProviderInfo\MioFornitore</frontend_model>
+      <frontend_model>Vendor\AcmeSign\Block\Adminhtml\System\Config\ProviderInfo\AcmeSign</frontend_model>
   </field>
   ```
 
-  La classe implementa 5 metodi (`getLogoUrl()`, `getProviderName()`,
-  `getDescription()`, `getLinks()`, `getLegalLevel()`); il logo va
-  referenziato con `$this->getViewFileUrl('Vendor_Modulo::images/logo.svg')`
-  da un asset in `view/adminhtml/web/images/` del proprio modulo — funziona
-  sia in developer mode sia dopo `setup:static-content:deploy` in
-  produzione.
+  Implement `getLogoUrl()`, `getProviderName()`, `getDescription()`, `getLinks()` and
+  `getLegalLevel()`. Reference the logo with
+  `$this->getViewFileUrl('Vendor_AcmeSign::images/logo.svg')` from your module's
+  `view/adminhtml/web/images/`; this works in developer mode and after
+  `setup:static-content:deploy`.
 
-  **`getLegalLevel()`** (introdotto 2026-07-14): etichetta breve del livello
-  di firma offerto dal provider, in terminologia eIDAS quando applicabile
-  (es. `"Firma Elettronica Avanzata (AES)"`, `"Firma Elettronica
-  Qualificata (QES)"`, o `"Nessuna validità legale — solo test/sviluppo"`
-  per un provider fittizio). Resa nel template come riga distinta dalla
-  descrizione discorsiva, non sepolta nel testo. **Dichiara solo quanto
-  effettivamente noto/documentato dal fornitore**: il box mostra comunque
-  un disclaimer fisso che invita il merchant a verificare la
-  certificazione esatta col proprio provider — un'agenzia terza non deve
-  presentare questo campo come una garanzia di conformità legale da parte
-  del modulo.
+  `getLegalLevel()` is a short label of the signature level offered, in eIDAS terms where
+  applicable (e.g. "Advanced Electronic Signature (AES)", "Qualified Electronic Signature
+  (QES)", or "No legal validity, testing only"). State only what the provider documents: the
+  box always shows a disclaimer asking the merchant to verify the exact certification with the
+  provider, and the field is not a compliance guarantee from the module.
 
-Infine, il campo globale `digital_signature/general/production_ack`
-(`ProductionModeGuard`) forza **tutti** i documenti sul provider `dummy`
-finché non è confermata la presa d'atto GDPR, indipendentemente da quale
-provider sia selezionato in `general/provider`: un'agenzia terza non deve
-prevedere alcun bypass a questo meccanismo, è intenzionale.
+Finally, `digital_signature/general/production_ack` (`ProductionModeGuard`) forces **every**
+document onto `dummy` until the GDPR acknowledgement is confirmed, whatever provider is
+selected. A third-party connector must not bypass it.
 
-## 9. Riepilogo: cosa deve consegnare un'agenzia terza
+## 9. Checklist for a provider module
 
-Un modulo satellite completo per un nuovo provider include tipicamente:
+1. `etc/module.xml` with `<sequence><module name="MageOS_DigitalSignature"/></sequence>`.
+2. `etc/di.xml` adding the item to the pool (§2).
+3. `Model/Provider/<Name>.php` implementing `SignProviderInterface` (§1), with a hardened HTTP
+   client (§4).
+4. `etc/adminhtml/system.xml` with the provider group inside `providers` (§8), status mapping
+   grid and info box included.
+5. `i18n/*.csv` for your strings.
+6. Unit tests for `mapStatus()` and the error classification. The core suite in `Test/Unit`
+   runs without a Magento installation and is a good template; see [testing.md](testing.md).
 
-1. `etc/module.xml` con `<sequence><module name="MageOS_DigitalSignature"/></sequence>`.
-2. `etc/di.xml` con l'`<item>` aggiuntivo nel pool (§2).
-3. `Model/Provider/MioFornitore.php` che implementa `SignProviderInterface` (§1),
-   eventualmente con un `Client` HTTP dedicato hardenizzato come WsSign (§4).
-4. `etc/adminhtml/system.xml` con il proprio gruppo dentro `providers` (§8),
-   incluso il riquadro informativo (§8, ultimo punto).
-5. `i18n/it_IT.csv` (+ altre lingue) per le proprie stringhe.
-6. Test unitari standalone (vedi `src/Test/Unit`, harness senza dipendenza da
-   Magento reale) per `mapStatus()` e la logica di validazione/errori.
-
-Nessuna di queste modifiche tocca file del modulo core
-`MageOS_DigitalSignature`: l'intero punto di estensione è
-`SignProviderPoolInterface` + `di.xml` merge.
+None of these steps touches the core module: the whole extension point is
+`SignProviderPoolInterface` plus the `di.xml` merge.

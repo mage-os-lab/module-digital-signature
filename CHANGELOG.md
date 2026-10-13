@@ -4,7 +4,38 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [0.5.0] - 2026-10-13
+### Added
+- **English developer documentation** in `docs/`: getting started, triggers and configuration
+  reference, merge fields, REST API, outbound webhooks (with HMAC verification examples),
+  available connectors, troubleshooting; the provider integration and testing guides are now in
+  English too. A `context7.json` lets Context7 index the documentation.
+- **Admin fields for the remaining quota settings** of wSign, DocuSign and Adobe Sign, which the
+  code already read but could only be set from the command line: *Alert Threshold (remaining
+  signatures)*, *When Quota Is Exhausted* (allow and log / block new requests), *Monthly Reset
+  Day*, *Prepaid Pool Start Date* (validated as `YYYY-MM-DD`) and *Quota Alert Recipient*.
+  Translated into all 8 locales.
+- **Complete localization across all 8 supported locales**: added 46 previously unregistered
+  strings to the translation dictionary and fully localized all 594 strings in `en_US`, `it_IT`,
+  `es_ES`, `pt_BR`, `fr_FR`, `de_DE`, `nl_NL`, and `zh_Hans_CN`.
+
+### Changed
+- **REST/SOAP output of signature documents no longer includes internal fields**:
+  `callback_token_hash`, `pdf_path` and `signed_pdf_path` are excluded from
+  `GET /V1/digitalsignature/documents` and `/documents/:documentId`. They were never needed by
+  an integration (PDFs are not downloadable through the API).
+
+### Fixed
+- The developer guide link in the provider configuration pointed to a private repository; it
+  now points to the public one.
+- Unit tests now also pass inside a real Magento/Mage-OS installation with PHPUnit 12 (as run
+  by the `check-extension` workflow): data providers use attributes, mocks target the concrete
+  `Order`/`Store` classes where the code calls their methods, and the standalone framework
+  stubs now match the real signatures, so the same mistakes can no longer hide locally.
+- Magento coding standard errors: removed `final` from the PDF cross-reference classes,
+  explicit escaping in the statistics panel template, no `md5()` in export file names.
+- Translation fixes in code: corrected hardcoded Italian base string in DocuSign client and
+  removed string concatenation inside `__()` in Adobe Acrobat Sign client to enable static extraction.
 
 ## [0.4.2] - 2026-10-13
 ### Added

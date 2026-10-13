@@ -55,6 +55,9 @@
                     <quota_enabled>0</quota_enabled>
                     <quota_type>prepaid_pool</quota_type>
                     <alert_threshold_percent>15</alert_threshold_percent>
+                    <alert_threshold_count>20</alert_threshold_count>
+                    <exceeded_behavior>allow_and_log</exceeded_behavior>
+                    <reset_day>1</reset_day>
                 </wssign>
                 <docusign>
                     <enabled>0</enabled>
@@ -63,6 +66,9 @@
                     <quota_enabled>0</quota_enabled>
                     <quota_type>monthly_allowance</quota_type>
                     <alert_threshold_percent>15</alert_threshold_percent>
+                    <alert_threshold_count>20</alert_threshold_count>
+                    <exceeded_behavior>allow_and_log</exceeded_behavior>
+                    <reset_day>1</reset_day>
                 </docusign>
                 <adobesign>
                     <enabled>0</enabled>
@@ -70,6 +76,9 @@
                     <quota_enabled>0</quota_enabled>
                     <quota_type>annual_allowance</quota_type>
                     <alert_threshold_percent>15</alert_threshold_percent>
+                    <alert_threshold_count>20</alert_threshold_count>
+                    <exceeded_behavior>allow_and_log</exceeded_behavior>
+                    <reset_day>1</reset_day>
                 </adobesign>
                 <dummy>
                     <allow>0</allow>

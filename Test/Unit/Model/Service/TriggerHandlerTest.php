@@ -14,6 +14,7 @@ use MageOS\DigitalSignature\TestSupport\FakeDocument;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\Exception\AlreadyExistsException;
 use Magento\Sales\Api\Data\OrderInterface;
+use Magento\Sales\Model\Order;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
@@ -276,7 +277,8 @@ class TriggerHandlerTest extends TestCase
             }
         };
 
-        $order = $this->createMock(OrderInterface::class);
+        // getData() lives on the concrete Order model, not on OrderInterface
+        $order = $this->createMock(Order::class);
         $order->method('getStoreId')->willReturn(1);
         $order->method('getEntityId')->willReturn(42);
         $order->method('getCustomerEmail')->willReturn('cliente@example.com');

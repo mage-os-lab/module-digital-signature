@@ -12,7 +12,7 @@ use Magento\Framework\Exception\LocalizedException;
  * isStreamBased come from the most recent revision (the one a new
  * incremental update, if any, would start from).
  */
-final class XrefChainResolver
+class XrefChainResolver
 {
     /**
      * Depth limit of the explored /Prev chain: beyond it, explicitly rejects

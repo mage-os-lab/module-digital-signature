@@ -535,3 +535,60 @@ the contract for your order #%increment_id has been signed digitally successfull
 the contract for your order #%increment_id is ready to be signed digitally.,il contratto relativo al tuo ordine #%increment_id è pronto per essere firmato digitalmente.
 the signing process for the contract of your order #%increment_id ended with outcome: %status.,il processo di firma del contratto relativo al tuo ordine #%increment_id si è concluso con esito: %status.
 we remind you that the contract for your order #%increment_id is still pending digital signature.,ti ricordiamo che il contratto relativo al tuo ordine #%increment_id è ancora in attesa di firma digitale.
+Alert Threshold (remaining signatures),Soglia di Alert (firme rimanenti)
+Also send the warning when this many signatures or fewer are left (e.g. 20).,Invia l'avviso anche quando restano questo numero di firme o meno (es. 20).
+When Quota Is Exhausted,Quando la quota è esaurita
+Blocking moves new documents for this provider to the error status instead of sending them.,"Con il blocco, i nuovi documenti per questo provider passano in stato di errore invece di essere inviati."
+Monthly Reset Day,Giorno di rinnovo mensile
+Day of the month (1-28) on which the monthly allowance renews.,Giorno del mese (1-28) in cui si rinnova la quota mensile.
+Prepaid Pool Start Date,Data di inizio del pacchetto prepagato
+"Date the credit package was purchased, format YYYY-MM-DD. Only documents created from this date count against the pool. Leave empty to count all documents.","Data di acquisto del pacchetto di crediti, formato AAAA-MM-GG. Contano solo i documenti creati da questa data. Lascia vuoto per contare tutti i documenti."
+Quota Alert Recipient,Destinatario degli avvisi quota
+Email for this provider's quota alerts. Leave empty to use the admin recipient of the email notifications.,Email per gli avvisi quota di questo provider. Lascia vuoto per usare il destinatario admin delle notifiche email.
+The quota start date must be a valid date in the format YYYY-MM-DD.,La data di inizio della quota deve essere una data valida nel formato AAAA-MM-GG.
+"Adobe Acrobat Sign: incomplete configuration (missing Client ID, Client Secret, Refresh Token, or API Access Point).","Adobe Acrobat Sign: configurazione incompleta (mancano Client ID, Client Secret, Refresh Token o API Access Point)."
+"Adobe Acrobat Sign: network error during ""%1"": %2","Adobe Acrobat Sign: errore di rete durante ""%1"": %2"
+"Adobe Acrobat Sign: non-JSON response during ""%1"".","Adobe Acrobat Sign: risposta non JSON durante ""%1""."
+"Adobe Acrobat Sign: request rejected during ""%1"" (HTTP %2). Response: %3","Adobe Acrobat Sign: richiesta rifiutata durante ""%1"" (HTTP %2). Risposta: %3"
+"Adobe Acrobat Sign: temporary service error during ""%1"" (HTTP %2).","Adobe Acrobat Sign: errore temporaneo del servizio durante ""%1"" (HTTP %2)."
+"Adobe Acrobat Sign: unexpected response structure during ""%1"".","Adobe Acrobat Sign: struttura della risposta imprevista durante ""%1""."
+An error occurred while generating the export file.,Si è verificato un errore durante la generazione del file di esportazione.
+Currently running in Demo / Sandbox mode: envelopes are not sent to real signers.,Attualmente in esecuzione in modalità Demo / Sandbox: le buste non vengono inviate a firmatari reali.
+"Digital signature service integrated into the Adobe Document Cloud ecosystem. Supports the eIDAS standard for Simple (SES), Advanced (AES), and Qualified (QES) electronic signatures. Allows you to orchestrate the sending of agreements and track their outcome through to completion.","Servizio di firma digitale integrato nell'ecosistema Adobe Document Cloud. Supporta lo standard eIDAS per firme elettroniche Semplici (FES), Avanzate (FEA) e Qualificate (FEQ). Consente di orchestrare l'invio degli accordi e monitorarne l'esito fino al completamento."
+"DocuSign: incomplete configuration (missing Integration Key, User ID or Private Key).","DocuSign: configurazione incompleta (mancano Integration Key, User ID o Chiave Privata)."
+"DocuSign: request rejected during ""%1"" (HTTP %2). Response: %3","DocuSign: richiesta rifiutata durante ""%1"" (HTTP %2). Risposta: %3"
+DocuSign: selected account data is incomplete or malformed.,DocuSign: dati dell'account selezionato incompleti o malformati.
+"DocuSign: unexpected response structure during ""%1"".","DocuSign: struttura della risposta imprevista durante ""%1""."
+"E.g. https://api.na1.adobesign.com. Unlike DocuSign, Adobe Sign has no fixed demo/production host: the shard is tied to the account and must be copied from the ""api_access_point"" returned during the initial OAuth exchange (interactive authorization).","Es. https://api.na1.adobesign.com. A differenza di DocuSign, Adobe Sign non ha un host demo/produzione fisso: lo shard è legato all'account e va copiato da ""api_access_point"" restituito durante lo scambio OAuth iniziale (autorizzazione interattiva)."
+File can not be saved to the destination folder.,Impossibile salvare il file nella cartella di destinazione.
+File validation failed.,Validazione del file non riuscita.
+General Information,Informazioni generali
+Generation Trigger,Trigger di generazione
+"Global leading electronic signature platform. Supports Simple (SES), Advanced (AES), and Qualified (QES) electronic signatures. The integration allows automatic sending of envelopes with the contractual PDFs generated at order time, tracking their status through to completion.","Piattaforma leader mondiale di firma elettronica. Supporta firme elettroniche Semplici (FES), Avanzate (FEA) e Qualificate (FEQ). L'integrazione consente l'invio automatico delle buste con i PDF contrattuali generati all'ordine, monitorandone lo stato fino al completamento."
+Integration Key (Client ID),Chiave di integrazione (Client ID)
+Light Gray,Grigio chiaro
+New Integration,Nuova integrazione
+New Template,Nuovo template
+OAuth Refresh Token,OAuth Refresh Token
+PDF File,File PDF
+Production,Produzione
+Provider,Provider
+Raw status returned by Adobe Acrobat Sign → internal document status. Unmapped statuses are logged so they can be added here.,Stato grezzo restituito da Adobe Acrobat Sign → stato interno del documento. Gli stati non mappati vengono registrati nei log per poter essere aggiunti qui.
+Raw status returned by DocuSign → internal document status. Unmapped statuses are logged so they can be added here.,Stato grezzo restituito da DocuSign → stato interno del documento. Gli stati non mappati vengono registrati nei log per poter essere aggiunti qui.
+"Recommended choice. WsSign is the native connector, developed and maintained alongside this module: no third-party integration to configure, predictable costs, and direct support in Italian. For most use cases it's the simplest solution to activate.","Scelta consigliata. WsSign è il connettore nativo, sviluppato e mantenuto insieme a questo modulo: nessuna integrazione di terze parti da configurare, costi prevedibili e supporto diretto in italiano. Per la maggior parte dei casi d'uso è la soluzione più semplice da attivare."
+Red,Rosso
+Required,Obbligatorio
+Scope,Ambito
+Secret Key (Client Secret),Chiave segreta (Client Secret)
+Signature Required,Firma obbligatoria
+"Signature request blocked: provider ""%1"" has exhausted its quota (%2).","Richiesta di firma bloccata: il provider ""%1"" ha esaurito la propria quota (%2)."
+Signer Email,Email firmatario
+Something went wrong while saving the file(s).,Si è verificato un errore durante il salvataggio dei file.
+Store View,Store View
+Template,Template
+Template Name,Nome template
+"The merge field tag ""{FIELD:%1}"" is not compatible with the selected trigger ""%2"".","Il tag merge field ""{FIELD:%1}"" non è compatibile con il trigger selezionato ""%2""."
+Trigger,Trigger
+Use default file,Usa file predefinito
+Webhook Subscription,Sottoscrizione webhook
+White (Invisible),Bianco (invisibile)

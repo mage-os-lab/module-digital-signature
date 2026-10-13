@@ -7,7 +7,7 @@ namespace MageOS\DigitalSignature\Model\Pdf\Xref;
  * Result of reading ONE cross-reference section (classic table or xref
  * stream), before following any /Prev chain.
  */
-final class XrefLink
+class XrefLink
 {
     /**
      * @param array<int, int> $objectOffsets object number => byte offset in the file,

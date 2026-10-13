@@ -196,23 +196,39 @@ namespace Magento\Framework\Api {
         }
     }
 
+    /** Same signatures as the real Magento\Framework\Api\SearchCriteriaInterface. */
     interface SearchCriteriaInterface
     {
         /** @return \Magento\Framework\Api\Search\FilterGroup[] */
         public function getFilterGroups();
 
         /** @return $this */
-        public function setFilterGroups(array $filterGroups);
+        public function setFilterGroups(?array $filterGroups = null);
+
+        public function getSortOrders();
 
         /** @return $this */
-        public function setCurrentPage($currentPage);
+        public function setSortOrders(?array $sortOrders = null);
+
+        public function getPageSize();
 
         /** @return $this */
         public function setPageSize($pageSize);
+
+        public function getCurrentPage();
+
+        /** @return $this */
+        public function setCurrentPage($currentPage);
     }
 }
 
 namespace Magento\Framework\Api\Search {
+    /** A row of a UI listing data provider. */
+    interface DocumentInterface
+    {
+        public function getId();
+    }
+
     class FilterGroup
     {
         /** @var \Magento\Framework\Api\Filter[] */
@@ -256,14 +272,41 @@ namespace Magento\Framework\Api\Search {
     }
 }
 
+namespace Magento\Framework\View\Element {
+    interface UiComponentInterface
+    {
+        public function getName();
+
+        public function getContext();
+    }
+}
+
+namespace Magento\Framework\View\Element\UiComponent {
+    interface ContextInterface
+    {
+        public function getDataProvider();
+    }
+}
+
+namespace Magento\Framework\View\Element\UiComponent\DataProvider {
+    interface DataProviderInterface
+    {
+        public function getSearchCriteria();
+
+        public function getSearchResult();
+    }
+}
+
 namespace Magento\Ui\Component\MassAction {
+    use Magento\Framework\View\Element\UiComponentInterface;
+
     class Filter
     {
         public function getComponent()
         {
         }
 
-        public function prepareComponent($component)
+        public function prepareComponent(UiComponentInterface $component)
         {
         }
 
@@ -274,25 +317,33 @@ namespace Magento\Ui\Component\MassAction {
 }
 
 namespace Magento\Ui\Model\Export {
+    use Magento\Framework\Api\Search\DocumentInterface;
+    use Magento\Framework\View\Element\UiComponentInterface;
+
+    /** Same signatures as the real MetadataProvider (typed parameters included). */
     class MetadataProvider
     {
-        public function getFields($component)
+        public function getFields(UiComponentInterface $component): array
         {
+            return [];
         }
 
-        public function getOptions()
+        public function getOptions(): array
         {
+            return [];
         }
 
-        public function getHeaders($component)
+        public function getHeaders(UiComponentInterface $component): array
         {
+            return [];
         }
 
-        public function getRowData($item, $fields, $options)
+        public function getRowData(DocumentInterface $document, $fields, $options): array
         {
+            return [];
         }
 
-        public function convertDate($item, $componentName)
+        public function convertDate($document, $componentName): void
         {
         }
     }
@@ -368,6 +419,15 @@ namespace Magento\Sales\Model\ResourceModel\Order\Invoice {
 }
 
 namespace Magento\Framework\App\Config {
+    /** System configuration backend model (the real one extends AbstractModel too). */
+    class Value extends \Magento\Framework\Model\AbstractModel
+    {
+        public function beforeSave()
+        {
+            return $this;
+        }
+    }
+
     interface ScopeConfigInterface
     {
         public const SCOPE_TYPE_DEFAULT = 'default';
@@ -392,12 +452,21 @@ namespace Magento\Store\Model {
     {
         public function getStore($storeId = null);
     }
+
+    /** getBaseUrl() belongs to the concrete Store model, not to StoreInterface. */
+    abstract class Store implements \Magento\Store\Api\Data\StoreInterface
+    {
+        public function getBaseUrl($type = 'link', $secure = null)
+        {
+            return '';
+        }
+    }
 }
 
 namespace Magento\Store\Api\Data {
     interface StoreInterface
     {
-        public function getBaseUrl($type = null, $secure = null);
+        public function getId();
     }
 }
 
@@ -597,9 +666,8 @@ namespace Magento\Framework\Stdlib\DateTime {
 
 namespace Magento\Sales\Api\Data {
     /**
-     * Sottoinsieme dei metodi di OrderInterface usati dal modulo; getData()
-     * appartiene al modello concreto Order ma viene dichiarato qui per
-     * permettere il mock nel test del TriggerHandler.
+     * Subset of the OrderInterface methods used by the module. getData()
+     * belongs to the concrete Order model (see Magento\Sales\Model\Order).
      */
     interface OrderInterface
     {
@@ -613,8 +681,6 @@ namespace Magento\Sales\Api\Data {
 
         public function getBillingAddress();
 
-        public function getData($key = '', $index = null);
-
         public function getIncrementId();
 
         public function getGrandTotal();
@@ -625,14 +691,14 @@ namespace Magento\Sales\Api\Data {
 
         public function getCustomerLastname();
 
-        public function getCustomerName();
-
         public function getCreatedAt();
     }
 
     interface OrderAddressInterface
     {
-        public function getName();
+        public function getFirstname();
+
+        public function getLastname();
     }
 
     interface InvoiceInterface
@@ -642,6 +708,31 @@ namespace Magento\Sales\Api\Data {
         public function getIncrementId();
 
         public function getCreatedAt();
+    }
+}
+
+namespace Magento\Sales\Model {
+    abstract class Order implements \Magento\Sales\Api\Data\OrderInterface
+    {
+        public function getData($key = '', $index = null)
+        {
+            return null;
+        }
+
+        public function getCustomerName()
+        {
+            return '';
+        }
+    }
+}
+
+namespace Magento\Sales\Model\Order {
+    abstract class Address implements \Magento\Sales\Api\Data\OrderAddressInterface
+    {
+        public function getName()
+        {
+            return '';
+        }
     }
 }
 

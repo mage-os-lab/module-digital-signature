@@ -12,7 +12,7 @@ use Magento\Framework\Exception\LocalizedException;
  * (used by PageTreeResolver to resolve objects by number; TagReplacer
  * continues to find its own objects via a direct text scan).
  */
-final class ClassicXrefReader
+class ClassicXrefReader
 {
     /**
      * @throws LocalizedException

@@ -221,7 +221,7 @@ class Client
 
         if (!$accountId || !$baseUri) {
             throw ProviderException::permanent(
-                __('DocuSign: dati dell\'account selezionato incompleti o malformati.')
+                __('DocuSign: selected account data is incomplete or malformed.')
             );
         }
 

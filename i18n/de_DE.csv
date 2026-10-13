@@ -1,24 +1,24 @@
 """Document error"" template (admin)","Vorlage ""Dokumentfehler"" (Administrator)"
 """Document ready"" template (customer)","Vorlage ""Dokument bereit"" (Kunde)"
 """Document signed"" template (customer)","Vorlage ""Dokument signiert"" (Kunde)"
-"""Expired/declined"" template (admin)","""Expired/declined"" template (admin)"
-"""Expired/declined"" template (customer)","""Expired/declined"" template (customer)"
+"""Expired/declined"" template (admin)","Vorlage ""Abgelaufen/abgelehnt"" (Administrator)"
+"""Expired/declined"" template (customer)","Vorlage ""Abgelaufen/abgelehnt"" (Kunde)"
 """Expired/rejected"" template (admin)","Vorlage ""Abgelaufen/abgelehnt"" (Administrator)"
 """Expired/rejected"" template (customer)","Vorlage ""Abgelaufen/abgelehnt"" (Kunde)"
--- All Store Views --,-- All Store Views --
+-- All Store Views --,-- Alle Store-Ansichten --
 -- None --,-- Keine --
 -- Use global default --,-- Globalen Standard verwenden --
-A document signing process has ended with a negative outcome.,A document signing process has ended with a negative outcome.
-API Access Point,API Access Point
-API Account ID,API Account ID
-API Integration,API Integration
-API Integrations,API Integrations
-API User ID (GUID),API User ID (GUID)
+A document signing process has ended with a negative outcome.,Ein Dokumentensignaturprozess wurde mit einem negativen Ergebnis abgeschlossen.
+API Access Point,API-Zugriffspunkt
+API Account ID,API-Konto-ID
+API Integration,API-Integration
+API Integrations,API-Integrationen
+API User ID (GUID),API-Benutzer-ID (GUID)
 API documentation (in the module repository),API-Dokumentation (im Modul-Repository)
-"API integration with id ""%1"" does not exist.","API integration with id ""%1"" does not exist."
-Account ID visible in the Apps and Keys section.,Account ID visible in the Apps and Keys section.
-Actions,Actions
-Active,Active
+"API integration with id ""%1"" does not exist.",API-Integration mit ID „%1“ existiert nicht.
+Account ID visible in the Apps and Keys section.,"Konto-ID, sichtbar im Bereich „Apps and Keys“."
+Actions,Aktionen
+Active,Aktiv
 Active signature provider,Aktiver Signaturanbieter
 Add mapping,Zuordnung hinzufügen
 Additional & Planned Connectors,Zusätzliche & geplante Konnektoren
@@ -27,98 +27,98 @@ Address notified by WsSign about process events.,"Adresse, die von WsSign über 
 Admin escalation email sent for document pending signature.,Admin-Eskalations-E-Mail für Dokument mit ausstehender Unterschrift gesendet.
 Admin recipient email,E-Mail-Adresse des Administrators
 Adobe Acrobat Sign,Adobe Acrobat Sign
-Adobe Acrobat Sign Developer Guide,Adobe Acrobat Sign Developer Guide
-"Adobe Acrobat Sign: agreement creation failed, no ID received.","Adobe Acrobat Sign: agreement creation failed, no ID received."
-Adobe Acrobat Sign: document upload succeeded but is missing transientDocumentId.,Adobe Acrobat Sign: document upload succeeded but is missing transientDocumentId.
-Adobe Acrobat Sign: downloaded PDF content is empty.,Adobe Acrobat Sign: downloaded PDF content is empty.
-Adobe Acrobat Sign: network error during %1: %2,Adobe Acrobat Sign: network error during %1: %2
-Adobe Acrobat Sign: non-JSON response during %1.,Adobe Acrobat Sign: non-JSON response during %1.
-Adobe Acrobat Sign: signer email is missing or invalid.,Adobe Acrobat Sign: signer email is missing or invalid.
-Adobe Acrobat Sign: status response is missing the status field.,Adobe Acrobat Sign: status response is missing the status field.
-Adobe Acrobat Sign: temporary service error during %1 (HTTP %2).,Adobe Acrobat Sign: temporary service error during %1 (HTTP %2).
-Adobe Acrobat Sign: the document has no started process (agreement).,Adobe Acrobat Sign: the document has no started process (agreement).
-Adobe Acrobat Sign: valid refresh response but missing access token.,Adobe Acrobat Sign: valid refresh response but missing access token.
+Adobe Acrobat Sign Developer Guide,Adobe Acrobat Sign Entwicklerhandbuch
+"Adobe Acrobat Sign: agreement creation failed, no ID received.","Adobe Acrobat Sign: Erstellung der Vereinbarung fehlgeschlagen, keine ID empfangen."
+Adobe Acrobat Sign: document upload succeeded but is missing transientDocumentId.,"Adobe Acrobat Sign: Dokumenten-Upload erfolgreich, aber transientDocumentId fehlt."
+Adobe Acrobat Sign: downloaded PDF content is empty.,Adobe Acrobat Sign: heruntergeladener PDF-Inhalt ist leer.
+Adobe Acrobat Sign: network error during %1: %2,Adobe Acrobat Sign: Netzwerkfehler bei %1: %2
+Adobe Acrobat Sign: non-JSON response during %1.,Adobe Acrobat Sign: Nicht-JSON-Antwort bei %1.
+Adobe Acrobat Sign: signer email is missing or invalid.,Adobe Acrobat Sign: E-Mail-Adresse des Unterzeichners fehlt oder ist ungültig.
+Adobe Acrobat Sign: status response is missing the status field.,Adobe Acrobat Sign: Statusfeld fehlt in der Statusantwort.
+Adobe Acrobat Sign: temporary service error during %1 (HTTP %2).,Adobe Acrobat Sign: vorübergehender Dienstfehler bei %1 (HTTP %2).
+Adobe Acrobat Sign: the document has no started process (agreement).,Adobe Acrobat Sign: für das Dokument wurde kein Prozess gestartet (Vereinbarung).
+Adobe Acrobat Sign: valid refresh response but missing access token.,"Adobe Acrobat Sign: gültige Aktualisierungsantwort, aber Access-Token fehlt."
 Adobe Developer Console,Adobe Developer Console
 Advanced Electronic Signature (AES),Fortgeschrittene elektronische Signatur (AES)
 "Advanced electronic signature platform (OTP via SMS or email). The connector uploads the PDF generated from the template, starts the signing request to the signer, and receives status updates via an authenticated callback. Requires an active WsSign account (tenant, owner user, password) provided by the WsSign team.","Plattform für fortgeschrittene elektronische Signaturen (OTP per SMS oder E-Mail). Der Connector lädt das aus der Vorlage erzeugte PDF hoch, startet die Signaturanfrage an den Unterzeichner und empfängt Statusaktualisierungen über einen authentifizierten Callback. Erfordert ein aktives WsSign-Konto (Tenant, Owner-Benutzer, Passwort), das vom WsSign-Team bereitgestellt wird."
 After this time the document is marked as signed.,Nach dieser Zeit gilt das Dokument als signiert.
-"After this time, the document is marked as signed.","After this time, the document is marked as signed."
-Agreement expiration (days),Agreement expiration (days)
-Alert Threshold (%),Alert Threshold (%)
+"After this time, the document is marked as signed.",Nach Ablauf dieser Zeit wird das Dokument als signiert markiert.
+Agreement expiration (days),Ablauf der Vereinbarung (Tage)
+Alert Threshold (%),Warnschwellenwert (%)
 All time,Immer
-Allow dispatch and log warning,Allow dispatch and log warning
+Allow dispatch and log warning,Versand zulassen und Warnung protokollieren
 Allow dummy provider,Dummy-Anbieter zulassen
 Analysis period:,Analysezeitraum:
-Annual Allowance (Commitment),Annual Allowance (Commitment)
-Application ID (Client ID),Application ID (Client ID)
-Application ID retrieved from the Adobe Developer Console.,Application ID retrieved from the Adobe Developer Console.
-Are you sure you want to delete this webhook subscription?,Are you sure you want to delete this webhook subscription?
-Assigned Products,Assigned Products
+Annual Allowance (Commitment),Jährliches Kontingent (Verpflichtung)
+Application ID (Client ID),Anwendungs-ID (Client-ID)
+Application ID retrieved from the Adobe Developer Console.,Aus der Adobe Developer Console abgerufene Anwendungs-ID.
+Are you sure you want to delete this webhook subscription?,"Sind Sie sicher, dass Sie dieses Webhook-Abonnement löschen möchten?"
+Assigned Products,Zugewiesene Produkte
 Auto-sign delay (seconds),Verzögerung für automatische Signatur (Sekunden)
 Automatic reminders,Automatische Erinnerungen
 Automatically delete past the retention period,Nach Ablauf der Aufbewahrungsfrist automatisch löschen
 Available,Verfügbar
 Avg signing time,Durchschnittliche Signaturzeit
-Back,Back
-Black,Black
-Block new signature requests,Block new signature requests
+Back,Zurück
+Black,Schwarz
+Block new signature requests,Neue Signaturanfragen blockieren
 CDN,CDN
 Callback IP allowlist,IP-Allowlist für Callback
 Cancel,Abbrechen
 Canceled,Storniert
-Cap on deliveries processed at each reconciliation cron run.,Cap on deliveries processed at each reconciliation cron run.
-Cap on deliveries processed per reconciliation cron run.,Cap on deliveries processed per reconciliation cron run.
+Cap on deliveries processed at each reconciliation cron run.,Obergrenze für verarbeitete Zustellungen pro Ausführung des Abgleich-Cron-Jobs.
+Cap on deliveries processed per reconciliation cron run.,Obergrenze für verarbeitete Zustellungen pro Ausführung des Abgleich-Cron-Jobs.
 Cap on documents processed at each cron run.,Obergrenze für pro Cron-Lauf verarbeitete Dokumente.
-Cap on documents processed per cron run.,Cap on documents processed per cron run.
+Cap on documents processed per cron run.,Obergrenze für verarbeitete Dokumente pro Cron-Ausführung.
 Cap on documents queued at each cron run (throttling towards the provider).,Obergrenze für pro Cron-Lauf eingereihte Dokumente (Drosselung gegenüber dem Anbieter).
-Cap on documents queued per cron run (throttling toward the provider).,Cap on documents queued per cron run (throttling toward the provider).
+Cap on documents queued per cron run (throttling toward the provider).,Obergrenze für Dokumente in der Warteschlange pro Cron-Ausführung (Drosselung gegenüber dem Anbieter).
 Cart / Order,Warenkorb / Bestellung
 Cart not available.,Warenkorb nicht verfügbar.
 Cart/Order,Warenkorb/Bestellung
 "Check this ONLY after signing a DPA (Data Processing Agreement) with the selected signature provider and updating the store's privacy policy to disclose that customer personal data (email, phone) is sent to a third-party provider for the signing process. Until this is checked, all new documents are generated with the dummy (test) provider, regardless of the provider configured below.","Aktivieren Sie diese Option NUR, nachdem Sie mit dem gewählten Signaturanbieter eine Auftragsverarbeitungsvereinbarung (DPA) abgeschlossen und die Datenschutzerklärung des Shops aktualisiert haben, um die Weitergabe personenbezogener Kundendaten (E-Mail, Telefon) an einen externen Anbieter für den Signaturprozess offenzulegen. Solange die Option nicht aktiviert ist, werden alle neuen Dokumente unabhängig vom unten konfigurierten Anbieter mit dem Dummy-Anbieter (Test) erzeugt."
-"Check this box ONLY after signing a DPA (Data Processing Agreement) with the selected signature provider and updating the store's privacy policy to disclose that customer personal data (email, phone) is sent to a third-party provider for the signing process. Until checked, all new documents are generated with the dummy (test) provider, regardless of the provider configured below.","Check this box ONLY after signing a DPA (Data Processing Agreement) with the selected signature provider and updating the store's privacy policy to disclose that customer personal data (email, phone) is sent to a third-party provider for the signing process. Until checked, all new documents are generated with the dummy (test) provider, regardless of the provider configured below."
-Client Secret,Client Secret
-"Color used to print the signature tag on the actual document generated for the order. Select ""White (Invisible)"" to hide it beneath the digital signature.","Color used to print the signature tag on the actual document generated for the order. Select ""White (Invisible)"" to hide it beneath the digital signature."
-Comma-separated IPs; empty = no IP filter (the secret token still applies).,Comma-separated IPs; empty = no IP filter (the secret token still applies).
+"Check this box ONLY after signing a DPA (Data Processing Agreement) with the selected signature provider and updating the store's privacy policy to disclose that customer personal data (email, phone) is sent to a third-party provider for the signing process. Until checked, all new documents are generated with the dummy (test) provider, regardless of the provider configured below.","Aktivieren Sie dieses Kontrollkästchen NUR, nachdem Sie einen AVV (Auftragsverarbeitungsvertrag / DPA) mit dem ausgewählten Signaturanbieter abgeschlossen und die Datenschutzerklärung des Shops aktualisiert haben, um offenzulegen, dass personenbezogene Daten des Kunden (E-Mail, Telefon) für den Signaturprozess an einen Drittanbieter übermittelt werden. Solange dieses Feld nicht aktiviert ist, werden alle neuen Dokumente mit dem Dummy-Anbieter (Test) generiert, unabhängig vom unten konfigurierten Anbieter."
+Client Secret,Client-Secret
+"Color used to print the signature tag on the actual document generated for the order. Select ""White (Invisible)"" to hide it beneath the digital signature.","Farbe, mit der das Signatur-Tag auf dem tatsächlich für die Bestellung generierten Dokument gedruckt wird. Wählen Sie „Weiß (unsichtbar)“, um es unter der digitalen Signatur zu verbergen."
+Comma-separated IPs; empty = no IP filter (the secret token still applies).,Kommagetrennte IPs; leer = kein IP-Filter (das Geheim-Token gilt weiterhin).
 Comma-separated IPs; empty = no IP filtering (the secret token still applies).,Durch Komma getrennte IPs; leer = kein IP-Filter (das geheime Token gilt weiterhin).
 Configuration,Konfiguration
 Confirm Position,Position bestätigen
 Connector to integrate digital and electronic signatures from Adobe Acrobat Sign. Supports OAuth2 authentication and asynchronous signature process tracking.,Konnektor zur Integration digitaler und elektronischer Signaturen von Adobe Acrobat Sign. Ermöglicht OAuth2-Authentifizierung und asynchrone Verfolgung des Signaturprozesses.
-Consigliato,Consigliato
+Consigliato,Empfohlen
 Contract,Vertrag
-Contract PDF,Contract PDF
-Copy and paste the complete RSA private key generated on DocuSign (including the BEGIN/END PRIVATE KEY tags).,Copy and paste the complete RSA private key generated on DocuSign (including the BEGIN/END PRIVATE KEY tags).
+Contract PDF,Vertrags-PDF
+Copy and paste the complete RSA private key generated on DocuSign (including the BEGIN/END PRIVATE KEY tags).,Kopieren Sie den vollständigen auf DocuSign generierten privaten RSA-Schlüssel und fügen Sie ihn ein (einschließlich der Tags BEGIN/END PRIVATE KEY).
 Could not queue %1 order(s) (see log).,%1 Bestellung(en) konnten nicht eingereiht werden (siehe Log).
-"Counted from the last status change of the completed document. Default 3650 (10 years, indicative: check the applicable fiscal/legal terms).","Counted from the last status change of the completed document. Default 3650 (10 years, indicative: check the applicable fiscal/legal terms)."
-Created,Created
-Created On,Created On
+"Counted from the last status change of the completed document. Default 3650 (10 years, indicative: check the applicable fiscal/legal terms).","Gezählt ab der letzten Statusänderung des abgeschlossenen Dokuments. Standard 3650 (10 Jahre, indikativ: prüfen Sie die geltenden steuerlichen/rechtlichen Fristen)."
+Created,Erstellt
+Created On,Erstellt am
 Customer reminder sent (reminder %1 of %2).,Kundenerinnerung gesendet (Erinnerung %1 von %2).
 "Daily cron that, when active, deletes PDFs and personal data (email/phone) of completed documents (signed/rejected/expired/cancelled) past the retention period. The record and status history are kept for audit/tax purposes, without the PDF or PII.","Täglicher Cron-Job, der, wenn aktiviert, die PDFs und personenbezogenen Daten (E-Mail/Telefon) abgeschlossener Dokumente (signiert/abgelehnt/abgelaufen/storniert) nach Ablauf der Aufbewahrungsfrist löscht. Der Datensatz und der Statusverlauf bleiben zu Audit-/steuerlichen Zwecken erhalten, jedoch ohne PDFs oder personenbezogene Daten."
-"Daily cron that, when enabled, deletes the PDFs and personal data (email/phone) of completed documents (signed/declined/expired/canceled) past the retention period. The record and status history remain for audit/fiscal purposes, without PDFs or PII.","Daily cron that, when enabled, deletes the PDFs and personal data (email/phone) of completed documents (signed/declined/expired/canceled) past the retention period. The record and status history remain for audit/fiscal purposes, without PDFs or PII."
+"Daily cron that, when enabled, deletes the PDFs and personal data (email/phone) of completed documents (signed/declined/expired/canceled) past the retention period. The record and status history remain for audit/fiscal purposes, without PDFs or PII.","Täglicher Cron-Job, der, wenn aktiviert, die PDFs und personenbezogenen Daten (E-Mail/Telefon) abgeschlossener Dokumente (signiert/abgelehnt/abgelaufen/storniert) nach Ablauf der Aufbewahrungsfrist löscht. Der Datensatz und der Statusverlauf bleiben zu Audit-/steuerlichen Zwecken erhalten, jedoch ohne PDFs oder personenbezogene Daten."
 Days before admin escalation,Tage vor Admin-Eskalation
-Days before first reminder,Days before first reminder
+Days before first reminder,Tage bis zur ersten Erinnerung
 Days before the first reminder,Tage vor der ersten Erinnerung
 Days between subsequent reminders,Tage zwischen aufeinanderfolgenden Erinnerungen
 Days elapsed since sending before alerting the admin.,"Vergangene Tage seit dem Senden, bevor der Admin alarmiert wird."
 Days elapsed since sending before the first customer reminder.,Vergangene Tage seit dem Senden vor der ersten Kundenerinnerung.
-Days to wait between a reminder and the next.,Days to wait between a reminder and the next.
+Days to wait between a reminder and the next.,Wartezeit in Tagen zwischen zwei Erinnerungen.
 Days to wait between one reminder and the next.,"Tage, die zwischen einer Erinnerung und der nächsten gewartet werden müssen."
 Declined,Abgelehnt
 Default OTP_SMS: requires the signer's phone number.,Standard OTP_SMS: erfordert die Telefonnummer des Unterzeichners.
 Default generation trigger,Standard-Auslöser für die Erstellung
 Default phone prefix,Standard-Telefonvorwahl
 Delete,Löschen
-Delete Webhook subscription,Delete Webhook subscription
-Delete integration,Delete integration
+Delete Webhook subscription,Webhook-Abonnement löschen
+Delete integration,Integration löschen
 Delete template,Vorlage löschen
-"Delete the Webhook subscription ""%1""?","Delete the Webhook subscription ""%1""?"
-"Delete the integration ""%1""?","Delete the integration ""%1""?"
+"Delete the Webhook subscription ""%1""?",Webhook-Abonnement „%1“ löschen?
+"Delete the integration ""%1""?",Integration „%1“ löschen?
 "Delete the template ""%1""?",Vorlage „%1“ löschen?
-Delete this integration?,Delete this integration?
+Delete this integration?,Diese Integration löschen?
 Delete this template? Documents already generated remain in the history.,Diese Vorlage löschen? Bereits erzeugte Dokumente bleiben im Verlauf erhalten.
-Deliveries limit per run,Deliveries limit per run
-Deliveries per run limit,Deliveries per run limit
-Delivery attempts before marking the webhook as permanently failed.,Delivery attempts before marking the webhook as permanently failed.
+Deliveries limit per run,Zustellungslimit pro Ausführung
+Deliveries per run limit,Zustellungslimit pro Ausführung
+Delivery attempts before marking the webhook as permanently failed.,"Zustellversuche, bevor der Webhook als dauerhaft fehlgeschlagen markiert wird."
 Demo / Sandbox,Demo / Sandbox
 Detail: %error_message,Detail: %error_message
 Details: %error_message,Details: %error_message
@@ -126,28 +126,28 @@ Digital Signature,Digitale Signatur
 Disabled by default to avoid alarming customers: evaluate on a case-by-case basis.,"Standardmäßig deaktiviert, um unnötige Beunruhigung zu vermeiden: von Fall zu Fall bewerten."
 Disabled by default: deletion is destructive and should be enabled deliberately after defining the required retention periods (tax/legal).,"Standardmäßig deaktiviert: Das Löschen ist destruktiv und sollte bewusst aktiviert werden, nachdem die erforderlichen (steuerlichen/rechtlichen) Aufbewahrungsfristen festgelegt wurden."
 DocuSign,DocuSign
-DocuSign Apps and Keys Panel,DocuSign Apps and Keys Panel
-DocuSign Developer Center,DocuSign Developer Center
-DocuSign: downloaded PDF content is empty.,DocuSign: downloaded PDF content is empty.
-"DocuSign: envelope creation failed, no ID received.","DocuSign: envelope creation failed, no ID received."
-DocuSign: error generating the JWT assertion: %1,DocuSign: error generating the JWT assertion: %1
-DocuSign: invalid document store.,DocuSign: invalid document store.
-"DocuSign: network error during ""%1"": %2","DocuSign: network error during ""%1"": %2"
-DocuSign: no account associated with the provided credentials.,DocuSign: no account associated with the provided credentials.
-"DocuSign: non-JSON response during ""%1"".","DocuSign: non-JSON response during ""%1""."
-DocuSign: signer email is missing or invalid.,DocuSign: signer email is missing or invalid.
-DocuSign: status response is missing the status field.,DocuSign: status response is missing the status field.
-"DocuSign: temporary service error during ""%1"" (HTTP %2).","DocuSign: temporary service error during ""%1"" (HTTP %2)."
-DocuSign: the document has no started process (envelope).,DocuSign: the document has no started process (envelope).
-DocuSign: valid OAuth response but missing access token.,DocuSign: valid OAuth response but missing access token.
+DocuSign Apps and Keys Panel,DocuSign-Panel für Apps und Schlüssel
+DocuSign Developer Center,DocuSign Entwicklerzentrum
+DocuSign: downloaded PDF content is empty.,DocuSign: heruntergeladener PDF-Inhalt ist leer.
+"DocuSign: envelope creation failed, no ID received.","DocuSign: Erstellung des Umschlags fehlgeschlagen, keine ID empfangen."
+DocuSign: error generating the JWT assertion: %1,DocuSign: Fehler beim Generieren der JWT-Assertion: %1
+DocuSign: invalid document store.,DocuSign: ungültiger Store des Dokuments.
+"DocuSign: network error during ""%1"": %2",DocuSign: Netzwerkfehler bei „%1“: %2
+DocuSign: no account associated with the provided credentials.,DocuSign: kein Konto mit den angegebenen Zugangsdaten verknüpft.
+"DocuSign: non-JSON response during ""%1"".",DocuSign: Nicht-JSON-Antwort bei „%1“.
+DocuSign: signer email is missing or invalid.,DocuSign: E-Mail-Adresse des Unterzeichners fehlt oder ist ungültig.
+DocuSign: status response is missing the status field.,DocuSign: Statusfeld fehlt in der Statusantwort.
+"DocuSign: temporary service error during ""%1"" (HTTP %2).",DocuSign: vorübergehender Dienstfehler bei „%1“ (HTTP %2).
+DocuSign: the document has no started process (envelope).,DocuSign: für das Dokument wurde kein Prozess gestartet (Umschlag).
+DocuSign: valid OAuth response but missing access token.,"DocuSign: gültige OAuth-Antwort, aber Access-Token fehlt."
 Document #%1 is not active: use the active one to regenerate.,Dokument #%1 ist nicht aktiv: verwenden Sie zum Neuerstellen das aktive Dokument.
 Document actions (API),Dokumentaktionen (API)
-Document ID,Document ID
-Document Template,Document Template
+Document ID,Dokument-ID
+Document Template,Dokumentvorlage
 Document canceled for manual regeneration.,Dokument für manuelle Neuerstellung storniert.
 Document file not found in storage: %1,Dokumentdatei im Speicher nicht gefunden: %1
-Document limit per reconciliation run,Document limit per reconciliation run
-Document limit per run,Document limit per run
+Document limit per reconciliation run,Dokumentenlimit pro Abgleichsausführung
+Document limit per run,Dokumentenlimit pro Ausführung
 Document metrics and performance,Dokumentenmetriken und Performance
 Document regenerated (replaces #%1).,Dokument neu erstellt (ersetzt #%1).
 Document regenerated: new document #%1 is being processed.,Dokument neu erstellt: neues Dokument #%1 wird verarbeitet.
@@ -163,40 +163,40 @@ Download signed,Signiertes Dokument herunterladen
 Download signed PDF,Signiertes PDF herunterladen
 Download the digitally signed contracts for this order.,Digital signierte Verträge für diese Bestellung herunterladen.
 Draw a box on the PDF before confirming.,"Zeichnen Sie ein Auswahlfeld auf der PDF, bevor Sie bestätigen."
-Draw a selection box on the PDF before confirming.,Draw a selection box on the PDF before confirming.
+Draw a selection box on the PDF before confirming.,"Ziehen Sie ein Auswahlfeld auf dem PDF auf, bevor Sie bestätigen."
 Dummy (test only),Dummy (nur Test)
 "Dummy provider included with the module: it does not contact any external service. It simulates a successful signature after the delay configured below, returning the original PDF as ""signed"". Useful for testing the whole flow (templates, triggers, notifications, customer area) without a real provider's credentials. Do NOT enable in production.","Im Modul enthaltener Dummy-Anbieter: kontaktiert keinen externen Dienst. Er simuliert eine erfolgreiche Signatur nach der unten konfigurierten Verzögerung und gibt das Original-PDF als „signiert“ zurück. Nützlich, um den gesamten Ablauf (Vorlagen, Auslöser, Benachrichtigungen, Kundenbereich) ohne Zugangsdaten eines echten Anbieters zu testen. NICHT in der Produktion aktivieren."
-Dummy provider that simulates signing locally. DO NOT use in production.,Dummy provider that simulates signing locally. DO NOT use in production.
+Dummy provider that simulates signing locally. DO NOT use in production.,"Dummy-Anbieter, der die Signatur lokal simuliert. NICHT in der Produktion verwenden."
 Dummy: generated PDF not found in storage.,Dummy: erzeugtes PDF im Speicher nicht gefunden.
 Dummy: missing or unrecognized process id.,Dummy: Prozess-ID fehlt oder wird nicht erkannt.
 Dummy: the content to send is not a PDF.,Dummy: der zu sendende Inhalt ist kein PDF.
 Dummy: the document has no generated PDF.,Dummy: für das Dokument wurde kein PDF erzeugt.
-E.g. https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/,E.g. https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/
+E.g. https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/,Z. B. https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/
 E.g. https://demo.wsign.cloud (HTTPS only).,Z. B. https://demo.wsign.cloud (nur HTTPS).
-EXHAUSTED,EXHAUSTED
+EXHAUSTED,ERSCHÖPFT
 Edit,Bearbeiten
-"Edit Webhook Subscription ""%1""","Edit Webhook Subscription ""%1"""
-"Edit integration ""%1""","Edit integration ""%1"""
+"Edit Webhook Subscription ""%1""",Webhook-Abonnement „%1“ bearbeiten
+"Edit integration ""%1""",Integration „%1“ bearbeiten
 "Edit template ""%1""",Vorlage „%1“ bearbeiten
-Email message for the signer,Email message for the signer
+Email message for the signer,E-Mail-Nachricht für den Unterzeichner
 Email notifications,E-Mail-Benachrichtigungen
 Email of the WsSign owner account.,E-Mail des WsSign-Owner-Kontos.
 Emails sent to the customer and admin about signature document events.,"E-Mails, die an Kunde und Administrator zu Ereignissen des Signaturdokuments gesendet werden."
-Emails sent to the customer and the admin about signature document events.,Emails sent to the customer and the admin about signature document events.
-Enable Quota Tracking,Enable Quota Tracking
-Enable webhooks,Enable webhooks
+Emails sent to the customer and the admin about signature document events.,"E-Mails, die an den Kunden und den Administrator über Ereignisse des Signaturdokuments gesendet werden."
+Enable Quota Tracking,Kontingentverfolgung aktivieren
+Enable webhooks,Webhooks aktivieren
 Enabled,Aktiviert
 Encrypted PDFs are not supported: remove the protection/password from the document and re-upload the file.,Verschlüsselte PDFs werden nicht unterstützt: Entfernen Sie den Schutz/das Passwort aus dem Dokument und laden Sie die Datei erneut hoch.
-Envelope expiration (days),Envelope expiration (days)
-Environment,Environment
+Envelope expiration (days),Umschlagablauf (Tage)
+Environment,Umgebung
 Error,Fehler
-Error message,Error message
+Error message,Fehlermeldung
 Error saving coordinates.,Fehler beim Speichern der Koordinaten.
-Error while deleting the subscription: %1,Error while deleting the subscription: %1
-Error while saving coordinates.,Error while saving coordinates.
-Error while saving the integration.,Error while saving the integration.
+Error while deleting the subscription: %1,Fehler beim Löschen des Abonnements: %1
+Error while saving coordinates.,Fehler beim Speichern der Koordinaten.
+Error while saving the integration.,Fehler beim Speichern der Integration.
 Error while saving the template.,Fehler beim Speichern der Vorlage.
-Error while saving the webhook subscription.,Error while saving the webhook subscription.
+Error while saving the webhook subscription.,Fehler beim Speichern des Webhook-Abonnements.
 Error: %message,Fehler: %message
 Escalation template (admin),Eskalationsvorlage (Admin)
 Expired,Abgelaufen
@@ -204,187 +204,187 @@ Expired or Declined,Abgelaufen oder Abgelehnt
 Fake provider that simulates signing locally. Do NOT use in production.,"Dummy-Anbieter, der die Signatur lokal simuliert. NICHT in der Produktion verwenden."
 File not specified.,Datei nicht spezifiziert.
 For error and negative outcome notifications. Empty = store's general contact.,Für Fehler- und negative Ergebnisbenachrichtigungen. Leer = allgemeiner Kontakt des Shops.
-For error and negative-outcome notifications. Empty = store general contact.,For error and negative-outcome notifications. Empty = store general contact.
+For error and negative-outcome notifications. Empty = store general contact.,Für Benachrichtigungen bei Fehlern und negativem Ergebnis. Leer = allgemeiner Shop-Kontakt.
 "From the last status change of the completed document. Default 3650 (10 years, indicative: check the applicable tax/legal terms).","Gerechnet ab der letzten Statusänderung des abgeschlossenen Dokuments. Standard 3650 (10 Jahre, indikativ: prüfen Sie die geltenden steuerlichen/rechtlichen Fristen)."
 GDPR acknowledgement (production mode),DSGVO-Bestätigung (Produktionsmodus)
 General,Allgemein
 Generate signature documents,Signaturdokumente erstellen
-Generate signature documents (manual),Generate signature documents (manual)
+Generate signature documents (manual),Signaturdokumente generieren (manuell)
 Generate signature documents for the selected orders?,Signaturdokumente für die ausgewählten Bestellungen erstellen?
-Generate template documents with manual trigger,Generate template documents with manual trigger
+Generate template documents with manual trigger,Vorlagendokumente mit manuellem Trigger generieren
 Generated,Erstellt
 Guide to integrating signature providers,Anleitung zur Integration von Signaturanbietern
-HMAC Secret,HMAC Secret
-HTTP/HTTPS endpoint where JSON webhook push notifications will be sent.,HTTP/HTTPS endpoint where JSON webhook push notifications will be sent.
+HMAC Secret,HMAC-Secret
+HTTP/HTTPS endpoint where JSON webhook push notifications will be sent.,"HTTP/HTTPS-Endpunkt, an den JSON-Webhook-Push-Benachrichtigungen gesendet werden."
 "Hello %name,","Hallo %name,"
-Historical,Historical
+Historical,Historisch
 I want to receive the contract to sign digitally,Ich möchte den Vertrag zur digitalen Unterschrift erhalten
 ID,ID
 "If you believe this is a mistake, contact our customer service. You can check your order here: <a href=""%url"">My orders</a>","Falls Sie glauben, dass dies ein Fehler ist, wenden Sie sich an unseren Kundendienst. Sie können Ihre Bestellung hier einsehen: <a href=""%url"">Meine Bestellungen</a>"
 In development,In Entwicklung
 Integration,Integration
-Integration ID,Integration ID
-Integration deleted.,Integration deleted.
-Integration key retrieved from the DocuSign Console.,Integration key retrieved from the DocuSign Console.
-Integration saved.,Integration saved.
-Integration with the Adobe Acrobat Sign platform.,Integration with the Adobe Acrobat Sign platform.
-Integration with the DocuSign platform.,Integration with the DocuSign platform.
+Integration ID,Integrations-ID
+Integration deleted.,Integration gelöscht.
+Integration key retrieved from the DocuSign Console.,Aus der DocuSign-Konsole abgerufener Integrationsschlüssel.
+Integration saved.,Integration gespeichert.
+Integration with the Adobe Acrobat Sign platform.,Integration mit der Adobe Acrobat Sign Plattform.
+Integration with the DocuSign platform.,Integration mit der DocuSign-Plattform.
 Internal status,Interner Status
-Invalid page number %1: the PDF has %2.,Invalid page number %1: the PDF has %2.
+Invalid page number %1: the PDF has %2.,Ungültige Seitennummer %1: Das PDF hat %2.
 Invalid signature parameters.,Ungültige Unterschriftsparameter.
 Invoice creation,Rechnungserstellung
 Invoice paid,Rechnung bezahlt
-Item,Item
-LOW QUOTA,LOW QUOTA
+Item,Position
+LOW QUOTA,GERINGES KONTINGENT
 Last 30 days,Letzte 30 Tage
 Last 90 days,Letzte 90 Tage
 Last year,Letztes Jahr
 Local (Recommended),Lokal (Empfohlen)
-Long-lived refresh token used to generate API Access Tokens.,Long-lived refresh token used to generate API Access Tokens.
+Long-lived refresh token used to generate API Access Tokens.,Langlebiges Refresh-Token zur Generierung von API-Access-Tokens.
 Mage-OS,Mage-OS
 "Manage the order in backend: <a href=\\""%url\""\"">%url</a>""","Bestellung im Backend verwalten: <a href=\\""%url\""\"">%url</a>"""
 Manual from backend,Manuell aus dem Backend
-Maximum attempts,Maximum attempts
-Maximum number of attempts,Maximum number of attempts
-Maximum number of attempts for temporary errors (network/service) before the error state.,Maximum number of attempts for temporary errors (network/service) before the error state.
+Maximum attempts,Maximale Versuche
+Maximum number of attempts,Maximale Anzahl von Versuchen
+Maximum number of attempts for temporary errors (network/service) before the error state.,"Maximale Anzahl von Versuchen bei vorübergehenden Fehlern (Netzwerk/Dienst), bevor der Fehlerstatus eintritt."
 Maximum number of customer reminders,Maximale Anzahl von Kundenerinnerungen
 Maximum number of retries for temporary errors (network/service) before reaching the error state.,"Maximale Anzahl an Versuchen bei temporären Fehlern (Netzwerk/Dienst), bevor der Fehlerstatus eintritt."
 Maximum number of times to remind the customer.,Maximale Anzahl der Erinnerungen an den Kunden.
 Maximum retries,Maximale Versuche
-"Merge field ""%1"" is not registered.","Merge field ""%1"" is not registered."
+"Merge field ""%1"" is not registered.",Merge-Feld „%1“ ist nicht registriert.
 Message for the signer,Nachricht an den Unterzeichner
-Monthly Allowance,Monthly Allowance
+Monthly Allowance,Monatliches Kontingent
 Name,Name
-New API integration,New API integration
-New Webhook Subscription,New Webhook Subscription
+New API integration,Neue API-Integration
+New Webhook Subscription,Neues Webhook-Abonnement
 New document template,Neue Dokumentvorlage
-New integration,New integration
+New integration,Neue Integration
 Next,Weiter
-"No API integration mapped for integration ""%1"".","No API integration mapped for integration ""%1""."
-No integration selected.,No integration selected.
+"No API integration mapped for integration ""%1"".",Keine API-Integration für Integration „%1“ zugeordnet.
+No integration selected.,Keine Integration ausgewählt.
 No legal validity — test/development only,Keine Rechtsgültigkeit — nur Test/Entwicklung
-No signature documents for this order.,No signature documents for this order.
+No signature documents for this order.,Keine Signaturdokumente für diese Bestellung.
 "No signature tag found in the PDF. Add at least one tag to the document in the format {WSIGN#width,height#email-placeholder}.","Kein Signatur-Tag im PDF gefunden. Fügen Sie dem Dokument mindestens ein Tag im Format {WSIGN#Breite,Höhe#E-Mail-Platzhalter} hinzu."
-No signature tag found in the template PDF: unable to insert the signer's data.,No signature tag found in the template PDF: unable to insert the signer's data.
+No signature tag found in the template PDF: unable to insert the signer's data.,Kein Signatur-Tag in der PDF-Vorlage gefunden: Daten des Unterzeichners können nicht eingefügt werden.
 No signature tag found in the template PDF: unable to insert the signer\'s data.,Kein Signatur-Tag in der Vorlagen-PDF gefunden: Die Daten des Unterzeichners können nicht eingefügt werden.
 No template selected.,Keine Vorlage ausgewählt.
 Note: The classification of the signature level is based on the specifications declared by the provider. The module does not guarantee legal adequacy or compliance for specific purposes.,Hinweis: Die Klassifizierung der Signaturebene basiert auf den vom Anbieter angegebenen Spezifikationen. Das Modul garantiert keine rechtliche Angemessenheit oder Konformität für bestimmte Zwecke.
 Notifier email (optional),Benachrichtigungs-E-Mail (optional)
-Notify admin on permanent failure,Notify admin on permanent failure
-Notify the admin if the document expires or is declined,Notify the admin if the document expires or is declined
+Notify admin on permanent failure,Administrator bei endgültigem Fehlschlag benachrichtigen
+Notify the admin if the document expires or is declined,"Administrator benachrichtigen, wenn das Dokument abläuft oder abgelehnt wird"
 Notify the admin if the document expires or is rejected,"Administrator benachrichtigen, wenn das Dokument abläuft oder abgelehnt wird"
 Notify the admin on a definitive error,Administrator bei endgültigem Fehler benachrichtigen
-Notify the admin on definitive error,Notify the admin on definitive error
-Notify the customer if the document expires or is declined,Notify the customer if the document expires or is declined
+Notify the admin on definitive error,Administrator bei endgültigem Fehler benachrichtigen
+Notify the customer if the document expires or is declined,"Kunden benachrichtigen, wenn das Dokument abläuft oder abgelehnt wird"
 Notify the customer if the document expires or is rejected,"Kunden benachrichtigen, wenn das Dokument abläuft oder abgelehnt wird"
 Notify the customer when the document is ready,"Kunden benachrichtigen, wenn das Dokument bereit ist"
 Notify the customer when the document is signed,"Kunden benachrichtigen, wenn das Dokument signiert wurde"
-Numeric ID of the integration already created under System > Integrations.,Numeric ID of the integration already created under System > Integrations.
-Off by default to avoid alarm: evaluate case by case.,Off by default to avoid alarm: evaluate case by case.
-Off by default: deletion is destructive and should be enabled deliberately after defining the required (fiscal/legal) retention periods.,Off by default: deletion is destructive and should be enabled deliberately after defining the required (fiscal/legal) retention periods.
+Numeric ID of the integration already created under System > Integrations.,Numerische ID der bereits unter System > Integrationen erstellten Integration.
+Off by default to avoid alarm: evaluate case by case.,"Standardmäßig deaktiviert, um Fehlalarme zu vermeiden: von Fall zu Fall prüfen."
+Off by default: deletion is destructive and should be enabled deliberately after defining the required (fiscal/legal) retention periods.,Standardmäßig deaktiviert: Das Löschen ist destruktiv und sollte erst nach Definition der erforderlichen (steuerlichen/rechtlichen) Aufbewahrungsfristen bewusst aktiviert werden.
 Official provider website,Offizielle Website des Anbieters
 "Open the order in backend: <a href=""%url"">%url</a>","Bestellung im Backend öffnen: <a href=""%url"">%url</a>"
 Operation cancelled.,Vorgang abgebrochen.
 Order ID,Bestell-ID
 Order confirmation,Bestellbestätigung
 Order contract,Bestellvertrag
-Order link,Order link
-Order number,Order number
-"Order with id ""%1"" does not exist.","Order with id ""%1"" does not exist."
+Order link,Bestell-Link
+Order number,Bestellnummer
+"Order with id ""%1"" does not exist.",Bestellung mit ID „%1“ existiert nicht.
 Order: #%increment_id,Bestellung: #%increment_id
-Outbound notifications to external systems about document events.,Outbound notifications to external systems about document events.
-Outbound notifications to external systems on document events.,Outbound notifications to external systems on document events.
+Outbound notifications to external systems about document events.,Ausgehende Benachrichtigungen an externe Systeme über Dokumentereignisse.
+Outbound notifications to external systems on document events.,Ausgehende Benachrichtigungen an externe Systeme bei Dokumentereignissen.
 Outcome: %status,Ergebnis: %status
 PDF and personal data deleted at the end of the retention period.,PDF und personenbezogene Daten nach Ablauf der Aufbewahrungsfrist gelöscht.
-PDF loading error.,PDF loading error.
+PDF loading error.,Fehler beim Laden der PDF-Datei.
 PDF not available for this document.,PDF für dieses Dokument nicht verfügbar.
 Page,Seite
 Password,Passwort
 Pending,Ausstehend
 Pending signature,Ausstehende Signatur
-Place signature on PDF,Place signature on PDF
+Place signature on PDF,Signatur auf PDF platzieren
 Platform URL,Plattform-URL
 Position signature on PDF,Unterschrift auf PDF platzieren
 Preference saved.,Einstellung gespeichert.
-Prepaid Credit Package (Pool),Prepaid Credit Package (Pool)
+Prepaid Credit Package (Pool),Prepaid-Guthabenpaket (Pool)
 Previous,Zurück
 Price,Preis
-Process ID,Process ID
+Process ID,Prozess-ID
 Processing of a signature document ended in error and requires manual intervention.,Die Verarbeitung eines Signaturdokuments ist mit einem Fehler beendet worden und erfordert manuelles Eingreifen.
 Product,Produkt
-Provider Quotas & Consumption,Provider Quotas & Consumption
+Provider Quotas & Consumption,Anbieter-Kontingente & Verbrauch
 Provider status,Anbieterstatus
 Provider: %provider,Anbieter: %provider
-Quota Model,Quota Model
-Quota tracking disabled.,Quota tracking disabled.
-RSA Private Key,RSA Private Key
-RSA Private Key (PEM),RSA Private Key (PEM)
+Quota Model,Kontingentmodell
+Quota tracking disabled.,Kontingentverfolgung deaktiviert.
+RSA Private Key,Privater RSA-Schlüssel
+RSA Private Key (PEM),Privater RSA-Schlüssel (PEM)
 Raw status returned by WsSign → internal document status. Unmapped statuses are logged so they can be added here.,"Von WsSign zurückgegebener Rohstatus → interner Dokumentstatus. Nicht zugeordnete Status werden protokolliert, damit sie hier ergänzt werden können."
-Regenerate / Resend,Regenerate / Resend
-Regenerate and resend this document?,Regenerate and resend this document?
-Remaining:,Remaining:
+Regenerate / Resend,Neu generieren / Erneut senden
+Regenerate and resend this document?,Dieses Dokument neu generieren und erneut senden?
+Remaining:,Verbleibend:
 Reminder template (customer),Erinnerungsvorlage (Kunde)
 Reminder: Sign your contract (order %increment_id),Erinnerung: Unterzeichnen Sie Ihren Vertrag (Bestellung %increment_id)
 Reminders for documents awaiting signature.,Erinnerungen für Dokumente mit ausstehender Unterschrift.
-Reminders for documents pending signature.,Reminders for documents pending signature.
-Required for Service Account JWT authentication.,Required for Service Account JWT authentication.
+Reminders for documents pending signature.,Erinnerungen für Dokumente mit ausstehender Unterschrift.
+Required for Service Account JWT authentication.,Erforderlich für die JWT-Authentifizierung als Dienstkonto (Service Account).
 Retention days,Aufbewahrungstage
 SKU,SKU
-Save integration,Save integration
-Save subscription,Save subscription
+Save integration,Integration speichern
+Save subscription,Abonnement speichern
 Save template,Vorlage speichern
 Saving...,Wird gespeichert...
-"Secret key used to sign the X-Signature header, whose value is sha256= followed by the HMAC-SHA256 hex digest. On edit, leave empty to keep the current secret.","Secret key used to sign the X-Signature header, whose value is sha256= followed by the HMAC-SHA256 hex digest. On edit, leave empty to keep the current secret."
+"Secret key used to sign the X-Signature header, whose value is sha256= followed by the HMAC-SHA256 hex digest. On edit, leave empty to keep the current secret.","Geheimer Schlüssel zum Signieren des X-Signature-Headers, dessen Wert sha256= gefolgt vom hexadezimalen HMAC-SHA256-Digest ist. Beim Bearbeiten leer lassen, um das aktuelle Secret beizubehalten."
 Select signature position by dragging the mouse to draw a box on the PDF page.,"Wählen Sie die Position der Unterschrift aus, indem Sie ein Feld auf der PDF-Seite ziehen."
-Select signature position by dragging to draw a box on the PDF page.,Select signature position by dragging to draw a box on the PDF page.
-Select the Store View to receive webhooks for (leave empty for all stores).,Select the Store View to receive webhooks for (leave empty for all stores).
-Send a notification to the admin if the document remains unsigned. Enabled by default.,Send a notification to the admin if the document remains unsigned. Enabled by default.
-Send an email to the admin when a webhook delivery exhausts its attempts. Enabled by default.,Send an email to the admin when a webhook delivery exhausts its attempts. Enabled by default.
-Send configured webhooks to active subscriptions. Disabled by default.,Send configured webhooks to active subscriptions. Disabled by default.
-Send escalation to admin,Send escalation to admin
+Select signature position by dragging to draw a box on the PDF page.,"Wählen Sie die Signaturposition aus, indem Sie ein Feld auf der PDF-Seite aufziehen."
+Select the Store View to receive webhooks for (leave empty for all stores).,"Wählen Sie die Store-Ansicht aus, für die Webhooks empfangen werden sollen (leer lassen für alle Stores)."
+Send a notification to the admin if the document remains unsigned. Enabled by default.,"Eine Benachrichtigung an den Administrator senden, wenn das Dokument nicht signiert bleibt. Standardmäßig aktiviert."
+Send an email to the admin when a webhook delivery exhausts its attempts. Enabled by default.,"Eine E-Mail an den Administrator senden, wenn eine Webhook-Zustellung alle Versuche erschöpft hat. Standardmäßig aktiviert."
+Send configured webhooks to active subscriptions. Disabled by default.,Konfigurierte Webhooks an aktive Abonnements senden. Standardmäßig deaktiviert.
+Send escalation to admin,Eskalation an den Administrator senden
 Send escalation to the admin,Eskalation an Admin senden
-Send periodic emails to the customer to remind them to sign. Disabled by default.,Send periodic emails to the customer to remind them to sign. Disabled by default.
-Send reminders to customer,Send reminders to customer
+Send periodic emails to the customer to remind them to sign. Disabled by default.,"Regelmäßige E-Mails an den Kunden senden, um ihn an die Unterschrift zu erinnern. Standardmäßig deaktiviert."
+Send reminders to customer,Erinnerungen an den Kunden senden
 Send reminders to the customer,Erinnerungen an Kunden senden
-Send warning notification when remaining quota drops below this percentage (e.g. 15).,Send warning notification when remaining quota drops below this percentage (e.g. 15).
+Send warning notification when remaining quota drops below this percentage (e.g. 15).,"Warnmeldung senden, wenn das verbleibende Kontingent unter diesen Prozentsatz fällt (z. B. 15)."
 Sender,Absender
 Sends a notification to the admin if the document remains unsigned. Enabled by default.,"Sende eine Benachrichtigung an den Admin, wenn das Dokument nicht unterzeichnet bleibt. Standardmäßig aktiviert."
-Sends an email to the admin when a webhook delivery exhausts its attempts. Enabled by default.,Sends an email to the admin when a webhook delivery exhausts its attempts. Enabled by default.
+Sends an email to the admin when a webhook delivery exhausts its attempts. Enabled by default.,"Sendet eine E-Mail an den Administrator, wenn eine Webhook-Zustellung alle Versuche erschöpft hat. Standardmäßig aktiviert."
 Sends periodic emails to the customer to remind them to sign. Disabled by default.,"Sende regelmäßige E-Mails an den Kunden, um ihn an die Unterschrift zu erinnern. Standardmäßig deaktiviert."
-Sends the configured webhooks to active subscriptions. Disabled by default.,Sends the configured webhooks to active subscriptions. Disabled by default.
+Sends the configured webhooks to active subscriptions. Disabled by default.,Sendet die konfigurierten Webhooks an aktive Abonnements. Standardmäßig deaktiviert.
 Sent by the provider in the signing invitation.,Wird vom Anbieter in der Signatureinladung gesendet.
 Sent for signature,Zur Signatur gesendet
-Sent in the Adobe Acrobat Sign notification email.,Sent in the Adobe Acrobat Sign notification email.
-Sent in the body of the DocuSign notification email.,Sent in the body of the DocuSign notification email.
-Sign contract for order #%1,Sign contract for order #%1
-Signature API Consumers,Signature API Consumers
-Signature Provider Quota Warning: %1,Signature Provider Quota Warning: %1
+Sent in the Adobe Acrobat Sign notification email.,Wird in der Adobe Acrobat Sign Benachrichtigungs-E-Mail gesendet.
+Sent in the body of the DocuSign notification email.,Wird im Text der DocuSign-Benachrichtigungs-E-Mail gesendet.
+Sign contract for order #%1,Vertrag für Bestellung #%1 unterzeichnen
+Signature API Consumers,Signatur-API-Nutzer
+Signature Provider Quota Warning: %1,Warnung zum Signaturanbieter-Kontingent: %1
 Signature document generation queued for %1 order(s).,Erstellung der Signaturdokumente für %1 Bestellung(en) eingereiht.
 Signature document generation request has been queued.,Die Anfrage zur Erstellung von Signaturdokumenten wurde entgegengenommen.
 Signature document templates,Signaturdokumentvorlagen
 Signature documents,Signaturdokumente
 Signature expiration (days),Signaturablauf (Tage)
-Signature provider,Signature provider
+Signature provider,Signaturanbieter
 "Signature provider ""%1"" is not registered.",Signaturanbieter „%1“ ist nicht registriert.
 Signature providers,Signaturanbieter
-Signature tag color (PDF Builder),Signature tag color (PDF Builder)
+Signature tag color (PDF Builder),Signatur-Tag-Farbe (PDF Builder)
 Signature type,Signaturtyp
 Signed,Signiert
 Signed contracts,Signierte Verträge
 Signer email,E-Mail des Unterzeichners
 Signer email missing or invalid.,E-Mail des Unterzeichners fehlt oder ist ungültig.
-Signer's phone number is invalid.,Signer's phone number is invalid.
+Signer's phone number is invalid.,Die Telefonnummer des Unterzeichners ist ungültig.
 Signer's phone number missing: required by WsSign for OTP via SMS.,Telefonnummer des Unterzeichners fehlt: von WsSign für OTP per SMS erforderlich.
 Signer: %email,Unterzeichner: %email
 Signer\'s phone number is invalid.,Telefonnummer des Unterzeichners ist ungültig.
-Signer\'s phone number missing: required by WsSign for OTP via SMS.,Signer\'s phone number missing: required by WsSign for OTP via SMS.
+Signer\'s phone number missing: required by WsSign for OTP via SMS.,Telefonnummer des Unterzeichners fehlt: von WsSign für OTP per SMS erforderlich.
 Signing the contract is mandatory for the products in your cart.,Für die Produkte im Warenkorb ist die Unterzeichnung des Vertrags obligatorisch.
-"Simple (SES), Advanced (AES), Qualified (QES) Electronic Signature","Simple (SES), Advanced (AES), Qualified (QES) Electronic Signature"
+"Simple (SES), Advanced (AES), Qualified (QES) Electronic Signature","Einfache (SES), fortgeschrittene (AES), qualifizierte (QES) elektronische Signatur"
 Status,Status
 Status mapping,Statuszuordnung
-Store view,Store view
-Store views this integration is authorized to operate on via API.,Store views this integration is authorized to operate on via API.
-Target URL,Target URL
+Store view,Store-Ansicht
+Store views this integration is authorized to operate on via API.,"Store-Ansichten, für die diese Integration über die API berechtigt ist."
+Target URL,Ziel-URL
 Template %1 has no uploaded PDF file.,Für Vorlage %1 wurde keine PDF-Datei hochgeladen.
 Template PDF file not found.,PDF-Datei der Vorlage nicht gefunden.
 Template PDF file not found: %1,PDF-Datei der Vorlage nicht gefunden: %1
@@ -393,22 +393,22 @@ Template saved.,Vorlage gespeichert.
 "Template with id ""%1"" does not exist.",Vorlage mit ID „%1“ existiert nicht.
 Tenant,Tenant
 Thank you! The signature has been received. You will get a confirmation once the document is available in your account.,"Vielen Dank! Die Signatur wurde erfasst. Sie erhalten eine Bestätigung, sobald das Dokument in Ihrem Konto verfügbar ist."
-The HMAC secret is required for new subscriptions.,The HMAC secret is required for new subscriptions.
-The Integration ID is required.,The Integration ID is required.
+The HMAC secret is required for new subscriptions.,Das HMAC-Secret ist für neue Abonnements erforderlich.
+The Integration ID is required.,Die Integrations-ID ist erforderlich.
 The PDF exceeds the maximum size of 10 MB.,Das PDF überschreitet die maximale Größe von 10 MB.
-The Target URL is required.,The Target URL is required.
-The Target URL must use the http or https scheme.,The Target URL must use the http or https scheme.
+The Target URL is required.,Die Ziel-URL ist erforderlich.
+The Target URL must use the http or https scheme.,Die Ziel-URL muss das Protokoll http oder https verwenden.
 The connector used for new documents once production mode is confirmed above. Configure the credentials in the provider's group.,"Der Connector, der für neue Dokumente verwendet wird, sobald der Produktionsmodus oben bestätigt wurde. Konfigurieren Sie die Zugangsdaten in der Gruppe des Anbieters."
 The document has no associated template.,Dem Dokument ist keine Vorlage zugeordnet.
 The document has no generated PDF to send.,Für das Dokument wurde kein zu sendendes PDF erzeugt.
 The dummy provider is not enabled: enable it explicitly in the configuration (test environments only).,Der Dummy-Anbieter ist nicht aktiviert: aktivieren Sie ihn explizit in der Konfiguration (nur Testumgebungen).
-The entered Target URL is invalid.,The entered Target URL is invalid.
+The entered Target URL is invalid.,Die eingegebene Ziel-URL ist ungültig.
 The following document is pending digital signature beyond the configured escalation period.,Das folgende Dokument wartet über den konfigurierten Eskalationszeitraum hinaus auf die digitale Signatur.
-"The merge field tag ""{FIELD:%1}"" is not supported or registered.","The merge field tag ""{FIELD:%1}"" is not supported or registered."
+"The merge field tag ""{FIELD:%1}"" is not supported or registered.",Das Merge-Feld-Tag „{FIELD:%1}“ wird nicht unterstützt oder ist nicht registriert.
 "The module is designed to be extended modularly. You can implement a custom connector for any digital signature provider (e.g. DocuSign, Namirial, InfoCert) by following our guide.","Das Modul ist modular aufgebaut und erweiterbar. Sie können einen benutzerdefinierten Konnektor für jeden Anbieter digitaler Signaturen (z. B. DocuSign, Namirial, InfoCert) gemäß unserer Anleitung implementieren."
-The name is required.,The name is required.
+The name is required.,Der Name ist erforderlich.
 The provider often already sends its own signing invitation: disabled by default.,Der Anbieter sendet oft bereits seine eigene Signatureinladung: standardmäßig deaktiviert.
-The provider often already sends its own signing invitation: off by default.,The provider often already sends its own signing invitation: off by default.
+The provider often already sends its own signing invitation: off by default.,Der Anbieter sendet oft bereits eine eigene Einladung zur Signatur: standardmäßig deaktiviert.
 The requested temporary file does not exist.,Die angeforderte temporäre Datei existiert nicht.
 The signing process of a document ended with a negative outcome.,Der Signaturprozess eines Dokuments wurde mit einem negativen Ergebnis abgeschlossen.
 The template file is not a PDF.,Die Vorlagendatei ist kein PDF.
@@ -416,33 +416,33 @@ The template has no PDF file uploaded for this store view.,Die Vorlage hat für 
 The template name is required.,Der Name der Vorlage ist erforderlich.
 The temporary file does not exist.,Die temporäre Datei existiert nicht.
 The uploaded file is not a valid PDF.,Die hochgeladene Datei ist kein gültiges PDF.
-This integration no longer exists.,This integration no longer exists.
-This subscription no longer exists.,This subscription no longer exists.
+This integration no longer exists.,Diese Integration existiert nicht mehr.
+This subscription no longer exists.,Dieses Abonnement existiert nicht mehr.
 This template no longer exists.,Diese Vorlage existiert nicht mehr.
 "To complete the order, we invite you to follow the instructions received at %email from the signature provider.","Um die Bestellung abzuschließen, bitten wir Sie, den Anweisungen zu folgen, die Sie unter %email vom Signaturanbieter erhalten haben."
-Total Quota / Included Signatures,Total Quota / Included Signatures
+Total Quota / Included Signatures,Gesamtkontingent / Enthaltene Signaturen
 Total generated,Gesamt generiert
-Total signatures included in prepaid package or monthly/annual allowance (e.g. 500).,Total signatures included in prepaid package or monthly/annual allowance (e.g. 500).
-Track signature credit consumption and send warning notifications when approaching limits.,Track signature credit consumption and send warning notifications when approaching limits.
-Unable to complete file validation.,Unable to complete file validation.
-Unable to delete Webhook subscription: %1,Unable to delete Webhook subscription: %1
-Unable to delete the API integration: %1,Unable to delete the API integration: %1
+Total signatures included in prepaid package or monthly/annual allowance (e.g. 500).,Gesamtzahl der im Prepaid-Paket oder im monatlichen/jährlichen Kontingent enthaltenen Signaturen (z. B. 500).
+Track signature credit consumption and send warning notifications when approaching limits.,"Verfolgen Sie den Verbrauch von Signaturguthaben und senden Sie Warnmeldungen, wenn Sie sich den Limits nähern."
+Unable to complete file validation.,Dateivalidierung konnte nicht abgeschlossen werden.
+Unable to delete Webhook subscription: %1,Webhook-Abonnement konnte nicht gelöscht werden: %1
+Unable to delete the API integration: %1,API-Integration konnte nicht gelöscht werden: %1
 Unable to delete the template: %1,Vorlage konnte nicht gelöscht werden: %1
 Unable to download the PDF: %1,PDF kann nicht heruntergeladen werden: %1
-Unable to find the subscription to delete.,Unable to find the subscription to delete.
+Unable to find the subscription to delete.,Das zu löschende Abonnement wurde nicht gefunden.
 Unable to generate the preview: %1,Vorschau konnte nicht erstellt werden: %1
 Unable to generate the signature documents: %1,Signaturdokumente konnten nicht erzeugt werden: %1
 Unable to load temporary PDF.,Die temporäre PDF-Datei konnte nicht geladen werden.
-Unable to load the temporary PDF.,Unable to load the temporary PDF.
+Unable to load the temporary PDF.,Das temporäre PDF konnte nicht geladen werden.
 Unable to regenerate the document: %1,Dokument konnte nicht neu erstellt werden: %1
-Unable to save Webhook subscription: %1,Unable to save Webhook subscription: %1
-Unable to save the API integration: %1,Unable to save the API integration: %1
+Unable to save Webhook subscription: %1,Webhook-Abonnement konnte nicht gespeichert werden: %1
+Unable to save the API integration: %1,API-Integration konnte nicht gespeichert werden: %1
 Unable to save the document: %1,Dokument konnte nicht gespeichert werden: %1
 Unable to save the template: %1,Vorlage konnte nicht gespeichert werden: %1
 Unable to save your choice.,Auswahl konnte nicht gespeichert werden.
-Unsupported PDF: /Pages is missing /Kids.,Unsupported PDF: /Pages is missing /Kids.
-Unsupported PDF: /Resources not found for the update.,Unsupported PDF: /Resources not found for the update.
-Unsupported PDF: catalog is missing /Pages.,Unsupported PDF: catalog is missing /Pages.
+Unsupported PDF: /Pages is missing /Kids.,Nicht unterstütztes PDF: /Pages fehlt /Kids.
+Unsupported PDF: /Resources not found for the update.,Nicht unterstütztes PDF: /Resources für die Aktualisierung nicht gefunden.
+Unsupported PDF: catalog is missing /Pages.,Nicht unterstütztes PDF: Dem Katalog fehlt /Pages.
 Unsupported PDF: classic cross-reference section not found at the expected position.,Nicht unterstütztes PDF: klassischer Cross-Reference-Abschnitt an der erwarteten Position nicht gefunden.
 Unsupported PDF: classic cross-reference table not found (save as PDF 1.4).,Nicht unterstütztes PDF: klassische Cross-Reference-Tabelle nicht gefunden (als PDF 1.4 speichern).
 Unsupported PDF: cross-reference chain has too many linked revisions (max %1).,Nicht unterstütztes PDF: Cross-Reference-Kette hat zu viele verknüpfte Revisionen (max. %1).
@@ -458,25 +458,25 @@ Unsupported PDF: incomplete cross-reference stream dictionary.,Nicht unterstütz
 Unsupported PDF: incomplete cross-reference stream.,Nicht unterstütztes PDF: unvollständiger Cross-Reference-Stream.
 Unsupported PDF: invalid cross-reference stream /W widths.,Nicht unterstütztes PDF: ungültige /W-Breiten des Cross-Reference-Streams.
 "Unsupported PDF: it uses object compression (object streams), not handled in this version. Disable object compression when exporting and re-upload the file.","Nicht unterstütztes PDF: Es verwendet Objektkomprimierung (Object Streams), die in dieser Version nicht unterstützt wird. Deaktivieren Sie die Objektkomprimierung beim Export und laden Sie die Datei erneut hoch."
-Unsupported PDF: nested page structure not handled by the builder.,Unsupported PDF: nested page structure not handled by the builder.
-Unsupported PDF: object %1 could not be resolved in the cross-reference table.,Unsupported PDF: object %1 could not be resolved in the cross-reference table.
-Unsupported PDF: object %1 is missing endobj.,Unsupported PDF: object %1 is missing endobj.
-Unsupported PDF: object %1 not recognized at the expected position.,Unsupported PDF: object %1 not recognized at the expected position.
-Unsupported PDF: page /Contents not recognized for tag insertion.,Unsupported PDF: page /Contents not recognized for tag insertion.
-Unsupported PDF: page content stream could not be resolved.,Unsupported PDF: page content stream could not be resolved.
-Unsupported PDF: page has no declared /Resources.,Unsupported PDF: page has no declared /Resources.
-Unsupported PDF: page is missing /Contents.,Unsupported PDF: page is missing /Contents.
-Unsupported PDF: rotated page (/Rotate %1) not handled by the builder.,Unsupported PDF: rotated page (/Rotate %1) not handled by the builder.
+Unsupported PDF: nested page structure not handled by the builder.,Nicht unterstütztes PDF: Verschachtelte Seitenstruktur wird vom Builder nicht unterstützt.
+Unsupported PDF: object %1 could not be resolved in the cross-reference table.,Nicht unterstütztes PDF: Objekt %1 konnte in der Querverweistabelle nicht aufgelöst werden.
+Unsupported PDF: object %1 is missing endobj.,Nicht unterstütztes PDF: Objekt %1 fehlt endobj.
+Unsupported PDF: object %1 not recognized at the expected position.,Nicht unterstütztes PDF: Objekt %1 an der erwarteten Position nicht erkannt.
+Unsupported PDF: page /Contents not recognized for tag insertion.,Nicht unterstütztes PDF: Seiten-/Contents für das Einfügen des Tags nicht erkannt.
+Unsupported PDF: page content stream could not be resolved.,Nicht unterstütztes PDF: Seiteninhalt-Stream konnte nicht aufgelöst werden.
+Unsupported PDF: page has no declared /Resources.,Nicht unterstütztes PDF: Seite hat keine deklarierten /Resources.
+Unsupported PDF: page is missing /Contents.,Nicht unterstütztes PDF: Seite fehlt /Contents.
+Unsupported PDF: rotated page (/Rotate %1) not handled by the builder.,Nicht unterstütztes PDF: Gedrehte Seite (/Rotate %1) wird vom Builder nicht unterstützt.
 Unsupported PDF: startxref not found.,Nicht unterstütztes PDF: startxref nicht gefunden.
 Unsupported PDF: trailer missing Size/Root.,Nicht unterstütztes PDF: Trailer ohne Size/Root.
 Unsupported PDF: trailer not found after the cross-reference table.,Nicht unterstütztes PDF: Trailer nach der Cross-Reference-Tabelle nicht gefunden.
-Unsupported PDF: unbalanced dictionary (missing closing delimiter).,Unsupported PDF: unbalanced dictionary (missing closing delimiter).
+Unsupported PDF: unbalanced dictionary (missing closing delimiter).,Nicht unterstütztes PDF: Nicht geschlossenes Dictionary (schließendes Trennzeichen fehlt).
 Unsupported PDF: unrecognized PNG row filter in cross-reference stream (%1).,Nicht unterstütztes PDF: nicht erkannter PNG-Zeilenfilter im Cross-Reference-Stream (%1).
 "Unsupported PDF: use a classic cross-reference table. Save/export the document as ""PDF 1.4"" and re-upload the file.",Nicht unterstütztes PDF: Verwenden Sie eine klassische Cross-Reference-Tabelle. Speichern/exportieren Sie das Dokument als „PDF 1.4“ und laden Sie die Datei erneut hoch.
 Update on the contract to sign (order %increment_id),Aktualisierung zum zu unterzeichnenden Vertrag (Bestellung %increment_id)
 Used when the template does not specify its own trigger.,"Wird verwendet, wenn die Vorlage keinen eigenen Auslöser angibt."
 Username (owner),Benutzername (Owner)
-Validation Error,Validation Error
+Validation Error,Validierungsfehler
 View order,Bestellung ansehen
 WARNING: enable only in test/development environments.,ACHTUNG: nur in Test-/Entwicklungsumgebungen aktivieren.
 Want to integrate a different provider?,Möchten Sie einen anderen Anbieter integrieren?
@@ -484,14 +484,14 @@ Warning: the signature is still required to complete the order.,"Achtung: Die Un
 We couldn't save your preference. Please try again.,Die Einstellung konnte nicht gespeichert werden. Bitte versuchen Sie es erneut.
 We kindly ask you to digitally sign the document related to your order.,"Wir bitten Sie, das Dokument zu Ihrer Bestellung digital zu signieren."
 Webhook,Webhook
-Webhook Outbound Logs,Webhook Outbound Logs
-Webhook Subscriptions,Webhook Subscriptions
-Webhook delivery failed for document #%document_id (order #%order_increment_id).,Webhook delivery failed for document #%document_id (order #%order_increment_id).
-Webhook failure notification template,Webhook failure notification template
-Webhook subscription deleted successfully.,Webhook subscription deleted successfully.
-Webhook subscription not found.,Webhook subscription not found.
-Webhook subscription saved.,Webhook subscription saved.
-"Webhook subscription with id ""%1"" does not exist.","Webhook subscription with id ""%1"" does not exist."
+Webhook Outbound Logs,Ausgehende Webhook-Protokolle
+Webhook Subscriptions,Webhook-Abonnements
+Webhook delivery failed for document #%document_id (order #%order_increment_id).,Webhook-Zustellung fehlgeschlagen für Dokument #%document_id (Bestellung #%order_increment_id).
+Webhook failure notification template,Vorlage für Webhook-Fehlerbenachrichtigung
+Webhook subscription deleted successfully.,Webhook-Abonnement erfolgreich gelöscht.
+Webhook subscription not found.,Webhook-Abonnement nicht gefunden.
+Webhook subscription saved.,Webhook-Abonnement gespeichert.
+"Webhook subscription with id ""%1"" does not exist.",Webhook-Abonnement mit ID „%1“ existiert nicht.
 WsSign,WsSign
 WsSign: GUID missing from the upload response.,WsSign: GUID fehlt in der Upload-Antwort.
 "WsSign: authentication failed, check the credentials and tenant.","WsSign: Authentifizierung fehlgeschlagen, überprüfen Sie Zugangsdaten und Tenant."
@@ -502,7 +502,7 @@ WsSign: invalid document store.,WsSign: ungültiger Store des Dokuments.
 "WsSign: non-JSON response during ""%1"".",WsSign: Nicht-JSON-Antwort bei „%1“.
 WsSign: platform URL not configured or not HTTPS.,WsSign: Plattform-URL nicht konfiguriert oder kein HTTPS.
 "WsSign: request rejected during ""%1"" (HTTP %2).",WsSign: Anfrage abgelehnt bei „%1“ (HTTP %2).
-WsSign: status missing from the provider's response.,WsSign: status missing from the provider's response.
+WsSign: status missing from the provider's response.,WsSign: Status fehlt in der Antwort des Anbieters.
 WsSign: status missing from the provider\'s response.,WsSign: Status fehlt in der Antwort des Anbieters.
 "WsSign: temporary service error during ""%1"" (HTTP %2).",WsSign: vorübergehender Dienstfehler bei „%1“ (HTTP %2).
 WsSign: the document has no started process.,WsSign: für das Dokument wurde kein Prozess gestartet.
@@ -519,19 +519,76 @@ Zoom -,Zoom -
 [Digital Signature] Document #%document_id %status (order %increment_id),[Digitale Signatur] Dokument #%document_id %status (Bestellung %increment_id)
 [Digital Signature] Document error #%document_id (order %increment_id),[Digitale Signatur] Dokumentfehler #%document_id (Bestellung %increment_id)
 [Digital Signature] Reminder: Document #%document_id pending signature (order %increment_id),[Digitale Signatur] Erinnerung: Dokument #%document_id wartet auf Unterschrift (Bestellung %increment_id)
-[Digital Signature] Webhook failed: document #%document_id (order %order_increment_id),[Digital Signature] Webhook failed: document #%document_id (order %order_increment_id)
+[Digital Signature] Webhook failed: document #%document_id (order %order_increment_id),[Digitale Signatur] Webhook fehlgeschlagen: Dokument #%document_id (Bestellung %order_increment_id)
 day,Tag
 days,Tage
-historical,historical
-network error,network error
+historical,historisch
+network error,Netzwerkfehler
 of,von
 pdf.js CDN URL,CDN-URL für pdf.js
-pdf.js Library Source,pdf.js Library Source
+pdf.js Library Source,Quelle der pdf.js-Bibliothek
 pdf.js library source,Quelle der pdf.js-Bibliothek
-permanent error,permanent error
-provider down,provider down
-temporary error,temporary error
+permanent error,dauerhafter Fehler
+provider down,Anbieter nicht verfügbar
+temporary error,vorübergehender Fehler
 the contract for your order #%increment_id has been signed digitally successfully.,der Vertrag zu Ihrer Bestellung #%increment_id wurde erfolgreich digital signiert.
 the contract for your order #%increment_id is ready to be signed digitally.,der Vertrag zu Ihrer Bestellung #%increment_id ist bereit zur digitalen Unterschrift.
 the signing process for the contract of your order #%increment_id ended with outcome: %status.,der Signaturprozess für den Vertrag zu Ihrer Bestellung #%increment_id wurde mit folgendem Ergebnis abgeschlossen: %status.
 we remind you that the contract for your order #%increment_id is still pending digital signature.,"wir erinnern Sie daran, dass der Vertrag für Ihre Bestellung #%increment_id noch auf die digitale Signatur wartet."
+Alert Threshold (remaining signatures),Warnschwelle (verbleibende Signaturen)
+Also send the warning when this many signatures or fewer are left (e.g. 20).,"Die Warnung auch senden, wenn nur noch so viele Signaturen oder weniger übrig sind (z. B. 20)."
+When Quota Is Exhausted,Wenn das Kontingent erschöpft ist
+Blocking moves new documents for this provider to the error status instead of sending them.,"Beim Blockieren werden neue Dokumente für diesen Anbieter in den Fehlerstatus gesetzt, statt versendet zu werden."
+Monthly Reset Day,Monatlicher Rücksetztag
+Day of the month (1-28) on which the monthly allowance renews.,"Tag des Monats (1-28), an dem sich das monatliche Kontingent erneuert."
+Prepaid Pool Start Date,Startdatum des Prepaid-Pakets
+"Date the credit package was purchased, format YYYY-MM-DD. Only documents created from this date count against the pool. Leave empty to count all documents.","Kaufdatum des Guthabenpakets, Format JJJJ-MM-TT. Nur ab diesem Datum erstellte Dokumente werden angerechnet. Leer lassen, um alle Dokumente zu zählen."
+Quota Alert Recipient,Empfänger der Kontingentwarnungen
+Email for this provider's quota alerts. Leave empty to use the admin recipient of the email notifications.,"E-Mail für die Kontingentwarnungen dieses Anbieters. Leer lassen, um den Admin-Empfänger der E-Mail-Benachrichtigungen zu verwenden."
+The quota start date must be a valid date in the format YYYY-MM-DD.,Das Startdatum des Kontingents muss ein gültiges Datum im Format JJJJ-MM-TT sein.
+"Adobe Acrobat Sign: incomplete configuration (missing Client ID, Client Secret, Refresh Token, or API Access Point).","Adobe Acrobat Sign: unvollständige Konfiguration (Client-ID, Client-Secret, Refresh-Token oder API-Zugriffspunkt fehlt)."
+"Adobe Acrobat Sign: network error during ""%1"": %2",Adobe Acrobat Sign: Netzwerkfehler bei „%1“: %2
+"Adobe Acrobat Sign: non-JSON response during ""%1"".",Adobe Acrobat Sign: Nicht-JSON-Antwort bei „%1“.
+"Adobe Acrobat Sign: request rejected during ""%1"" (HTTP %2). Response: %3",Adobe Acrobat Sign: Anfrage abgelehnt bei „%1“ (HTTP %2). Antwort: %3
+"Adobe Acrobat Sign: temporary service error during ""%1"" (HTTP %2).",Adobe Acrobat Sign: vorübergehender Dienstfehler bei „%1“ (HTTP %2).
+"Adobe Acrobat Sign: unexpected response structure during ""%1"".",Adobe Acrobat Sign: unerwartete Antwortstruktur bei „%1“.
+An error occurred while generating the export file.,Beim Erstellen der Exportdatei ist ein Fehler aufgetreten.
+Currently running in Demo / Sandbox mode: envelopes are not sent to real signers.,Wird derzeit im Demo-/Sandbox-Modus ausgeführt: Umschläge werden nicht an echte Unterzeichner gesendet.
+"Digital signature service integrated into the Adobe Document Cloud ecosystem. Supports the eIDAS standard for Simple (SES), Advanced (AES), and Qualified (QES) electronic signatures. Allows you to orchestrate the sending of agreements and track their outcome through to completion.","Digitaler Signaturdienst, integriert in das Adobe Document Cloud-Ökosystem. Unterstützt den eIDAS-Standard für einfache (SES), fortgeschrittene (AES) und qualifizierte (QES) elektronische Signaturen. Ermöglicht die Orchestrierung des Versands von Vereinbarungen und die Verfolgung ihres Status bis zum Abschluss."
+"DocuSign: incomplete configuration (missing Integration Key, User ID or Private Key).","DocuSign: unvollständige Konfiguration (Integration-Key, Benutzer-ID oder privater Schlüssel fehlt)."
+"DocuSign: request rejected during ""%1"" (HTTP %2). Response: %3",DocuSign: Anfrage abgelehnt bei „%1“ (HTTP %2). Antwort: %3
+DocuSign: selected account data is incomplete or malformed.,DocuSign: Daten des ausgewählten Kontos sind unvollständig oder fehlerhaft.
+"DocuSign: unexpected response structure during ""%1"".",DocuSign: unerwartete Antwortstruktur bei „%1“.
+"E.g. https://api.na1.adobesign.com. Unlike DocuSign, Adobe Sign has no fixed demo/production host: the shard is tied to the account and must be copied from the ""api_access_point"" returned during the initial OAuth exchange (interactive authorization).","Z. B. https://api.na1.adobesign.com. Im Gegensatz zu DocuSign hat Adobe Sign keinen festen Demo-/Produktions-Host: Der Shard ist an das Konto gebunden und muss aus dem „api_access_point“ kopiert werden, der beim anfänglichen OAuth-Austausch (interaktive Autorisierung) zurückgegeben wird."
+File can not be saved to the destination folder.,Datei kann nicht im Zielordner gespeichert werden.
+File validation failed.,Dateivalidierung fehlgeschlagen.
+General Information,Allgemeine Informationen
+Generation Trigger,Generierungs-Trigger
+"Global leading electronic signature platform. Supports Simple (SES), Advanced (AES), and Qualified (QES) electronic signatures. The integration allows automatic sending of envelopes with the contractual PDFs generated at order time, tracking their status through to completion.","Weltweit führende Plattform für elektronische Signaturen. Unterstützt einfache (SES), fortgeschrittene (AES) und qualifizierte (QES) elektronische Signaturen. Die Integration ermöglicht den automatischen Versand von Umschlägen mit den bei der Bestellung erstellten Vertrags-PDFs und verfolgt deren Status bis zum Abschluss."
+Integration Key (Client ID),Integrationsschlüssel (Client-ID)
+Light Gray,Hellgrau
+New Integration,Neue Integration
+New Template,Neue Vorlage
+OAuth Refresh Token,OAuth-Refresh-Token
+PDF File,PDF-Datei
+Production,Produktion
+Provider,Anbieter
+Raw status returned by Adobe Acrobat Sign → internal document status. Unmapped statuses are logged so they can be added here.,"Von Adobe Acrobat Sign zurückgegebener Rohstatus → interner Dokumentstatus. Nicht zugeordnete Status werden protokolliert, damit sie hier ergänzt werden können."
+Raw status returned by DocuSign → internal document status. Unmapped statuses are logged so they can be added here.,"Von DocuSign zurückgegebener Rohstatus → interner Dokumentstatus. Nicht zugeordnete Status werden protokolliert, damit sie hier ergänzt werden können."
+"Recommended choice. WsSign is the native connector, developed and maintained alongside this module: no third-party integration to configure, predictable costs, and direct support in Italian. For most use cases it's the simplest solution to activate.","Empfohlene Wahl. WsSign ist der native Connector, der zusammen mit diesem Modul entwickelt und gepflegt wird: keine Drittanbieter-Integration zu konfigurieren, planbare Kosten und direkter Support auf Italienisch. Für die meisten Anwendungsfälle ist dies die am einfachsten zu aktivierende Lösung."
+Red,Rot
+Required,Erforderlich
+Scope,Geltungsbereich
+Secret Key (Client Secret),Geheimer Schlüssel (Client-Secret)
+Signature Required,Signatur erforderlich
+"Signature request blocked: provider ""%1"" has exhausted its quota (%2).",Signaturanfrage blockiert: Anbieter „%1“ hat sein Kontingent aufgebraucht (%2).
+Signer Email,E-Mail des Unterzeichners
+Something went wrong while saving the file(s).,Beim Speichern der Datei(en) ist ein Fehler aufgetreten.
+Store View,Store-Ansicht
+Template,Vorlage
+Template Name,Vorlagenname
+"The merge field tag ""{FIELD:%1}"" is not compatible with the selected trigger ""%2"".",Das Merge-Feld-Tag „{FIELD:%1}“ ist nicht mit dem ausgewählten Trigger „%2“ kompatibel.
+Trigger,Trigger
+Use default file,Standarddatei verwenden
+Webhook Subscription,Webhook-Abonnement
+White (Invisible),Weiß (unsichtbar)

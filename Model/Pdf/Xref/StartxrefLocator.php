@@ -9,7 +9,7 @@ use Magento\Framework\Exception\LocalizedException;
  * Locates the last "startxref" in the file: entry point of the most recent
  * cross-reference chain (classic table or stream).
  */
-final class StartxrefLocator
+class StartxrefLocator
 {
     /**
      * @throws LocalizedException

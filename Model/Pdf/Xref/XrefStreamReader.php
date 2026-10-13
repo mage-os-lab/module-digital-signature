@@ -13,7 +13,7 @@ use Magento\Framework\Exception\LocalizedException;
  * xref streams) and predictor 1 (none) or 10-15 (generic PNG: each row
  * carries its own filter-type byte, read and applied individually).
  */
-final class XrefStreamReader
+class XrefStreamReader
 {
     /**
      * Cap on the decompressed size of the stream, same anti

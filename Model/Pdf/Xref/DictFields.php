@@ -10,7 +10,7 @@ use Magento\Framework\Exception\LocalizedException;
  * string (e.g. the content between "<<" and ">>" of an object). Read-only,
  * no complete structural validation: used by the xref readers.
  */
-final class DictFields
+class DictFields
 {
     public static function extractInt(string $dict, string $key): ?int
     {

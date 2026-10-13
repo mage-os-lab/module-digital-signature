@@ -15,7 +15,7 @@ use Magento\Framework\Exception\LocalizedException;
  * (separate object resolved via the xref table); if absent in both forms,
  * it is rejected.
  */
-final class PageTreeResolver
+class PageTreeResolver
 {
     public function __construct(private readonly XrefChainResolver $xrefResolver)
     {

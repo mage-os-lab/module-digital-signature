@@ -88,7 +88,7 @@ class AdobeSignTest extends TestCase
         $captured = null;
         $this->client->expects(self::once())
             ->method('createAgreement')
-            ->with(1, self::isType('array'), 'documento-ordine-9.pdf', '%PDF-1.4 contenuto')
+            ->with(1, self::callback('is_array'), 'documento-ordine-9.pdf', '%PDF-1.4 contenuto')
             ->willReturnCallback(function (int $storeId, array $agreementData) use (&$captured) {
                 $captured = $agreementData;
 
@@ -208,7 +208,7 @@ class AdobeSignTest extends TestCase
 
         $this->client->expects(self::once())
             ->method('cancelAgreement')
-            ->with(1, 'agreement-123', self::isType('string'));
+            ->with(1, 'agreement-123', self::callback('is_string'));
 
         $this->provider->cancel($document);
     }

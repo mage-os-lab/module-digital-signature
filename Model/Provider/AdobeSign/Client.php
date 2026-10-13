@@ -158,10 +158,7 @@ class Client
 
         if (empty($clientId) || empty($clientSecret) || empty($refreshToken) || empty($apiAccessPoint)) {
             throw ProviderException::permanent(
-                __(
-                    'Adobe Acrobat Sign: incomplete configuration (missing Client ID, Client Secret, '
-                    . 'Refresh Token, or API Access Point).'
-                )
+                __('Adobe Acrobat Sign: incomplete configuration (missing Client ID, Client Secret, Refresh Token, or API Access Point).')
             );
         }
 

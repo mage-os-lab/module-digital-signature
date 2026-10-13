@@ -1,0 +1,28 @@
+{
+  "$schema": "https://context7.com/schema/context7.json",
+  "projectTitle": "Mage-OS Digital Signature",
+  "description": "Magento 2 / Mage-OS module (MageOS_DigitalSignature) that generates contract PDFs from order data and sends them for e-signature through pluggable providers (wSign, DocuSign, Adobe Acrobat Sign, custom). Includes order/invoice triggers, merge fields, a REST API, HMAC-signed outbound webhooks, provider quotas and GDPR retention.",
+  "folders": [
+    "docs"
+  ],
+  "excludeFolders": [
+    "docs/internal",
+    "docs/superpowers"
+  ],
+  "excludeFiles": [
+    "CHANGELOG.md",
+    "LICENSE",
+    "wssign-api.md"
+  ],
+  "rules": [
+    "Register a new signature provider by adding an item to MageOS\\DigitalSignature\\Model\\Provider\\Pool in your own module's di.xml; never edit the core module.",
+    "Connectors implement SignProviderInterface, return StartResult/StatusResult DTOs and never write to the document or the storage.",
+    "In mapStatus(), call ProviderConfig::mapConfiguredStatus() first and return only MageOS\\DigitalSignature\\Model\\Document\\Status constants or null.",
+    "Throw ProviderException::retryable() for transient errors (network, 5xx, 429) and ProviderException::permanent() for everything else.",
+    "Add merge fields by implementing MergeFieldProviderInterface and registering it in MageOS\\DigitalSignature\\Model\\MergeField\\Pool; the di.xml item name is the {FIELD:code} used in the PDF.",
+    "Verify outbound webhooks with HMAC-SHA256 of the raw body against the X-Signature header (sha256=<hex>) and deduplicate on delivery_id.",
+    "POST /V1/digitalsignature/orders/:orderId/documents/generate only runs templates whose trigger is manual.",
+    "Configuration paths start with digital_signature/; provider settings are digital_signature/providers/<code>/<field>.",
+    "Documents are processed asynchronously: the digitalsignatureDocumentProcess, digitalsignatureDocumentRefresh and digitalsignatureWebhookDispatch consumers and cron must run."
+  ]
+}

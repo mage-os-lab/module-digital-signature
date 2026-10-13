@@ -11,10 +11,11 @@ use MageOS\DigitalSignature\Model\Provider\ProviderConfig;
 use MageOS\DigitalSignature\Model\Provider\Result\StartResult;
 use MageOS\DigitalSignature\TestSupport\FakeDocument;
 use Magento\Framework\Serialize\Serializer\Json;
-use Magento\Sales\Api\Data\OrderAddressInterface;
 use Magento\Sales\Api\Data\OrderInterface;
+use Magento\Sales\Model\Order;
+use Magento\Sales\Model\Order\Address;
 use Magento\Sales\Api\OrderRepositoryInterface;
-use Magento\Store\Api\Data\StoreInterface;
+use Magento\Store\Model\Store;
 use Magento\Store\Model\StoreManagerInterface;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
@@ -57,7 +58,8 @@ class DocusignTest extends TestCase
 
     private function stubStoreBaseUrl(string $baseUrl = 'https://shop.example.com/'): void
     {
-        $store = $this->createMock(StoreInterface::class);
+        // getBaseUrl() lives on the concrete Store model, not on StoreInterface
+        $store = $this->createMock(Store::class);
         $store->method('getBaseUrl')->willReturn($baseUrl);
         $this->storeManager->method('getStore')->with(1)->willReturn($store);
     }
@@ -122,7 +124,7 @@ class DocusignTest extends TestCase
         $captured = null;
         $this->client->expects(self::once())
             ->method('createEnvelope')
-            ->with(1, self::isType('array'))
+            ->with(1, self::callback('is_array'))
             ->willReturnCallback(function (int $storeId, array $envelopeData) use (&$captured) {
                 $captured = $envelopeData;
 
@@ -190,7 +192,8 @@ class DocusignTest extends TestCase
         $document = $this->makeDocument();
         $this->stubStoreBaseUrl();
 
-        $order = $this->createMock(OrderInterface::class);
+        // getCustomerName() lives on the concrete Order model, not on OrderInterface
+        $order = $this->createMock(Order::class);
         $order->method('getCustomerFirstname')->willReturn('');
         $order->method('getCustomerLastname')->willReturn('');
         $order->method('getCustomerName')->willReturn('Ragione Sociale SRL');
@@ -216,10 +219,11 @@ class DocusignTest extends TestCase
         $document = $this->makeDocument();
         $this->stubStoreBaseUrl();
 
-        $address = $this->createMock(OrderAddressInterface::class);
+        // getName() lives on the concrete Order\Address model
+        $address = $this->createMock(Address::class);
         $address->method('getName')->willReturn('Indirizzo Nome');
 
-        $order = $this->createMock(OrderInterface::class);
+        $order = $this->createMock(Order::class);
         $order->method('getCustomerFirstname')->willReturn('');
         $order->method('getCustomerLastname')->willReturn('');
         $order->method('getCustomerName')->willReturn('');
@@ -331,7 +335,7 @@ class DocusignTest extends TestCase
 
         $this->client->expects(self::once())
             ->method('voidEnvelope')
-            ->with(1, 'env-123', self::isType('string'));
+            ->with(1, 'env-123', self::callback('is_string'));
 
         $this->provider->cancel($document);
     }

@@ -35,6 +35,6 @@ class AvailableConnectors extends Field
 
     public function getDeveloperGuideUrl(): string
     {
-        return 'https://github.com/mage-os/mage-os-module-firma-digitale/blob/main/docs/sign-provider-integration.md';
+        return 'https://github.com/mage-os-lab/module-digital-signature/blob/main/docs/sign-provider-integration.md';
     }
 }

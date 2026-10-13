@@ -7,7 +7,7 @@ namespace MageOS\DigitalSignature\Model\Pdf\Xref;
  * Result of resolving the entire cross-reference chain of a PDF (most
  * recent table/stream + history within the supported limit).
  */
-final class XrefInfo
+class XrefInfo
 {
     /**
      * @param array<int, int> $objectOffsets object number => byte offset, merged over

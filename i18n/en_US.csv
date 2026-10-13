@@ -535,3 +535,60 @@ the contract for your order #%increment_id has been signed digitally successfull
 the contract for your order #%increment_id is ready to be signed digitally.,the contract for your order #%increment_id is ready to be signed digitally.
 the signing process for the contract of your order #%increment_id ended with outcome: %status.,the signing process for the contract of your order #%increment_id ended with outcome: %status.
 we remind you that the contract for your order #%increment_id is still pending digital signature.,we remind you that the contract for your order #%increment_id is still pending digital signature.
+Alert Threshold (remaining signatures),Alert Threshold (remaining signatures)
+Also send the warning when this many signatures or fewer are left (e.g. 20).,Also send the warning when this many signatures or fewer are left (e.g. 20).
+When Quota Is Exhausted,When Quota Is Exhausted
+Blocking moves new documents for this provider to the error status instead of sending them.,Blocking moves new documents for this provider to the error status instead of sending them.
+Monthly Reset Day,Monthly Reset Day
+Day of the month (1-28) on which the monthly allowance renews.,Day of the month (1-28) on which the monthly allowance renews.
+Prepaid Pool Start Date,Prepaid Pool Start Date
+"Date the credit package was purchased, format YYYY-MM-DD. Only documents created from this date count against the pool. Leave empty to count all documents.","Date the credit package was purchased, format YYYY-MM-DD. Only documents created from this date count against the pool. Leave empty to count all documents."
+Quota Alert Recipient,Quota Alert Recipient
+Email for this provider's quota alerts. Leave empty to use the admin recipient of the email notifications.,Email for this provider's quota alerts. Leave empty to use the admin recipient of the email notifications.
+The quota start date must be a valid date in the format YYYY-MM-DD.,The quota start date must be a valid date in the format YYYY-MM-DD.
+"Adobe Acrobat Sign: incomplete configuration (missing Client ID, Client Secret, Refresh Token, or API Access Point).","Adobe Acrobat Sign: incomplete configuration (missing Client ID, Client Secret, Refresh Token, or API Access Point)."
+"Adobe Acrobat Sign: network error during ""%1"": %2","Adobe Acrobat Sign: network error during ""%1"": %2"
+"Adobe Acrobat Sign: non-JSON response during ""%1"".","Adobe Acrobat Sign: non-JSON response during ""%1""."
+"Adobe Acrobat Sign: request rejected during ""%1"" (HTTP %2). Response: %3","Adobe Acrobat Sign: request rejected during ""%1"" (HTTP %2). Response: %3"
+"Adobe Acrobat Sign: temporary service error during ""%1"" (HTTP %2).","Adobe Acrobat Sign: temporary service error during ""%1"" (HTTP %2)."
+"Adobe Acrobat Sign: unexpected response structure during ""%1"".","Adobe Acrobat Sign: unexpected response structure during ""%1""."
+An error occurred while generating the export file.,An error occurred while generating the export file.
+Currently running in Demo / Sandbox mode: envelopes are not sent to real signers.,Currently running in Demo / Sandbox mode: envelopes are not sent to real signers.
+"Digital signature service integrated into the Adobe Document Cloud ecosystem. Supports the eIDAS standard for Simple (SES), Advanced (AES), and Qualified (QES) electronic signatures. Allows you to orchestrate the sending of agreements and track their outcome through to completion.","Digital signature service integrated into the Adobe Document Cloud ecosystem. Supports the eIDAS standard for Simple (SES), Advanced (AES), and Qualified (QES) electronic signatures. Allows you to orchestrate the sending of agreements and track their outcome through to completion."
+"DocuSign: incomplete configuration (missing Integration Key, User ID or Private Key).","DocuSign: incomplete configuration (missing Integration Key, User ID or Private Key)."
+"DocuSign: request rejected during ""%1"" (HTTP %2). Response: %3","DocuSign: request rejected during ""%1"" (HTTP %2). Response: %3"
+DocuSign: selected account data is incomplete or malformed.,DocuSign: selected account data is incomplete or malformed.
+"DocuSign: unexpected response structure during ""%1"".","DocuSign: unexpected response structure during ""%1""."
+"E.g. https://api.na1.adobesign.com. Unlike DocuSign, Adobe Sign has no fixed demo/production host: the shard is tied to the account and must be copied from the ""api_access_point"" returned during the initial OAuth exchange (interactive authorization).","E.g. https://api.na1.adobesign.com. Unlike DocuSign, Adobe Sign has no fixed demo/production host: the shard is tied to the account and must be copied from the ""api_access_point"" returned during the initial OAuth exchange (interactive authorization)."
+File can not be saved to the destination folder.,File can not be saved to the destination folder.
+File validation failed.,File validation failed.
+General Information,General Information
+Generation Trigger,Generation Trigger
+"Global leading electronic signature platform. Supports Simple (SES), Advanced (AES), and Qualified (QES) electronic signatures. The integration allows automatic sending of envelopes with the contractual PDFs generated at order time, tracking their status through to completion.","Global leading electronic signature platform. Supports Simple (SES), Advanced (AES), and Qualified (QES) electronic signatures. The integration allows automatic sending of envelopes with the contractual PDFs generated at order time, tracking their status through to completion."
+Integration Key (Client ID),Integration Key (Client ID)
+Light Gray,Light Gray
+New Integration,New Integration
+New Template,New Template
+OAuth Refresh Token,OAuth Refresh Token
+PDF File,PDF File
+Production,Production
+Provider,Provider
+Raw status returned by Adobe Acrobat Sign → internal document status. Unmapped statuses are logged so they can be added here.,Raw status returned by Adobe Acrobat Sign → internal document status. Unmapped statuses are logged so they can be added here.
+Raw status returned by DocuSign → internal document status. Unmapped statuses are logged so they can be added here.,Raw status returned by DocuSign → internal document status. Unmapped statuses are logged so they can be added here.
+"Recommended choice. WsSign is the native connector, developed and maintained alongside this module: no third-party integration to configure, predictable costs, and direct support in Italian. For most use cases it's the simplest solution to activate.","Recommended choice. WsSign is the native connector, developed and maintained alongside this module: no third-party integration to configure, predictable costs, and direct support in Italian. For most use cases it's the simplest solution to activate."
+Red,Red
+Required,Required
+Scope,Scope
+Secret Key (Client Secret),Secret Key (Client Secret)
+Signature Required,Signature Required
+"Signature request blocked: provider ""%1"" has exhausted its quota (%2).","Signature request blocked: provider ""%1"" has exhausted its quota (%2)."
+Signer Email,Signer Email
+Something went wrong while saving the file(s).,Something went wrong while saving the file(s).
+Store View,Store View
+Template,Template
+Template Name,Template Name
+"The merge field tag ""{FIELD:%1}"" is not compatible with the selected trigger ""%2"".","The merge field tag ""{FIELD:%1}"" is not compatible with the selected trigger ""%2""."
+Trigger,Trigger
+Use default file,Use default file
+Webhook Subscription,Webhook Subscription
+White (Invisible),White (Invisible)

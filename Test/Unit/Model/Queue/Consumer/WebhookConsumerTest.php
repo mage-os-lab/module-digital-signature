@@ -124,7 +124,7 @@ class WebhookConsumerTest extends TestCase
         $this->client->method('deliver')->willReturn(DeliveryResult::failure('HTTP 503', true));
 
         $this->deliveryResource->expects(self::once())->method('scheduleRetry')
-            ->with(10, 1, 'HTTP 503', self::isType('string'));
+            ->with(10, 1, 'HTTP 503', self::callback('is_string'));
         $this->deliveryResource->expects(self::never())->method('markFailed');
 
         $this->consumer->process('10');
@@ -153,7 +153,7 @@ class WebhookConsumerTest extends TestCase
         $this->encryptor->method('decrypt')->willThrowException(new \RuntimeException('chiave non valida'));
 
         $this->deliveryResource->expects(self::once())->method('scheduleRetry')
-            ->with(10, 1, self::stringContains('chiave non valida'), self::isType('string'));
+            ->with(10, 1, self::stringContains('chiave non valida'), self::callback('is_string'));
 
         $this->consumer->process('10');
     }

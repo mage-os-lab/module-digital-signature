@@ -62,7 +62,7 @@ class ClientTest extends TestCase
         $this->configureValidCredentials();
         $this->cache->method('load')->willReturn(false);
         $this->cache->expects(self::once())->method('save')->with(
-            self::isType('string'),
+            self::callback('is_string'),
             'adobesign_token_' . self::STORE_ID,
             [],
             3300

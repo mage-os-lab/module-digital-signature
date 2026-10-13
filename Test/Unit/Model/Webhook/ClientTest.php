@@ -6,6 +6,7 @@ namespace MageOS\DigitalSignature\Test\Unit\Model\Webhook;
 use MageOS\DigitalSignature\Model\Webhook\Client;
 use MageOS\DigitalSignature\TestSupport\FakeCurl;
 use Magento\Framework\HTTP\Client\CurlFactory;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
@@ -51,9 +52,7 @@ class ClientTest extends TestCase
         self::assertTrue($result->isRetryable());
     }
 
-    /**
-     * @dataProvider permanentStatusProvider
-     */
+    #[DataProvider('permanentStatusProvider')]
     public function testDeliverMarksClientErrorsAsPermanent(int $status): void
     {
         $this->curl->status = $status;
@@ -76,9 +75,7 @@ class ClientTest extends TestCase
         ];
     }
 
-    /**
-     * @dataProvider retryableStatusProvider
-     */
+    #[DataProvider('retryableStatusProvider')]
     public function testDeliverKeepsThrottlingStatusesRetryable(int $status): void
     {
         $this->curl->status = $status;

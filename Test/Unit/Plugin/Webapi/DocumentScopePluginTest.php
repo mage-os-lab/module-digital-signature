@@ -7,6 +7,7 @@ use MageOS\DigitalSignature\Api\DocumentRepositoryInterface;
 use MageOS\DigitalSignature\Model\Service\ApiConsumerScope;
 use MageOS\DigitalSignature\Plugin\Webapi\DocumentScopePlugin;
 use MageOS\DigitalSignature\TestSupport\FakeDocument;
+use Magento\Framework\Api\Filter;
 use Magento\Framework\Api\FilterBuilder;
 use Magento\Framework\Api\Search\FilterGroup;
 use Magento\Framework\Api\Search\FilterGroupBuilder;
@@ -27,9 +28,59 @@ class DocumentScopePluginTest extends TestCase
         $this->subject = $this->createMock(DocumentRepositoryInterface::class);
         $this->plugin = new DocumentScopePlugin(
             $this->scope,
-            new FilterBuilder(),
-            new FilterGroupBuilder()
+            $this->createFilterBuilder(),
+            $this->createFilterGroupBuilder()
         );
+    }
+
+    /**
+     * Builder doubles that assemble real Filter/FilterGroup objects: the real
+     * builders need an ObjectFactory, which is not available standalone.
+     */
+    private function createFilterBuilder(): FilterBuilder
+    {
+        $state = new \ArrayObject(['field' => '', 'condition_type' => 'eq', 'value' => null]);
+        $builder = $this->createMock(FilterBuilder::class);
+        foreach (['setField' => 'field', 'setConditionType' => 'condition_type', 'setValue' => 'value'] as $method => $key) {
+            $builder->method($method)->willReturnCallback(
+                static function ($value) use ($state, $key, $builder) {
+                    $state[$key] = $value;
+
+                    return $builder;
+                }
+            );
+        }
+        $builder->method('create')->willReturnCallback(
+            static fn () => (new Filter())
+                ->setField($state['field'])
+                ->setConditionType($state['condition_type'])
+                ->setValue($state['value'])
+        );
+
+        return $builder;
+    }
+
+    private function createFilterGroupBuilder(): FilterGroupBuilder
+    {
+        $filters = new \ArrayObject();
+        $builder = $this->createMock(FilterGroupBuilder::class);
+        $builder->method('addFilter')->willReturnCallback(
+            static function (Filter $filter) use ($filters, $builder) {
+                $filters[] = $filter;
+
+                return $builder;
+            }
+        );
+        $builder->method('create')->willReturnCallback(
+            static function () use ($filters) {
+                $group = (new FilterGroup())->setFilters($filters->getArrayCopy());
+                $filters->exchangeArray([]);
+
+                return $group;
+            }
+        );
+
+        return $builder;
     }
 
     public function testAfterGetByIdAllowsDocumentInScope(): void
@@ -123,19 +174,39 @@ class DocumentScopePluginTest extends TestCase
                 return $this->groups;
             }
 
-            public function setFilterGroups(array $filterGroups)
+            public function setFilterGroups(?array $filterGroups = null)
             {
-                $this->groups = $filterGroups;
+                $this->groups = $filterGroups ?? [];
 
                 return $this;
             }
 
-            public function setCurrentPage($currentPage)
+            public function getSortOrders()
+            {
+                return null;
+            }
+
+            public function setSortOrders(?array $sortOrders = null)
             {
                 return $this;
+            }
+
+            public function getPageSize()
+            {
+                return null;
             }
 
             public function setPageSize($pageSize)
+            {
+                return $this;
+            }
+
+            public function getCurrentPage()
+            {
+                return null;
+            }
+
+            public function setCurrentPage($currentPage)
             {
                 return $this;
             }

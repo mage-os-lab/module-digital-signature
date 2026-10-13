@@ -34,7 +34,7 @@ reuses the same backend.
 - **GDPR by design.** A configurable retention cron deletes PDFs and personal data (email/phone)
   of closed documents past the retention period, keeping only the audit trail — an easy line in a
   commercial proposal.
-- **Low maintenance risk.** The suite has 240+ automated unit tests and runs standalone without a
+- **Low maintenance risk.** The suite has 300+ automated unit tests and runs standalone without a
   full Magento installation, which means fewer silent breakages after a Magento/dependency
   upgrade and fewer non-billable support hours.
 - **End-client UX already built.** A visual PDF builder (click-to-place signature tag), a document
@@ -115,8 +115,19 @@ PDF templates and their placeholders are managed under **Digital Signature > Doc
 Templates** in the admin panel; generated documents and their status under **Digital Signature >
 Signed Documents**.
 
-For technical details see the [`docs/`](docs) folder (functional analysis, WsSign API, testing,
-security audit).
+## Documentation
+
+- [Getting started](docs/getting-started.md): install, consumers and cron, first signed
+  document with the dummy provider
+- [Triggers and configuration reference](docs/triggers-and-configuration.md): templates,
+  triggers, every config path, quotas, reminders, retention
+- [Merge fields](docs/merge-fields.md): order data inside the PDF, custom fields
+- [REST API](docs/rest-api.md): endpoints, authentication, store scoping
+- [Webhooks](docs/webhooks.md): payload, HMAC verification, retries
+- [Available connectors](docs/available-connectors.md) and
+  [building a provider connector](docs/sign-provider-integration.md)
+- [Troubleshooting](docs/troubleshooting.md)
+- [Testing](docs/testing.md)
 
 ## Running the test suite
 

@@ -5,8 +5,12 @@ declare(strict_types=1);
 namespace MageOS\DigitalSignature\Test\Unit\Model\Document\Export;
 
 use MageOS\DigitalSignature\Model\Document\Export\ConvertToXlsx;
+use Magento\Framework\Api\Search\DocumentInterface as SearchDocumentInterface;
 use Magento\Framework\Filesystem;
 use Magento\Framework\Filesystem\Directory\WriteInterface;
+use Magento\Framework\View\Element\UiComponent\ContextInterface;
+use Magento\Framework\View\Element\UiComponent\DataProvider\DataProviderInterface;
+use Magento\Framework\View\Element\UiComponentInterface;
 use Magento\Ui\Component\MassAction\Filter;
 use Magento\Ui\Model\Export\MetadataProvider;
 use PhpOffice\PhpSpreadsheet\Cell\DataType;
@@ -21,6 +25,8 @@ class ConvertToXlsxTest extends TestCase
     private MetadataProvider&MockObject $metadataProvider;
     private WriteInterface&MockObject $directory;
     private string $tempFile;
+    /** @var array<int, string[]> row values by listing document object id */
+    private array $rowsByDocument = [];
 
     protected function setUp(): void
     {
@@ -40,76 +46,66 @@ class ConvertToXlsxTest extends TestCase
         }
     }
 
-    private function buildComponent(array $rows): object
+    /**
+     * Listing component double paging over $rows (2 rows per page, like the
+     * real data provider would after setPageSize()). Each row becomes a
+     * listing document; $rowsByDocument lets getRowData() return the row.
+     *
+     * @param array<int, string[]> $rows
+     */
+    private function buildComponent(array $rows): UiComponentInterface
     {
-        return new class($rows) {
-            public function __construct(private array $rows)
-            {
-            }
+        $documents = [];
+        foreach ($rows as $id => $row) {
+            $document = $this->createMock(SearchDocumentInterface::class);
+            $document->method('getId')->willReturn($id);
+            $documents[$id] = $document;
+            $this->rowsByDocument[spl_object_id($document)] = $row;
+        }
 
-            public function getName(): string
-            {
-                return 'digitalsignature_document_listing';
-            }
+        $page = new \ArrayObject(['current' => 1]);
+        $dataProvider = $this->createMock(DataProviderInterface::class);
+        $dataProvider->method('getSearchCriteria')->willReturn(
+            new FakeSearchCriteria(static function (int $current) use ($page): void {
+                $page['current'] = $current;
+            })
+        );
+        $dataProvider->method('getSearchResult')->willReturnCallback(
+            static function () use ($documents, $page): object {
+                $pageSize = 2;
+                $items = array_slice($documents, ($page['current'] - 1) * $pageSize, $pageSize, true);
 
-            public function getContext(): object
-            {
-                return new class($this->rows) {
-                    public function __construct(private array $rows)
+                return new class($items, count($documents)) {
+                    public function __construct(private array $items, private int $totalCount)
                     {
                     }
 
-                    public function getDataProvider(): object
+                    public function getTotalCount(): int
                     {
-                        return new class($this->rows) implements \IteratorAggregate {
-                            private int $page = 1;
+                        return $this->totalCount;
+                    }
 
-                            public function __construct(private array $rows)
-                            {
-                            }
-
-                            public function getSearchCriteria(): FakeSearchCriteria
-                            {
-                                return new FakeSearchCriteria($this);
-                            }
-
-                            public function setPage(int $page): void
-                            {
-                                $this->page = $page;
-                            }
-
-                            public function getSearchResult(): object
-                            {
-                                $pageSize = 2;
-                                $offset = ($this->page - 1) * $pageSize;
-                                $items = array_slice($this->rows, $offset, $pageSize, true);
-
-                                return new class($items, count($this->rows)) {
-                                    public function __construct(private array $items, private int $totalCount)
-                                    {
-                                    }
-
-                                    public function getTotalCount(): int
-                                    {
-                                        return $this->totalCount;
-                                    }
-
-                                    public function getItems(): array
-                                    {
-                                        return $this->items;
-                                    }
-                                };
-                            }
-
-                            public function getIterator(): \Iterator
-                            {
-                                return new \ArrayIterator([]);
-                            }
-                        };
+                    public function getItems(): array
+                    {
+                        return $this->items;
                     }
                 };
             }
-        };
+        );
+
+        $context = $this->createMock(ContextInterface::class);
+        $context->method('getDataProvider')->willReturn($dataProvider);
+
+        $component = $this->createMock(UiComponentInterface::class);
+        $component->method('getName')->willReturn('digitalsignature_document_listing');
+        $component->method('getContext')->willReturn($context);
+
+        return $component;
+    }
+
+    private function rowOf(SearchDocumentInterface $document): array
+    {
+        return $this->rowsByDocument[spl_object_id($document)];
     }
 
     public function testExportsHeaderAndAllPagesOfRows(): void
@@ -126,7 +122,7 @@ class ConvertToXlsxTest extends TestCase
         $this->metadataProvider->method('getOptions')->willReturn([]);
         $this->metadataProvider->method('getHeaders')->willReturn(['ID', 'Status']);
         $this->metadataProvider->method('getRowData')
-            ->willReturnCallback(static fn ($item) => $item);
+            ->willReturnCallback(fn (SearchDocumentInterface $document) => $this->rowOf($document));
 
         $this->directory->expects(self::once())->method('create')->with('export');
         $this->directory->expects(self::once())
@@ -164,7 +160,7 @@ class ConvertToXlsxTest extends TestCase
         $this->metadataProvider->method('getOptions')->willReturn([]);
         $this->metadataProvider->method('getHeaders')->willReturn(['ID', 'Status']);
         $this->metadataProvider->method('getRowData')
-            ->willReturnCallback(static fn ($item) => $item);
+            ->willReturnCallback(fn (SearchDocumentInterface $document) => $this->rowOf($document));
 
         $this->directory->method('getAbsolutePath')->willReturn($this->tempFile);
 
@@ -186,13 +182,14 @@ class ConvertToXlsxTest extends TestCase
 
 class FakeSearchCriteria
 {
-    public function __construct(private object $dataProvider)
+    /** @param callable(int): void $onPageChange */
+    public function __construct(private $onPageChange)
     {
     }
 
     public function setCurrentPage($currentPage): self
     {
-        $this->dataProvider->setPage((int) $currentPage);
+        ($this->onPageChange)((int) $currentPage);
 
         return $this;
     }

@@ -23,13 +23,9 @@ class MergeFieldProvidersTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->orderMock = $this->getMockBuilder(OrderInterface::class)
-            ->disableOriginalConstructor()
-            ->getMockForAbstractClass();
+        $this->orderMock = $this->createMock(OrderInterface::class);
 
-        $this->invoiceMock = $this->getMockBuilder(InvoiceInterface::class)
-            ->disableOriginalConstructor()
-            ->getMockForAbstractClass();
+        $this->invoiceMock = $this->createMock(InvoiceInterface::class);
     }
 
     public function testOrderNumberProvider(): void
@@ -48,9 +44,7 @@ class MergeFieldProvidersTest extends TestCase
 
     public function testGrandTotalProvider(): void
     {
-        $priceCurrencyMock = $this->getMockBuilder(PriceCurrencyInterface::class)
-            ->disableOriginalConstructor()
-            ->getMockForAbstractClass();
+        $priceCurrencyMock = $this->createMock(PriceCurrencyInterface::class);
 
         $this->orderMock->expects(self::once())
             ->method('getGrandTotal')
@@ -94,9 +88,7 @@ class MergeFieldProvidersTest extends TestCase
 
     public function testOrderDateProvider(): void
     {
-        $timezoneMock = $this->getMockBuilder(TimezoneInterface::class)
-            ->disableOriginalConstructor()
-            ->getMockForAbstractClass();
+        $timezoneMock = $this->createMock(TimezoneInterface::class);
 
         $this->orderMock->expects(self::once())
             ->method('getCreatedAt')
@@ -117,9 +109,7 @@ class MergeFieldProvidersTest extends TestCase
 
     public function testInvoiceDateProvider(): void
     {
-        $timezoneMock = $this->getMockBuilder(TimezoneInterface::class)
-            ->disableOriginalConstructor()
-            ->getMockForAbstractClass();
+        $timezoneMock = $this->createMock(TimezoneInterface::class);
 
         $this->invoiceMock->expects(self::once())
             ->method('getCreatedAt')
@@ -141,9 +131,7 @@ class MergeFieldProvidersTest extends TestCase
 
     public function testInvoiceDateProviderReturnsEmptyStringWhenNoInvoice(): void
     {
-        $timezoneMock = $this->getMockBuilder(TimezoneInterface::class)
-            ->disableOriginalConstructor()
-            ->getMockForAbstractClass();
+        $timezoneMock = $this->createMock(TimezoneInterface::class);
 
         $context = new Context($this->orderMock, null);
         $provider = new InvoiceDate($timezoneMock);

@@ -73,7 +73,7 @@ class ConvertToXlsx
 
         $directory = $this->filesystem->getDirectoryWrite(DirectoryList::VAR_DIR);
         $directory->create('export');
-        $fileName = 'export/' . $component->getName() . md5(microtime()) . '.xlsx';
+        $fileName = 'export/' . $component->getName() . bin2hex(random_bytes(16)) . '.xlsx';
 
         (new Xlsx($spreadsheet))->save($directory->getAbsolutePath($fileName));
 

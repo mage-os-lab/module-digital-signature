@@ -8,7 +8,7 @@ namespace MageOS\DigitalSignature\Model\Pdf\Xref;
  * object and its content stream, and exposes what SignatureTagInjector
  * needs to decide whether to reuse an existing font or add a new one.
  */
-final class PageInfo
+class PageInfo
 {
     public function __construct(
         public readonly int $pageObjectNumber,

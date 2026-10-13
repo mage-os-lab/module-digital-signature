@@ -42,7 +42,7 @@ $options = $block->getPeriodOptions();
                     <?= (int)$summary->getSignedCount() ?>
                 </strong>
                 <span style="font-size:0.95em;font-weight:700;color:#15803d;">
-                    <?= $summary->getSignedPercentage() ?>%
+                    <?= /* @noEscape */ (float)$summary->getSignedPercentage() ?>%
                 </span>
             </div>
         </div>
@@ -67,7 +67,7 @@ $options = $block->getPeriodOptions();
                     <?= (int)$summary->getExpiredDeclinedCount() ?>
                 </strong>
                 <span style="font-size:0.95em;font-weight:700;color:#b91c1c;">
-                    <?= $summary->getExpiredDeclinedPercentage() ?>%
+                    <?= /* @noEscape */ (float)$summary->getExpiredDeclinedPercentage() ?>%
                 </span>
             </div>
         </div>
@@ -78,7 +78,7 @@ $options = $block->getPeriodOptions();
                 <?= $block->escapeHtml(__('Avg signing time')) ?>
             </span>
             <strong style="font-size:2em;font-weight:700;color:#581c87;line-height:1;">
-                <?= $summary->getAvgSigningTimeDays() ?> <span style="font-size:0.45em;font-weight:600;color:#6b21a8;"><?= $summary->getAvgSigningTimeDays() == 1 ? $block->escapeHtml(__('day')) : $block->escapeHtml(__('days')) ?></span>
+                <?= /* @noEscape */ (float)$summary->getAvgSigningTimeDays() ?> <span style="font-size:0.45em;font-weight:600;color:#6b21a8;"><?= $summary->getAvgSigningTimeDays() == 1 ? $block->escapeHtml(__('day')) : $block->escapeHtml(__('days')) ?></span>
             </strong>
         </div>
     </div>
@@ -110,23 +110,23 @@ $options = $block->getPeriodOptions();
                         $textColor = '#b45309';
                     }
                     ?>
-                    <div style="padding:16px;background-color:<?= $bgColor ?>;border:1px solid <?= $borderColor ?>;border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,0.05);">
+                    <div style="padding:16px;background-color:<?= $block->escapeHtmlAttr($bgColor) ?>;border:1px solid <?= $block->escapeHtmlAttr($borderColor) ?>;border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,0.05);">
                         <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
-                            <span style="font-weight:700;font-size:1em;color:<?= $textColor ?>;text-transform:uppercase;letter-spacing:0.05em;">
+                            <span style="font-weight:700;font-size:1em;color:<?= $block->escapeHtmlAttr($textColor) ?>;text-transform:uppercase;letter-spacing:0.05em;">
                                 <?= $block->escapeHtml(strtoupper($status->getProviderCode())) ?>
                             </span>
-                            <span style="font-size:0.85em;font-weight:700;color:<?= $textColor ?>;">
-                                <?= $status->getUsedQuota() ?> / <?= $status->getTotalQuota() ?> (<?= $status->getPercentageUsed() ?>%)
+                            <span style="font-size:0.85em;font-weight:700;color:<?= $block->escapeHtmlAttr($textColor) ?>;">
+                                <?= /* @noEscape */ (int)$status->getUsedQuota() ?> / <?= /* @noEscape */ (int)$status->getTotalQuota() ?> (<?= /* @noEscape */ (float)$status->getPercentageUsed() ?>%)
                             </span>
                         </div>
 
                         <!-- Progress Bar -->
                         <div style="width:100%;background-color:#e5e7eb;height:8px;border-radius:4px;overflow:hidden;margin-bottom:8px;">
-                            <div style="width:<?= min(100.0, $status->getPercentageUsed()) ?>%;background-color:<?= $barColor ?>;height:100%;border-radius:4px;"></div>
+                            <div style="width:<?= /* @noEscape */ min(100.0, (float)$status->getPercentageUsed()) ?>%;background-color:<?= $block->escapeHtmlAttr($barColor) ?>;height:100%;border-radius:4px;"></div>
                         </div>
 
                         <div style="font-size:0.85em;color:#555;display:flex;justify-content:space-between;">
-                            <span><?= $block->escapeHtml(__('Remaining:')) ?> <strong><?= $status->getRemainingQuota() ?></strong></span>
+                            <span><?= $block->escapeHtml(__('Remaining:')) ?> <strong><?= /* @noEscape */ (int)$status->getRemainingQuota() ?></strong></span>
                             <?php if ($status->isExhausted()): ?>
                                 <strong style="color:#b91c1c;"><?= $block->escapeHtml(__('EXHAUSTED')) ?></strong>
                             <?php elseif ($status->isWarningThreshold()): ?>

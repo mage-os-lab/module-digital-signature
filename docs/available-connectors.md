@@ -1,37 +1,56 @@
-# Connettori di Firma Digitale Disponibili e Pianificati
+# Available signature connectors
 
-Questo documento elenca i connettori (provider) di firma digitale disponibili "di serie" nel modulo core, quelli in corso di sviluppo e le opzioni per l'integrazione di provider di terze parti.
+`MageOS_DigitalSignature` ships four connectors in the core module. Each one is configured
+under **Stores > Configuration > Mage-OS > Digital Signature > Signature providers** and
+selected with `digital_signature/general/provider`. Configuration fields are listed in
+[triggers-and-configuration.md](triggers-and-configuration.md#providers).
 
----
+| Code | Provider | Signature level declared | Status updates |
+|---|---|---|---|
+| `wssign` | wSign by EuroNovate (recommended) | Advanced Electronic Signature (AES), OTP via SMS or email | Callback + reconcile polling |
+| `docusign` | DocuSign eSignature (JWT, REST v2.1) | SES, AES, QES | Callback (`eventNotification`) + reconcile polling |
+| `adobesign` | Adobe Acrobat Sign (OAuth refresh token) | SES, AES, QES | Reconcile polling |
+| `dummy` | Built-in simulator | No legal validity, test/development only | Reconcile polling |
 
-## 1. Connettori Integrati nel Core
+The legal level is the one declared by each provider. The exact certification depends on the
+plan and configuration of the merchant's account: verify it with the provider.
 
-Questi provider sono distribuiti direttamente con il modulo `MageOS_DigitalSignature` e sono pronti all'uso previa configurazione:
+## wSign (`wssign`)
 
-*   **WsSign (Sponsor del Progetto)**
-    *   *Tipo di Firma:* Elettronica Avanzata (AES) basata su OTP (SMS o Email).
-    *   *Uso:* Produzione e Test (con ambienti dedicati).
-    *   *Documentazione:* Vedi [docs/wssign-api.md](wssign-api.md).
-*   **Dummy**
-    *   *Tipo di Firma:* Nessuna validità legale.
-    *   *Uso:* Esclusivamente test locale e sviluppo. Simula il flusso di firma (invio, callback e firma) senza contattare servizi esterni.
+Advanced electronic signature platform by EuroNovate. The connector uploads the PDF generated
+from the template, starts the signing request with OTP via SMS or email, and receives status
+updates through an authenticated callback. Requires a wSign account (platform URL, tenant,
+owner user and password) from EuroNovate. API notes: [wssign-api.md](wssign-api.md).
 
----
+## DocuSign (`docusign`)
 
-## 2. Connettori in Corso di Sviluppo (Moduli Satellite)
+Sends envelopes with the contract PDFs through the eSignature REST API, authenticated with JWT
+impersonation (integration key, user id, RSA private key). Set
+`digital_signature/providers/docusign/environment` to `production` for live envelopes: the
+default `demo` sends everything to the developer sandbox.
 
-I nuovi connettori di firma non saranno inclusi nel pacchetto core per mantenere il modulo snello, ma verranno distribuiti come moduli satellite indipendenti:
+## Adobe Acrobat Sign (`adobesign`)
 
-*   **Adobe Acrobat Sign (In sviluppo)**
-    *   *Stato:* Pianificato / In sviluppo.
-    *   *Tipo di Firma:* Elettronica Semplice (SES) e Avanzata (AES).
-    *   *Integrazione:* Autenticazione OAuth2, caricamento accordo e polling/webhook di stato.
+Sends agreements through the Acrobat Sign REST API, authenticated with an OAuth refresh token,
+on the API access point (shard) of the merchant's account. Status changes are picked up by the
+reconcile cron.
 
----
+## Dummy (`dummy`)
 
-## 3. Vuoi Sviluppare un Connettore Personalizzato?
+Contacts no external service: it reports a sent document as signed after
+`auto_sign_delay` seconds and returns the original PDF as the "signed" one. Use it to test
+templates, triggers, notifications and the customer area. It must be enabled explicitly with
+`digital_signature/providers/dummy/allow`, and it is the provider every document is forced
+onto until `digital_signature/general/production_ack` is confirmed.
 
-Il modulo è stato progettato con un'architettura pluggable simile ai metodi di pagamento di Magento. Qualsiasi agenzia o sviluppatore terzo può implementare un connettore per un provider locale o internazionale (es. DocuSign, Namirial, InfoCert, Yousign).
+## Status mapping
 
-Per le istruzioni dettagliate su come estendere il modulo e registrare un nuovo provider, consulta la guida:
-*   [Guida all'integrazione dei provider di firma](sign-provider-integration.md).
+Every connector reads the admin **Status mapping** grid before its built-in mapping, so a new
+raw status returned by a provider can be mapped to an internal status without a deploy. See
+[troubleshooting.md](troubleshooting.md#unmapped-provider-status).
+
+## Another provider
+
+Connectors for other services (Namirial, InfoCert, Yousign, regional providers) can be built
+as separate modules without changing the core: see
+[sign-provider-integration.md](sign-provider-integration.md).

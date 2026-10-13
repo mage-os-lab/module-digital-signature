@@ -352,6 +352,47 @@
                         <validate>validate-digits</validate>
                         <depends><field id="quota_enabled">1</field></depends>
                     </field>
+                    <field id="alert_threshold_count" translate="label comment" type="text" sortOrder="235"
+                           showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Alert Threshold (remaining signatures)</label>
+                        <comment>Also send the warning when this many signatures or fewer are left (e.g. 20).</comment>
+                        <validate>validate-digits</validate>
+                        <depends><field id="quota_enabled">1</field></depends>
+                    </field>
+                    <field id="exceeded_behavior" translate="label comment" type="select" sortOrder="240"
+                           showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>When Quota Is Exhausted</label>
+                        <comment>Blocking moves new documents for this provider to the error status instead of sending them.</comment>
+                        <source_model>MageOS\DigitalSignature\Model\Config\Source\ExceededBehavior</source_model>
+                        <depends><field id="quota_enabled">1</field></depends>
+                    </field>
+                    <field id="reset_day" translate="label comment" type="text" sortOrder="250"
+                           showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Monthly Reset Day</label>
+                        <comment>Day of the month (1-28) on which the monthly allowance renews.</comment>
+                        <validate>validate-digits validate-digits-range digits-range-1-28</validate>
+                        <depends>
+                            <field id="quota_enabled">1</field>
+                            <field id="quota_type">monthly_allowance</field>
+                        </depends>
+                    </field>
+                    <field id="quota_start_date" translate="label comment" type="text" sortOrder="260"
+                           showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Prepaid Pool Start Date</label>
+                        <comment>Date the credit package was purchased, format YYYY-MM-DD. Only documents created from this date count against the pool. Leave empty to count all documents.</comment>
+                        <backend_model>MageOS\DigitalSignature\Model\Config\Backend\QuotaStartDate</backend_model>
+                        <depends>
+                            <field id="quota_enabled">1</field>
+                            <field id="quota_type">prepaid_pool</field>
+                        </depends>
+                    </field>
+                    <field id="notification_email" translate="label comment" type="text" sortOrder="270"
+                           showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Quota Alert Recipient</label>
+                        <comment>Email for this provider's quota alerts. Leave empty to use the admin recipient of the email notifications.</comment>
+                        <validate>validate-email</validate>
+                        <depends><field id="quota_enabled">1</field></depends>
+                    </field>
                 </group>
                 <group id="docusign" translate="label comment" type="text" sortOrder="12"
                        showInDefault="1" showInWebsite="1" showInStore="1">
@@ -452,6 +493,47 @@
                         <validate>validate-digits</validate>
                         <depends><field id="quota_enabled">1</field></depends>
                     </field>
+                    <field id="alert_threshold_count" translate="label comment" type="text" sortOrder="235"
+                           showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Alert Threshold (remaining signatures)</label>
+                        <comment>Also send the warning when this many signatures or fewer are left (e.g. 20).</comment>
+                        <validate>validate-digits</validate>
+                        <depends><field id="quota_enabled">1</field></depends>
+                    </field>
+                    <field id="exceeded_behavior" translate="label comment" type="select" sortOrder="240"
+                           showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>When Quota Is Exhausted</label>
+                        <comment>Blocking moves new documents for this provider to the error status instead of sending them.</comment>
+                        <source_model>MageOS\DigitalSignature\Model\Config\Source\ExceededBehavior</source_model>
+                        <depends><field id="quota_enabled">1</field></depends>
+                    </field>
+                    <field id="reset_day" translate="label comment" type="text" sortOrder="250"
+                           showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Monthly Reset Day</label>
+                        <comment>Day of the month (1-28) on which the monthly allowance renews.</comment>
+                        <validate>validate-digits validate-digits-range digits-range-1-28</validate>
+                        <depends>
+                            <field id="quota_enabled">1</field>
+                            <field id="quota_type">monthly_allowance</field>
+                        </depends>
+                    </field>
+                    <field id="quota_start_date" translate="label comment" type="text" sortOrder="260"
+                           showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Prepaid Pool Start Date</label>
+                        <comment>Date the credit package was purchased, format YYYY-MM-DD. Only documents created from this date count against the pool. Leave empty to count all documents.</comment>
+                        <backend_model>MageOS\DigitalSignature\Model\Config\Backend\QuotaStartDate</backend_model>
+                        <depends>
+                            <field id="quota_enabled">1</field>
+                            <field id="quota_type">prepaid_pool</field>
+                        </depends>
+                    </field>
+                    <field id="notification_email" translate="label comment" type="text" sortOrder="270"
+                           showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Quota Alert Recipient</label>
+                        <comment>Email for this provider's quota alerts. Leave empty to use the admin recipient of the email notifications.</comment>
+                        <validate>validate-email</validate>
+                        <depends><field id="quota_enabled">1</field></depends>
+                    </field>
                 </group>
                 <group id="adobesign" translate="label comment" type="text" sortOrder="14"
                        showInDefault="1" showInWebsite="1" showInStore="1">
@@ -488,11 +570,7 @@
                     <field id="api_access_point" translate="label comment" type="text" sortOrder="55"
                            showInDefault="1" showInWebsite="1" showInStore="1">
                         <label>API Access Point</label>
-                        <comment>
-                            E.g. https://api.na1.adobesign.com. Unlike DocuSign, Adobe Sign has no fixed
-                            demo/production host: the shard is tied to the account and must be copied from the
-                            "api_access_point" returned during the initial OAuth exchange (interactive authorization).
-                        </comment>
+                        <comment>E.g. https://api.na1.adobesign.com. Unlike DocuSign, Adobe Sign has no fixed demo/production host: the shard is tied to the account and must be copied from the "api_access_point" returned during the initial OAuth exchange (interactive authorization).</comment>
                         <validate>required-entry</validate>
                         <depends><field id="enabled">1</field></depends>
                     </field>
@@ -541,6 +619,47 @@
                         <label>Alert Threshold (%)</label>
                         <comment>Send warning notification when remaining quota drops below this percentage (e.g. 15).</comment>
                         <validate>validate-digits</validate>
+                        <depends><field id="quota_enabled">1</field></depends>
+                    </field>
+                    <field id="alert_threshold_count" translate="label comment" type="text" sortOrder="235"
+                           showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Alert Threshold (remaining signatures)</label>
+                        <comment>Also send the warning when this many signatures or fewer are left (e.g. 20).</comment>
+                        <validate>validate-digits</validate>
+                        <depends><field id="quota_enabled">1</field></depends>
+                    </field>
+                    <field id="exceeded_behavior" translate="label comment" type="select" sortOrder="240"
+                           showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>When Quota Is Exhausted</label>
+                        <comment>Blocking moves new documents for this provider to the error status instead of sending them.</comment>
+                        <source_model>MageOS\DigitalSignature\Model\Config\Source\ExceededBehavior</source_model>
+                        <depends><field id="quota_enabled">1</field></depends>
+                    </field>
+                    <field id="reset_day" translate="label comment" type="text" sortOrder="250"
+                           showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Monthly Reset Day</label>
+                        <comment>Day of the month (1-28) on which the monthly allowance renews.</comment>
+                        <validate>validate-digits validate-digits-range digits-range-1-28</validate>
+                        <depends>
+                            <field id="quota_enabled">1</field>
+                            <field id="quota_type">monthly_allowance</field>
+                        </depends>
+                    </field>
+                    <field id="quota_start_date" translate="label comment" type="text" sortOrder="260"
+                           showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Prepaid Pool Start Date</label>
+                        <comment>Date the credit package was purchased, format YYYY-MM-DD. Only documents created from this date count against the pool. Leave empty to count all documents.</comment>
+                        <backend_model>MageOS\DigitalSignature\Model\Config\Backend\QuotaStartDate</backend_model>
+                        <depends>
+                            <field id="quota_enabled">1</field>
+                            <field id="quota_type">prepaid_pool</field>
+                        </depends>
+                    </field>
+                    <field id="notification_email" translate="label comment" type="text" sortOrder="270"
+                           showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Quota Alert Recipient</label>
+                        <comment>Email for this provider's quota alerts. Leave empty to use the admin recipient of the email notifications.</comment>
+                        <validate>validate-email</validate>
                         <depends><field id="quota_enabled">1</field></depends>
                     </field>
                 </group>

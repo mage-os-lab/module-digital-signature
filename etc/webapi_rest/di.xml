@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <!--
+        Internal fields of a signature document are not part of the Web API output:
+        the callback token hash and the storage paths of the PDFs are only used by
+        the module itself. Both spellings of the type are listed because the type
+        name is compared verbatim and may or may not carry the leading backslash.
+    -->
+    <type name="Magento\Framework\Reflection\DataObjectProcessor">
+        <arguments>
+            <argument name="excludedMethodsClassMap" xsi:type="array">
+                <item name="MageOS\DigitalSignature\Api\Data\DocumentInterface" xsi:type="array">
+                    <item name="getCallbackTokenHash" xsi:type="string">getCallbackTokenHash</item>
+                    <item name="getPdfPath" xsi:type="string">getPdfPath</item>
+                    <item name="getSignedPdfPath" xsi:type="string">getSignedPdfPath</item>
+                </item>
+                <item name="\MageOS\DigitalSignature\Api\Data\DocumentInterface" xsi:type="array">
+                    <item name="getCallbackTokenHash" xsi:type="string">getCallbackTokenHash</item>
+                    <item name="getPdfPath" xsi:type="string">getPdfPath</item>
+                    <item name="getSignedPdfPath" xsi:type="string">getSignedPdfPath</item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+</config>

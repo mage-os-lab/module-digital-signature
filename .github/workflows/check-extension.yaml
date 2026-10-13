@@ -13,7 +13,7 @@ jobs:
       matrix: ${{ steps.supported.outputs.matrix }}
     steps:
       - uses: actions/checkout@v4
-      - uses: graycoreio/github-actions-magento2/supported-version@v8.9.0
+      - uses: graycoreio/github-actions-magento2/supported-version@v8.11.0
         id: supported
         with:
           project: mage-os
@@ -22,7 +22,7 @@ jobs:
   # install, for every supported version.
   check-extension:
     needs: compute-matrix
-    uses: graycoreio/github-actions-magento2/.github/workflows/check-extension.yaml@v8.9.0
+    uses: graycoreio/github-actions-magento2/.github/workflows/check-extension.yaml@v8.11.0
     with:
       matrix: ${{ needs.compute-matrix.outputs.matrix }}
       # The default mirror only proxies magento/* packages; the

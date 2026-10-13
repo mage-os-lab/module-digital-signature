@@ -3,7 +3,7 @@
     "description": "Digital signature of order contracts through external providers (WsSign, ...)",
     "type": "magento2-module",
     "license": "MIT",
-    "version": "0.5.0",
+    "version": "0.5.1",
     "authors": [
         {
             "name": "Nino Aratari",
@@ -43,6 +43,12 @@
         ],
         "psr-4": {
             "MageOS\\DigitalSignature\\": ""
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true,
+            "magento/*": true
         }
     }
 }

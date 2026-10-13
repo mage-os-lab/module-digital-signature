@@ -6,6 +6,17 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [0.4.2] - 2026-10-13
+### Added
+- GitHub issue templates (bug report, feature request) and a `check-extension` workflow that runs
+  the Magento coding standard, `setup:di:compile` and the unit suite inside a Mage-OS install for
+  every supported version.
+
+### Fixed
+- The standalone test manifest (`composer.test.json`) of the published package now requires
+  `phpoffice/phpspreadsheet`, so `composer install && vendor/bin/phpunit` runs the full suite
+  without missing-class errors.
+
 ## [0.4.1] - 2026-09-21
 ### Added
 - **Mage-OS 3.5.0 compatibility verified** (Magento 2.4.9 base, PHP 8.5): clean `composer require`,

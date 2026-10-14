@@ -34,7 +34,7 @@ reuses the same backend.
 - **GDPR by design.** A configurable retention cron deletes PDFs and personal data (email/phone)
   of closed documents past the retention period, keeping only the audit trail — an easy line in a
   commercial proposal.
-- **Low maintenance risk.** The suite has 300+ automated unit tests and runs standalone without a
+- **Low maintenance risk.** The suite has 450+ automated unit tests and runs standalone without a
   full Magento installation, which means fewer silent breakages after a Magento/dependency
   upgrade and fewer non-billable support hours.
 - **End-client UX already built.** A visual PDF builder (click-to-place signature tag), a document
@@ -61,6 +61,10 @@ reuses the same backend.
 - Signature opt-in in cart, minicart and checkout, for both Luma and Hyvä themes, with ARIA
   support for accessibility.
 - Retention/cleanup cron for documents and a dedicated production-mode gate (GDPR compliance).
+- eIDAS audit trail (opt-in, explicit merchant choice required): SHA-256 hashes of the document
+  before and after signing, DocuSign/Adobe Sign certificates fetched and stored automatically,
+  and a ZIP dossier export (PDF + certificate + manifest) for disputes; see the
+  [audit trail guide](docs/audit-trail.md).
 - Admin panel for template and document management, provider configuration, with dedicated ACL
   resources and menu entries.
 
@@ -98,7 +102,7 @@ type on Magento 2.4.5, already included; Mage-OS 3.5.0 required no code changes)
 | Mage-OS | 3.4.0, **3.5.0** (Magento 2.4.9 base, verified 2026-09-21) |
 | PHP | 8.1, 8.2, 8.3, 8.4, 8.5 |
 
-The unit test suite (312 tests) also passes on PHP 8.1 and PHP 8.5. Compatibility with newer
+The unit test suite (460 tests) also passes on PHP 8.1 and PHP 8.5. Compatibility with newer
 releases is not guaranteed until tested; please open an issue if you hit a problem.
 
 ## Configuration
@@ -124,6 +128,8 @@ Signed Documents**.
 - [Merge fields](docs/merge-fields.md): order data inside the PDF, custom fields
 - [REST API](docs/rest-api.md): endpoints, authentication, store scoping
 - [Webhooks](docs/webhooks.md): payload, HMAC verification, retries
+- [Audit trail](docs/audit-trail.md): compliance choice, document hashes, provider certificates,
+  dossier export
 - [Available connectors](docs/available-connectors.md) and
   [building a provider connector](docs/sign-provider-integration.md)
 - [Troubleshooting](docs/troubleshooting.md)

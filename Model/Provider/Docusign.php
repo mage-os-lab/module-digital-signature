@@ -3,18 +3,20 @@ declare(strict_types=1);
 
 namespace MageOS\DigitalSignature\Model\Provider;
 
+use MageOS\DigitalSignature\Api\AuditTrailCertificateProviderInterface;
 use MageOS\DigitalSignature\Api\Data\DocumentInterface;
 use MageOS\DigitalSignature\Api\SignProviderInterface;
 use MageOS\DigitalSignature\Exception\ProviderException;
 use MageOS\DigitalSignature\Model\Document\Status;
 use MageOS\DigitalSignature\Model\Provider\Docusign\Client;
+use MageOS\DigitalSignature\Model\Provider\Result\AuditTrailCertificateResult;
 use MageOS\DigitalSignature\Model\Provider\Result\StartResult;
 use MageOS\DigitalSignature\Model\Provider\Result\StatusResult;
 use Magento\Framework\Serialize\Serializer\Json;
 use Magento\Sales\Api\OrderRepositoryInterface;
 use Magento\Store\Model\StoreManagerInterface;
 
-class Docusign implements SignProviderInterface
+class Docusign implements SignProviderInterface, AuditTrailCertificateProviderInterface
 {
     public const CODE = 'docusign';
 
@@ -149,6 +151,14 @@ class Docusign implements SignProviderInterface
         $envelopeId = $this->requireProcessId($document);
 
         return $this->client->downloadDocument($storeId, $envelopeId);
+    }
+
+    public function fetchCertificate(DocumentInterface $document): AuditTrailCertificateResult
+    {
+        $storeId = $document->getStoreId();
+        $envelopeId = $this->requireProcessId($document);
+
+        return $this->client->getCertificate($storeId, $envelopeId);
     }
 
     public function cancel(DocumentInterface $document): void

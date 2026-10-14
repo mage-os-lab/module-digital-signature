@@ -5,8 +5,12 @@
 """Expired/declined"" template (customer)","Plantilla ""caducado/rechazado"" (cliente)"
 """Expired/rejected"" template (admin)","Plantilla ""caducado/rechazado"" (administrador)"
 """Expired/rejected"" template (customer)","Plantilla ""caducado/rechazado"" (cliente)"
+%1 Start the export again from Digital Signature > Signature documents.,%1 Vuelva a iniciar la exportación desde Digital Signature > Documentos de firma.
+%1 dossier export(s) could not be deleted.,%1 exportaciones de dosier no se pudieron eliminar.
+%1 dossier export(s) deleted.,%1 exportaciones de dosier eliminadas.
 -- All Store Views --,-- Todas las vistas de la tienda --
 -- None --,-- Ninguno --
+-- Please choose --,-- Seleccione --
 -- Use global default --,-- Usar valor global predeterminado --
 A document signing process has ended with a negative outcome.,Un proceso de firma de documento ha finalizado con un resultado negativo.
 API Access Point,Punto de acceso API
@@ -31,6 +35,7 @@ Adobe Acrobat Sign Developer Guide,Guía para desarrolladores de Adobe Acrobat S
 "Adobe Acrobat Sign: agreement creation failed, no ID received.","Adobe Acrobat Sign: error al crear el acuerdo, no se recibió ningún ID."
 Adobe Acrobat Sign: document upload succeeded but is missing transientDocumentId.,Adobe Acrobat Sign: la carga del documento se realizó correctamente pero falta transientDocumentId.
 Adobe Acrobat Sign: downloaded PDF content is empty.,Adobe Acrobat Sign: el contenido del PDF descargado está vacío.
+Adobe Acrobat Sign: downloaded audit trail content is empty.,Adobe Acrobat Sign: el contenido del registro de auditoría descargado está vacío.
 Adobe Acrobat Sign: network error during %1: %2,Adobe Acrobat Sign: error de red durante %1: %2
 Adobe Acrobat Sign: non-JSON response during %1.,Adobe Acrobat Sign: respuesta no JSON durante %1.
 Adobe Acrobat Sign: signer email is missing or invalid.,Adobe Acrobat Sign: el email del firmante falta o no es válido.
@@ -48,12 +53,15 @@ Alert Threshold (%),Umbral de alerta (%)
 All time,Siempre
 Allow dispatch and log warning,Permitir envío y registrar advertencia
 Allow dummy provider,Permitir proveedor dummy
+An error occurred while generating the dossier.,Se ha producido un error al generar el dosier.
 Analysis period:,Periodo de análisis:
 Annual Allowance (Commitment),Cuota anual (compromiso)
 Application ID (Client ID),ID de la aplicación (Client ID)
 Application ID retrieved from the Adobe Developer Console.,ID de la aplicación obtenido de la Adobe Developer Console.
 Are you sure you want to delete this webhook subscription?,¿Estás seguro de que deseas eliminar esta suscripción de Webhook?
 Assigned Products,Productos asignados
+Audit trail (eIDAS compliance),Registro de auditoría (cumplimiento eIDAS)
+Audit trail retention (days),Conservación del registro de auditoría (días)
 Auto-sign delay (seconds),Retraso de firma automática (segundos)
 Automatic reminders,Recordatorios automáticos
 Automatically delete past the retention period,Eliminar automáticamente tras el período de retención
@@ -62,6 +70,7 @@ Avg signing time,Tiempo medio de firma
 Back,Volver
 Black,Negro
 Block new signature requests,Bloquear nuevas solicitudes de firma
+Blocking choice: no document is generated until this is set to Yes or No.,Elección obligatoria: no se genera ningún documento hasta que se establezca en Sí o No.
 CDN,CDN
 Callback IP allowlist,Lista blanca de IP para el callback
 Cancel,Cancelar
@@ -75,12 +84,15 @@ Cap on documents queued per cron run (throttling toward the provider).,Límite d
 Cart / Order,Carrito / Pedido
 Cart not available.,Carrito no disponible.
 Cart/Order,Carrito/Pedido
+"Check this ONLY after defining, for this store, the legal basis and retention period for the audit trail data listed above (see the comment on this section).","Marque esta casilla SOLO después de haber definido, para esta tienda, la base jurídica y el periodo de conservación de los datos del registro de auditoría indicados arriba (vea el comentario de esta sección)."
 "Check this ONLY after signing a DPA (Data Processing Agreement) with the selected signature provider and updating the store's privacy policy to disclose that customer personal data (email, phone) is sent to a third-party provider for the signing process. Until this is checked, all new documents are generated with the dummy (test) provider, regardless of the provider configured below.","Marca esta casilla SOLO después de firmar un DPA (Acuerdo de Tratamiento de Datos) con el proveedor de firma seleccionado y de haber actualizado la política de privacidad de la tienda, indicando el envío de datos personales del cliente (email, teléfono) a un proveedor externo para el proceso de firma. Hasta que no se marque, todos los documentos nuevos se generarán con el proveedor dummy (pruebas), independientemente del proveedor configurado abajo."
 "Check this box ONLY after signing a DPA (Data Processing Agreement) with the selected signature provider and updating the store's privacy policy to disclose that customer personal data (email, phone) is sent to a third-party provider for the signing process. Until checked, all new documents are generated with the dummy (test) provider, regardless of the provider configured below.","Marca esta casilla SOLO después de firmar un DPA (Acuerdo de Tratamiento de Datos) con el proveedor de firma seleccionado y de actualizar la política de privacidad de la tienda para informar que los datos personales del cliente (email, teléfono) se envían a un proveedor externo para el proceso de firma. Hasta que no se marque, todos los documentos nuevos se generarán con el proveedor dummy (pruebas), independientemente del proveedor configurado abajo."
 Client Secret,Client Secret
+Collect audit trail data,Recopilar datos del registro de auditoría
 "Color used to print the signature tag on the actual document generated for the order. Select ""White (Invisible)"" to hide it beneath the digital signature.","Color usado para imprimir la etiqueta de firma en el documento real generado para el pedido. Selecciona ""Blanco (invisible)"" para ocultarla bajo la firma digital."
 Comma-separated IPs; empty = no IP filter (the secret token still applies).,IPs separadas por comas; vacío = sin filtro de IP (el token secreto sigue aplicándose).
 Comma-separated IPs; empty = no IP filtering (the secret token still applies).,IPs separadas por comas; vacío = sin filtro de IP (el token secreto sigue aplicando).
+Completed on,Completado el
 Configuration,Configuración
 Confirm Position,Confirmar posición
 Connector to integrate digital and electronic signatures from Adobe Acrobat Sign. Supports OAuth2 authentication and asynchronous signature process tracking.,Conector para integrar las firmas digitales y electrónicas de Adobe Acrobat Sign. Permite la autenticación OAuth2 y el seguimiento asíncrono del proceso de firma.
@@ -109,6 +121,8 @@ Default generation trigger,Disparador de generación predeterminado
 Default phone prefix,Prefijo telefónico predeterminado
 Delete,Eliminar
 Delete Webhook subscription,Eliminar suscripción de Webhook
+Delete dossier export #%1,Eliminar exportación de dosier #%1
+Delete dossier exports,Eliminar exportaciones de dosier
 Delete integration,Eliminar integración
 Delete template,Eliminar plantilla
 "Delete the Webhook subscription ""%1""?","¿Eliminar la suscripción de Webhook ""%1""?"
@@ -116,6 +130,7 @@ Delete template,Eliminar plantilla
 "Delete the template ""%1""?",¿Eliminar la plantilla «%1»?
 Delete this integration?,¿Eliminar esta integración?
 Delete this template? Documents already generated remain in the history.,¿Eliminar esta plantilla? Los documentos ya generados permanecen en el historial.
+Deleted after,Eliminado después de
 Deliveries limit per run,Límite de entregas por ejecución
 Deliveries per run limit,Límite de entregas por ejecución
 Delivery attempts before marking the webhook as permanently failed.,Intentos de entrega antes de marcar el webhook como fallido de forma permanente.
@@ -123,12 +138,15 @@ Demo / Sandbox,Demo / Sandbox
 Detail: %error_message,Detalle: %error_message
 Details: %error_message,Detalles: %error_message
 Digital Signature,Firma digital
+Digital Signature is enabled but the audit trail compliance choice (Stores > Configuration > Mage-OS > Digital Signature > Audit trail) has not been set for at least one store: document generation is blocked there until it is configured.,Digital Signature está habilitado pero la elección de cumplimiento del registro de auditoría (Tiendas > Configuración > Mage-OS > Digital Signature > Audit trail) no se ha establecido para al menos una tienda: allí la generación de documentos queda bloqueada hasta que se configure.
+Digital Signature is enabled but the audit trail compliance choice has not been configured for store %1. Configure it under Stores > Configuration > Mage-OS > Digital Signature > Audit trail before documents can be generated.,Digital Signature está habilitado pero la elección de cumplimiento del registro de auditoría no se ha configurado para la tienda %1. Configúrela en Tiendas > Configuración > Mage-OS > Digital Signature > Audit trail antes de poder generar documentos.
 Disabled by default to avoid alarming customers: evaluate on a case-by-case basis.,Desactivado por defecto para evitar alarmismos: evaluar caso por caso.
 Disabled by default: deletion is destructive and should be enabled deliberately after defining the required retention periods (tax/legal).,Desactivado por defecto: la eliminación es destructiva y debe activarse conscientemente tras definir los períodos de retención requeridos (fiscales/legales).
 DocuSign,DocuSign
 DocuSign Apps and Keys Panel,Panel de aplicaciones y claves de DocuSign
 DocuSign Developer Center,Centro de desarrolladores de DocuSign
 DocuSign: downloaded PDF content is empty.,DocuSign: el contenido del PDF descargado está vacío.
+DocuSign: downloaded certificate content is empty.,DocuSign: el contenido del certificado descargado está vacío.
 "DocuSign: envelope creation failed, no ID received.","DocuSign: error al crear el sobre, no se recibió ningún ID."
 DocuSign: error generating the JWT assertion: %1,DocuSign: error al generar la aserción JWT: %1
 DocuSign: invalid document store.,DocuSign: tienda del documento no válida.
@@ -155,8 +173,19 @@ Document retention (GDPR),Retención de documentos (RGPD)
 Document templates,Plantillas de documentos
 "Document with id ""%1"" does not exist.",El documento con id «%1» no existe.
 Document: #%document_id,Documento: #%document_id
+Documents,Documentos
 Documents per reconciliation limit,Límite de documentos por conciliación
 Documents per run limit,Límite de documentos por ejecución
+Dossier export,Exportación de dosier
+Dossier export #%1 could not be deleted.,No se pudo eliminar la exportación de dosier #%1.
+Dossier export #%1 deleted.,Exportación de dosier #%1 eliminada.
+Dossier export #%1 failed,La exportación de dosier #%1 ha fallado
+Dossier export #%1 is ready,La exportación de dosier #%1 está lista
+Dossier export #%1 queued (%2 documents). You will be notified when it is ready under Digital Signature > Dossier exports.,Exportación de dosier #%1 en cola (%2 documentos). Recibirá una notificación cuando esté lista en Digital Signature > Exportaciones de dosier.
+"Dossier export with id ""%1"" does not exist.","La exportación de dosier con id ""%1"" no existe."
+Dossier exports,Exportaciones de dosier
+Download,Descargar
+Download certificate,Descargar certificado
 Download generated,Descargar generado
 Download processed preview,Descargar vista previa procesada
 Download signed,Descargar firmado
@@ -201,6 +230,8 @@ Error: %message,Error: %message
 Escalation template (admin),Plantilla de escalamiento (administrador)
 Expired,Caducado
 Expired or Declined,Expirados o Rechazados
+Export dossier (ZIP),Exportar dosier (ZIP)
+Failed,Fallido
 Fake provider that simulates signing locally. Do NOT use in production.,Proveedor ficticio que simula la firma en local. NO usar en producción.
 File not specified.,Archivo no especificado.
 For error and negative outcome notifications. Empty = store's general contact.,Para notificaciones de error y resultado negativo. Vacío = contacto general de la tienda.
@@ -213,6 +244,7 @@ Generate signature documents (manual),Generar documentos de firma (manual)
 Generate signature documents for the selected orders?,¿Generar los documentos de firma para los pedidos seleccionados?
 Generate template documents with manual trigger,Generar documentos de plantillas con disparador manual
 Generated,Generado
+Generated ZIP files contain personal data and are deleted after this period.,Los archivos ZIP generados contienen datos personales y se eliminan después de este periodo.
 Guide to integrating signature providers,Guía para la integración de proveedores de firma
 HMAC Secret,Secreto HMAC
 HTTP/HTTPS endpoint where JSON webhook push notifications will be sent.,Punto de conexión HTTP/HTTPS al que se enviarán las notificaciones push de webhook en formato JSON.
@@ -221,7 +253,9 @@ Historical,Histórico
 I want to receive the contract to sign digitally,Quiero recibir el contrato para firmarlo digitalmente
 ID,ID
 "If you believe this is a mistake, contact our customer service. You can check your order here: <a href=""%url"">My orders</a>","Si cree que se trata de un error, contacte con nuestro servicio de atención al cliente. Puede consultar su pedido aquí: <a href=""%url"">Mis pedidos</a>"
+Immediate download up to (documents),Descarga inmediata hasta (documentos)
 In development,En desarrollo
+"Independent from the document retention below: typically tied to the contract's legal prescription period, not a GDPR minimum.","Independiente de la conservación de documentos de más abajo: normalmente ligada al plazo de prescripción legal del contrato, no a un mínimo del RGPD."
 Integration,Integración
 Integration ID,ID de integración
 Integration deleted.,Integración eliminada.
@@ -235,16 +269,20 @@ Invalid signature parameters.,Parámetros de firma no válidos.
 Invoice creation,Creación de factura
 Invoice paid,Factura pagada
 Item,Elemento
+Keep queued exports for (hours),Conservar las exportaciones en cola durante (horas)
 LOW QUOTA,CUOTA BAJA
+Larger selections are refused.,Las selecciones más grandes se rechazan.
 Last 30 days,Últimos 30 días
 Last 90 days,Últimos 90 días
 Last year,Último año
+Limits for the Export dossier (ZIP) mass action. Larger selections are generated in the background and listed under Digital Signature > Dossier exports.,Límites para la acción masiva Exportar dosier (ZIP). Las selecciones más grandes se generan en segundo plano y se muestran en Digital Signature > Exportaciones de dosier.
 Local (Recommended),Local (Recomendado)
 Long-lived refresh token used to generate API Access Tokens.,Token de actualización de larga duración utilizado para generar tokens de acceso a la API.
 Mage-OS,Mage-OS
 "Manage the order in backend: <a href=\\""%url\""\"">%url</a>""","Gestionar el pedido en el backend: <a href=\\""%url\""\"">%url</a>"""
 Manual from backend,Manual desde el backend
 Maximum attempts,Intentos máximos
+Maximum documents per export,Máximo de documentos por exportación
 Maximum number of attempts,Número máximo de intentos
 Maximum number of attempts for temporary errors (network/service) before the error state.,Número máximo de intentos para errores temporales (red/servicio) antes de pasar al estado de error.
 Maximum number of customer reminders,Número máximo de recordatorios al cliente
@@ -260,7 +298,9 @@ New Webhook Subscription,Nueva suscripción de Webhook
 New document template,Nueva plantilla de documento
 New integration,Nueva integración
 Next,Siguiente
+No - do not collect additional audit trail data,No - no recopilar datos adicionales del registro de auditoría
 "No API integration mapped for integration ""%1"".","No hay ninguna integración API asignada para la integración ""%1""."
+No documents were selected.,No se ha seleccionado ningún documento.
 No integration selected.,Ninguna integración seleccionada.
 No legal validity — test/development only,Sin validez legal — solo test/desarrollo
 No signature documents for this order.,No hay documentos de firma para este pedido.
@@ -310,16 +350,20 @@ Prepaid Credit Package (Pool),Paquete de créditos prepago (Pool)
 Previous,Atrás
 Price,Precio
 Process ID,ID de proceso
+Processed,Procesados
+Processing,Procesando
 Processing of a signature document ended in error and requires manual intervention.,El procesamiento de un documento de firma ha terminado en error y requiere intervención manual.
 Product,Producto
 Provider Quotas & Consumption,Cuotas y consumo del proveedor
 Provider status,Estado del proveedor
 Provider: %provider,Proveedor: %provider
+Queued,En cola
 Quota Model,Modelo de cuota
 Quota tracking disabled.,Seguimiento de cuotas deshabilitado.
 RSA Private Key,Clave privada RSA
 RSA Private Key (PEM),Clave privada RSA (PEM)
 Raw status returned by WsSign → internal document status. Unmapped statuses are logged so they can be added here.,Estado en bruto devuelto por WsSign → estado interno del documento. Los estados no mapeados se registran en el log para poder añadirlos aquí.
+Ready,Listo
 Regenerate / Resend,Regenerar / Reenviar
 Regenerate and resend this document?,¿Regenerar y reenviar este documento?
 Remaining:,Restantes:
@@ -327,8 +371,11 @@ Reminder template (customer),Plantilla de recordatorio (cliente)
 Reminder: Sign your contract (order %increment_id),Recordatorio: Firma tu contrato (pedido %increment_id)
 Reminders for documents awaiting signature.,Recordatorios de documentos pendientes de firma.
 Reminders for documents pending signature.,Recordatorios para documentos pendientes de firma.
+Requested by,Solicitado por
+Requested on,Solicitado el
 Required for Service Account JWT authentication.,Requerido para la autenticación JWT con cuenta de servicio.
 Retention days,Días de retención
+Retention policy acknowledgement,Aceptación de la política de conservación
 SKU,SKU
 Save integration,Guardar integración
 Save subscription,Guardar suscripción
@@ -363,6 +410,7 @@ Signature document generation queued for %1 order(s).,Generación de documentos 
 Signature document generation request has been queued.,Se ha aceptado la solicitud de generación de documentos de firma.
 Signature document templates,Plantillas de documentos de firma
 Signature documents,Documentos de firma
+"Signature documents are only generated once this choice is made explicitly. Collecting audit trail data (signer IP, authentication details, provider certificates) means retaining personal data for a compliance/legal purpose distinct from, and typically longer than, the retention configured below for the document itself: check with your data protection advisor before enabling it.","Los documentos de firma solo se generan una vez que esta elección se ha hecho explícitamente. Recopilar datos del registro de auditoría (IP del firmante, detalles de autenticación, certificados del proveedor) implica conservar datos personales con una finalidad de cumplimiento/legal distinta de la conservación configurada más abajo para el propio documento, y normalmente más larga: consulte con su asesor de protección de datos antes de habilitarlo."
 Signature expiration (days),Caducidad de la firma (días)
 Signature provider,Proveedor de firma
 "Signature provider ""%1"" is not registered.",El proveedor de firma «%1» no está registrado.
@@ -380,6 +428,7 @@ Signer\'s phone number is invalid.,El teléfono del firmante no es válido.
 Signer\'s phone number missing: required by WsSign for OTP via SMS.,Falta el número de teléfono del firmante: requerido por WsSign para OTP mediante SMS.
 Signing the contract is mandatory for the products in your cart.,"Para los productos del carrito, la firma del contrato es obligatoria."
 "Simple (SES), Advanced (AES), Qualified (QES) Electronic Signature","Firma electrónica simple (SES), avanzada (AES), cualificada (QES)"
+Size (bytes),Tamaño (bytes)
 Status,Estado
 Status mapping,Mapeo de estados
 Store view,Vista de tienda
@@ -398,9 +447,11 @@ The Integration ID is required.,El ID de integración es obligatorio.
 The PDF exceeds the maximum size of 10 MB.,El PDF supera el tamaño máximo de 10 MB.
 The Target URL is required.,La URL de destino es obligatoria.
 The Target URL must use the http or https scheme.,La URL de destino debe usar el esquema http o https.
+The ZIP file is deleted immediately. Continue?,El archivo ZIP se elimina inmediatamente. ¿Continuar?
 The connector used for new documents once production mode is confirmed above. Configure the credentials in the provider's group.,El conector usado para los nuevos documentos una vez confirmado el modo producción arriba. Configura las credenciales en el grupo del proveedor.
 The document has no associated template.,El documento no tiene una plantilla asociada.
 The document has no generated PDF to send.,El documento no tiene un PDF generado para enviar.
+The dossier of %1 documents can be downloaded from Digital Signature > Dossier exports. It will be deleted after %2 hours.,El dosier de %1 documentos se puede descargar en Digital Signature > Exportaciones de dosier. Se eliminará después de %2 horas.
 The dummy provider is not enabled: enable it explicitly in the configuration (test environments only).,El proveedor dummy no está habilitado: actívalo explícitamente en la configuración (solo entornos de prueba).
 The entered Target URL is invalid.,La URL de destino introducida no es válida.
 The following document is pending digital signature beyond the configured escalation period.,El siguiente documento está pendiente de firma digital más allá del período de escalamiento configurado.
@@ -410,12 +461,14 @@ The name is required.,El nombre es obligatorio.
 The provider often already sends its own signing invitation: disabled by default.,El proveedor a menudo ya envía su propia invitación a firmar: desactivado por defecto.
 The provider often already sends its own signing invitation: off by default.,El proveedor a menudo ya envía su propia invitación de firma: desactivado por defecto.
 The requested temporary file does not exist.,El archivo temporal solicitado no existe.
+The selected dossier exports and their ZIP files are deleted immediately. Continue?,Las exportaciones de dosier seleccionadas y sus archivos ZIP se eliminan inmediatamente. ¿Continuar?
 The signing process of a document ended with a negative outcome.,El proceso de firma de un documento ha finalizado con un resultado negativo.
 The template file is not a PDF.,El archivo de la plantilla no es un PDF.
 The template has no PDF file uploaded for this store view.,La plantilla no tiene un archivo PDF cargado para esta vista de tienda.
 The template name is required.,El nombre de la plantilla es obligatorio.
 The temporary file does not exist.,El archivo temporal no existe.
 The uploaded file is not a valid PDF.,El archivo cargado no es un PDF válido.
+This dossier export is not available for download.,Esta exportación de dosier no está disponible para descargar.
 This integration no longer exists.,Esta integración ya no existe.
 This subscription no longer exists.,Esta suscripción ya no existe.
 This template no longer exists.,Esta plantilla ya no existe.
@@ -427,6 +480,7 @@ Track signature credit consumption and send warning notifications when approachi
 Unable to complete file validation.,No se puede completar la validación del archivo.
 Unable to delete Webhook subscription: %1,No se puede eliminar la suscripción de Webhook: %1
 Unable to delete the API integration: %1,No se puede eliminar la integración API: %1
+Unable to delete the dossier export: %1,No se puede eliminar la exportación de dosier: %1
 Unable to delete the template: %1,No se ha podido eliminar la plantilla: %1
 Unable to download the PDF: %1,No se puede descargar el PDF: %1
 Unable to find the subscription to delete.,No se puede encontrar la suscripción para eliminar.
@@ -437,7 +491,9 @@ Unable to load the temporary PDF.,No se puede cargar el PDF temporal.
 Unable to regenerate the document: %1,No se ha podido regenerar el documento: %1
 Unable to save Webhook subscription: %1,No se puede guardar la suscripción de Webhook: %1
 Unable to save the API integration: %1,No se puede guardar la integración API: %1
+Unable to save the audit trail: %1,No se puede guardar el registro de auditoría: %1
 Unable to save the document: %1,No se ha podido guardar el documento: %1
+Unable to save the dossier export: %1,No se puede guardar la exportación de dosier: %1
 Unable to save the template: %1,No se ha podido guardar la plantilla: %1
 Unable to save your choice.,No se pudo guardar la selección.
 Unsupported PDF: /Pages is missing /Kids.,PDF no compatible: /Pages no tiene /Kids.
@@ -473,6 +529,7 @@ Unsupported PDF: trailer not found after the cross-reference table.,PDF no compa
 Unsupported PDF: unbalanced dictionary (missing closing delimiter).,PDF no compatible: diccionario desequilibrado (falta el delimitador de cierre).
 Unsupported PDF: unrecognized PNG row filter in cross-reference stream (%1).,PDF no compatible: filtro PNG de fila no reconocido en el flujo de referencia cruzada (%1).
 "Unsupported PDF: use a classic cross-reference table. Save/export the document as ""PDF 1.4"" and re-upload the file.",PDF no compatible: usa una tabla de referencias cruzadas clásica. Guarda/exporta el documento como «PDF 1.4» y vuelve a cargar el archivo.
+Up to this number the ZIP is downloaded immediately; above it the export is queued. 0 = always queued.,"Hasta este número el ZIP se descarga inmediatamente; por encima, la exportación se pone en cola. 0 = siempre en cola."
 Update on the contract to sign (order %increment_id),Actualización sobre el contrato a firmar (pedido %increment_id)
 Used when the template does not specify its own trigger.,Se usa cuando la plantilla no especifica su propio disparador.
 Username (owner),Usuario (owner)
@@ -508,9 +565,11 @@ WsSign: status missing from the provider\'s response.,WsSign: falta el estado en
 WsSign: the document has no started process.,WsSign: el documento no tiene un proceso iniciado.
 WsSign: the downloaded content is not a valid PDF.,WsSign: el contenido descargado no es un PDF válido.
 "WsSign: unexpected response structure during ""%1"".",WsSign: estructura de respuesta inesperada durante «%1».
+Yes - collect and retain audit trail data,Sí - recopilar y conservar los datos del registro de auditoría
 "You can check your order status here: <a href=""%url"">My orders</a>","Puede consultar el estado de su pedido aquí: <a href=""%url"">Mis pedidos</a>"
 "You can download the signed document from your account area: <a href=""%url"">Go to the order</a>","Puede descargar el documento firmado desde su área de cliente: <a href=""%url"">Ir al pedido</a>"
 You must accept the digital signature of the contract to proceed.,Para continuar debes aceptar la firma digital del contrato.
+You selected %1 documents: the dossier export is limited to %2. Narrow the selection.,Ha seleccionado %1 documentos: la exportación de dosier está limitada a %2. Reduzca la selección.
 You will soon receive (or have already received) instructions from the signature service at %email. Follow that process to complete the signature.,En breve recibirá (o ya ha recibido) las instrucciones del servicio de firma en %email. Siga ese proceso para completar la firma.
 Your contract to sign digitally is ready (order %increment_id),Su contrato para firmar digitalmente está listo (pedido %increment_id)
 Your signed contract is available (order %increment_id),Su contrato firmado está disponible (pedido %increment_id)

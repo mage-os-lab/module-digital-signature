@@ -8,11 +8,13 @@ use MageOS\DigitalSignature\Model\Document\Status;
 use MageOS\DigitalSignature\Model\DocumentFactory;
 use MageOS\DigitalSignature\Model\Queue\Publisher;
 use MageOS\DigitalSignature\Model\ResourceModel\Template as TemplateResource;
+use MageOS\DigitalSignature\Model\Service\AuditTrailComplianceGate;
 use MageOS\DigitalSignature\Model\Service\ProductionModeGuard;
 use MageOS\DigitalSignature\Model\Service\TriggerHandler;
 use MageOS\DigitalSignature\TestSupport\FakeDocument;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\Exception\AlreadyExistsException;
+use Magento\Framework\Exception\LocalizedException;
 use Magento\Sales\Api\Data\OrderInterface;
 use Magento\Sales\Model\Order;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -27,6 +29,7 @@ class TriggerHandlerTest extends TestCase
     private Publisher&MockObject $publisher;
     private LoggerInterface&MockObject $logger;
     private ProductionModeGuard&MockObject $productionModeGuard;
+    private AuditTrailComplianceGate&MockObject $auditTrailComplianceGate;
     private TriggerHandler $handler;
 
     /** @var FakeDocument[] documents created by the factory during the test */
@@ -41,13 +44,17 @@ class TriggerHandlerTest extends TestCase
         $this->logger = $this->createMock(LoggerInterface::class);
         $this->productionModeGuard = $this->createMock(ProductionModeGuard::class);
         $this->productionModeGuard->method('resolveProviderCode')->willReturnArgument(0);
+        $this->auditTrailComplianceGate = $this->createMock(AuditTrailComplianceGate::class);
+        $this->auditTrailComplianceGate->method('isConfigured')->willReturn(true);
         $this->createdDocuments = [];
 
-        $this->handler = $this->buildHandler($this->productionModeGuard);
+        $this->handler = $this->buildHandler($this->productionModeGuard, $this->auditTrailComplianceGate);
     }
 
-    private function buildHandler(ProductionModeGuard&MockObject $productionModeGuard): TriggerHandler
-    {
+    private function buildHandler(
+        ProductionModeGuard&MockObject $productionModeGuard,
+        ?AuditTrailComplianceGate $auditTrailComplianceGate = null
+    ): TriggerHandler {
         $documentFactory = $this->createMock(DocumentFactory::class);
         $documentFactory->method('create')->willReturnCallback(function (): FakeDocument {
             $document = new FakeDocument();
@@ -63,7 +70,8 @@ class TriggerHandlerTest extends TestCase
             $this->documentRepository,
             $this->publisher,
             $this->logger,
-            $productionModeGuard
+            $productionModeGuard,
+            $auditTrailComplianceGate ?? $this->auditTrailComplianceGate
         );
     }
 
@@ -236,6 +244,19 @@ class TriggerHandlerTest extends TestCase
         $this->publisher->expects(self::never())->method('publishProcess');
 
         $this->handler->handle($this->buildOrder(), 'order_place');
+    }
+
+    public function testThrowsAndCreatesNothingWhenAuditTrailNotConfigured(): void
+    {
+        $this->configureModule();
+        $unconfiguredGate = $this->createMock(AuditTrailComplianceGate::class);
+        $unconfiguredGate->method('isConfigured')->willReturn(false);
+        $handler = $this->buildHandler($this->productionModeGuard, $unconfiguredGate);
+        $this->documentRepository->expects(self::never())->method('save');
+
+        $this->expectException(LocalizedException::class);
+
+        $handler->handle($this->buildOrder(), 'order_place');
     }
 
     public function testProviderIsForcedToDummyWhenProductionNotConfirmed(): void

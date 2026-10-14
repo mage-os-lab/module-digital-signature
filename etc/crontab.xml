@@ -17,5 +17,8 @@
         <job name="digitalsignature_quota_check" instance="MageOS\DigitalSignature\Cron\QuotaCheck" method="execute">
             <schedule>0 4 * * *</schedule>
         </job>
+        <job name="digitalsignature_dossier_export_cleanup" instance="MageOS\DigitalSignature\Cron\DossierExportCleanup" method="execute">
+            <schedule>15 * * * *</schedule>
+        </job>
     </group>
 </config>

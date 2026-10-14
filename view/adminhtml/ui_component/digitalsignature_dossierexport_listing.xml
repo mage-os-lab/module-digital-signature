@@ -1,0 +1,128 @@
+<?xml version="1.0"?>
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">digitalsignature_dossierexport_listing.digitalsignature_dossierexport_listing_data_source</item>
+        </item>
+    </argument>
+    <settings>
+        <spinner>digitalsignature_dossierexport_columns</spinner>
+        <deps>
+            <dep>digitalsignature_dossierexport_listing.digitalsignature_dossierexport_listing_data_source</dep>
+        </deps>
+    </settings>
+    <dataSource name="digitalsignature_dossierexport_listing_data_source" component="Magento_Ui/js/grid/provider">
+        <settings>
+            <storageConfig>
+                <param name="indexField" xsi:type="string">export_id</param>
+            </storageConfig>
+            <updateUrl path="mui/index/render"/>
+        </settings>
+        <aclResource>MageOS_DigitalSignature::document_dossier_export</aclResource>
+        <dataProvider class="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider"
+                      name="digitalsignature_dossierexport_listing_data_source">
+            <settings>
+                <requestFieldName>export_id</requestFieldName>
+                <primaryFieldName>export_id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+    <listingToolbar name="listing_top">
+        <settings>
+            <sticky>true</sticky>
+        </settings>
+        <bookmark name="bookmarks"/>
+        <columnsControls name="columns_controls"/>
+        <filters name="listing_filters"/>
+        <massaction name="listing_massaction">
+            <action name="delete">
+                <settings>
+                    <confirm>
+                        <message translate="true">The selected dossier exports and their ZIP files are deleted immediately. Continue?</message>
+                        <title translate="true">Delete dossier exports</title>
+                    </confirm>
+                    <url path="digitalsignature/dossierexport/massDelete"/>
+                    <type>delete</type>
+                    <label translate="true">Delete</label>
+                </settings>
+            </action>
+        </massaction>
+        <paging name="listing_paging"/>
+    </listingToolbar>
+    <columns name="digitalsignature_dossierexport_columns">
+        <selectionsColumn name="ids">
+            <settings>
+                <indexField>export_id</indexField>
+            </settings>
+        </selectionsColumn>
+        <column name="export_id" sortOrder="10">
+            <settings>
+                <filter>textRange</filter>
+                <sorting>desc</sorting>
+                <label translate="true">ID</label>
+            </settings>
+        </column>
+        <column name="status" component="Magento_Ui/js/grid/columns/select" sortOrder="20">
+            <settings>
+                <filter>select</filter>
+                <options class="MageOS\DigitalSignature\Model\Config\Source\DossierExportStatus"/>
+                <dataType>select</dataType>
+                <label translate="true">Status</label>
+            </settings>
+        </column>
+        <column name="requested_by" sortOrder="30">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Requested by</label>
+            </settings>
+        </column>
+        <column name="document_count" sortOrder="40">
+            <settings>
+                <label translate="true">Documents</label>
+            </settings>
+        </column>
+        <column name="processed_documents" sortOrder="45">
+            <settings>
+                <label translate="true">Processed</label>
+            </settings>
+        </column>
+        <column name="file_size" sortOrder="50">
+            <settings>
+                <label translate="true">Size (bytes)</label>
+            </settings>
+        </column>
+        <column name="created_at" component="Magento_Ui/js/grid/columns/date" sortOrder="60">
+            <settings>
+                <filter>dateRange</filter>
+                <dataType>date</dataType>
+                <label translate="true">Requested on</label>
+            </settings>
+        </column>
+        <column name="completed_at" component="Magento_Ui/js/grid/columns/date" sortOrder="70">
+            <settings>
+                <dataType>date</dataType>
+                <label translate="true">Completed on</label>
+            </settings>
+        </column>
+        <column name="expires_at" component="Magento_Ui/js/grid/columns/date" sortOrder="80">
+            <settings>
+                <dataType>date</dataType>
+                <label translate="true">Deleted after</label>
+            </settings>
+        </column>
+        <column name="error" sortOrder="90">
+            <settings>
+                <label translate="true">Error</label>
+            </settings>
+        </column>
+        <actionsColumn name="actions" class="MageOS\DigitalSignature\Ui\Component\Listing\Column\DossierExportActions"
+                       sortOrder="100">
+            <settings>
+                <indexField>export_id</indexField>
+                <resizeEnabled>false</resizeEnabled>
+                <resizeDefaultWidth>107</resizeDefaultWidth>
+            </settings>
+        </actionsColumn>
+    </columns>
+</listing>

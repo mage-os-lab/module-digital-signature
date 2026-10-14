@@ -3,11 +3,13 @@ declare(strict_types=1);
 
 namespace MageOS\DigitalSignature\Test\Unit\Model\Provider;
 
+use MageOS\DigitalSignature\Api\AuditTrailCertificateProviderInterface;
 use MageOS\DigitalSignature\Exception\ProviderException;
 use MageOS\DigitalSignature\Model\Document\Status;
 use MageOS\DigitalSignature\Model\Provider\AdobeSign;
 use MageOS\DigitalSignature\Model\Provider\AdobeSign\Client;
 use MageOS\DigitalSignature\Model\Provider\ProviderConfig;
+use MageOS\DigitalSignature\Model\Provider\Result\AuditTrailCertificateResult;
 use MageOS\DigitalSignature\Model\Provider\Result\StartResult;
 use MageOS\DigitalSignature\TestSupport\FakeDocument;
 use Magento\Framework\Serialize\Serializer\Json;
@@ -243,5 +245,34 @@ class AdobeSignTest extends TestCase
             ->willReturn(Status::SENT);
 
         self::assertSame(Status::SENT, $this->provider->mapStatus('delegated'));
+    }
+
+    public function testImplementsAuditTrailCertificateProviderInterface(): void
+    {
+        self::assertInstanceOf(AuditTrailCertificateProviderInterface::class, $this->provider);
+    }
+
+    public function testFetchCertificateDelegatesToClient(): void
+    {
+        $document = $this->buildDocument();
+        $expected = new AuditTrailCertificateResult('%PDF%', null, null, 'agr-1');
+        $this->client->expects(self::once())->method('getAuditTrail')->with(1, 'agr-1')->willReturn($expected);
+
+        $result = $this->provider->fetchCertificate($document);
+
+        self::assertSame($expected, $result);
+    }
+
+    private function buildDocument(): FakeDocument
+    {
+        $document = new FakeDocument();
+        $document->documentId = 55;
+        $document->setOrderId(9)
+            ->setStoreId(1)
+            ->setSignerEmail('cliente@example.com')
+            ->setProviderCode(AdobeSign::CODE)
+            ->setProviderProcessId('agr-1');
+
+        return $document;
     }
 }

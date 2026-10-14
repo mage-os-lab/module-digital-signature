@@ -175,6 +175,48 @@
         </index>
     </table>
 
+    <!-- Audit trail (eIDAS): our own hash pair + the provider's official
+         certificate, 1:1 optional with document. Independent lifecycle from
+         the document's own GDPR retention (Fase 0 decision). -->
+    <table name="mageos_digitalsignature_document_audit_trail" resource="default" engine="innodb"
+           comment="DigitalSignature Audit Trail (eIDAS)">
+        <column xsi:type="int" name="document_id" unsigned="true" nullable="false"
+                comment="Document ID (1:1 with document)"/>
+        <column xsi:type="varchar" name="provider_code" length="32" nullable="false" comment="Sign provider code"/>
+        <column xsi:type="varchar" name="transaction_id" length="64" nullable="true"
+                comment="Provider envelope/agreement id, if distinct from provider_process_id"/>
+        <column xsi:type="varchar" name="hash_before_signing" length="64" nullable="true"
+                comment="SHA-256 hex of the PDF sent to the provider"/>
+        <column xsi:type="varchar" name="hash_after_signing" length="64" nullable="true"
+                comment="SHA-256 hex of the signed PDF downloaded from the provider"/>
+        <column xsi:type="varchar" name="certificate_path" length="255" nullable="true"
+                comment="Provider's official certificate/report media path"/>
+        <column xsi:type="varchar" name="signer_ip" length="64" nullable="true" comment="Signer IP, if exposed by the provider"/>
+        <column xsi:type="varchar" name="authentication_method" length="64" nullable="true"
+                comment="Signer authentication method, if exposed by the provider"/>
+        <column xsi:type="varchar" name="fetch_status" length="16" nullable="false" default="pending"
+                comment="pending|fetched|unavailable|error"/>
+        <column xsi:type="smallint" name="fetch_attempts" unsigned="true" nullable="false" default="0"
+                comment="Certificate fetch attempts"/>
+        <column xsi:type="text" name="last_error" nullable="true" comment="Last certificate fetch error"/>
+        <column xsi:type="timestamp" name="fetched_at" on_update="false" nullable="true"
+                comment="When the certificate was fetched, or marked unavailable"/>
+        <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Created At"/>
+        <column xsi:type="timestamp" name="updated_at" on_update="true" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Updated At"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="document_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="MDS_DS_AUDIT_DOC_ID_MDS_DS_DOC_DOC_ID"
+                    table="mageos_digitalsignature_document_audit_trail" column="document_id"
+                    referenceTable="mageos_digitalsignature_document" referenceColumn="document_id"
+                    onDelete="CASCADE"/>
+        <index referenceId="MDS_DIGITALSIGNATURE_AUDIT_TRAIL_FETCH_STATUS" indexType="btree">
+            <column name="fetch_status"/>
+        </index>
+    </table>
+
     <!-- API Consumer: API consumer registration for OAuth access -->
     <table name="mageos_digitalsignature_api_consumer" resource="default" engine="innodb"
            comment="DigitalSignature API Consumer (store scope mapping)">
@@ -279,6 +321,43 @@
         <index referenceId="MDS_DIGITALSIGNATURE_WH_DELIVERY_STATUS_NEXT_ATTEMPT" indexType="btree">
             <column name="status"/>
             <column name="next_attempt_at"/>
+        </index>
+    </table>
+    <!-- Dossier export: queued multi-document ZIP exports (Audit trail) -->
+    <table name="mageos_digitalsignature_dossier_export" resource="default" engine="innodb"
+           comment="DigitalSignature Dossier Export">
+        <column xsi:type="int" name="export_id" unsigned="true" nullable="false" identity="true"
+                comment="Export ID"/>
+        <column xsi:type="varchar" name="status" length="16" nullable="false" default="queued"
+                comment="queued|processing|ready|failed|expired"/>
+        <column xsi:type="mediumtext" name="document_ids" nullable="false" comment="JSON array of document IDs"/>
+        <column xsi:type="int" name="document_count" unsigned="true" nullable="false" default="0"
+                comment="Number of documents"/>
+        <column xsi:type="int" name="processed_documents" unsigned="true" nullable="false" default="0"
+                comment="Documents processed so far (heartbeat progress)"/>
+        <column xsi:type="varchar" name="requested_by" length="40" nullable="true" comment="Admin username"/>
+        <column xsi:type="int" name="requested_by_user_id" unsigned="true" nullable="true"
+                comment="Admin user ID (no FK: the user may be deleted)"/>
+        <column xsi:type="varchar" name="file_path" length="255" nullable="true"
+                comment="ZIP path relative to var/"/>
+        <column xsi:type="int" name="file_size" unsigned="true" nullable="true" comment="ZIP size in bytes"/>
+        <column xsi:type="text" name="error" nullable="true" comment="Failure reason"/>
+        <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Created At"/>
+        <column xsi:type="datetime" name="started_at" nullable="true" comment="Processing started at"/>
+        <column xsi:type="datetime" name="heartbeat_at" nullable="true" comment="Last progress from the consumer"/>
+        <column xsi:type="datetime" name="completed_at" nullable="true" comment="Ready or failed at"/>
+        <column xsi:type="datetime" name="expires_at" nullable="true" comment="ZIP deleted after"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="export_id"/>
+        </constraint>
+        <index referenceId="MDS_DS_DOSSIER_EXPORT_STATUS_EXPIRES_AT" indexType="btree">
+            <column name="status"/>
+            <column name="expires_at"/>
+        </index>
+        <index referenceId="MDS_DS_DOSSIER_EXPORT_STATUS_HEARTBEAT_AT" indexType="btree">
+            <column name="status"/>
+            <column name="heartbeat_at"/>
         </index>
     </table>
 </schema>

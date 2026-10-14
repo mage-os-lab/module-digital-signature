@@ -13,9 +13,11 @@ use MageOS\DigitalSignature\Model\Notification\Notifier;
 use MageOS\DigitalSignature\Model\Pdf\TagReplacer;
 use MageOS\DigitalSignature\Model\Provider\ProviderConfig;
 use MageOS\DigitalSignature\Model\Provider\Result\StartResult;
+use MageOS\DigitalSignature\Model\Provider\Result\StatusResult;
 use MageOS\DigitalSignature\Model\Quota\Calculator;
 use MageOS\DigitalSignature\Model\Quota\QuotaStatus;
 use MageOS\DigitalSignature\Model\ResourceModel\Template as TemplateResource;
+use MageOS\DigitalSignature\Model\Service\AuditTrailRecorder;
 use MageOS\DigitalSignature\Model\Service\DocumentProcessor;
 use MageOS\DigitalSignature\TestSupport\FakeDocument;
 use Magento\Framework\Filesystem;
@@ -34,6 +36,7 @@ class DocumentProcessorTest extends TestCase
     private Calculator&MockObject $quotaCalculator;
     private ProviderConfig&MockObject $providerConfig;
     private SignProviderInterface&MockObject $provider;
+    private AuditTrailRecorder&MockObject $auditTrailRecorder;
     private DocumentProcessor $processor;
 
     protected function setUp(): void
@@ -45,6 +48,7 @@ class DocumentProcessorTest extends TestCase
         $this->providerPool = $this->createMock(SignProviderPoolInterface::class);
         $this->quotaCalculator = $this->createMock(Calculator::class);
         $this->providerConfig = $this->createMock(ProviderConfig::class);
+        $this->auditTrailRecorder = $this->createMock(AuditTrailRecorder::class);
 
         $this->provider = $this->createMock(SignProviderInterface::class);
         $this->providerPool->method('get')->with('wssign')->willReturn($this->provider);
@@ -66,7 +70,8 @@ class DocumentProcessorTest extends TestCase
             $this->createMock(OrderRepositoryInterface::class),
             $this->createMock(InvoiceCollectionFactory::class),
             $this->quotaCalculator,
-            $this->providerConfig
+            $this->providerConfig,
+            $this->auditTrailRecorder
         );
     }
 
@@ -149,6 +154,30 @@ class DocumentProcessorTest extends TestCase
         self::assertSame(Status::SENT, $document->getStatus());
     }
 
+    public function testSendRecordsHashBeforeSigning(): void
+    {
+        $document = $this->generatedDocument();
+        $this->provider->method('start')->willReturn(new StartResult('proc-1', '{}'));
+        $this->auditTrailRecorder->expects(self::once())
+            ->method('recordHashBeforeSigning')
+            ->with($document, '%PDF-fake%');
+
+        $this->processor->send($document);
+    }
+
+    public function testRefreshStatusRecordsHashAfterSigningOnSigned(): void
+    {
+        $document = $this->sentDocument();
+        $this->provider->method('fetchStatus')->willReturn(new StatusResult('completed', '{}'));
+        $this->provider->method('mapStatus')->willReturn(Status::SIGNED);
+        $this->provider->method('downloadSignedPdf')->willReturn('%PDF-signed%');
+        $this->auditTrailRecorder->expects(self::once())
+            ->method('recordHashAfterSigning')
+            ->with($document, '%PDF-signed%');
+
+        $this->processor->refreshStatus($document);
+    }
+
     private function generatedDocument(): FakeDocument
     {
         $document = new FakeDocument();
@@ -156,6 +185,19 @@ class DocumentProcessorTest extends TestCase
         $document->setProviderCode('wssign');
         $document->setStoreId(1);
         $document->setStatus(Status::GENERATED);
+        $document->setPdfPath('order_1/document_1.pdf');
+
+        return $document;
+    }
+
+    private function sentDocument(): FakeDocument
+    {
+        $document = new FakeDocument();
+        $document->documentId = 1;
+        $document->setOrderId(1);
+        $document->setProviderCode('wssign');
+        $document->setStoreId(1);
+        $document->setStatus(Status::SENT);
         $document->setPdfPath('order_1/document_1.pdf');
 
         return $document;

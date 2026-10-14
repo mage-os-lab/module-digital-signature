@@ -3,7 +3,6 @@
     "description": "Digital signature of order contracts through external providers (WsSign, ...)",
     "type": "magento2-module",
     "license": "MIT",
-    "version": "0.5.1",
     "authors": [
         {
             "name": "Nino Aratari",
@@ -17,6 +16,7 @@
     "require": {
         "php": "~8.1.0||~8.2.0||~8.3.0||~8.4.0||~8.5.0",
         "ext-zlib": "*",
+        "ext-zip": "*",
         "phpoffice/phpspreadsheet": "^1.29 || ^2.1",
         "magento/framework": ">=103.0.4",
         "magento/module-backend": ">=102.0.4",

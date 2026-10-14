@@ -34,6 +34,8 @@ through cron (`cron_consumers_runner` in `app/etc/env.php`), run them explicitly
 bin/magento queue:consumers:start digitalsignatureDocumentProcess &
 bin/magento queue:consumers:start digitalsignatureDocumentRefresh &
 bin/magento queue:consumers:start digitalsignatureWebhookDispatch &
+bin/magento queue:consumers:start digitalsignatureAuditTrailFetch &
+bin/magento queue:consumers:start digitalsignatureDossierExport &
 ```
 
 | Consumer | Topic | Purpose |
@@ -41,16 +43,19 @@ bin/magento queue:consumers:start digitalsignatureWebhookDispatch &
 | `digitalsignatureDocumentProcess` | `digitalsignature.document.process` | Builds the PDF and starts the signature at the provider |
 | `digitalsignatureDocumentRefresh` | `digitalsignature.document.refresh` | Fetches the provider status after a callback |
 | `digitalsignatureWebhookDispatch` | `digitalsignature.webhook.dispatch` | Delivers outbound webhooks |
+| `digitalsignatureAuditTrailFetch` | `digitalsignature.audit_trail.fetch` | Downloads provider certificates for the [audit trail](audit-trail.md) |
+| `digitalsignatureDossierExport` | `digitalsignature.dossier.export` | Builds queued [dossier exports](audit-trail.md#export-a-dossier) |
 
 Cron jobs (group `default`):
 
 | Job | Schedule | Purpose |
 |---|---|---|
-| `digitalsignature_reconcile` | every 5 min | Re-queues documents stuck in `sent` (> 15 min) or in processing (> 10 min) |
+| `digitalsignature_reconcile` | every 5 min | Re-queues documents stuck in `sent` (> 15 min) or in processing (> 10 min), and queues certificate fetches for the audit trail |
 | `digitalsignature_webhook_retry` | every 5 min | Re-queues webhook deliveries due for retry |
 | `digitalsignature_reminder` | 02:00 daily | Customer reminders and admin escalation |
-| `digitalsignature_retention_cleanup` | 03:00 daily | GDPR retention: deletes PDFs and personal data of closed documents |
+| `digitalsignature_retention_cleanup` | 03:00 daily | GDPR retention: deletes PDFs and personal data of closed documents, and audit trail personal data past its own retention |
 | `digitalsignature_quota_check` | 04:00 daily | Provider quota alerts |
+| `digitalsignature_dossier_export_cleanup` | hourly (:15) | Deletes expired dossier ZIPs, fails exports that stopped making progress |
 
 ## 3. Try the full flow with the dummy provider
 
@@ -63,8 +68,13 @@ bin/magento config:set digital_signature/general/provider dummy
 bin/magento config:set digital_signature/providers/dummy/allow 1
 bin/magento config:set digital_signature/providers/dummy/auto_sign_delay 60
 bin/magento config:set digital_signature/general/default_trigger order_placed
+bin/magento config:set digital_signature/audit_trail/data_collection 0
 bin/magento cache:flush
 ```
+
+The `audit_trail/data_collection` line is required: no document is generated until the
+merchant chooses whether to collect audit trail data. `0` opts out, which is enough for a test;
+see [audit-trail.md](audit-trail.md) before going live.
 
 Then, in the admin:
 
@@ -109,6 +119,7 @@ Then, in the admin:
 - [triggers-and-configuration.md](triggers-and-configuration.md): when documents are generated,
   per-product overrides, quotas, reminders, retention
 - [merge-fields.md](merge-fields.md): dynamic order data inside the PDF
+- [audit-trail.md](audit-trail.md): document hashes, provider certificates, dossier export
 - [rest-api.md](rest-api.md) and [webhooks.md](webhooks.md): ERP/CRM integration
 - [sign-provider-integration.md](sign-provider-integration.md): build your own provider connector
 - [troubleshooting.md](troubleshooting.md)

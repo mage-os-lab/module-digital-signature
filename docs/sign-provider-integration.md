@@ -430,3 +430,41 @@ selected. A third-party connector must not bypass it.
 
 None of these steps touches the core module: the whole extension point is
 `SignProviderPoolInterface` plus the `di.xml` merge.
+
+## 10. Optional: audit trail certificate
+
+If the service exposes an official certificate or audit report for a completed signature,
+implement `MageOS\DigitalSignature\Api\AuditTrailCertificateProviderInterface` on the same
+provider class. When the merchant collects audit trail data, the module calls it for every
+`signed` document and stores the result (see [audit-trail.md](audit-trail.md)). Providers that
+do not implement it get `fetch_status` = `unavailable` and only the module's own hashes.
+
+```php
+use MageOS\DigitalSignature\Api\AuditTrailCertificateProviderInterface;
+use MageOS\DigitalSignature\Api\Data\DocumentInterface;
+use MageOS\DigitalSignature\Exception\ProviderException;
+use MageOS\DigitalSignature\Model\Provider\Result\AuditTrailCertificateResult;
+
+class Acme implements SignProviderInterface, AuditTrailCertificateProviderInterface
+{
+    public function fetchCertificate(DocumentInterface $document): AuditTrailCertificateResult
+    {
+        $pdf = $this->client->downloadAuditReport($document->getProviderProcessId());
+        if ($pdf === '') {
+            // Not ready yet on the provider side: the reconcile cron retries it
+            throw ProviderException::retryable(__('Acme: audit report not ready.'));
+        }
+
+        return new AuditTrailCertificateResult(
+            $pdf,                                  // certificate content (stored as a PDF)
+            $this->client->signerIp($document),    // signer IP, or null
+            null,                                  // authentication method, or null
+            $document->getProviderProcessId()      // transaction id, or null
+        );
+    }
+}
+```
+
+Throw a retryable `ProviderException` for temporary or not-ready-yet errors (retried up to
+`digital_signature/general/max_retries` times) and a permanent one when the certificate will
+never be available.

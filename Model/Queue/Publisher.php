@@ -14,6 +14,8 @@ class Publisher
     public const TOPIC_PROCESS = 'digitalsignature.document.process';
     public const TOPIC_REFRESH = 'digitalsignature.document.refresh';
     public const TOPIC_WEBHOOK_DISPATCH = 'digitalsignature.webhook.dispatch';
+    public const TOPIC_AUDIT_TRAIL_FETCH = 'digitalsignature.audit_trail.fetch';
+    public const TOPIC_DOSSIER_EXPORT = 'digitalsignature.dossier.export';
 
     public function __construct(private readonly PublisherInterface $publisher)
     {
@@ -32,5 +34,15 @@ class Publisher
     public function publishWebhookDispatch(int $deliveryId): void
     {
         $this->publisher->publish(self::TOPIC_WEBHOOK_DISPATCH, (string)$deliveryId);
+    }
+
+    public function publishAuditTrailFetch(int $documentId): void
+    {
+        $this->publisher->publish(self::TOPIC_AUDIT_TRAIL_FETCH, (string)$documentId);
+    }
+
+    public function publishDossierExport(int $exportId): void
+    {
+        $this->publisher->publish(self::TOPIC_DOSSIER_EXPORT, (string)$exportId);
     }
 }

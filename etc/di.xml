@@ -11,6 +11,12 @@
                 type="MageOS\DigitalSignature\Model\DocumentRepository"/>
     <preference for="MageOS\DigitalSignature\Api\Data\DocumentSearchResultsInterface"
                 type="MageOS\DigitalSignature\Model\Data\DocumentSearchResults"/>
+    <preference for="MageOS\DigitalSignature\Api\AuditTrailRepositoryInterface"
+                type="MageOS\DigitalSignature\Model\AuditTrailRepository"/>
+    <preference for="MageOS\DigitalSignature\Api\Data\DossierExportInterface"
+                type="MageOS\DigitalSignature\Model\DossierExport"/>
+    <preference for="MageOS\DigitalSignature\Api\DossierExportRepositoryInterface"
+                type="MageOS\DigitalSignature\Model\DossierExportRepository"/>
     <preference for="MageOS\DigitalSignature\Api\Data\ApiConsumerInterface"
                 type="MageOS\DigitalSignature\Model\ApiConsumer"/>
     <preference for="MageOS\DigitalSignature\Api\ApiConsumerRepositoryInterface"
@@ -97,6 +103,14 @@
             <argument name="resourceModel" xsi:type="string">MageOS\DigitalSignature\Model\ResourceModel\ApiConsumer</argument>
         </arguments>
     </virtualType>
+    <!-- Dossier exports grid data source -->
+    <virtualType name="MageOS\DigitalSignature\Model\ResourceModel\DossierExport\Grid\Collection"
+                 type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">mageos_digitalsignature_dossier_export</argument>
+            <argument name="resourceModel" xsi:type="string">MageOS\DigitalSignature\Model\ResourceModel\DossierExport</argument>
+        </arguments>
+    </virtualType>
     <!-- Webhook subscriptions grid data source -->
     <virtualType name="MageOS\DigitalSignature\Model\ResourceModel\WebhookSubscription\Grid\Collection"
                  type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
@@ -112,6 +126,7 @@
                 <item name="digitalsignature_document_listing_data_source" xsi:type="string">MageOS\DigitalSignature\Model\ResourceModel\Document\Grid\Collection</item>
                 <item name="digitalsignature_apiconsumer_listing_data_source" xsi:type="string">MageOS\DigitalSignature\Model\ResourceModel\ApiConsumer\Grid\Collection</item>
                 <item name="digitalsignature_webhooksubscription_listing_data_source" xsi:type="string">MageOS\DigitalSignature\Model\ResourceModel\WebhookSubscription\Grid\Collection</item>
+                <item name="digitalsignature_dossierexport_listing_data_source" xsi:type="string">MageOS\DigitalSignature\Model\ResourceModel\DossierExport\Grid\Collection</item>
             </argument>
         </arguments>
     </type>

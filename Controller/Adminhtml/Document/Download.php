@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace MageOS\DigitalSignature\Controller\Adminhtml\Document;
 
+use MageOS\DigitalSignature\Api\AuditTrailRepositoryInterface;
 use MageOS\DigitalSignature\Api\Data\DocumentInterface;
 use MageOS\DigitalSignature\Api\DocumentRepositoryInterface;
 use MageOS\DigitalSignature\Api\DocumentStorageInterface;
@@ -28,7 +29,8 @@ class Download extends Action implements HttpGetActionInterface
         private readonly DocumentRepositoryInterface $documentRepository,
         private readonly DocumentStorageInterface $storage,
         private readonly RawFactory $rawFactory,
-        private readonly LoggerInterface $logger
+        private readonly LoggerInterface $logger,
+        private readonly AuditTrailRepositoryInterface $auditTrailRepository
     ) {
         parent::__construct($context);
     }
@@ -40,9 +42,15 @@ class Download extends Action implements HttpGetActionInterface
 
         try {
             $document = $this->documentRepository->getById($documentId);
-            $relativePath = $type === 'generated'
-                ? $document->getPdfPath()
-                : ($document->getSignedPdfPath() ?: $document->getPdfPath());
+
+            if ($type === 'certificate') {
+                $auditTrail = $this->auditTrailRepository->getByDocumentId($documentId);
+                $relativePath = $auditTrail?->getCertificatePath();
+            } else {
+                $relativePath = $type === 'generated'
+                    ? $document->getPdfPath()
+                    : ($document->getSignedPdfPath() ?: $document->getPdfPath());
+            }
 
             if (!$relativePath || !$this->storage->exists($relativePath)) {
                 throw new \RuntimeException((string)__('PDF not available for this document.'));
@@ -77,7 +85,11 @@ class Download extends Action implements HttpGetActionInterface
 
     private function buildFileName(DocumentInterface $document, string $type): string
     {
-        $suffix = $type === 'generated' ? 'documento' : 'firmato';
+        $suffix = match ($type) {
+            'generated' => 'documento',
+            'certificate' => 'certificate',
+            default => 'firmato',
+        };
 
         return sprintf('digitalsignature-%d-%s.pdf', (int)$document->getDocumentId(), $suffix);
     }

@@ -113,5 +113,115 @@
         "column": {
             "digitalsignature_requested": true
         }
+    },
+    "mageos_digitalsignature_document_audit_trail": {
+        "column": {
+            "document_id": true,
+            "provider_code": true,
+            "transaction_id": true,
+            "hash_before_signing": true,
+            "hash_after_signing": true,
+            "certificate_path": true,
+            "signer_ip": true,
+            "authentication_method": true,
+            "fetch_status": true,
+            "fetch_attempts": true,
+            "last_error": true,
+            "fetched_at": true,
+            "created_at": true,
+            "updated_at": true
+        },
+        "index": {
+            "MAGEOS_DIGITALSIGNATURE_DOCUMENT_AUDIT_TRAIL_FETCH_STATUS": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "FK_5AADBA75AFEEB4B31BEC2F6C6FE98E5A": true
+        }
+    },
+    "mageos_digitalsignature_api_consumer": {
+        "column": {
+            "consumer_id": true,
+            "integration_id": true,
+            "name": true,
+            "enabled": true,
+            "created_at": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "MAGEOS_DIGITALSIGNATURE_API_CONSUMER_INTEGRATION_ID": true
+        }
+    },
+    "mageos_digitalsignature_api_consumer_store": {
+        "column": {
+            "consumer_id": true,
+            "store_id": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "FK_C4902391B5726E9982F235B3DB1942B2": true
+        }
+    },
+    "mageos_digitalsignature_webhook_subscription": {
+        "column": {
+            "subscription_id": true,
+            "store_id": true,
+            "target_url": true,
+            "secret": true,
+            "enabled": true,
+            "created_at": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "mageos_digitalsignature_webhook_delivery": {
+        "column": {
+            "delivery_id": true,
+            "subscription_id": true,
+            "document_id": true,
+            "event_type": true,
+            "payload": true,
+            "status": true,
+            "attempts": true,
+            "next_attempt_at": true,
+            "last_error": true,
+            "created_at": true,
+            "updated_at": true
+        },
+        "index": {
+            "MAGEOS_DIGITALSIGNATURE_WEBHOOK_DELIVERY_STATUS_NEXT_ATTEMPT_AT": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "FK_414CA482E4708E3477E3898087D2A37A": true,
+            "FK_50931DB0390FB989547A95E15869E2E3": true
+        }
+    },
+    "mageos_digitalsignature_dossier_export": {
+        "column": {
+            "export_id": true,
+            "status": true,
+            "document_ids": true,
+            "document_count": true,
+            "processed_documents": true,
+            "requested_by": true,
+            "requested_by_user_id": true,
+            "file_path": true,
+            "file_size": true,
+            "error": true,
+            "created_at": true,
+            "started_at": true,
+            "heartbeat_at": true,
+            "completed_at": true,
+            "expires_at": true
+        },
+        "index": {
+            "MAGEOS_DIGITALSIGNATURE_DOSSIER_EXPORT_STATUS_EXPIRES_AT": true,
+            "MAGEOS_DIGITALSIGNATURE_DOSSIER_EXPORT_STATUS_HEARTBEAT_AT": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
     }
 }

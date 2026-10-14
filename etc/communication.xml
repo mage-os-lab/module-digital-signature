@@ -4,4 +4,6 @@
     <topic name="digitalsignature.document.process" request="string"/>
     <topic name="digitalsignature.document.refresh" request="string"/>
     <topic name="digitalsignature.webhook.dispatch" request="string"/>
+    <topic name="digitalsignature.audit_trail.fetch" request="string"/>
+    <topic name="digitalsignature.dossier.export" request="string"/>
 </config>

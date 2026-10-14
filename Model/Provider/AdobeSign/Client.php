@@ -5,6 +5,7 @@ namespace MageOS\DigitalSignature\Model\Provider\AdobeSign;
 
 use MageOS\DigitalSignature\Exception\ProviderException;
 use MageOS\DigitalSignature\Model\Provider\ProviderConfig;
+use MageOS\DigitalSignature\Model\Provider\Result\AuditTrailCertificateResult;
 use Magento\Framework\App\CacheInterface;
 use Magento\Framework\HTTP\Client\Curl;
 use Magento\Framework\HTTP\Client\CurlFactory;
@@ -90,6 +91,28 @@ class Client
         }
 
         return $body;
+    }
+
+    /**
+     * Downloads the audit trail report (PDF) for the agreement.
+     *
+     * @throws ProviderException
+     */
+    public function getAuditTrail(int $storeId, string $agreementId): AuditTrailCertificateResult
+    {
+        $session = $this->getSession($storeId);
+        $url = $session['api_access_point'] . '/api/rest/v6/agreements/'
+            . rawurlencode($agreementId) . '/auditTrail';
+
+        $curl = $this->createCurlWithAuth($session['access_token']);
+        $curl->addHeader('Accept', 'application/pdf');
+
+        $body = $this->execute($curl, 'GET', $url, null, 'downloading audit trail report');
+        if ($body === null || $body === '') {
+            throw ProviderException::permanent(__('Adobe Acrobat Sign: downloaded audit trail content is empty.'));
+        }
+
+        return new AuditTrailCertificateResult($body, null, null, $agreementId);
     }
 
     /**

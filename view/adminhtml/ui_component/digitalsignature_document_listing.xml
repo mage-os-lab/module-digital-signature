@@ -34,6 +34,15 @@
         </settings>
         <bookmark name="bookmarks"/>
         <columnsControls name="columns_controls"/>
+        <massaction name="listing_massaction">
+            <action name="digitalsignature_export_dossier">
+                <settings>
+                    <url path="digitalsignature/document/massExportDossier"/>
+                    <type>digitalsignature_export_dossier</type>
+                    <label translate="true">Export dossier (ZIP)</label>
+                </settings>
+            </action>
+        </massaction>
         <exportButton name="export_button">
             <settings>
                 <options>

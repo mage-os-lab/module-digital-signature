@@ -80,6 +80,10 @@ namespace Magento\Framework\Exception {
     {
     }
 
+    class FileSystemException extends LocalizedException
+    {
+    }
+
     class CouldNotDeleteException extends LocalizedException
     {
     }
@@ -313,6 +317,10 @@ namespace Magento\Ui\Component\MassAction {
         public function applySelectionOnTargetProvider()
         {
         }
+
+        public function getCollection($collection)
+        {
+        }
     }
 }
 
@@ -366,6 +374,20 @@ namespace Magento\Framework\App\Filesystem {
     }
 }
 
+namespace Magento\Framework\App {
+    class ResourceConnection
+    {
+        public function getConnection($resourceName = 'default')
+        {
+        }
+
+        public function getTableName($modelEntity, $connectionName = 'default')
+        {
+            return $modelEntity;
+        }
+    }
+}
+
 namespace Magento\Framework\Filesystem\Directory {
     interface ReadInterface
     {
@@ -383,6 +405,14 @@ namespace Magento\Framework\Filesystem\Directory {
         public function writeFile($path, $content);
 
         public function getAbsolutePath($path);
+
+        public function isExist($path);
+
+        public function delete($path);
+
+        public function stat($path);
+
+        public function read($path);
     }
 }
 
@@ -402,6 +432,9 @@ namespace Magento\Framework {
 namespace Magento\Framework\Math {
     class Random
     {
+        public const CHARS_LOWERS = 'abcdefghijklmnopqrstuvwxyz';
+        public const CHARS_DIGITS = '0123456789';
+
         public function getRandomString($length, $chars = null)
         {
             return str_repeat('a', $length);
@@ -451,6 +484,9 @@ namespace Magento\Store\Model {
     interface StoreManagerInterface
     {
         public function getStore($storeId = null);
+
+        /** @return \Magento\Store\Api\Data\StoreInterface[] */
+        public function getStores($withDefault = false, $codeKey = false);
     }
 
     /** getBaseUrl() belongs to the concrete Store model, not to StoreInterface. */
@@ -467,6 +503,24 @@ namespace Magento\Store\Api\Data {
     interface StoreInterface
     {
         public function getId();
+    }
+}
+
+namespace Magento\Framework\Notification {
+    interface MessageInterface
+    {
+        public const SEVERITY_CRITICAL = 1;
+        public const SEVERITY_MAJOR = 2;
+        public const SEVERITY_MINOR = 3;
+        public const SEVERITY_NOTICE = 4;
+
+        public function getIdentity();
+
+        public function isDisplayed();
+
+        public function getText();
+
+        public function getSeverity();
     }
 }
 
@@ -662,6 +716,14 @@ namespace Magento\Framework\Stdlib\DateTime {
     {
         public function formatDateTime($date = null, $format = \IntlDateFormatter::SHORT, $showTime = \IntlDateFormatter::SHORT, $locale = null, $timezone = null);
     }
+
+    class DateTime
+    {
+        public function gmtTimestamp($input = null): int
+        {
+            return $input === null ? time() : (int)strtotime((string)$input);
+        }
+    }
 }
 
 namespace Magento\Sales\Api\Data {
@@ -771,6 +833,22 @@ namespace MageOS\DigitalSignature\Model {
             throw new \LogicException('Stub ApiConsumerFactory: configurare un mock nel test.');
         }
     }
+
+    class AuditTrailFactory
+    {
+        public function create(array $data = [])
+        {
+            throw new \LogicException('Stub AuditTrailFactory: configurare un mock nel test.');
+        }
+    }
+
+    class DossierExportFactory
+    {
+        public function create(array $data = [])
+        {
+            throw new \LogicException('Stub DossierExportFactory: configurare un mock nel test.');
+        }
+    }
 }
 
 namespace Magento\Framework\Event {
@@ -806,7 +884,12 @@ namespace Magento\Framework\Event {
 namespace Magento\AdminNotification\Model {
     class Inbox
     {
-        public function addNotice($title, $description): self
+        public function addNotice($title, $description, $url = '', $isInternal = true): self
+        {
+            return $this;
+        }
+
+        public function addMajor($title, $description, $url = '', $isInternal = true): self
         {
             return $this;
         }
@@ -821,9 +904,78 @@ namespace Magento\AdminNotification\Model {
     }
 }
 
-namespace Magento\Framework\Model\ResourceModel\Db\Collection {
-    abstract class AbstractCollection
+namespace Magento\Framework\DB {
+    /**
+     * Stub minimale di Zend_Db_Select/Magento\Framework\DB\Select: registra le
+     * chiamate a joinLeft()/where() cosi' i test unitari possono ispezionarle
+     * senza eseguire SQL reale.
+     */
+    class Select
     {
+        /** @var array<int, array{0: array|string, 1: string, 2: array|string}> */
+        public array $joinLeftCalls = [];
+
+        /** @var array<int, array{0: string, 1: mixed}> */
+        public array $whereCalls = [];
+
+        public function joinLeft($name, $cond, $cols = '*'): self
+        {
+            $this->joinLeftCalls[] = [$name, $cond, $cols];
+            return $this;
+        }
+
+        public function where($cond, $value = null, $type = null): self
+        {
+            $this->whereCalls[] = [$cond, $value];
+            return $this;
+        }
+
+        public function __toString(): string
+        {
+            return implode(' AND ', array_column($this->whereCalls, 0));
+        }
+    }
+}
+
+namespace Magento\Framework\DB\Adapter {
+    interface AdapterInterface
+    {
+        public function quoteInto(string $text, $value, ?string $type = null, ?int $count = null): string;
+
+        public function update($table, array $bind, $where = '');
+    }
+}
+
+namespace {
+    /**
+     * Stub minimale dell'adapter di connessione: replica solo i metodi usati
+     * dal codice del modulo nei test unitari (quoteInto(), update()).
+     */
+    class MageOSTestDbAdapter implements \Magento\Framework\DB\Adapter\AdapterInterface
+    {
+        public function quoteInto(string $text, $value, ?string $type = null, ?int $count = null): string
+        {
+            $quoted = is_string($value) ? "'" . addslashes($value) . "'" : (string)$value;
+            return str_replace('?', $quoted, $text);
+        }
+
+        public function update($table, array $bind, $where = '')
+        {
+            return 0;
+        }
+    }
+}
+
+namespace Magento\Framework\Model\ResourceModel\Db\Collection {
+    abstract class AbstractCollection implements \IteratorAggregate
+    {
+        /** @var array<int, object> */
+        protected array $_items = [];
+
+        private ?\Magento\Framework\DB\Select $_select = null;
+
+        private ?\Magento\Framework\DB\Adapter\AdapterInterface $_connection = null;
+
         public function addFieldToFilter($field, $condition = null)
         {
             return $this;
@@ -831,7 +983,90 @@ namespace Magento\Framework\Model\ResourceModel\Db\Collection {
 
         public function getSize(): int
         {
-            return 0;
+            return count($this->_items);
+        }
+
+        public function setPageSize($size)
+        {
+            return $this;
+        }
+
+        public function setOrder($field, $direction = 'DESC')
+        {
+            return $this;
+        }
+
+        public function getSelect(): \Magento\Framework\DB\Select
+        {
+            if ($this->_select === null) {
+                $this->_select = new \Magento\Framework\DB\Select();
+            }
+            return $this->_select;
+        }
+
+        public function getConnection(): \Magento\Framework\DB\Adapter\AdapterInterface
+        {
+            if ($this->_connection === null) {
+                $this->_connection = new \MageOSTestDbAdapter();
+            }
+            return $this->_connection;
+        }
+
+        public function getTable($table)
+        {
+            return $table;
+        }
+
+        /**
+         * Helper di test: popola la collection con item gia' pronti, senza
+         * passare da una query reale (usato dai fake ...WithIds() nei test).
+         */
+        public function addItem($item): self
+        {
+            $this->_items[] = $item;
+            return $this;
+        }
+
+        public function getIterator(): \ArrayIterator
+        {
+            return new \ArrayIterator($this->_items);
+        }
+    }
+}
+
+namespace Magento\Framework {
+    interface UrlInterface
+    {
+        public function getUrl($routePath = null, $routeParams = null);
+    }
+}
+
+namespace Magento\Framework\View\Element {
+    class UiComponentFactory
+    {
+    }
+}
+
+namespace Magento\Ui\Component\Listing\Columns {
+    use Magento\Framework\View\Element\UiComponent\ContextInterface;
+    use Magento\Framework\View\Element\UiComponentFactory;
+
+    class Column
+    {
+        protected array $_data;
+
+        public function __construct(
+            ContextInterface $context,
+            UiComponentFactory $uiComponentFactory,
+            array $components = [],
+            array $data = []
+        ) {
+            $this->_data = $data;
+        }
+
+        public function getData($key = '')
+        {
+            return $key === '' ? $this->_data : ($this->_data[$key] ?? null);
         }
     }
 }
@@ -842,6 +1077,26 @@ namespace MageOS\DigitalSignature\Model\ResourceModel\Document {
         public function create(): \MageOS\DigitalSignature\Model\ResourceModel\Document\Collection
         {
             return new \MageOS\DigitalSignature\Model\ResourceModel\Document\Collection();
+        }
+    }
+}
+
+namespace MageOS\DigitalSignature\Model\ResourceModel\AuditTrail {
+    class CollectionFactory
+    {
+        public function create(): \MageOS\DigitalSignature\Model\ResourceModel\AuditTrail\Collection
+        {
+            return new \MageOS\DigitalSignature\Model\ResourceModel\AuditTrail\Collection();
+        }
+    }
+}
+
+namespace MageOS\DigitalSignature\Model\ResourceModel\DossierExport {
+    class CollectionFactory
+    {
+        public function create(): \MageOS\DigitalSignature\Model\ResourceModel\DossierExport\Collection
+        {
+            return new \MageOS\DigitalSignature\Model\ResourceModel\DossierExport\Collection();
         }
     }
 }

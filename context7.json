@@ -1,7 +1,7 @@
 {
   "$schema": "https://context7.com/schema/context7.json",
   "projectTitle": "Mage-OS Digital Signature",
-  "description": "Magento 2 / Mage-OS module (MageOS_DigitalSignature) that generates contract PDFs from order data and sends them for e-signature through pluggable providers (wSign, DocuSign, Adobe Acrobat Sign, custom). Includes order/invoice triggers, merge fields, a REST API, HMAC-signed outbound webhooks, provider quotas and GDPR retention.",
+  "description": "Magento 2 / Mage-OS module (MageOS_DigitalSignature) that generates contract PDFs from order data and sends them for e-signature through pluggable providers (wSign, DocuSign, Adobe Acrobat Sign, custom). Includes order/invoice triggers, merge fields, a REST API, HMAC-signed outbound webhooks, provider quotas, GDPR retention and an eIDAS audit trail (document hashes, provider certificates, dossier export).",
   "folders": [
     "docs"
   ],
@@ -23,6 +23,8 @@
     "Verify outbound webhooks with HMAC-SHA256 of the raw body against the X-Signature header (sha256=<hex>) and deduplicate on delivery_id.",
     "POST /V1/digitalsignature/orders/:orderId/documents/generate only runs templates whose trigger is manual.",
     "Configuration paths start with digital_signature/; provider settings are digital_signature/providers/<code>/<field>.",
-    "Documents are processed asynchronously: the digitalsignatureDocumentProcess, digitalsignatureDocumentRefresh and digitalsignatureWebhookDispatch consumers and cron must run."
+    "Documents are processed asynchronously: the digitalsignatureDocumentProcess, digitalsignatureDocumentRefresh, digitalsignatureWebhookDispatch, digitalsignatureAuditTrailFetch and digitalsignatureDossierExport consumers and cron must run.",
+    "No document is generated until digital_signature/audit_trail/data_collection is set: 0 opts out; 1 opts in and also needs audit_trail/policy_ack = 1 and audit_trail/retention_days > 0.",
+    "A provider exposes a signing certificate by also implementing MageOS\\DigitalSignature\\Api\\AuditTrailCertificateProviderInterface::fetchCertificate(), returning an AuditTrailCertificateResult."
   ]
 }

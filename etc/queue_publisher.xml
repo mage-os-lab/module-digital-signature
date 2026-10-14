@@ -10,4 +10,10 @@
     <publisher topic="digitalsignature.webhook.dispatch">
         <connection name="db" exchange="magento-db"/>
     </publisher>
+    <publisher topic="digitalsignature.audit_trail.fetch">
+        <connection name="db" exchange="magento-db"/>
+    </publisher>
+    <publisher topic="digitalsignature.dossier.export">
+        <connection name="db" exchange="magento-db"/>
+    </publisher>
 </config>

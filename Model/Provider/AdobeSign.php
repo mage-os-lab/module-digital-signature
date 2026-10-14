@@ -3,16 +3,18 @@ declare(strict_types=1);
 
 namespace MageOS\DigitalSignature\Model\Provider;
 
+use MageOS\DigitalSignature\Api\AuditTrailCertificateProviderInterface;
 use MageOS\DigitalSignature\Api\Data\DocumentInterface;
 use MageOS\DigitalSignature\Api\SignProviderInterface;
 use MageOS\DigitalSignature\Exception\ProviderException;
 use MageOS\DigitalSignature\Model\Document\Status;
 use MageOS\DigitalSignature\Model\Provider\AdobeSign\Client;
+use MageOS\DigitalSignature\Model\Provider\Result\AuditTrailCertificateResult;
 use MageOS\DigitalSignature\Model\Provider\Result\StartResult;
 use MageOS\DigitalSignature\Model\Provider\Result\StatusResult;
 use Magento\Framework\Serialize\Serializer\Json;
 
-class AdobeSign implements SignProviderInterface
+class AdobeSign implements SignProviderInterface, AuditTrailCertificateProviderInterface
 {
     public const CODE = 'adobesign';
 
@@ -99,6 +101,14 @@ class AdobeSign implements SignProviderInterface
         $agreementId = $this->requireProcessId($document);
 
         return $this->client->downloadCombinedDocument($storeId, $agreementId);
+    }
+
+    public function fetchCertificate(DocumentInterface $document): AuditTrailCertificateResult
+    {
+        $storeId = $document->getStoreId();
+        $agreementId = $this->requireProcessId($document);
+
+        return $this->client->getAuditTrail($storeId, $agreementId);
     }
 
     public function cancel(DocumentInterface $document): void

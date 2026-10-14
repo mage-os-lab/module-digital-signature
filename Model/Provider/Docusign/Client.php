@@ -5,6 +5,7 @@ namespace MageOS\DigitalSignature\Model\Provider\Docusign;
 
 use MageOS\DigitalSignature\Exception\ProviderException;
 use MageOS\DigitalSignature\Model\Provider\ProviderConfig;
+use MageOS\DigitalSignature\Model\Provider\Result\AuditTrailCertificateResult;
 use Magento\Framework\App\CacheInterface;
 use Magento\Framework\HTTP\Client\Curl;
 use Magento\Framework\HTTP\Client\CurlFactory;
@@ -83,6 +84,28 @@ class Client
         }
 
         return $body;
+    }
+
+    /**
+     * Downloads the Certificate of Completion (PDF).
+     *
+     * @throws ProviderException
+     */
+    public function getCertificate(int $storeId, string $envelopeId): AuditTrailCertificateResult
+    {
+        $session = $this->getSession($storeId);
+        $baseUrl = $session['base_url'] . '/restapi/v2.1/accounts/' . $session['account_id'] . '/envelopes/' . rawurlencode($envelopeId);
+
+        $certificateCurl = $this->createCurlWithAuth($session['access_token']);
+        $certificateCurl->addHeader('Accept', 'application/pdf');
+        $certificate = $this->execute($certificateCurl, 'GET', $baseUrl . '/documents/certificate', null, 'downloading certificate of completion');
+        if ($certificate === null || $certificate === '') {
+            throw ProviderException::permanent(__('DocuSign: downloaded certificate content is empty.'));
+        }
+
+        // The signer's IP is printed in the Certificate of Completion: the
+        // recipients' Signer model does not expose it as a field.
+        return new AuditTrailCertificateResult($certificate, null, null, $envelopeId);
     }
 
     /**

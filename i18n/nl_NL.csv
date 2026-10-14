@@ -5,8 +5,12 @@
 """Expired/declined"" template (customer)","Sjabloon ""verlopen/geweigerd"" (klant)"
 """Expired/rejected"" template (admin)","Sjabloon ""verlopen/geweigerd"" (beheerder)"
 """Expired/rejected"" template (customer)","Sjabloon ""verlopen/geweigerd"" (klant)"
+%1 Start the export again from Digital Signature > Signature documents.,%1 Start de export opnieuw via Digital Signature > Ondertekeningsdocumenten.
+%1 dossier export(s) could not be deleted.,%1 dossierexport(s) konden niet worden verwijderd.
+%1 dossier export(s) deleted.,%1 dossierexport(s) verwijderd.
 -- All Store Views --,-- Alle winkelweergaven --
 -- None --,-- Geen --
+-- Please choose --,-- Maak een keuze --
 -- Use global default --,-- Gebruik globale standaard --
 A document signing process has ended with a negative outcome.,Een ondertekeningsproces van een document is beëindigd met een negatief resultaat.
 API Access Point,API-toegangspunt
@@ -31,6 +35,7 @@ Adobe Acrobat Sign Developer Guide,Adobe Acrobat Sign Developer Guide
 "Adobe Acrobat Sign: agreement creation failed, no ID received.","Adobe Acrobat Sign: aanmaken van overeenkomst mislukt, geen ID ontvangen."
 Adobe Acrobat Sign: document upload succeeded but is missing transientDocumentId.,"Adobe Acrobat Sign: uploaden van document geslaagd, maar transientDocumentId ontbreekt."
 Adobe Acrobat Sign: downloaded PDF content is empty.,Adobe Acrobat Sign: gedownloade pdf-inhoud is leeg.
+Adobe Acrobat Sign: downloaded audit trail content is empty.,Adobe Acrobat Sign: de gedownloade audittrail-inhoud is leeg.
 Adobe Acrobat Sign: network error during %1: %2,Adobe Acrobat Sign: netwerkfout tijdens %1: %2
 Adobe Acrobat Sign: non-JSON response during %1.,Adobe Acrobat Sign: niet-JSON-antwoord tijdens %1.
 Adobe Acrobat Sign: signer email is missing or invalid.,Adobe Acrobat Sign: e-mailadres van ondertekenaar ontbreekt of is ongeldig.
@@ -48,12 +53,15 @@ Alert Threshold (%),Waarschuwingsdrempel (%)
 All time,Altijd
 Allow dispatch and log warning,Verzending toestaan en waarschuwing loggen
 Allow dummy provider,Dummy-provider toestaan
+An error occurred while generating the dossier.,Er is een fout opgetreden bij het genereren van het dossier.
 Analysis period:,Analyseperiode:
 Annual Allowance (Commitment),Jaarlijks quotum (toezegging)
 Application ID (Client ID),Applicatie-ID (Client ID)
 Application ID retrieved from the Adobe Developer Console.,Applicatie-ID opgehaald uit de Adobe Developer Console.
 Are you sure you want to delete this webhook subscription?,Weet u zeker dat u dit webhook-abonnement wilt verwijderen?
 Assigned Products,Toegewezen producten
+Audit trail (eIDAS compliance),Audittrail (eIDAS-conformiteit)
+Audit trail retention (days),Bewaartermijn audittrail (dagen)
 Auto-sign delay (seconds),Vertraging automatische ondertekening (seconden)
 Automatic reminders,Automatische herinneringen
 Automatically delete past the retention period,Automatisch verwijderen na de bewaarperiode
@@ -62,6 +70,7 @@ Avg signing time,Gemiddelde tekentijd
 Back,Terug
 Black,Zwart
 Block new signature requests,Nieuwe handtekeningverzoeken blokkeren
+Blocking choice: no document is generated until this is set to Yes or No.,Blokkerende keuze: er wordt geen document gegenereerd totdat dit op Ja of Nee is gezet.
 CDN,CDN
 Callback IP allowlist,IP-allowlist voor callback
 Cancel,Annuleren
@@ -75,12 +84,15 @@ Cap on documents queued per cron run (throttling toward the provider).,Maximum a
 Cart / Order,Winkelwagen / Bestelling
 Cart not available.,Winkelwagen niet beschikbaar.
 Cart/Order,Winkelwagen/Bestelling
+"Check this ONLY after defining, for this store, the legal basis and retention period for the audit trail data listed above (see the comment on this section).",Vink dit ALLEEN aan nadat u voor deze winkel de rechtsgrond en de bewaartermijn hebt vastgesteld voor de hierboven genoemde audittrailgegevens (zie de toelichting bij deze sectie).
 "Check this ONLY after signing a DPA (Data Processing Agreement) with the selected signature provider and updating the store's privacy policy to disclose that customer personal data (email, phone) is sent to a third-party provider for the signing process. Until this is checked, all new documents are generated with the dummy (test) provider, regardless of the provider configured below.","Vink dit vakje PAS aan nadat u een DPA (verwerkersovereenkomst) heeft gesloten met de gekozen handtekeningprovider en het privacybeleid van de winkel heeft bijgewerkt om te vermelden dat persoonsgegevens van de klant (e-mail, telefoon) naar een externe provider worden gestuurd voor het ondertekeningsproces. Zolang dit niet is aangevinkt, worden alle nieuwe documenten gegenereerd met de dummy-provider (test), ongeacht de hieronder geconfigureerde provider."
 "Check this box ONLY after signing a DPA (Data Processing Agreement) with the selected signature provider and updating the store's privacy policy to disclose that customer personal data (email, phone) is sent to a third-party provider for the signing process. Until checked, all new documents are generated with the dummy (test) provider, regardless of the provider configured below.","Vink dit vakje ALLEEN aan na het ondertekenen van een DPA (verwerkersovereenkomst) met de geselecteerde handtekeningprovider en het bijwerken van het privacybeleid van de winkel om te vermelden dat persoonsgegevens van klanten (e-mail, telefoon) naar een externe provider worden verzonden voor het ondertekeningsproces. Totdat dit is aangevinkt, worden alle nieuwe documenten gegenereerd met de dummy- (test-)provider, ongeacht de hieronder geconfigureerde provider."
 Client Secret,Client Secret
+Collect audit trail data,Audittrailgegevens verzamelen
 "Color used to print the signature tag on the actual document generated for the order. Select ""White (Invisible)"" to hide it beneath the digital signature.","Kleur die wordt gebruikt om de handtekeningtag af te drukken op het daadwerkelijke document dat voor de bestelling is gegenereerd. Selecteer ""Wit (onzichtbaar)"" om deze onder de digitale handtekening te verbergen."
 Comma-separated IPs; empty = no IP filter (the secret token still applies).,Kommagescheiden IP-adressen; leeg = geen IP-filter (het geheime token blijft van toepassing).
 Comma-separated IPs; empty = no IP filtering (the secret token still applies).,Door komma's gescheiden IP's; leeg = geen IP-filter (het geheime token blijft van toepassing).
+Completed on,Voltooid op
 Configuration,Configuratie
 Confirm Position,Bevestig positie
 Connector to integrate digital and electronic signatures from Adobe Acrobat Sign. Supports OAuth2 authentication and asynchronous signature process tracking.,Connector om digitale en elektronische handtekeningen van Adobe Acrobat Sign te integreren. Ondersteunt OAuth2-authenticatie en asynchrone tracking van het handtekeningproces.
@@ -109,6 +121,8 @@ Default generation trigger,Standaard trigger voor generatie
 Default phone prefix,Standaard telefoonprefix
 Delete,Verwijderen
 Delete Webhook subscription,Webhook-abonnement verwijderen
+Delete dossier export #%1,Dossierexport #%1 verwijderen
+Delete dossier exports,Dossierexports verwijderen
 Delete integration,Integratie verwijderen
 Delete template,Sjabloon verwijderen
 "Delete the Webhook subscription ""%1""?","Webhook-abonnement ""%1"" verwijderen?"
@@ -116,6 +130,7 @@ Delete template,Sjabloon verwijderen
 "Delete the template ""%1""?","Sjabloon ""%1"" verwijderen?"
 Delete this integration?,Deze integratie verwijderen?
 Delete this template? Documents already generated remain in the history.,Deze sjabloon verwijderen? Reeds gegenereerde documenten blijven in de geschiedenis staan.
+Deleted after,Verwijderd na
 Deliveries limit per run,Limiet leveringen per uitvoer
 Deliveries per run limit,Limiet leveringen per uitvoer
 Delivery attempts before marking the webhook as permanently failed.,Bezorgingspogingen voordat de webhook als definitief mislukt wordt gemarkeerd.
@@ -123,12 +138,15 @@ Demo / Sandbox,Demo / Sandbox
 Detail: %error_message,Detail: %error_message
 Details: %error_message,Details: %error_message
 Digital Signature,Digitale handtekening
+Digital Signature is enabled but the audit trail compliance choice (Stores > Configuration > Mage-OS > Digital Signature > Audit trail) has not been set for at least one store: document generation is blocked there until it is configured.,"Digital Signature is ingeschakeld, maar de audittrail-conformiteitskeuze (Winkels > Configuratie > Mage-OS > Digital Signature > Audit trail) is voor ten minste één winkel niet ingesteld: daar blijft het genereren van documenten geblokkeerd totdat deze is geconfigureerd."
+Digital Signature is enabled but the audit trail compliance choice has not been configured for store %1. Configure it under Stores > Configuration > Mage-OS > Digital Signature > Audit trail before documents can be generated.,"Digital Signature is ingeschakeld, maar de audittrail-conformiteitskeuze is niet geconfigureerd voor winkel %1. Configureer deze onder Winkels > Configuratie > Mage-OS > Digital Signature > Audit trail voordat er documenten kunnen worden gegenereerd."
 Disabled by default to avoid alarming customers: evaluate on a case-by-case basis.,Standaard uitgeschakeld om onnodige ongerustheid te vermijden: per geval beoordelen.
 Disabled by default: deletion is destructive and should be enabled deliberately after defining the required retention periods (tax/legal).,Standaard uitgeschakeld: verwijderen is destructief en moet bewust worden ingeschakeld nadat de vereiste (fiscale/wettelijke) bewaartermijnen zijn vastgesteld.
 DocuSign,DocuSign
 DocuSign Apps and Keys Panel,DocuSign Apps and Keys-paneel
 DocuSign Developer Center,DocuSign Developer Center
 DocuSign: downloaded PDF content is empty.,DocuSign: gedownloade pdf-inhoud is leeg.
+DocuSign: downloaded certificate content is empty.,DocuSign: de gedownloade certificaatinhoud is leeg.
 "DocuSign: envelope creation failed, no ID received.","DocuSign: aanmaken van envelop mislukt, geen ID ontvangen."
 DocuSign: error generating the JWT assertion: %1,DocuSign: fout bij het genereren van de JWT-assertie: %1
 DocuSign: invalid document store.,DocuSign: ongeldige documentstore.
@@ -155,8 +173,19 @@ Document retention (GDPR),Documentbewaring (GDPR)
 Document templates,Documentsjablonen
 "Document with id ""%1"" does not exist.","Document met id ""%1"" bestaat niet."
 Document: #%document_id,Document: #%document_id
+Documents,Documenten
 Documents per reconciliation limit,Documentlimiet per verzoeningsrun
 Documents per run limit,Documentlimiet per uitvoering
+Dossier export,Dossierexport
+Dossier export #%1 could not be deleted.,Dossierexport #%1 kon niet worden verwijderd.
+Dossier export #%1 deleted.,Dossierexport #%1 verwijderd.
+Dossier export #%1 failed,Dossierexport #%1 mislukt
+Dossier export #%1 is ready,Dossierexport #%1 is klaar
+Dossier export #%1 queued (%2 documents). You will be notified when it is ready under Digital Signature > Dossier exports.,Dossierexport #%1 in de wachtrij (%2 documenten). U krijgt een melding wanneer deze klaarstaat onder Digital Signature > Dossierexports.
+"Dossier export with id ""%1"" does not exist.","Dossierexport met id ""%1"" bestaat niet."
+Dossier exports,Dossierexports
+Download,Downloaden
+Download certificate,Certificaat downloaden
 Download generated,Gegenereerd document downloaden
 Download processed preview,Verwerkte voorbeeldweergave downloaden
 Download signed,Ondertekend document downloaden
@@ -201,6 +230,8 @@ Error: %message,Fout: %message
 Escalation template (admin),Escalatiesjabloon (admin)
 Expired,Verlopen
 Expired or Declined,Verlopen of Geweigerd
+Export dossier (ZIP),Dossier exporteren (ZIP)
+Failed,Mislukt
 Fake provider that simulates signing locally. Do NOT use in production.,Dummy-provider die het ondertekenen lokaal simuleert. NIET gebruiken in productie.
 File not specified.,Bestand niet gespecificeerd.
 For error and negative outcome notifications. Empty = store's general contact.,Voor meldingen van fouten en negatieve uitkomsten. Leeg = algemeen contact van de winkel.
@@ -213,6 +244,7 @@ Generate signature documents (manual),Handtekeningdocumenten genereren (handmati
 Generate signature documents for the selected orders?,Ondertekeningsdocumenten genereren voor de geselecteerde bestellingen?
 Generate template documents with manual trigger,Sjabloondocumenten genereren met handmatige trigger
 Generated,Gegenereerd
+Generated ZIP files contain personal data and are deleted after this period.,Gegenereerde ZIP-bestanden bevatten persoonsgegevens en worden na deze periode verwijderd.
 Guide to integrating signature providers,Gids voor het integreren van handtekeningproviders
 HMAC Secret,HMAC Secret
 HTTP/HTTPS endpoint where JSON webhook push notifications will be sent.,HTTP/HTTPS-eindpunt waarnaar JSON webhook-pushmeldingen worden verzonden.
@@ -221,7 +253,9 @@ Historical,Historisch
 I want to receive the contract to sign digitally,Ik wil het contract ontvangen om digitaal te ondertekenen
 ID,ID
 "If you believe this is a mistake, contact our customer service. You can check your order here: <a href=""%url"">My orders</a>","Als u denkt dat dit een vergissing is, neem dan contact op met onze klantenservice. U kunt uw bestelling hier bekijken: <a href=""%url"">Mijn bestellingen</a>"
+Immediate download up to (documents),Directe download tot (documenten)
 In development,In ontwikkeling
+"Independent from the document retention below: typically tied to the contract's legal prescription period, not a GDPR minimum.","Onafhankelijk van de documentbewaring hieronder: meestal gekoppeld aan de wettelijke verjaringstermijn van het contract, niet aan een AVG-minimum."
 Integration,Integratie
 Integration ID,Integratie-ID
 Integration deleted.,Integratie verwijderd.
@@ -235,16 +269,20 @@ Invalid signature parameters.,Ongeldige handtekeningparameters.
 Invoice creation,Factuur aanmaken
 Invoice paid,Factuur betaald
 Item,Item
+Keep queued exports for (hours),Exports in de wachtrij bewaren gedurende (uren)
 LOW QUOTA,LAAG QUOTUM
+Larger selections are refused.,Grotere selecties worden geweigerd.
 Last 30 days,Laatste 30 dagen
 Last 90 days,Laatste 90 dagen
 Last year,Afgelopen jaar
+Limits for the Export dossier (ZIP) mass action. Larger selections are generated in the background and listed under Digital Signature > Dossier exports.,Limieten voor de bulkactie Dossier exporteren (ZIP). Grotere selecties worden op de achtergrond gegenereerd en vermeld onder Digital Signature > Dossierexports.
 Local (Recommended),Lokaal (Aanbevolen)
 Long-lived refresh token used to generate API Access Tokens.,Langdurig vernieuwingstoken (refresh token) gebruikt om API Access Tokens te genereren.
 Mage-OS,Mage-OS
 "Manage the order in backend: <a href=\\""%url\""\"">%url</a>""","Beheer de bestelling in backend: <a href=\\""%url\""\"">%url</a>"""
 Manual from backend,Handmatig vanuit backend
 Maximum attempts,Maximaal aantal pogingen
+Maximum documents per export,Maximaal aantal documenten per export
 Maximum number of attempts,Maximaal aantal pogingen
 Maximum number of attempts for temporary errors (network/service) before the error state.,Maximaal aantal pogingen bij tijdelijke fouten (netwerk/service) vóór de foutstatus.
 Maximum number of customer reminders,Maximum aantal klantherinneringen
@@ -260,7 +298,9 @@ New Webhook Subscription,Nieuw webhook-abonnement
 New document template,Nieuwe documentsjabloon
 New integration,Nieuwe integratie
 Next,Volgende
+No - do not collect additional audit trail data,Nee - geen extra audittrailgegevens verzamelen
 "No API integration mapped for integration ""%1"".","Geen API-integratie gekoppeld voor integratie ""%1""."
+No documents were selected.,Er zijn geen documenten geselecteerd.
 No integration selected.,Geen integratie geselecteerd.
 No legal validity — test/development only,Geen juridische geldigheid — alleen test/ontwikkeling
 No signature documents for this order.,Geen handtekeningdocumenten voor deze bestelling.
@@ -310,16 +350,20 @@ Prepaid Credit Package (Pool),Prepaid tegoedpakket (pool)
 Previous,Terug
 Price,Prijs
 Process ID,Proces-ID
+Processed,Verwerkt
+Processing,Bezig
 Processing of a signature document ended in error and requires manual intervention.,De verwerking van een ondertekeningsdocument is met een fout beëindigd en vereist handmatige interventie.
 Product,Product
 Provider Quotas & Consumption,Providerquota en verbruik
 Provider status,Providerstatus
 Provider: %provider,Provider: %provider
+Queued,In wachtrij
 Quota Model,Quotummodel
 Quota tracking disabled.,Quotumregistratie uitgeschakeld.
 RSA Private Key,RSA-privésleutel
 RSA Private Key (PEM),RSA-privésleutel (PEM)
 Raw status returned by WsSign → internal document status. Unmapped statuses are logged so they can be added here.,Ruwe status geretourneerd door WsSign → interne documentstatus. Niet-gekoppelde statussen worden gelogd zodat ze hier kunnen worden toegevoegd.
+Ready,Klaar
 Regenerate / Resend,Opnieuw genereren / Opnieuw verzenden
 Regenerate and resend this document?,Dit document opnieuw genereren en verzenden?
 Remaining:,Resterend:
@@ -327,8 +371,11 @@ Reminder template (customer),Herinneringssjabloon (klant)
 Reminder: Sign your contract (order %increment_id),Herinnering: Onderteken uw contract (bestelling %increment_id)
 Reminders for documents awaiting signature.,Herinneringen voor documenten die wachten op handtekening.
 Reminders for documents pending signature.,Herinneringen voor documenten die wachten op ondertekening.
+Requested by,Aangevraagd door
+Requested on,Aangevraagd op
 Required for Service Account JWT authentication.,Vereist voor Service Account JWT-authenticatie.
 Retention days,Bewaardagen
+Retention policy acknowledgement,Kennisname van het bewaarbeleid
 SKU,SKU
 Save integration,Integratie opslaan
 Save subscription,Abonnement opslaan
@@ -363,6 +410,7 @@ Signature document generation queued for %1 order(s).,Genereren van ondertekenin
 Signature document generation request has been queued.,Het verzoek voor het genereren van handtekeningdocumenten is in behandeling genomen.
 Signature document templates,Handtekeningdocumentsjablonen
 Signature documents,Ondertekeningsdocumenten
+"Signature documents are only generated once this choice is made explicitly. Collecting audit trail data (signer IP, authentication details, provider certificates) means retaining personal data for a compliance/legal purpose distinct from, and typically longer than, the retention configured below for the document itself: check with your data protection advisor before enabling it.","Ondertekeningsdocumenten worden pas gegenereerd nadat deze keuze uitdrukkelijk is gemaakt. Het verzamelen van audittrailgegevens (IP van de ondertekenaar, authenticatiegegevens, certificaten van de provider) betekent dat persoonsgegevens worden bewaard voor een compliance-/juridisch doel dat losstaat van, en doorgaans langer is dan, de hieronder voor het document zelf ingestelde bewaartermijn: overleg met uw privacyadviseur voordat u dit inschakelt."
 Signature expiration (days),Vervaldatum handtekening (dagen)
 Signature provider,Handtekeningprovider
 "Signature provider ""%1"" is not registered.","Handtekeningprovider ""%1"" is niet geregistreerd."
@@ -380,6 +428,7 @@ Signer\'s phone number is invalid.,Telefoonnummer van de ondertekenaar is ongeld
 Signer\'s phone number missing: required by WsSign for OTP via SMS.,Telefoonnummer van de ondertekenaar ontbreekt: vereist door WsSign voor OTP via sms.
 Signing the contract is mandatory for the products in your cart.,Voor de producten in de winkelwagen is het ondertekenen van het contract verplicht.
 "Simple (SES), Advanced (AES), Qualified (QES) Electronic Signature","Eenvoudige (SES), geavanceerde (AES), gekwalificeerde (QES) elektronische handtekening"
+Size (bytes),Grootte (bytes)
 Status,Status
 Status mapping,Statustoewijzing
 Store view,Winkelweergave
@@ -398,9 +447,11 @@ The Integration ID is required.,De integratie-ID is verplicht.
 The PDF exceeds the maximum size of 10 MB.,De pdf overschrijdt de maximale grootte van 10 MB.
 The Target URL is required.,De doel-URL is verplicht.
 The Target URL must use the http or https scheme.,De doel-URL moet het http- of https-schema gebruiken.
+The ZIP file is deleted immediately. Continue?,Het ZIP-bestand wordt direct verwijderd. Doorgaan?
 The connector used for new documents once production mode is confirmed above. Configure the credentials in the provider's group.,De connector die wordt gebruikt voor nieuwe documenten zodra de productiemodus hierboven is bevestigd. Configureer de inloggegevens in de groep van de provider.
 The document has no associated template.,Aan het document is geen sjabloon gekoppeld.
 The document has no generated PDF to send.,Het document heeft geen gegenereerde pdf om te verzenden.
+The dossier of %1 documents can be downloaded from Digital Signature > Dossier exports. It will be deleted after %2 hours.,Het dossier met %1 documenten kan worden gedownload via Digital Signature > Dossierexports. Het wordt na %2 uur verwijderd.
 The dummy provider is not enabled: enable it explicitly in the configuration (test environments only).,De dummy-provider is niet ingeschakeld: schakel deze expliciet in via de configuratie (alleen testomgevingen).
 The entered Target URL is invalid.,De ingevoerde doel-URL is ongeldig.
 The following document is pending digital signature beyond the configured escalation period.,Het volgende document wacht op digitale handtekening buiten de geconfigureerde escalatieperiode.
@@ -410,12 +461,14 @@ The name is required.,De naam is verplicht.
 The provider often already sends its own signing invitation: disabled by default.,De provider stuurt vaak al zijn eigen uitnodiging om te ondertekenen: standaard uitgeschakeld.
 The provider often already sends its own signing invitation: off by default.,De provider stuurt vaak al een eigen ondertekeningsuitnodiging: standaard uitgeschakeld.
 The requested temporary file does not exist.,Het gevraagde tijdelijke bestand bestaat niet.
+The selected dossier exports and their ZIP files are deleted immediately. Continue?,De geselecteerde dossierexports en hun ZIP-bestanden worden direct verwijderd. Doorgaan?
 The signing process of a document ended with a negative outcome.,Het ondertekeningsproces van een document is afgesloten met een negatief resultaat.
 The template file is not a PDF.,Het sjabloonbestand is geen pdf.
 The template has no PDF file uploaded for this store view.,De template heeft geen geüpload PDF-bestand voor deze winkelweergave.
 The template name is required.,De naam van de sjabloon is verplicht.
 The temporary file does not exist.,Het tijdelijke bestand bestaat niet.
 The uploaded file is not a valid PDF.,Het geüploade bestand is geen geldige pdf.
+This dossier export is not available for download.,Deze dossierexport is niet beschikbaar om te downloaden.
 This integration no longer exists.,Deze integratie bestaat niet meer.
 This subscription no longer exists.,Dit abonnement bestaat niet meer.
 This template no longer exists.,Deze sjabloon bestaat niet meer.
@@ -427,6 +480,7 @@ Track signature credit consumption and send warning notifications when approachi
 Unable to complete file validation.,Kan bestandsvalidatie niet voltooien.
 Unable to delete Webhook subscription: %1,Kan webhook-abonnement niet verwijderen: %1
 Unable to delete the API integration: %1,Kan de API-integratie niet verwijderen: %1
+Unable to delete the dossier export: %1,Kan de dossierexport niet verwijderen: %1
 Unable to delete the template: %1,Kan sjabloon niet verwijderen: %1
 Unable to download the PDF: %1,Kan de PDF niet downloaden: %1
 Unable to find the subscription to delete.,Kan het te verwijderen abonnement niet vinden.
@@ -437,7 +491,9 @@ Unable to load the temporary PDF.,Kan de tijdelijke pdf niet laden.
 Unable to regenerate the document: %1,Kan document niet opnieuw genereren: %1
 Unable to save Webhook subscription: %1,Kan webhook-abonnement niet opslaan: %1
 Unable to save the API integration: %1,Kan de API-integratie niet opslaan: %1
+Unable to save the audit trail: %1,Kan de audittrail niet opslaan: %1
 Unable to save the document: %1,Kan document niet opslaan: %1
+Unable to save the dossier export: %1,Kan de dossierexport niet opslaan: %1
 Unable to save the template: %1,Kan sjabloon niet opslaan: %1
 Unable to save your choice.,Kon de keuze niet opslaan.
 Unsupported PDF: /Pages is missing /Kids.,Niet-ondersteunde pdf: /Pages mist /Kids.
@@ -473,6 +529,7 @@ Unsupported PDF: trailer not found after the cross-reference table.,Niet-onderst
 Unsupported PDF: unbalanced dictionary (missing closing delimiter).,Niet-ondersteunde pdf: ongebalanceerde dictionary (ontbrekend afsluitteken).
 Unsupported PDF: unrecognized PNG row filter in cross-reference stream (%1).,Niet-ondersteunde PDF: niet-herkend PNG-rijfilter in de cross-reference-stream (%1).
 "Unsupported PDF: use a classic cross-reference table. Save/export the document as ""PDF 1.4"" and re-upload the file.","Niet-ondersteunde pdf: gebruik een klassieke cross-reference-tabel. Sla het document op/exporteer het als ""PDF 1.4"" en upload het bestand opnieuw."
+Up to this number the ZIP is downloaded immediately; above it the export is queued. 0 = always queued.,Tot dit aantal wordt de ZIP direct gedownload; daarboven gaat de export in de wachtrij. 0 = altijd wachtrij.
 Update on the contract to sign (order %increment_id),Update over het te ondertekenen contract (bestelling %increment_id)
 Used when the template does not specify its own trigger.,Wordt gebruikt wanneer de sjabloon geen eigen trigger opgeeft.
 Username (owner),Gebruikersnaam (owner)
@@ -508,9 +565,11 @@ WsSign: status missing from the provider\'s response.,WsSign: status ontbreekt i
 WsSign: the document has no started process.,WsSign: voor het document is geen proces gestart.
 WsSign: the downloaded content is not a valid PDF.,WsSign: de gedownloade inhoud is geen geldige pdf.
 "WsSign: unexpected response structure during ""%1"".","WsSign: onverwachte antwoordstructuur tijdens ""%1""."
+Yes - collect and retain audit trail data,Ja - audittrailgegevens verzamelen en bewaren
 "You can check your order status here: <a href=""%url"">My orders</a>","U kunt de status van uw bestelling hier bekijken: <a href=""%url"">Mijn bestellingen</a>"
 "You can download the signed document from your account area: <a href=""%url"">Go to the order</a>","U kunt het ondertekende document downloaden vanuit uw accountgebied: <a href=""%url"">Naar de bestelling</a>"
 You must accept the digital signature of the contract to proceed.,Om door te gaan moet u de digitale ondertekening van het contract accepteren.
+You selected %1 documents: the dossier export is limited to %2. Narrow the selection.,U hebt %1 documenten geselecteerd: de dossierexport is beperkt tot %2. Verklein de selectie.
 You will soon receive (or have already received) instructions from the signature service at %email. Follow that process to complete the signature.,U ontvangt binnenkort (of heeft al ontvangen) instructies van de ondertekeningsdienst op %email. Volg dat proces om de ondertekening te voltooien.
 Your contract to sign digitally is ready (order %increment_id),Uw contract om digitaal te ondertekenen is klaar (bestelling %increment_id)
 Your signed contract is available (order %increment_id),Uw ondertekende contract is beschikbaar (bestelling %increment_id)

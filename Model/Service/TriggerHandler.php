@@ -11,6 +11,7 @@ use MageOS\DigitalSignature\Model\Queue\Publisher;
 use MageOS\DigitalSignature\Model\ResourceModel\Template as TemplateResource;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\Exception\AlreadyExistsException;
+use Magento\Framework\Exception\LocalizedException;
 use Magento\Sales\Api\Data\OrderInterface;
 use Magento\Store\Model\ScopeInterface;
 use Psr\Log\LoggerInterface;
@@ -36,15 +37,26 @@ class TriggerHandler
         private readonly DocumentRepositoryInterface $documentRepository,
         private readonly Publisher $publisher,
         private readonly LoggerInterface $logger,
-        private readonly ProductionModeGuard $productionModeGuard
+        private readonly ProductionModeGuard $productionModeGuard,
+        private readonly AuditTrailComplianceGate $auditTrailComplianceGate
     ) {
     }
 
+    /**
+     * @throws LocalizedException if the module is enabled but the merchant
+     * has not yet made an explicit audit trail compliance choice.
+     */
     public function handle(OrderInterface $order, string $triggerCode): void
     {
         $storeId = (int)$order->getStoreId();
         if (!$this->scopeConfig->isSetFlag(self::XML_PATH_ENABLED, ScopeInterface::SCOPE_STORE, $storeId)) {
             return;
+        }
+        if (!$this->auditTrailComplianceGate->isConfigured($storeId)) {
+            throw new LocalizedException(__(
+                'Digital Signature is enabled but the audit trail compliance choice has not been configured for store %1. Configure it under Stores > Configuration > Mage-OS > Digital Signature > Audit trail before documents can be generated.',
+                $storeId
+            ));
         }
         $configuredProviderCode = (string)$this->scopeConfig->getValue(
             self::XML_PATH_PROVIDER,

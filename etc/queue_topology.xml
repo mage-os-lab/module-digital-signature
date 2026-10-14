@@ -8,5 +8,9 @@
                  destinationType="queue" destination="digitalsignature.document.refresh"/>
         <binding id="digitalsignatureWebhookDispatchBinding" topic="digitalsignature.webhook.dispatch"
                  destinationType="queue" destination="digitalsignature.webhook.dispatch"/>
+        <binding id="digitalsignatureAuditTrailFetchBinding" topic="digitalsignature.audit_trail.fetch"
+                 destinationType="queue" destination="digitalsignature.audit_trail.fetch"/>
+        <binding id="digitalsignatureDossierExportBinding" topic="digitalsignature.dossier.export"
+                 destinationType="queue" destination="digitalsignature.dossier.export"/>
     </exchange>
 </config>

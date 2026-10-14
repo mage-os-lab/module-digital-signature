@@ -4,6 +4,51 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [0.6.0] - 2026-10-14
+### Upgrade notes
+- **Document generation stops after upgrading until the audit trail choice is made.** Set
+  `digital_signature/audit_trail/data_collection` to `0` (opt out) or `1` (opt in, with
+  `policy_ack` and `retention_days`) under Stores > Configuration > Mage-OS > Digital Signature >
+  Audit trail. See [docs/audit-trail.md](docs/audit-trail.md).
+- Run the new `digitalsignatureAuditTrailFetch` and `digitalsignatureDossierExport` consumers if your consumers are not started by cron.
+
+### Added
+- **Audit trail compliance choice (eIDAS)**: once Digital Signature is enabled, no document is
+  generated until the merchant chooses explicitly whether to collect audit trail data (signer
+  IP, provider certificates) and for how long. An unset choice is logged and skipped on
+  automatic triggers and shown as an error on manual generation; opting out is a valid choice.
+  A critical admin notice links to the setting while any enabled store has no valid choice.
+- **Audit trail for DocuSign and Adobe Sign**: when collection is on, the module stores a SHA-256
+  hash of the document before and after signing (every provider), and the reconcile cron fetches
+  and stores DocuSign's Certificate of Completion / Adobe Sign's Audit Trail Report through the
+  new `digitalsignatureAuditTrailFetch` consumer. wSign has no certificate API: hashes only.
+- **Asynchronous dossier export**: selections up to `dossier_export/sync_threshold` (20) still
+  download immediately, now streamed from a file with bounded memory; larger ones are queued,
+  built by the `digitalsignatureDossierExport` consumer and listed in the new **Digital
+  Signature > Dossier exports** grid (download, delete, progress), with an admin notification
+  when ready or failed. Selections above `dossier_export/max_documents` (500) are refused. ZIPs
+  are deleted after `dossier_export/retention_hours` (72) by the hourly
+  `digitalsignature_dossier_export_cleanup` cron, which also fails exports that stopped making
+  progress.
+- **Download certificate** action in the Signature documents grid.
+- **Export dossier (ZIP)** mass action in the Signature documents grid: each document's PDF, its
+  provider certificate when available, and a `manifest.json` with hashes, provenance and the
+  reason for any missing file. Immediate exports are streamed and unlinked; queued exports are
+  stored temporarily under `var/digitalsignature/dossiers/`. New ACL resource
+  `MageOS_DigitalSignature::document_dossier_export`.
+- **Separate retention for audit trail personal data**
+  (`digital_signature/audit_trail/retention_days`): the certificate, signer IP and
+  authentication method are purged by the retention cron on that schedule even when the document
+  retention is disabled; hashes and transaction id are kept.
+- `AuditTrailCertificateProviderInterface` for third-party connectors that expose a certificate.
+- Documentation: [audit trail guide](docs/audit-trail.md), plus updates to getting started,
+  configuration reference, troubleshooting and the provider integration guide.
+
+### Fixed
+- `db_schema_whitelist.json` was missing the REST API and webhook tables
+  (`mageos_digitalsignature_api_consumer`, `..._api_consumer_store`, `..._webhook_subscription`,
+  `..._webhook_delivery`) since 0.3.0. It is now generated from a real installation.
+
 ## [0.5.1] - 2026-10-13
 ### Fixed
 - **Public CI check-extension**: upgraded graycoreio actions to `v8.11.0` so `.github/check-extension.json`

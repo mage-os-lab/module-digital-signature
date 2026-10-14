@@ -9,18 +9,22 @@ lines are prefixed with `DigitalSignature:` in `var/log/system.log`.
 Checks, in order:
 
 1. `digital_signature/general/enabled` is `1` for the order's store.
-2. `digital_signature/general/provider` is not empty. With no active provider, triggers do
+2. The audit trail choice is made: `digital_signature/audit_trail/data_collection` is `0`, or
+   `1` with `policy_ack` = `1` and `retention_days` > 0. While it is not, the admin shows a
+   critical notice and `system.log` reports *"the audit trail compliance choice has not been
+   configured"*. See [audit-trail.md](audit-trail.md#the-compliance-choice-required).
+3. `digital_signature/general/provider` is not empty. With no active provider, triggers do
    nothing.
-3. A template is active and its **resolved trigger** matches the event: the product
+4. A template is active and its **resolved trigger** matches the event: the product
    assignment override, then the template trigger, then
    `digital_signature/general/default_trigger`. A template on `invoice_paid` creates nothing
    when the order is placed. See
    [triggers-and-configuration.md](triggers-and-configuration.md#triggers).
-4. For an optional template (*Signature Required* = No), the customer ticked the signature
+5. For an optional template (*Signature Required* = No), the customer ticked the signature
    checkbox. Required templates always generate.
-5. For product-scope templates, the ordered product (or the parent of a configurable/bundle
+6. For product-scope templates, the ordered product (or the parent of a configurable/bundle
    line) is assigned to the template.
-6. `POST .../orders/:orderId/documents/generate` and the admin mass action only run the
+7. `POST .../orders/:orderId/documents/generate` and the admin mass action only run the
    `manual` trigger.
 
 ## Document stuck in `pending` or `generated`
@@ -118,3 +122,26 @@ Details in [webhooks.md](webhooks.md).
 The integration is not mapped to the document's store under **Digital Signature > API
 Integrations**, or the mapping is disabled. Out-of-scope documents answer `404` on purpose.
 See [rest-api.md](rest-api.md#store-scoping).
+
+## No certificate in the audit trail
+
+**Download certificate** only appears once the certificate is fetched. Check
+`fetch_status` in `mageos_digitalsignature_document_audit_trail`:
+
+- no row: `audit_trail/data_collection` was not `1` when the document was sent;
+- `pending`: the document is `signed` but the reconcile cron has not queued it yet (it waits
+  10 minutes) or the `digitalsignatureAuditTrailFetch` consumer is not running;
+- `unavailable`: the provider has no certificate API (wSign, Dummy). The hashes are still
+  recorded;
+- `error`: read `last_error`. Temporary errors are retried up to
+  `digital_signature/general/max_retries` times, permanent ones are not.
+
+Details in [audit-trail.md](audit-trail.md#how-the-certificate-is-fetched).
+
+## Dossier export stuck in queued
+
+A queued export is built by the `digitalsignatureDossierExport` consumer: check that it runs.
+An export in `processing` that makes no progress for 15 minutes is marked `failed` by the hourly
+`digitalsignature_dossier_export_cleanup` cron with *"Interrupted: the export stopped making
+progress."* (the consumer was stopped or killed). Start the export again from the Signature
+documents grid. See [audit-trail.md](audit-trail.md#export-a-dossier).

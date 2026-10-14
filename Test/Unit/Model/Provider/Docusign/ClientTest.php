@@ -6,6 +6,7 @@ namespace MageOS\DigitalSignature\Test\Unit\Model\Provider\Docusign;
 use MageOS\DigitalSignature\Exception\ProviderException;
 use MageOS\DigitalSignature\Model\Provider\Docusign\Client;
 use MageOS\DigitalSignature\Model\Provider\ProviderConfig;
+use MageOS\DigitalSignature\Model\Provider\Result\AuditTrailCertificateResult;
 use MageOS\DigitalSignature\TestSupport\FakeCurl;
 use MageOS\DigitalSignature\TestSupport\SequencedCurlFactory;
 use Magento\Framework\App\CacheInterface;
@@ -438,5 +439,43 @@ class ClientTest extends TestCase
 
         $this->expectException(ProviderException::class);
         $client->getEnvelopeStatus(self::STORE_ID, 'env-1');
+    }
+
+    public function testGetCertificateReturnsPdfWithoutSignerIp(): void
+    {
+        // The recipients' Signer model has no ipAddress: the signer IP is in
+        // the Certificate of Completion itself, so only one request is made.
+        $this->configureValidCredentials();
+        $session = ['access_token' => 'tok', 'base_url' => 'https://demo.docusign.net', 'account_id' => 'acc-1'];
+        $this->cache->method('load')->willReturn((new Json())->serialize($session));
+
+        $certificateCurl = new FakeCurl();
+        $certificateCurl->body = "%PDF-1.4\ncertificate";
+
+        $curlFactory = new SequencedCurlFactory($certificateCurl);
+        $client = $this->makeClient($curlFactory);
+
+        $result = $client->getCertificate(self::STORE_ID, 'env-1');
+
+        self::assertCount(1, $curlFactory->created);
+        self::assertStringStartsWith('%PDF', $result->getCertificateContent());
+        self::assertNull($result->getSignerIp());
+        self::assertSame('env-1', $result->getTransactionId());
+        self::assertSame('application/pdf', $certificateCurl->headers['Accept'] ?? null);
+    }
+
+    public function testGetCertificateRejectsEmptyPdf(): void
+    {
+        $this->configureValidCredentials();
+        $session = ['access_token' => 'tok', 'base_url' => 'https://demo.docusign.net', 'account_id' => 'acc-1'];
+        $this->cache->method('load')->willReturn((new Json())->serialize($session));
+
+        $certificateCurl = new FakeCurl();
+        $certificateCurl->body = '';
+
+        $client = $this->makeClient(new SequencedCurlFactory($certificateCurl));
+
+        $this->expectException(ProviderException::class);
+        $client->getCertificate(self::STORE_ID, 'env-1');
     }
 }

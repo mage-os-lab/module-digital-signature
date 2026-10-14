@@ -15,6 +15,11 @@
              parent="MageOS_DigitalSignature::digitalsignature"
              action="digitalsignature/document/index"
              resource="MageOS_DigitalSignature::document"/>
+        <add id="MageOS_DigitalSignature::dossier_export" title="Dossier exports" translate="title"
+             module="MageOS_DigitalSignature" sortOrder="22"
+             parent="MageOS_DigitalSignature::digitalsignature"
+             action="digitalsignature/dossierexport/index"
+             resource="MageOS_DigitalSignature::document_dossier_export"/>
         <add id="MageOS_DigitalSignature::api_consumer" title="API Integrations" translate="title"
              module="MageOS_DigitalSignature" sortOrder="25"
              parent="MageOS_DigitalSignature::digitalsignature"

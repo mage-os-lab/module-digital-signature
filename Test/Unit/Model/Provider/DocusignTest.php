@@ -3,11 +3,13 @@ declare(strict_types=1);
 
 namespace MageOS\DigitalSignature\Test\Unit\Model\Provider;
 
+use MageOS\DigitalSignature\Api\AuditTrailCertificateProviderInterface;
 use MageOS\DigitalSignature\Exception\ProviderException;
 use MageOS\DigitalSignature\Model\Document\Status;
 use MageOS\DigitalSignature\Model\Provider\Docusign;
 use MageOS\DigitalSignature\Model\Provider\Docusign\Client;
 use MageOS\DigitalSignature\Model\Provider\ProviderConfig;
+use MageOS\DigitalSignature\Model\Provider\Result\AuditTrailCertificateResult;
 use MageOS\DigitalSignature\Model\Provider\Result\StartResult;
 use MageOS\DigitalSignature\TestSupport\FakeDocument;
 use Magento\Framework\Serialize\Serializer\Json;
@@ -368,5 +370,22 @@ class DocusignTest extends TestCase
             ->willReturn(Status::SENT);
 
         self::assertSame(Status::SENT, $this->provider->mapStatus('corrected'));
+    }
+
+    public function testImplementsAuditTrailCertificateProviderInterface(): void
+    {
+        self::assertInstanceOf(AuditTrailCertificateProviderInterface::class, $this->provider);
+    }
+
+    public function testFetchCertificateDelegatesToClient(): void
+    {
+        $document = $this->makeDocument();
+        $document->setProviderProcessId('env-1');
+        $expected = new AuditTrailCertificateResult('%PDF%', '1.2.3.4', null, 'env-1');
+        $this->client->expects(self::once())->method('getCertificate')->with(1, 'env-1')->willReturn($expected);
+
+        $result = $this->provider->fetchCertificate($document);
+
+        self::assertSame($expected, $result);
     }
 }

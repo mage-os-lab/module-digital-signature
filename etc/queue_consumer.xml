@@ -10,4 +10,10 @@
     <consumer name="digitalsignatureWebhookDispatch" queue="digitalsignature.webhook.dispatch" connection="db"
               handler="MageOS\DigitalSignature\Model\Queue\Consumer\WebhookConsumer::process"
               maxMessages="100"/>
+    <consumer name="digitalsignatureAuditTrailFetch" queue="digitalsignature.audit_trail.fetch" connection="db"
+              handler="MageOS\DigitalSignature\Model\Queue\Consumer\AuditTrailFetchConsumer::process"
+              maxMessages="100"/>
+    <consumer name="digitalsignatureDossierExport" queue="digitalsignature.dossier.export" connection="db"
+              handler="MageOS\DigitalSignature\Model\Queue\Consumer\DossierExportConsumer::process"
+              maxMessages="10"/>
 </config>

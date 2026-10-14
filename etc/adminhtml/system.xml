@@ -690,6 +690,54 @@
                     <frontend_model>MageOS\DigitalSignature\Block\Adminhtml\System\Config\AvailableConnectors</frontend_model>
                 </field>
             </group>
+            <group id="audit_trail" translate="label comment" type="text" sortOrder="22"
+                   showInDefault="1" showInWebsite="0" showInStore="0">
+                <label>Audit trail (eIDAS compliance)</label>
+                <comment><![CDATA[Signature documents are only generated once this choice is made explicitly. Collecting audit trail data (signer IP, authentication details, provider certificates) means retaining personal data for a compliance/legal purpose distinct from, and typically longer than, the retention configured below for the document itself: check with your data protection advisor before enabling it.]]></comment>
+                <field id="data_collection" translate="label comment" type="select" sortOrder="10"
+                       showInDefault="1" showInWebsite="0" showInStore="0" canRestore="1">
+                    <label>Collect audit trail data</label>
+                    <comment>Blocking choice: no document is generated until this is set to Yes or No.</comment>
+                    <source_model>MageOS\DigitalSignature\Model\Config\Source\AuditTrailDataCollection</source_model>
+                </field>
+                <field id="policy_ack" translate="label comment" type="select" sortOrder="20"
+                       showInDefault="1" showInWebsite="0" showInStore="0" canRestore="1">
+                    <label>Retention policy acknowledgement</label>
+                    <comment><![CDATA[Check this ONLY after defining, for this store, the legal basis and retention period for the audit trail data listed above (see the comment on this section).]]></comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends><field id="data_collection">1</field></depends>
+                </field>
+                <field id="retention_days" translate="label comment" type="text" sortOrder="30"
+                       showInDefault="1" showInWebsite="0" showInStore="0" canRestore="1">
+                    <label>Audit trail retention (days)</label>
+                    <comment>Independent from the document retention below: typically tied to the contract's legal prescription period, not a GDPR minimum.</comment>
+                    <validate>validate-digits validate-greater-than-zero</validate>
+                    <depends><field id="data_collection">1</field></depends>
+                </field>
+            </group>
+            <group id="dossier_export" translate="label comment" type="text" sortOrder="23"
+                   showInDefault="1" showInWebsite="0" showInStore="0">
+                <label>Dossier export</label>
+                <comment>Limits for the Export dossier (ZIP) mass action. Larger selections are generated in the background and listed under Digital Signature > Dossier exports.</comment>
+                <field id="max_documents" translate="label comment" type="text" sortOrder="10"
+                       showInDefault="1" showInWebsite="0" showInStore="0" canRestore="1">
+                    <label>Maximum documents per export</label>
+                    <comment>Larger selections are refused.</comment>
+                    <validate>validate-digits validate-greater-than-zero</validate>
+                </field>
+                <field id="sync_threshold" translate="label comment" type="text" sortOrder="20"
+                       showInDefault="1" showInWebsite="0" showInStore="0" canRestore="1">
+                    <label>Immediate download up to (documents)</label>
+                    <comment>Up to this number the ZIP is downloaded immediately; above it the export is queued. 0 = always queued.</comment>
+                    <validate>validate-digits</validate>
+                </field>
+                <field id="retention_hours" translate="label comment" type="text" sortOrder="30"
+                       showInDefault="1" showInWebsite="0" showInStore="0" canRestore="1">
+                    <label>Keep queued exports for (hours)</label>
+                    <comment>Generated ZIP files contain personal data and are deleted after this period.</comment>
+                    <validate>validate-digits validate-greater-than-zero</validate>
+                </field>
+            </group>
             <group id="retention" translate="label comment" type="text" sortOrder="25"
                    showInDefault="1" showInWebsite="0" showInStore="0">
                 <label>Document retention (GDPR)</label>

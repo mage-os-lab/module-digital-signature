@@ -5,8 +5,12 @@
 """Expired/declined"" template (customer)","""已过期/已拒绝""邮件模板（客户）"
 """Expired/rejected"" template (admin)","""已过期/已拒绝""邮件模板（管理员）"
 """Expired/rejected"" template (customer)","""已过期/已拒绝""邮件模板（客户）"
+%1 Start the export again from Digital Signature > Signature documents.,%1 请从 Digital Signature > 签署文档 重新开始导出。
+%1 dossier export(s) could not be deleted.,%1 个档案导出无法删除。
+%1 dossier export(s) deleted.,已删除 %1 个档案导出。
 -- All Store Views --,-- 所有商店视图 --
 -- None --,-- 无 --
+-- Please choose --,-- 请选择 --
 -- Use global default --,-- 使用全局默认值 --
 A document signing process has ended with a negative outcome.,文档签署流程已以负面结果结束。
 API Access Point,API 接入点
@@ -31,6 +35,7 @@ Adobe Acrobat Sign Developer Guide,Adobe Acrobat Sign 开发者指南
 "Adobe Acrobat Sign: agreement creation failed, no ID received.",Adobe Acrobat Sign：创建协议失败，未收到 ID。
 Adobe Acrobat Sign: document upload succeeded but is missing transientDocumentId.,Adobe Acrobat Sign：文档上传成功，但缺少 transientDocumentId。
 Adobe Acrobat Sign: downloaded PDF content is empty.,Adobe Acrobat Sign：下载的 PDF 内容为空。
+Adobe Acrobat Sign: downloaded audit trail content is empty.,Adobe Acrobat Sign：下载的审计跟踪内容为空。
 Adobe Acrobat Sign: network error during %1: %2,Adobe Acrobat Sign：在 %1 期间发生网络错误：%2
 Adobe Acrobat Sign: non-JSON response during %1.,Adobe Acrobat Sign：在 %1 期间返回了非 JSON 响应。
 Adobe Acrobat Sign: signer email is missing or invalid.,Adobe Acrobat Sign：签署人邮箱缺失或无效。
@@ -48,12 +53,15 @@ Alert Threshold (%),警报阈值 (%)
 All time,所有时间
 Allow dispatch and log warning,允许发送并记录警告
 Allow dummy provider,允许使用 Dummy 提供商
+An error occurred while generating the dossier.,生成档案时出错。
 Analysis period:,分析周期：
 Annual Allowance (Commitment),年度承诺额度
 Application ID (Client ID),应用程序 ID (Client ID)
 Application ID retrieved from the Adobe Developer Console.,从 Adobe Developer Console 获取的应用程序 ID。
 Are you sure you want to delete this webhook subscription?,确定要删除此 Webhook 订阅吗？
 Assigned Products,已分配产品
+Audit trail (eIDAS compliance),审计跟踪（eIDAS 合规）
+Audit trail retention (days),审计跟踪保留期（天）
 Auto-sign delay (seconds),自动签名延迟（秒）
 Automatic reminders,自动催签
 Automatically delete past the retention period,超过保留期后自动删除
@@ -62,6 +70,7 @@ Avg signing time,平均签署时间
 Back,返回
 Black,黑色
 Block new signature requests,阻止新的签名请求
+Blocking choice: no document is generated until this is set to Yes or No.,阻断性选择：在设置为“是”或“否”之前，不会生成任何文档。
 CDN,CDN
 Callback IP allowlist,回调 IP 白名单
 Cancel,取消
@@ -75,12 +84,15 @@ Cap on documents queued per cron run (throttling toward the provider).,每次定
 Cart / Order,购物车/订单
 Cart not available.,购物车不可用。
 Cart/Order,购物车/订单
+"Check this ONLY after defining, for this store, the legal basis and retention period for the audit trail data listed above (see the comment on this section).",仅在为此商店确定上述审计跟踪数据的法律依据和保留期限后才勾选此项（参见本节说明）。
 "Check this ONLY after signing a DPA (Data Processing Agreement) with the selected signature provider and updating the store's privacy policy to disclose that customer personal data (email, phone) is sent to a third-party provider for the signing process. Until this is checked, all new documents are generated with the dummy (test) provider, regardless of the provider configured below.",仅在与所选签名提供商签订 DPA（数据处理协议）并更新商店隐私政策（说明将客户个人数据如邮箱、电话发送给第三方提供商用于签名流程）后才勾选此项。未勾选前，无论下方配置了哪个提供商，所有新文档都将使用 dummy（测试）提供商生成。
 "Check this box ONLY after signing a DPA (Data Processing Agreement) with the selected signature provider and updating the store's privacy policy to disclose that customer personal data (email, phone) is sent to a third-party provider for the signing process. Until checked, all new documents are generated with the dummy (test) provider, regardless of the provider configured below.",仅在与所选签名服务商签署 DPA（数据处理协议），并更新商店隐私政策以披露客户个人数据（邮箱、电话）会被发送给第三方服务商用于签署流程后，才勾选此框。在勾选之前，无论下方配置了哪个服务商，所有新文档都将使用虚拟（测试）服务商生成。
 Client Secret,客户端密钥 (Client Secret)
+Collect audit trail data,收集审计跟踪数据
 "Color used to print the signature tag on the actual document generated for the order. Select ""White (Invisible)"" to hide it beneath the digital signature.",用于在订单生成的实际文档上打印签名标签的颜色。选择“白色（不可见）”可将其隐藏在电子签名之下。
 Comma-separated IPs; empty = no IP filter (the secret token still applies).,逗号分隔的 IP；留空 = 无 IP 过滤（机密令牌仍然有效）。
 Comma-separated IPs; empty = no IP filtering (the secret token still applies).,以逗号分隔的 IP 列表；留空 = 不做 IP 过滤（仍会校验密钥令牌）。
+Completed on,完成时间
 Configuration,配置
 Confirm Position,确认位置
 Connector to integrate digital and electronic signatures from Adobe Acrobat Sign. Supports OAuth2 authentication and asynchronous signature process tracking.,用于集成 Adobe Acrobat Sign 电子和数字签名的连接器。支持 OAuth2 认证和异步签署流程追踪。
@@ -109,6 +121,8 @@ Default generation trigger,默认生成触发器
 Default phone prefix,默认电话区号
 Delete,删除
 Delete Webhook subscription,删除 Webhook 订阅
+Delete dossier export #%1,删除档案导出 #%1
+Delete dossier exports,删除档案导出
 Delete integration,删除集成
 Delete template,删除模板
 "Delete the Webhook subscription ""%1""?",确定删除 Webhook 订阅“%1”吗？
@@ -116,6 +130,7 @@ Delete template,删除模板
 "Delete the template ""%1""?",确定删除模板“%1”吗？
 Delete this integration?,确定删除此集成吗？
 Delete this template? Documents already generated remain in the history.,确定删除此模板吗？已生成的文档仍会保留在历史记录中。
+Deleted after,删除时间
 Deliveries limit per run,每次运行发送限制
 Deliveries per run limit,每次运行发送限制
 Delivery attempts before marking the webhook as permanently failed.,将 Webhook 标记为永久失败前的投递重试次数。
@@ -123,12 +138,15 @@ Demo / Sandbox,演示 / 沙盒
 Detail: %error_message,详情：%error_message
 Details: %error_message,详情：%error_message
 Digital Signature,数字签名
+Digital Signature is enabled but the audit trail compliance choice (Stores > Configuration > Mage-OS > Digital Signature > Audit trail) has not been set for at least one store: document generation is blocked there until it is configured.,Digital Signature 已启用，但至少有一个商店尚未设置审计跟踪合规选项（商店 > 配置 > Mage-OS > Digital Signature > Audit trail）：在完成配置之前，该商店的文档生成将被阻止。
+Digital Signature is enabled but the audit trail compliance choice has not been configured for store %1. Configure it under Stores > Configuration > Mage-OS > Digital Signature > Audit trail before documents can be generated.,Digital Signature 已启用，但商店 %1 尚未配置审计跟踪合规选项。请先在 商店 > 配置 > Mage-OS > Digital Signature > Audit trail 中进行配置，然后才能生成文档。
 Disabled by default to avoid alarming customers: evaluate on a case-by-case basis.,默认关闭，以避免不必要的担忧：请根据具体情况评估。
 Disabled by default: deletion is destructive and should be enabled deliberately after defining the required retention periods (tax/legal).,默认关闭：删除操作具有破坏性，应在明确所需的（财务/法律）保留期限后再谨慎启用。
 DocuSign,DocuSign
 DocuSign Apps and Keys Panel,DocuSign Apps and Keys 面板
 DocuSign Developer Center,DocuSign 开发者中心
 DocuSign: downloaded PDF content is empty.,DocuSign：下载的 PDF 内容为空。
+DocuSign: downloaded certificate content is empty.,DocuSign：下载的证书内容为空。
 "DocuSign: envelope creation failed, no ID received.",DocuSign：信封创建失败，未收到 ID。
 DocuSign: error generating the JWT assertion: %1,DocuSign：生成 JWT 断言时出错：%1
 DocuSign: invalid document store.,DocuSign：文档所属店铺无效。
@@ -155,8 +173,19 @@ Document retention (GDPR),文档保留（GDPR）
 Document templates,文档模板
 "Document with id ""%1"" does not exist.",ID 为“%1”的文档不存在。
 Document: #%document_id,文档：#%document_id
+Documents,文档
 Documents per reconciliation limit,每次对账处理的文档数量上限
 Documents per run limit,每次运行的文档数量上限
+Dossier export,档案导出
+Dossier export #%1 could not be deleted.,无法删除档案导出 #%1。
+Dossier export #%1 deleted.,已删除档案导出 #%1。
+Dossier export #%1 failed,档案导出 #%1 失败
+Dossier export #%1 is ready,档案导出 #%1 已就绪
+Dossier export #%1 queued (%2 documents). You will be notified when it is ready under Digital Signature > Dossier exports.,档案导出 #%1 已加入队列（%2 个文档）。在 Digital Signature > 档案导出 中就绪后会通知您。
+"Dossier export with id ""%1"" does not exist.",ID 为“%1”的档案导出不存在。
+Dossier exports,档案导出
+Download,下载
+Download certificate,下载证书
 Download generated,下载已生成文件
 Download processed preview,下载已处理的预览
 Download signed,下载已签名文件
@@ -201,6 +230,8 @@ Error: %message,错误：%message
 Escalation template (admin),升级模板（管理员）
 Expired,已过期
 Expired or Declined,已过期或已拒绝
+Export dossier (ZIP),导出档案（ZIP）
+Failed,失败
 Fake provider that simulates signing locally. Do NOT use in production.,在本地模拟签名的虚拟提供商。请勿在生产环境中使用。
 File not specified.,未指定文件。
 For error and negative outcome notifications. Empty = store's general contact.,用于错误和负面结果通知。留空 = 商店的通用联系方式。
@@ -213,6 +244,7 @@ Generate signature documents (manual),生成签名文档（手动）
 Generate signature documents for the selected orders?,是否为所选订单生成签名文档？
 Generate template documents with manual trigger,通过手动触发器生成模板文档
 Generated,已生成
+Generated ZIP files contain personal data and are deleted after this period.,生成的 ZIP 文件包含个人数据，将在此期限后删除。
 Guide to integrating signature providers,电子签名服务商集成指南
 HMAC Secret,HMAC 密钥
 HTTP/HTTPS endpoint where JSON webhook push notifications will be sent.,接收 JSON 格式 Webhook 推送通知的 HTTP/HTTPS 端点。
@@ -221,7 +253,9 @@ Historical,历史记录
 I want to receive the contract to sign digitally,我希望收到需要电子签名的合同
 ID,ID
 "If you believe this is a mistake, contact our customer service. You can check your order here: <a href=""%url"">My orders</a>","如果您认为这是错误，请联系我们的客服。您可以在此查看订单：<a href=""%url"">我的订单</a>"
+Immediate download up to (documents),立即下载的上限（文档数）
 In development,开发中
+"Independent from the document retention below: typically tied to the contract's legal prescription period, not a GDPR minimum.",独立于下方的文档保留期：通常取决于合同的法定诉讼时效，而非 GDPR 最低要求。
 Integration,集成
 Integration ID,集成 ID
 Integration deleted.,集成已删除。
@@ -235,16 +269,20 @@ Invalid signature parameters.,签名参数无效。
 Invoice creation,发票创建
 Invoice paid,发票已付款
 Item,项目
+Keep queued exports for (hours),队列导出的保留时间（小时）
 LOW QUOTA,配额不足
+Larger selections are refused.,更大的选择将被拒绝。
 Last 30 days,最近30天
 Last 90 days,最近90天
 Last year,最近一年
+Limits for the Export dossier (ZIP) mass action. Larger selections are generated in the background and listed under Digital Signature > Dossier exports.,导出档案（ZIP）批量操作的限制。更大的选择会在后台生成，并列在 Digital Signature > 档案导出 中。
 Local (Recommended),本地（推荐）
 Long-lived refresh token used to generate API Access Tokens.,用于生成 API 访问令牌的长效刷新令牌。
 Mage-OS,Mage-OS
 "Manage the order in backend: <a href=\\""%url\""\"">%url</a>""","在后台管理订单：<a href=\\""%url\""\"">%url</a>"""
 Manual from backend,后台手动触发
 Maximum attempts,最大尝试次数
+Maximum documents per export,每次导出的最大文档数
 Maximum number of attempts,最大尝试次数
 Maximum number of attempts for temporary errors (network/service) before the error state.,进入错误状态前针对临时错误（网络/服务）的最大重试次数。
 Maximum number of customer reminders,客户最大催签次数
@@ -260,7 +298,9 @@ New Webhook Subscription,新建 Webhook 订阅
 New document template,新建文档模板
 New integration,新建集成
 Next,下一页
+No - do not collect additional audit trail data,否 - 不收集额外的审计跟踪数据
 "No API integration mapped for integration ""%1"".",集成“%1”未映射任何 API 集成。
+No documents were selected.,未选择任何文档。
 No integration selected.,未选择集成。
 No legal validity — test/development only,无法律效力 — 仅限测试/开发
 No signature documents for this order.,此订单没有签名文档。
@@ -310,16 +350,20 @@ Prepaid Credit Package (Pool),预付费额度包（资源池）
 Previous,返回
 Price,价格
 Process ID,流程 ID
+Processed,已处理
+Processing,处理中
 Processing of a signature document ended in error and requires manual intervention.,一份签名文档的处理已出错，需要人工干预。
 Product,产品
 Provider Quotas & Consumption,服务商配额与消耗
 Provider status,提供商状态
 Provider: %provider,服务商：%provider
+Queued,排队中
 Quota Model,配额模式
 Quota tracking disabled.,配额跟踪已禁用。
 RSA Private Key,RSA 私钥
 RSA Private Key (PEM),RSA 私钥 (PEM)
 Raw status returned by WsSign → internal document status. Unmapped statuses are logged so they can be added here.,WsSign 返回的原始状态 → 文档内部状态。未映射的状态会记录到日志中，以便在此处补充。
+Ready,就绪
 Regenerate / Resend,重新生成 / 重新发送
 Regenerate and resend this document?,重新生成并重新发送此文档？
 Remaining:,剩余：
@@ -327,8 +371,11 @@ Reminder template (customer),催签模板（客户）
 Reminder: Sign your contract (order %increment_id),提醒：签署您的合同（订单 %increment_id）
 Reminders for documents awaiting signature.,待签署文档的催签。
 Reminders for documents pending signature.,针对等待签署文档的提醒。
+Requested by,请求人
+Requested on,请求时间
 Required for Service Account JWT authentication.,用于服务账户 JWT 身份验证的必填项。
 Retention days,保留天数
+Retention policy acknowledgement,保留政策确认
 SKU,SKU
 Save integration,保存集成
 Save subscription,保存订阅
@@ -363,6 +410,7 @@ Signature document generation queued for %1 order(s).,已为%1个订单加入签
 Signature document generation request has been queued.,签名文档生成请求已受理。
 Signature document templates,签名文档模板
 Signature documents,签名文档
+"Signature documents are only generated once this choice is made explicitly. Collecting audit trail data (signer IP, authentication details, provider certificates) means retaining personal data for a compliance/legal purpose distinct from, and typically longer than, the retention configured below for the document itself: check with your data protection advisor before enabling it.",只有在明确做出此选择后才会生成签署文档。收集审计跟踪数据（签署人 IP、身份验证详情、服务商证书）意味着出于合规/法律目的保留个人数据，该目的有别于下方为文档本身配置的保留期，且通常更长：启用前请咨询您的数据保护顾问。
 Signature expiration (days),签名过期时间（天）
 Signature provider,签名服务商
 "Signature provider ""%1"" is not registered.",签名提供商“%1”未注册。
@@ -380,6 +428,7 @@ Signer\'s phone number is invalid.,签署人电话号码无效。
 Signer\'s phone number missing: required by WsSign for OTP via SMS.,缺少签署人电话号码：WsSign 的短信 OTP 需要此信息。
 Signing the contract is mandatory for the products in your cart.,购物车中的商品必须签署合同。
 "Simple (SES), Advanced (AES), Qualified (QES) Electronic Signature",简易 (SES)、高级 (AES)、合规 (QES) 电子签名
+Size (bytes),大小（字节）
 Status,状态
 Status mapping,状态映射
 Store view,商店视图
@@ -398,9 +447,11 @@ The Integration ID is required.,集成 ID 为必填项。
 The PDF exceeds the maximum size of 10 MB.,PDF 超过最大 10 MB 的限制。
 The Target URL is required.,目标 URL 为必填项。
 The Target URL must use the http or https scheme.,目标 URL 必须使用 http 或 https 协议。
+The ZIP file is deleted immediately. Continue?,ZIP 文件将立即删除。是否继续？
 The connector used for new documents once production mode is confirmed above. Configure the credentials in the provider's group.,在上方确认生产模式后用于新文档的连接器。请在对应提供商分组中配置凭据。
 The document has no associated template.,该文档没有关联的模板。
 The document has no generated PDF to send.,该文档没有可供发送的已生成 PDF。
+The dossier of %1 documents can be downloaded from Digital Signature > Dossier exports. It will be deleted after %2 hours.,包含 %1 个文档的档案可在 Digital Signature > 档案导出 中下载，将在 %2 小时后删除。
 The dummy provider is not enabled: enable it explicitly in the configuration (test environments only).,Dummy 提供商未启用：请在配置中显式启用（仅限测试环境）。
 The entered Target URL is invalid.,输入的目标 URL 无效。
 The following document is pending digital signature beyond the configured escalation period.,以下文档在超出配置的升级期限后仍在等待电子签署。
@@ -410,12 +461,14 @@ The name is required.,名称为必填项。
 The provider often already sends its own signing invitation: disabled by default.,服务商通常已经发送了自己的签名邀请：默认关闭。
 The provider often already sends its own signing invitation: off by default.,服务商通常已经发送了自己的签名邀请：默认关闭。
 The requested temporary file does not exist.,请求的临时文件不存在。
+The selected dossier exports and their ZIP files are deleted immediately. Continue?,所选档案导出及其 ZIP 文件将立即删除。是否继续？
 The signing process of a document ended with a negative outcome.,文档的签名流程已以负面结果结束。
 The template file is not a PDF.,模板文件不是 PDF。
 The template has no PDF file uploaded for this store view.,该模板在此商店视图下未上传 PDF 文件。
 The template name is required.,模板名称为必填项。
 The temporary file does not exist.,临时文件不存在。
 The uploaded file is not a valid PDF.,上传的文件不是有效的 PDF。
+This dossier export is not available for download.,此档案导出不可下载。
 This integration no longer exists.,此集成已不存在。
 This subscription no longer exists.,此订阅已不存在。
 This template no longer exists.,此模板已不存在。
@@ -427,6 +480,7 @@ Track signature credit consumption and send warning notifications when approachi
 Unable to complete file validation.,无法完成文件验证。
 Unable to delete Webhook subscription: %1,无法删除 Webhook 订阅：%1
 Unable to delete the API integration: %1,无法删除 API 集成：%1
+Unable to delete the dossier export: %1,无法删除档案导出：%1
 Unable to delete the template: %1,无法删除模板：%1
 Unable to download the PDF: %1,无法下载PDF：%1
 Unable to find the subscription to delete.,找不到要删除的订阅。
@@ -437,7 +491,9 @@ Unable to load the temporary PDF.,无法加载临时 PDF。
 Unable to regenerate the document: %1,无法重新生成文档：%1
 Unable to save Webhook subscription: %1,无法保存 Webhook 订阅：%1
 Unable to save the API integration: %1,无法保存 API 集成：%1
+Unable to save the audit trail: %1,无法保存审计跟踪：%1
 Unable to save the document: %1,无法保存文档：%1
+Unable to save the dossier export: %1,无法保存档案导出：%1
 Unable to save the template: %1,无法保存模板：%1
 Unable to save your choice.,无法保存您的选择。
 Unsupported PDF: /Pages is missing /Kids.,不支持的 PDF：/Pages 缺少 /Kids。
@@ -473,6 +529,7 @@ Unsupported PDF: trailer not found after the cross-reference table.,不支持的
 Unsupported PDF: unbalanced dictionary (missing closing delimiter).,不支持的 PDF：字典未闭合（缺少结束定界符）。
 Unsupported PDF: unrecognized PNG row filter in cross-reference stream (%1).,不支持的 PDF：交叉引用流中无法识别的 PNG 行过滤器（%1）。
 "Unsupported PDF: use a classic cross-reference table. Save/export the document as ""PDF 1.4"" and re-upload the file.",不支持的 PDF：请使用经典交叉引用表。将文档另存为/导出为“PDF 1.4”后重新上传。
+Up to this number the ZIP is downloaded immediately; above it the export is queued. 0 = always queued.,不超过此数量时立即下载 ZIP；超过则加入队列。0 = 始终加入队列。
 Update on the contract to sign (order %increment_id),关于待签合同的更新（订单 %increment_id）
 Used when the template does not specify its own trigger.,当模板未指定自己的触发器时使用。
 Username (owner),用户名（所有者）
@@ -508,9 +565,11 @@ WsSign: status missing from the provider\'s response.,WsSign：提供商响应�
 WsSign: the document has no started process.,WsSign：该文档尚未启动流程。
 WsSign: the downloaded content is not a valid PDF.,WsSign：下载的内容不是有效的 PDF。
 "WsSign: unexpected response structure during ""%1"".",WsSign：在“%1”期间返回了意外的响应结构。
+Yes - collect and retain audit trail data,是 - 收集并保留审计跟踪数据
 "You can check your order status here: <a href=""%url"">My orders</a>","您可以在此查看订单状态：<a href=""%url"">我的订单</a>"
 "You can download the signed document from your account area: <a href=""%url"">Go to the order</a>","您可以从您的客户中心下载已签名文档：<a href=""%url"">前往订单</a>"
 You must accept the digital signature of the contract to proceed.,若要继续，您必须接受合同的电子签名。
+You selected %1 documents: the dossier export is limited to %2. Narrow the selection.,您选择了 %1 个文档：档案导出上限为 %2。请缩小选择范围。
 You will soon receive (or have already received) instructions from the signature service at %email. Follow that process to complete the signature.,您很快将收到（或已经收到）签名服务发送至 %email 的说明。请按照该流程完成签名。
 Your contract to sign digitally is ready (order %increment_id),您需要电子签名的合同已准备就绪（订单 %increment_id）
 Your signed contract is available (order %increment_id),您的已签名合同现已可用（订单 %increment_id）

@@ -5,8 +5,12 @@
 """Expired/declined"" template (customer)","""Expired/declined"" template (customer)"
 """Expired/rejected"" template (admin)","""Expired/rejected"" template (admin)"
 """Expired/rejected"" template (customer)","""Expired/rejected"" template (customer)"
+%1 Start the export again from Digital Signature > Signature documents.,%1 Start the export again from Digital Signature > Signature documents.
+%1 dossier export(s) could not be deleted.,%1 dossier export(s) could not be deleted.
+%1 dossier export(s) deleted.,%1 dossier export(s) deleted.
 -- All Store Views --,-- All Store Views --
 -- None --,-- None --
+-- Please choose --,-- Please choose --
 -- Use global default --,-- Use global default --
 A document signing process has ended with a negative outcome.,A document signing process has ended with a negative outcome.
 API Access Point,API Access Point
@@ -31,6 +35,7 @@ Adobe Acrobat Sign Developer Guide,Adobe Acrobat Sign Developer Guide
 "Adobe Acrobat Sign: agreement creation failed, no ID received.","Adobe Acrobat Sign: agreement creation failed, no ID received."
 Adobe Acrobat Sign: document upload succeeded but is missing transientDocumentId.,Adobe Acrobat Sign: document upload succeeded but is missing transientDocumentId.
 Adobe Acrobat Sign: downloaded PDF content is empty.,Adobe Acrobat Sign: downloaded PDF content is empty.
+Adobe Acrobat Sign: downloaded audit trail content is empty.,Adobe Acrobat Sign: downloaded audit trail content is empty.
 Adobe Acrobat Sign: network error during %1: %2,Adobe Acrobat Sign: network error during %1: %2
 Adobe Acrobat Sign: non-JSON response during %1.,Adobe Acrobat Sign: non-JSON response during %1.
 Adobe Acrobat Sign: signer email is missing or invalid.,Adobe Acrobat Sign: signer email is missing or invalid.
@@ -48,12 +53,15 @@ Alert Threshold (%),Alert Threshold (%)
 All time,All time
 Allow dispatch and log warning,Allow dispatch and log warning
 Allow dummy provider,Allow dummy provider
+An error occurred while generating the dossier.,An error occurred while generating the dossier.
 Analysis period:,Analysis period:
 Annual Allowance (Commitment),Annual Allowance (Commitment)
 Application ID (Client ID),Application ID (Client ID)
 Application ID retrieved from the Adobe Developer Console.,Application ID retrieved from the Adobe Developer Console.
 Are you sure you want to delete this webhook subscription?,Are you sure you want to delete this webhook subscription?
 Assigned Products,Assigned Products
+Audit trail (eIDAS compliance),Audit trail (eIDAS compliance)
+Audit trail retention (days),Audit trail retention (days)
 Auto-sign delay (seconds),Auto-sign delay (seconds)
 Automatic reminders,Automatic reminders
 Automatically delete past the retention period,Automatically delete past the retention period
@@ -62,6 +70,7 @@ Avg signing time,Avg signing time
 Back,Back
 Black,Black
 Block new signature requests,Block new signature requests
+Blocking choice: no document is generated until this is set to Yes or No.,Blocking choice: no document is generated until this is set to Yes or No.
 CDN,CDN
 Callback IP allowlist,Callback IP allowlist
 Cancel,Cancel
@@ -75,12 +84,15 @@ Cap on documents queued per cron run (throttling toward the provider).,Cap on do
 Cart / Order,Cart / Order
 Cart not available.,Cart not available.
 Cart/Order,Cart/Order
+"Check this ONLY after defining, for this store, the legal basis and retention period for the audit trail data listed above (see the comment on this section).","Check this ONLY after defining, for this store, the legal basis and retention period for the audit trail data listed above (see the comment on this section)."
 "Check this ONLY after signing a DPA (Data Processing Agreement) with the selected signature provider and updating the store's privacy policy to disclose that customer personal data (email, phone) is sent to a third-party provider for the signing process. Until this is checked, all new documents are generated with the dummy (test) provider, regardless of the provider configured below.","Check this ONLY after signing a DPA (Data Processing Agreement) with the selected signature provider and updating the store's privacy policy to disclose that customer personal data (email, phone) is sent to a third-party provider for the signing process. Until this is checked, all new documents are generated with the dummy (test) provider, regardless of the provider configured below."
 "Check this box ONLY after signing a DPA (Data Processing Agreement) with the selected signature provider and updating the store's privacy policy to disclose that customer personal data (email, phone) is sent to a third-party provider for the signing process. Until checked, all new documents are generated with the dummy (test) provider, regardless of the provider configured below.","Check this box ONLY after signing a DPA (Data Processing Agreement) with the selected signature provider and updating the store's privacy policy to disclose that customer personal data (email, phone) is sent to a third-party provider for the signing process. Until checked, all new documents are generated with the dummy (test) provider, regardless of the provider configured below."
 Client Secret,Client Secret
+Collect audit trail data,Collect audit trail data
 "Color used to print the signature tag on the actual document generated for the order. Select ""White (Invisible)"" to hide it beneath the digital signature.","Color used to print the signature tag on the actual document generated for the order. Select ""White (Invisible)"" to hide it beneath the digital signature."
 Comma-separated IPs; empty = no IP filter (the secret token still applies).,Comma-separated IPs; empty = no IP filter (the secret token still applies).
 Comma-separated IPs; empty = no IP filtering (the secret token still applies).,Comma-separated IPs; empty = no IP filtering (the secret token still applies).
+Completed on,Completed on
 Configuration,Configuration
 Confirm Position,Confirm Position
 Connector to integrate digital and electronic signatures from Adobe Acrobat Sign. Supports OAuth2 authentication and asynchronous signature process tracking.,Connector to integrate digital and electronic signatures from Adobe Acrobat Sign. Supports OAuth2 authentication and asynchronous signature process tracking.
@@ -109,6 +121,8 @@ Default generation trigger,Default generation trigger
 Default phone prefix,Default phone prefix
 Delete,Delete
 Delete Webhook subscription,Delete Webhook subscription
+Delete dossier export #%1,Delete dossier export #%1
+Delete dossier exports,Delete dossier exports
 Delete integration,Delete integration
 Delete template,Delete template
 "Delete the Webhook subscription ""%1""?","Delete the Webhook subscription ""%1""?"
@@ -116,6 +130,7 @@ Delete template,Delete template
 "Delete the template ""%1""?","Delete the template ""%1""?"
 Delete this integration?,Delete this integration?
 Delete this template? Documents already generated remain in the history.,Delete this template? Documents already generated remain in the history.
+Deleted after,Deleted after
 Deliveries limit per run,Deliveries limit per run
 Deliveries per run limit,Deliveries per run limit
 Delivery attempts before marking the webhook as permanently failed.,Delivery attempts before marking the webhook as permanently failed.
@@ -123,12 +138,15 @@ Demo / Sandbox,Demo / Sandbox
 Detail: %error_message,Detail: %error_message
 Details: %error_message,Details: %error_message
 Digital Signature,Digital Signature
+Digital Signature is enabled but the audit trail compliance choice (Stores > Configuration > Mage-OS > Digital Signature > Audit trail) has not been set for at least one store: document generation is blocked there until it is configured.,Digital Signature is enabled but the audit trail compliance choice (Stores > Configuration > Mage-OS > Digital Signature > Audit trail) has not been set for at least one store: document generation is blocked there until it is configured.
+Digital Signature is enabled but the audit trail compliance choice has not been configured for store %1. Configure it under Stores > Configuration > Mage-OS > Digital Signature > Audit trail before documents can be generated.,Digital Signature is enabled but the audit trail compliance choice has not been configured for store %1. Configure it under Stores > Configuration > Mage-OS > Digital Signature > Audit trail before documents can be generated.
 Disabled by default to avoid alarming customers: evaluate on a case-by-case basis.,Disabled by default to avoid alarming customers: evaluate on a case-by-case basis.
 Disabled by default: deletion is destructive and should be enabled deliberately after defining the required retention periods (tax/legal).,Disabled by default: deletion is destructive and should be enabled deliberately after defining the required retention periods (tax/legal).
 DocuSign,DocuSign
 DocuSign Apps and Keys Panel,DocuSign Apps and Keys Panel
 DocuSign Developer Center,DocuSign Developer Center
 DocuSign: downloaded PDF content is empty.,DocuSign: downloaded PDF content is empty.
+DocuSign: downloaded certificate content is empty.,DocuSign: downloaded certificate content is empty.
 "DocuSign: envelope creation failed, no ID received.","DocuSign: envelope creation failed, no ID received."
 DocuSign: error generating the JWT assertion: %1,DocuSign: error generating the JWT assertion: %1
 DocuSign: invalid document store.,DocuSign: invalid document store.
@@ -155,8 +173,19 @@ Document retention (GDPR),Document retention (GDPR)
 Document templates,Document templates
 "Document with id ""%1"" does not exist.","Document with id ""%1"" does not exist."
 Document: #%document_id,Document: #%document_id
+Documents,Documents
 Documents per reconciliation limit,Documents per reconciliation limit
 Documents per run limit,Documents per run limit
+Dossier export,Dossier export
+Dossier export #%1 could not be deleted.,Dossier export #%1 could not be deleted.
+Dossier export #%1 deleted.,Dossier export #%1 deleted.
+Dossier export #%1 failed,Dossier export #%1 failed
+Dossier export #%1 is ready,Dossier export #%1 is ready
+Dossier export #%1 queued (%2 documents). You will be notified when it is ready under Digital Signature > Dossier exports.,Dossier export #%1 queued (%2 documents). You will be notified when it is ready under Digital Signature > Dossier exports.
+"Dossier export with id ""%1"" does not exist.","Dossier export with id ""%1"" does not exist."
+Dossier exports,Dossier exports
+Download,Download
+Download certificate,Download certificate
 Download generated,Download generated
 Download processed preview,Download processed preview
 Download signed,Download signed
@@ -201,6 +230,8 @@ Error: %message,Error: %message
 Escalation template (admin),Escalation template (admin)
 Expired,Expired
 Expired or Declined,Expired or Declined
+Export dossier (ZIP),Export dossier (ZIP)
+Failed,Failed
 Fake provider that simulates signing locally. Do NOT use in production.,Fake provider that simulates signing locally. Do NOT use in production.
 File not specified.,File not specified.
 For error and negative outcome notifications. Empty = store's general contact.,For error and negative outcome notifications. Empty = store's general contact.
@@ -213,6 +244,7 @@ Generate signature documents (manual),Generate signature documents (manual)
 Generate signature documents for the selected orders?,Generate signature documents for the selected orders?
 Generate template documents with manual trigger,Generate template documents with manual trigger
 Generated,Generated
+Generated ZIP files contain personal data and are deleted after this period.,Generated ZIP files contain personal data and are deleted after this period.
 Guide to integrating signature providers,Guide to integrating signature providers
 HMAC Secret,HMAC Secret
 HTTP/HTTPS endpoint where JSON webhook push notifications will be sent.,HTTP/HTTPS endpoint where JSON webhook push notifications will be sent.
@@ -221,7 +253,9 @@ Historical,Historical
 I want to receive the contract to sign digitally,I want to receive the contract to sign digitally
 ID,ID
 "If you believe this is a mistake, contact our customer service. You can check your order here: <a href=""%url"">My orders</a>","If you believe this is a mistake, contact our customer service. You can check your order here: <a href=""%url"">My orders</a>"
+Immediate download up to (documents),Immediate download up to (documents)
 In development,In development
+"Independent from the document retention below: typically tied to the contract's legal prescription period, not a GDPR minimum.","Independent from the document retention below: typically tied to the contract's legal prescription period, not a GDPR minimum."
 Integration,Integration
 Integration ID,Integration ID
 Integration deleted.,Integration deleted.
@@ -235,16 +269,20 @@ Invalid signature parameters.,Invalid signature parameters.
 Invoice creation,Invoice creation
 Invoice paid,Invoice paid
 Item,Item
+Keep queued exports for (hours),Keep queued exports for (hours)
 LOW QUOTA,LOW QUOTA
+Larger selections are refused.,Larger selections are refused.
 Last 30 days,Last 30 days
 Last 90 days,Last 90 days
 Last year,Last year
+Limits for the Export dossier (ZIP) mass action. Larger selections are generated in the background and listed under Digital Signature > Dossier exports.,Limits for the Export dossier (ZIP) mass action. Larger selections are generated in the background and listed under Digital Signature > Dossier exports.
 Local (Recommended),Local (Recommended)
 Long-lived refresh token used to generate API Access Tokens.,Long-lived refresh token used to generate API Access Tokens.
 Mage-OS,Mage-OS
 "Manage the order in backend: <a href=\\""%url\""\"">%url</a>""","Manage the order in backend: <a href=\\""%url\""\"">%url</a>"""
 Manual from backend,Manual from backend
 Maximum attempts,Maximum attempts
+Maximum documents per export,Maximum documents per export
 Maximum number of attempts,Maximum number of attempts
 Maximum number of attempts for temporary errors (network/service) before the error state.,Maximum number of attempts for temporary errors (network/service) before the error state.
 Maximum number of customer reminders,Maximum number of customer reminders
@@ -260,7 +298,9 @@ New Webhook Subscription,New Webhook Subscription
 New document template,New document template
 New integration,New integration
 Next,Next
+No - do not collect additional audit trail data,No - do not collect additional audit trail data
 "No API integration mapped for integration ""%1"".","No API integration mapped for integration ""%1""."
+No documents were selected.,No documents were selected.
 No integration selected.,No integration selected.
 No legal validity — test/development only,No legal validity — test/development only
 No signature documents for this order.,No signature documents for this order.
@@ -310,16 +350,20 @@ Prepaid Credit Package (Pool),Prepaid Credit Package (Pool)
 Previous,Previous
 Price,Price
 Process ID,Process ID
+Processed,Processed
+Processing,Processing
 Processing of a signature document ended in error and requires manual intervention.,Processing of a signature document ended in error and requires manual intervention.
 Product,Product
 Provider Quotas & Consumption,Provider Quotas & Consumption
 Provider status,Provider status
 Provider: %provider,Provider: %provider
+Queued,Queued
 Quota Model,Quota Model
 Quota tracking disabled.,Quota tracking disabled.
 RSA Private Key,RSA Private Key
 RSA Private Key (PEM),RSA Private Key (PEM)
 Raw status returned by WsSign → internal document status. Unmapped statuses are logged so they can be added here.,Raw status returned by WsSign → internal document status. Unmapped statuses are logged so they can be added here.
+Ready,Ready
 Regenerate / Resend,Regenerate / Resend
 Regenerate and resend this document?,Regenerate and resend this document?
 Remaining:,Remaining:
@@ -327,8 +371,11 @@ Reminder template (customer),Reminder template (customer)
 Reminder: Sign your contract (order %increment_id),Reminder: Sign your contract (order %increment_id)
 Reminders for documents awaiting signature.,Reminders for documents awaiting signature.
 Reminders for documents pending signature.,Reminders for documents pending signature.
+Requested by,Requested by
+Requested on,Requested on
 Required for Service Account JWT authentication.,Required for Service Account JWT authentication.
 Retention days,Retention days
+Retention policy acknowledgement,Retention policy acknowledgement
 SKU,SKU
 Save integration,Save integration
 Save subscription,Save subscription
@@ -363,6 +410,7 @@ Signature document generation queued for %1 order(s).,Signature document generat
 Signature document generation request has been queued.,Signature document generation request has been queued.
 Signature document templates,Signature document templates
 Signature documents,Signature documents
+"Signature documents are only generated once this choice is made explicitly. Collecting audit trail data (signer IP, authentication details, provider certificates) means retaining personal data for a compliance/legal purpose distinct from, and typically longer than, the retention configured below for the document itself: check with your data protection advisor before enabling it.","Signature documents are only generated once this choice is made explicitly. Collecting audit trail data (signer IP, authentication details, provider certificates) means retaining personal data for a compliance/legal purpose distinct from, and typically longer than, the retention configured below for the document itself: check with your data protection advisor before enabling it."
 Signature expiration (days),Signature expiration (days)
 Signature provider,Signature provider
 "Signature provider ""%1"" is not registered.","Signature provider ""%1"" is not registered."
@@ -380,6 +428,7 @@ Signer\'s phone number is invalid.,Signer\'s phone number is invalid.
 Signer\'s phone number missing: required by WsSign for OTP via SMS.,Signer\'s phone number missing: required by WsSign for OTP via SMS.
 Signing the contract is mandatory for the products in your cart.,Signing the contract is mandatory for the products in your cart.
 "Simple (SES), Advanced (AES), Qualified (QES) Electronic Signature","Simple (SES), Advanced (AES), Qualified (QES) Electronic Signature"
+Size (bytes),Size (bytes)
 Status,Status
 Status mapping,Status mapping
 Store view,Store view
@@ -398,9 +447,11 @@ The Integration ID is required.,The Integration ID is required.
 The PDF exceeds the maximum size of 10 MB.,The PDF exceeds the maximum size of 10 MB.
 The Target URL is required.,The Target URL is required.
 The Target URL must use the http or https scheme.,The Target URL must use the http or https scheme.
+The ZIP file is deleted immediately. Continue?,The ZIP file is deleted immediately. Continue?
 The connector used for new documents once production mode is confirmed above. Configure the credentials in the provider's group.,The connector used for new documents once production mode is confirmed above. Configure the credentials in the provider's group.
 The document has no associated template.,The document has no associated template.
 The document has no generated PDF to send.,The document has no generated PDF to send.
+The dossier of %1 documents can be downloaded from Digital Signature > Dossier exports. It will be deleted after %2 hours.,The dossier of %1 documents can be downloaded from Digital Signature > Dossier exports. It will be deleted after %2 hours.
 The dummy provider is not enabled: enable it explicitly in the configuration (test environments only).,The dummy provider is not enabled: enable it explicitly in the configuration (test environments only).
 The entered Target URL is invalid.,The entered Target URL is invalid.
 The following document is pending digital signature beyond the configured escalation period.,The following document is pending digital signature beyond the configured escalation period.
@@ -410,12 +461,14 @@ The name is required.,The name is required.
 The provider often already sends its own signing invitation: disabled by default.,The provider often already sends its own signing invitation: disabled by default.
 The provider often already sends its own signing invitation: off by default.,The provider often already sends its own signing invitation: off by default.
 The requested temporary file does not exist.,The requested temporary file does not exist.
+The selected dossier exports and their ZIP files are deleted immediately. Continue?,The selected dossier exports and their ZIP files are deleted immediately. Continue?
 The signing process of a document ended with a negative outcome.,The signing process of a document ended with a negative outcome.
 The template file is not a PDF.,The template file is not a PDF.
 The template has no PDF file uploaded for this store view.,The template has no PDF file uploaded for this store view.
 The template name is required.,The template name is required.
 The temporary file does not exist.,The temporary file does not exist.
 The uploaded file is not a valid PDF.,The uploaded file is not a valid PDF.
+This dossier export is not available for download.,This dossier export is not available for download.
 This integration no longer exists.,This integration no longer exists.
 This subscription no longer exists.,This subscription no longer exists.
 This template no longer exists.,This template no longer exists.
@@ -427,6 +480,7 @@ Track signature credit consumption and send warning notifications when approachi
 Unable to complete file validation.,Unable to complete file validation.
 Unable to delete Webhook subscription: %1,Unable to delete Webhook subscription: %1
 Unable to delete the API integration: %1,Unable to delete the API integration: %1
+Unable to delete the dossier export: %1,Unable to delete the dossier export: %1
 Unable to delete the template: %1,Unable to delete the template: %1
 Unable to download the PDF: %1,Unable to download the PDF: %1
 Unable to find the subscription to delete.,Unable to find the subscription to delete.
@@ -437,7 +491,9 @@ Unable to load the temporary PDF.,Unable to load the temporary PDF.
 Unable to regenerate the document: %1,Unable to regenerate the document: %1
 Unable to save Webhook subscription: %1,Unable to save Webhook subscription: %1
 Unable to save the API integration: %1,Unable to save the API integration: %1
+Unable to save the audit trail: %1,Unable to save the audit trail: %1
 Unable to save the document: %1,Unable to save the document: %1
+Unable to save the dossier export: %1,Unable to save the dossier export: %1
 Unable to save the template: %1,Unable to save the template: %1
 Unable to save your choice.,Unable to save your choice.
 Unsupported PDF: /Pages is missing /Kids.,Unsupported PDF: /Pages is missing /Kids.
@@ -473,6 +529,7 @@ Unsupported PDF: trailer not found after the cross-reference table.,Unsupported 
 Unsupported PDF: unbalanced dictionary (missing closing delimiter).,Unsupported PDF: unbalanced dictionary (missing closing delimiter).
 Unsupported PDF: unrecognized PNG row filter in cross-reference stream (%1).,Unsupported PDF: unrecognized PNG row filter in cross-reference stream (%1).
 "Unsupported PDF: use a classic cross-reference table. Save/export the document as ""PDF 1.4"" and re-upload the file.","Unsupported PDF: use a classic cross-reference table. Save/export the document as ""PDF 1.4"" and re-upload the file."
+Up to this number the ZIP is downloaded immediately; above it the export is queued. 0 = always queued.,Up to this number the ZIP is downloaded immediately; above it the export is queued. 0 = always queued.
 Update on the contract to sign (order %increment_id),Update on the contract to sign (order %increment_id)
 Used when the template does not specify its own trigger.,Used when the template does not specify its own trigger.
 Username (owner),Username (owner)
@@ -508,9 +565,11 @@ WsSign: status missing from the provider\'s response.,WsSign: status missing fro
 WsSign: the document has no started process.,WsSign: the document has no started process.
 WsSign: the downloaded content is not a valid PDF.,WsSign: the downloaded content is not a valid PDF.
 "WsSign: unexpected response structure during ""%1"".","WsSign: unexpected response structure during ""%1""."
+Yes - collect and retain audit trail data,Yes - collect and retain audit trail data
 "You can check your order status here: <a href=""%url"">My orders</a>","You can check your order status here: <a href=""%url"">My orders</a>"
 "You can download the signed document from your account area: <a href=""%url"">Go to the order</a>","You can download the signed document from your account area: <a href=""%url"">Go to the order</a>"
 You must accept the digital signature of the contract to proceed.,You must accept the digital signature of the contract to proceed.
+You selected %1 documents: the dossier export is limited to %2. Narrow the selection.,You selected %1 documents: the dossier export is limited to %2. Narrow the selection.
 You will soon receive (or have already received) instructions from the signature service at %email. Follow that process to complete the signature.,You will soon receive (or have already received) instructions from the signature service at %email. Follow that process to complete the signature.
 Your contract to sign digitally is ready (order %increment_id),Your contract to sign digitally is ready (order %increment_id)
 Your signed contract is available (order %increment_id),Your signed contract is available (order %increment_id)

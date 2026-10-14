@@ -177,6 +177,38 @@ class ClientTest extends TestCase
         $client->downloadCombinedDocument(self::STORE_ID, 'agreement-1');
     }
 
+    public function testGetAuditTrailReturnsPdf(): void
+    {
+        $this->configureValidCredentials();
+        $this->cache->method('load')->willReturn($this->cachedSessionJson());
+
+        $auditTrailCurl = new FakeCurl();
+        $auditTrailCurl->body = "%PDF-1.4\naudit trail report";
+
+        $client = $this->makeClient(new SequencedCurlFactory($auditTrailCurl));
+
+        $result = $client->getAuditTrail(self::STORE_ID, 'agr-1');
+
+        self::assertStringStartsWith('%PDF', $result->getCertificateContent());
+        self::assertSame('agr-1', $result->getTransactionId());
+        self::assertNull($result->getSignerIp());
+        self::assertSame('application/pdf', $auditTrailCurl->headers['Accept'] ?? null);
+    }
+
+    public function testGetAuditTrailRejectsEmptyPdf(): void
+    {
+        $this->configureValidCredentials();
+        $this->cache->method('load')->willReturn($this->cachedSessionJson());
+
+        $auditTrailCurl = new FakeCurl();
+        $auditTrailCurl->body = '';
+
+        $client = $this->makeClient(new SequencedCurlFactory($auditTrailCurl));
+
+        $this->expectException(ProviderException::class);
+        $client->getAuditTrail(self::STORE_ID, 'agr-1');
+    }
+
     public function testCancelAgreementSendsPutWithReason(): void
     {
         $this->configureValidCredentials();

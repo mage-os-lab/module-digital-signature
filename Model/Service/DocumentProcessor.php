@@ -41,7 +41,8 @@ class DocumentProcessor
         private readonly \Magento\Sales\Api\OrderRepositoryInterface $orderRepository,
         private readonly \Magento\Sales\Model\ResourceModel\Order\Invoice\CollectionFactory $invoiceCollectionFactory,
         private readonly Calculator $quotaCalculator,
-        private readonly ProviderConfig $providerConfig
+        private readonly ProviderConfig $providerConfig,
+        private readonly AuditTrailRecorder $auditTrailRecorder
     ) {
     }
 
@@ -149,7 +150,9 @@ class DocumentProcessor
         $document->setCallbackTokenHash(hash('sha256', $callbackToken));
         $this->documentRepository->save($document);
 
-        $result = $provider->start($document, $this->storage->read($pdfPath), $callbackToken);
+        $pdfBytes = $this->storage->read($pdfPath);
+        $result = $provider->start($document, $pdfBytes, $callbackToken);
+        $this->auditTrailRecorder->recordHashBeforeSigning($document, $pdfBytes);
 
         $previousStatus = $document->getStatus();
         $document->setProviderProcessId($result->getProcessId());
@@ -251,6 +254,7 @@ class DocumentProcessor
             );
             $this->storage->write($signedPath, $signedPdf);
             $document->setSignedPdfPath($signedPath);
+            $this->auditTrailRecorder->recordHashAfterSigning($document, $signedPdf);
         }
         $document->setStatus($mapped);
         $this->documentRepository->save($document);

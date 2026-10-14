@@ -88,6 +88,15 @@
                     <alert_threshold_percent>15</alert_threshold_percent>
                 </dummy>
             </providers>
+            <audit_trail>
+                <policy_ack>0</policy_ack>
+                <retention_days>3650</retention_days>
+            </audit_trail>
+            <dossier_export>
+                <max_documents>500</max_documents>
+                <sync_threshold>20</sync_threshold>
+                <retention_hours>72</retention_hours>
+            </dossier_export>
             <retention>
                 <enabled>0</enabled>
                 <retention_days>3650</retention_days>

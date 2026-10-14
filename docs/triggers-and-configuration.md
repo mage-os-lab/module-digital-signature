@@ -199,6 +199,30 @@ The `digitalsignature_retention_cleanup` cron (03:00 daily) picks documents in a
 original and signed PDF files, clears `signer_email` and `signer_phone`, sets `purged_at` and
 writes a log entry. The document row and its status history stay as the audit record.
 
+The same cron also purges audit trail personal data on its own schedule
+(`digital_signature/audit_trail/retention_days`), even when this document retention is
+disabled. See [audit-trail.md](audit-trail.md#retention).
+
+## Audit trail
+
+| Path | Default | Description |
+|---|---|---|
+| `digital_signature/audit_trail/data_collection` | *(unset)* | `1` collect, `0` do not collect. **While unset, no document is generated** |
+| `digital_signature/audit_trail/policy_ack` | `0` | Legal basis and retention defined. Required when collecting |
+| `digital_signature/audit_trail/retention_days` | `3650` | Days after the certificate fetch before its personal data is purged |
+
+See [audit-trail.md](audit-trail.md).
+
+## Dossier export
+
+| Path | Default | Description |
+|---|---|---|
+| `digital_signature/dossier_export/max_documents` | `500` | Larger selections are refused |
+| `digital_signature/dossier_export/sync_threshold` | `20` | Up to this number the ZIP downloads immediately; above it the export is queued. `0` = always queued |
+| `digital_signature/dossier_export/retention_hours` | `72` | Hours a ready ZIP is kept before deletion |
+
+See [audit-trail.md](audit-trail.md#export-a-dossier).
+
 ## Webhooks
 
 See [webhooks.md](webhooks.md#configuration-reference).

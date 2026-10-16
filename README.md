@@ -94,15 +94,15 @@ reuses the same backend.
 
 The module has been installed, compiled (`setup:di:compile`), upgraded and exercised end-to-end
 against every platform version below (the only compatibility fix needed so far was a return
-type on Magento 2.4.5, already included; Mage-OS 3.5.0 required no code changes):
+type on Magento 2.4.5, already included; Mage-OS 3.5.0 and 3.6.0 required no code changes):
 
 | Platform | Versions tested |
 |---|---|
 | Magento Open Source | 2.4.5, 2.4.6, 2.4.7, 2.4.8, 2.4.9 |
-| Mage-OS | 3.4.0, **3.5.0** (Magento 2.4.9 base, verified 2026-09-21) |
+| Mage-OS | 3.4.0, 3.5.0, **3.6.0** (Magento 2.4.9 base, verified 2026-10-16) |
 | PHP | 8.1, 8.2, 8.3, 8.4, 8.5 |
 
-The unit test suite (460 tests) also passes on PHP 8.1 and PHP 8.5. Compatibility with newer
+The unit test suite (461 tests) also passes on PHP 8.1 and PHP 8.5. Compatibility with newer
 releases is not guaranteed until tested; please open an issue if you hit a problem.
 
 ## Configuration

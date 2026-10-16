@@ -4,6 +4,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [0.6.1] - 2026-10-16
+### Fixed
+- **Audit trail compliance notice never shown, CRITICAL logged on every admin page** (0.6.0
+  regression): the system message was registered on `MessageList` as `xsi:type="object"`, but the
+  core resolves each entry through `ObjectManager::get()` and expects a class name. Every admin page
+  logged `TypeError: ltrim()` and no system message was displayed, the module's own included. Now
+  registered as `xsi:type="string"`, like the core messages.
+
+### Compatibility
+- **Mage-OS 3.6.0** (Magento 2.4.9 base) is now supported and verified: upgrade from 3.5.0 via
+  Composer, `setup:upgrade` (idempotent), `setup:di:compile`, static content deploy,
+  `module:disable`/`enable`, all five queue consumers start, REST ACL, storefront and admin,
+  Playwright PDF builder flow, unit suite on PHP 8.1 and 8.5. No code change needed for 3.6.0
+  itself; the fix above was found during this run.
+
 ## [0.6.0] - 2026-10-14
 ### Upgrade notes
 - **Document generation stops after upgrading until the audit trail choice is made.** Set

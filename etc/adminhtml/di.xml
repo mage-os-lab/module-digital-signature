@@ -11,7 +11,7 @@
     <type name="Magento\Framework\Notification\MessageList">
         <arguments>
             <argument name="messages" xsi:type="array">
-                <item name="mageos_digitalsignature_audit_trail_compliance" xsi:type="object">MageOS\DigitalSignature\Model\Notification\AuditTrailComplianceMessage</item>
+                <item name="mageos_digitalsignature_audit_trail_compliance" xsi:type="string">MageOS\DigitalSignature\Model\Notification\AuditTrailComplianceMessage</item>
             </argument>
         </arguments>
     </type>

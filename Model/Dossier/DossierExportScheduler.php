@@ -36,7 +36,13 @@ class DossierExportScheduler
         $this->repository->save($export);
 
         $exportId = (int)$export->getExportId();
-        $this->publisher->publishDossierExport($exportId);
+        try {
+            $this->publisher->publishDossierExport($exportId);
+        } catch (\Throwable $e) {
+            // Without its message the job would stay queued forever: nothing else picks up queued rows
+            $this->repository->delete($export);
+            throw $e;
+        }
 
         return $exportId;
     }

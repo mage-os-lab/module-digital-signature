@@ -96,7 +96,7 @@ Completed on,Voltooid op
 Configuration,Configuratie
 Confirm Position,Bevestig positie
 Connector to integrate digital and electronic signatures from Adobe Acrobat Sign. Supports OAuth2 authentication and asynchronous signature process tracking.,Connector om digitale en elektronische handtekeningen van Adobe Acrobat Sign te integreren. Ondersteunt OAuth2-authenticatie en asynchrone tracking van het handtekeningproces.
-Consigliato,Aanbevolen
+Recommended,Aanbevolen
 Contract,Contract
 Contract PDF,Contract-pdf
 Copy and paste the complete RSA private key generated on DocuSign (including the BEGIN/END PRIVATE KEY tags).,Kopieer en plak de volledige RSA-privésleutel die op DocuSign is gegenereerd (inclusief de BEGIN/END PRIVATE KEY-tags).
@@ -268,7 +268,7 @@ Invalid page number %1: the PDF has %2.,Ongeldig paginanummer %1: de pdf heeft e
 Invalid signature parameters.,Ongeldige handtekeningparameters.
 Invoice creation,Factuur aanmaken
 Invoice paid,Factuur betaald
-Item,Item
+Item,Artikel
 Keep queued exports for (hours),Exports in de wachtrij bewaren gedurende (uren)
 LOW QUOTA,LAAG QUOTUM
 Larger selections are refused.,Grotere selecties worden geweigerd.

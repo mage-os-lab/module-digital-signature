@@ -10,13 +10,31 @@ jobs:
   compute-matrix:
     runs-on: ubuntu-latest
     outputs:
-      matrix: ${{ steps.supported.outputs.matrix }}
+      matrix: ${{ steps.extra.outputs.matrix }}
     steps:
       - uses: actions/checkout@v4
       - uses: graycoreio/github-actions-magento2/supported-version@v8.11.0
         id: supported
         with:
           project: mage-os
+      # supported-version does not know Mage-OS 3.6.0 yet (its version table stops at
+      # 3.5.0, same Magento 2.4.9 base and services): add it by copying the latest
+      # entry, unless the action already returns it.
+      - id: extra
+        env:
+          MATRIX: ${{ steps.supported.outputs.matrix }}
+          EXTRA_VERSIONS: "3.6.0"
+        run: |
+          matrix="$MATRIX"
+          for version in $EXTRA_VERSIONS; do
+            package="mage-os/project-community-edition:$version"
+            matrix=$(jq -c --arg package "$package" --arg version "$version" '
+              if (.magento | index($package)) then . else
+                .magento += [$package]
+                | .include += [.include[-1] + {magento: $package, version: $version}]
+              end' <<< "$matrix")
+          done
+          echo "matrix=$matrix" >> "$GITHUB_OUTPUT"
 
   # Coding standard, setup:di:compile and the unit suite (Test/Unit) inside a Mage-OS
   # install, for every supported version.

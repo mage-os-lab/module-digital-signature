@@ -413,6 +413,8 @@ namespace Magento\Framework\Filesystem\Directory {
         public function stat($path);
 
         public function read($path);
+
+        public function isFile($path);
     }
 }
 

@@ -70,9 +70,11 @@ reuses the same backend.
 
 ## Installation
 
-1. Install the core module into your Magento 2 / Mage-OS project with composer:
+1. Install the core module into your Magento 2 / Mage-OS project with composer. The package
+   is not on Packagist yet, so first tell Composer where it lives:
     ```
-    composer require mage-os/module-digital-signature
+    composer config repositories.mage-os-digital-signature vcs https://github.com/mage-os-lab/module-digital-signature
+    composer require mage-os/module-digital-signature:^0.6
     ```
 2. If your store uses the **Hyvä** theme, also install the frontend satellite:
     ```
@@ -102,7 +104,7 @@ type on Magento 2.4.5, already included; Mage-OS 3.5.0 and 3.6.0 required no cod
 | Mage-OS | 3.4.0, 3.5.0, **3.6.0** (Magento 2.4.9 base, verified 2026-10-16) |
 | PHP | 8.1, 8.2, 8.3, 8.4, 8.5 |
 
-The unit test suite (461 tests) also passes on PHP 8.1 and PHP 8.5. Compatibility with newer
+The unit test suite (464 tests) also passes on PHP 8.1 and PHP 8.5. Compatibility with newer
 releases is not guaranteed until tested; please open an issue if you hit a problem.
 
 ## Configuration

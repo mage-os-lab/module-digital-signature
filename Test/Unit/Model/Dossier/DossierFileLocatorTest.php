@@ -62,6 +62,7 @@ class DossierFileLocatorTest extends TestCase
     public function testDeletesOnlyStaleTemporaryFiles(): void
     {
         $this->varDir->method('isExist')->willReturn(true);
+        $this->varDir->method('isFile')->willReturn(true);
         $this->varDir->method('read')->with('digitalsignature/dossiers')->willReturn([
             'digitalsignature/dossiers/tmp-old.zip',
             'digitalsignature/dossiers/tmp-new.zip',
@@ -75,5 +76,39 @@ class DossierFileLocatorTest extends TestCase
         $this->varDir->expects(self::once())->method('delete')->with('digitalsignature/dossiers/tmp-old.zip');
 
         self::assertSame(1, $this->locator->deleteTemporaryFilesOlderThan(500));
+    }
+
+    public function testAlsoDeletesStaleLibzipLeftoversOfKilledWrites(): void
+    {
+        // ZipArchive::close() writes to "<archive>.XXXXXX" and renames it: a process
+        // killed meanwhile leaves that file (personal data) behind, under any prefix
+        $this->varDir->method('isExist')->willReturn(true);
+        $this->varDir->method('isFile')->willReturn(true);
+        $this->varDir->method('read')->with('digitalsignature/dossiers')->willReturn([
+            'digitalsignature/dossiers/dossier-3-abc.zip.58phc4',
+            'digitalsignature/dossiers/dossier-4-def.zip.Qx81Lm',
+            'digitalsignature/dossiers/dossier-3-abc.zip',
+        ]);
+        $this->varDir->method('stat')->willReturnMap([
+            ['digitalsignature/dossiers/dossier-3-abc.zip.58phc4', ['mtime' => 100]],
+            ['digitalsignature/dossiers/dossier-4-def.zip.Qx81Lm', ['mtime' => 900]],
+            ['digitalsignature/dossiers/dossier-3-abc.zip', ['mtime' => 100]],
+        ]);
+        $this->varDir->expects(self::once())->method('delete')
+            ->with('digitalsignature/dossiers/dossier-3-abc.zip.58phc4');
+
+        self::assertSame(1, $this->locator->deleteTemporaryFilesOlderThan(500));
+    }
+
+    public function testNeverDeletesDirectories(): void
+    {
+        // Directory delete is recursive: the cleanup must only ever remove files
+        $this->varDir->method('isExist')->willReturn(true);
+        $this->varDir->method('read')->willReturn(['digitalsignature/dossiers/somedir']);
+        $this->varDir->method('isFile')->willReturn(false);
+        $this->varDir->method('stat')->willReturn(['mtime' => 100]);
+        $this->varDir->expects(self::never())->method('delete');
+
+        self::assertSame(0, $this->locator->deleteTemporaryFilesOlderThan(500));
     }
 }

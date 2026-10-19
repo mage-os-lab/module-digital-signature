@@ -59,7 +59,10 @@ class DossierFileLocator
 
     /**
      * Synchronous exports are streamed and removed by the response; a request
-     * killed mid-way leaves its tmp- file behind, which this removes.
+     * killed mid-way leaves its tmp- file behind, which this removes. Also
+     * removes what ZipArchive::close() leaves when the process is killed while
+     * writing: it writes to "<archive>.XXXXXX" and renames it, so the leftover
+     * never ends in .zip and no export row points to it.
      */
     public function deleteTemporaryFilesOlderThan(int $timestamp): int
     {
@@ -70,8 +73,12 @@ class DossierFileLocator
 
         $deleted = 0;
         foreach ($dir->read(self::RELATIVE_DIR) as $path) {
-            if (!str_starts_with(basename((string)$path), self::TEMPORARY_PREFIX)) {
+            $name = basename((string)$path);
+            if (!str_starts_with($name, self::TEMPORARY_PREFIX) && str_ends_with($name, '.zip')) {
                 continue;
+            }
+            if (!$dir->isFile($path)) {
+                continue; // delete() is recursive on a directory
             }
             if ((int)($dir->stat($path)['mtime'] ?? PHP_INT_MAX) < $timestamp) {
                 $dir->delete($path);

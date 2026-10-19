@@ -4,6 +4,25 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [0.6.2] - 2026-10-19
+### Fixed
+- **Dossier export leftovers with personal data**: a consumer or request killed while
+  `ZipArchive` was writing left a partial `<archive>.XXXXXX` file in
+  `var/digitalsignature/dossiers/` that no cleanup ever removed. The hourly cleanup cron now
+  deletes these files after 24 hours, like the `tmp-` files of synchronous exports (files only,
+  never directories).
+- **Queued dossier export without a queue message**: if publishing to
+  `digitalsignature.dossier.export` failed, the job stayed `queued` forever. The job is now
+  removed and the admin sees the error.
+- The "Recommended" provider badge in the admin configuration used an Italian source string,
+  so it showed "Consigliato" in every language. Also translated "Platform URL" (Italian) and
+  "Item" (Dutch). The same source-string fix is applied to the Hyvä satellite templates, which
+  are not published yet.
+
+### Documentation
+- Installation: the package is not on Packagist yet, so README and the getting-started guide
+  now register the GitHub repository with Composer before `composer require`.
+
 ## [0.6.1] - 2026-10-16
 ### Fixed
 - **Audit trail compliance notice never shown, CRITICAL logged on every admin page** (0.6.0

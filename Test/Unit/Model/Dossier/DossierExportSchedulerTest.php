@@ -42,4 +42,24 @@ class DossierExportSchedulerTest extends TestCase
         self::assertSame(4, $export->getRequestedByUserId());
         self::assertSame('admin_jane', $export->getRequestedBy());
     }
+
+    public function testRemovesTheJobWhenPublishingFailsSoNoQueuedRowIsLeftWithoutAMessage(): void
+    {
+        $export = $this->newModel(DossierExport::class);
+        $factory = $this->createStub(DossierExportFactory::class);
+        $factory->method('create')->willReturn($export);
+        $repository = $this->createMock(DossierExportRepositoryInterface::class);
+        $repository->method('save')->willReturnCallback(function (DossierExport $saved) {
+            $saved->setData(DossierExportInterface::EXPORT_ID, 12);
+
+            return $saved;
+        });
+        $repository->expects(self::once())->method('delete')->with($export);
+        $publisher = $this->createStub(Publisher::class);
+        $publisher->method('publishDossierExport')->willThrowException(new \RuntimeException('queue down'));
+
+        $this->expectExceptionMessage('queue down');
+
+        (new DossierExportScheduler($factory, $repository, $publisher))->schedule([7], 4, 'admin_jane');
+    }
 }

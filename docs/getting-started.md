@@ -7,15 +7,19 @@ Module name: `MageOS_DigitalSignature` · Composer package: `mage-os/module-digi
 
 ## Requirements
 
-- Magento Open Source 2.4.5 – 2.4.9 or Mage-OS 3.4 / 3.5
+- Magento Open Source 2.4.5 – 2.4.9 or Mage-OS 3.4 – 3.6
 - PHP 8.1 – 8.5 with `ext-zlib`
 - A running cron (`bin/magento cron:run`) and message queue consumers: generation, status
   refresh and webhooks are asynchronous
 
 ## 1. Install
 
+The package is not on Packagist yet: register the GitHub repository with Composer before
+requiring it.
+
 ```bash
-composer require mage-os/module-digital-signature
+composer config repositories.mage-os-digital-signature vcs https://github.com/mage-os-lab/module-digital-signature
+composer require mage-os/module-digital-signature:^0.6
 bin/magento module:enable MageOS_DigitalSignature
 bin/magento setup:upgrade
 bin/magento setup:di:compile          # production mode only

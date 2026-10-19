@@ -96,7 +96,7 @@ Completed on,Completato il
 Configuration,Configurazione
 Confirm Position,Conferma Posizione
 Connector to integrate digital and electronic signatures from Adobe Acrobat Sign. Supports OAuth2 authentication and asynchronous signature process tracking.,Connettore per integrare le firme digitali ed elettroniche di Adobe Acrobat Sign. Consente l\'autenticazione OAuth2 ed il tracciamento asincrono del processo di firma.
-Consigliato,Consigliato
+Recommended,Consigliato
 Contract,Contratto
 Contract PDF,PDF Contratto
 Copy and paste the complete RSA private key generated on DocuSign (including the BEGIN/END PRIVATE KEY tags).,Copia e incolla la chiave privata RSA completa generata su DocuSign (inclusi i tag BEGIN/END PRIVATE KEY).
@@ -343,7 +343,7 @@ Password,Password
 Pending,In attesa
 Pending signature,In attesa di firma
 Place signature on PDF,Posiziona la firma sul PDF
-Platform URL,Platform URL
+Platform URL,URL piattaforma
 Position signature on PDF,Posiziona la firma sul PDF
 Preference saved.,Preferenza salvata.
 Prepaid Credit Package (Pool),Pacchetto Crediti Prepagato (Pool)

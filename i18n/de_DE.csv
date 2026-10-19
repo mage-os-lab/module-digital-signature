@@ -96,7 +96,7 @@ Completed on,Abgeschlossen am
 Configuration,Konfiguration
 Confirm Position,Position bestätigen
 Connector to integrate digital and electronic signatures from Adobe Acrobat Sign. Supports OAuth2 authentication and asynchronous signature process tracking.,Konnektor zur Integration digitaler und elektronischer Signaturen von Adobe Acrobat Sign. Ermöglicht OAuth2-Authentifizierung und asynchrone Verfolgung des Signaturprozesses.
-Consigliato,Empfohlen
+Recommended,Empfohlen
 Contract,Vertrag
 Contract PDF,Vertrags-PDF
 Copy and paste the complete RSA private key generated on DocuSign (including the BEGIN/END PRIVATE KEY tags).,Kopieren Sie den vollständigen auf DocuSign generierten privaten RSA-Schlüssel und fügen Sie ihn ein (einschließlich der Tags BEGIN/END PRIVATE KEY).

@@ -25,8 +25,6 @@ Actions,Actions
 Active,Active
 Active signature provider,Active signature provider
 Add mapping,Add mapping
-Additional & Planned Connectors,Additional & Planned Connectors
-Additional connectors,Additional connectors
 Address notified by WsSign about process events.,Address notified by WsSign about process events.
 Admin escalation email sent for document pending signature.,Admin escalation email sent for document pending signature.
 Admin recipient email,Admin recipient email
@@ -65,7 +63,6 @@ Audit trail retention (days),Audit trail retention (days)
 Auto-sign delay (seconds),Auto-sign delay (seconds)
 Automatic reminders,Automatic reminders
 Automatically delete past the retention period,Automatically delete past the retention period
-Available,Available
 Avg signing time,Avg signing time
 Back,Back
 Black,Black
@@ -245,7 +242,6 @@ Generate signature documents for the selected orders?,Generate signature documen
 Generate template documents with manual trigger,Generate template documents with manual trigger
 Generated,Generated
 Generated ZIP files contain personal data and are deleted after this period.,Generated ZIP files contain personal data and are deleted after this period.
-Guide to integrating signature providers,Guide to integrating signature providers
 HMAC Secret,HMAC Secret
 HTTP/HTTPS endpoint where JSON webhook push notifications will be sent.,HTTP/HTTPS endpoint where JSON webhook push notifications will be sent.
 "Hello %name,","Hello %name,"
@@ -254,7 +250,6 @@ I want to receive the contract to sign digitally,I want to receive the contract 
 ID,ID
 "If you believe this is a mistake, contact our customer service. You can check your order here: <a href=""%url"">My orders</a>","If you believe this is a mistake, contact our customer service. You can check your order here: <a href=""%url"">My orders</a>"
 Immediate download up to (documents),Immediate download up to (documents)
-In development,In development
 "Independent from the document retention below: typically tied to the contract's legal prescription period, not a GDPR minimum.","Independent from the document retention below: typically tied to the contract's legal prescription period, not a GDPR minimum."
 Integration,Integration
 Integration ID,Integration ID
@@ -322,7 +317,6 @@ Notify the customer when the document is signed,Notify the customer when the doc
 Numeric ID of the integration already created under System > Integrations.,Numeric ID of the integration already created under System > Integrations.
 Off by default to avoid alarm: evaluate case by case.,Off by default to avoid alarm: evaluate case by case.
 Off by default: deletion is destructive and should be enabled deliberately after defining the required (fiscal/legal) retention periods.,Off by default: deletion is destructive and should be enabled deliberately after defining the required (fiscal/legal) retention periods.
-Official provider website,Official provider website
 "Open the order in backend: <a href=""%url"">%url</a>","Open the order in backend: <a href=""%url"">%url</a>"
 Operation cancelled.,Operation cancelled.
 Order ID,Order ID
@@ -536,7 +530,6 @@ Username (owner),Username (owner)
 Validation Error,Validation Error
 View order,View order
 WARNING: enable only in test/development environments.,WARNING: enable only in test/development environments.
-Want to integrate a different provider?,Want to integrate a different provider?
 Warning: the signature is still required to complete the order.,Warning: the signature is still required to complete the order.
 We couldn't save your preference. Please try again.,We couldn't save your preference. Please try again.
 We kindly ask you to digitally sign the document related to your order.,We kindly ask you to digitally sign the document related to your order.

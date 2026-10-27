@@ -4,6 +4,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [0.6.3] - 2026-10-27
+### Added
+- **Dummy provider: visible signing stamp**: the test-only Dummy provider now draws a
+  black-bordered box with "DUMMY SIGNED at HH:MM:SS" at the signature tag's exact position
+  (reusing the font already added for the tag, no QR code), so a demo document visibly looks
+  signed instead of coming back unchanged.
+
+### Changed
+- Raised the PDF incremental-update xref chain depth limit from 2 to 3 revisions: a document
+  ready for signing already carries 2 increments (signature tag injected at template build time,
+  signer's real email merged in at order time), and the new signing stamp adds a third.
+
 ## [0.6.2] - 2026-10-19
 ### Fixed
 - **Dossier export leftovers with personal data**: a consumer or request killed while

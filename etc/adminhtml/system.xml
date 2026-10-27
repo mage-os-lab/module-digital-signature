@@ -684,11 +684,6 @@
                         <depends><field id="allow">1</field></depends>
                     </field>
                 </group>
-                <field id="available_connectors" translate="label comment" sortOrder="30"
-                       showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Additional connectors</label>
-                    <frontend_model>MageOS\DigitalSignature\Block\Adminhtml\System\Config\AvailableConnectors</frontend_model>
-                </field>
             </group>
             <group id="audit_trail" translate="label comment" type="text" sortOrder="22"
                    showInDefault="1" showInWebsite="0" showInStore="0">

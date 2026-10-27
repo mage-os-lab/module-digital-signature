@@ -3,6 +3,7 @@
       xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <body>
         <referenceContainer name="content">
+            <block class="MageOS\DigitalSignature\Block\Adminhtml\ConfigurationWarning" name="digitalsignature.configuration.warning"/>
             <uiComponent name="digitalsignature_template_listing"/>
         </referenceContainer>
     </body>

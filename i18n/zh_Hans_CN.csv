@@ -25,8 +25,6 @@ Actions,操作
 Active,启用
 Active signature provider,当前签名提供商
 Add mapping,添加映射
-Additional & Planned Connectors,附加和计划中的连接器
-Additional connectors,附加连接器
 Address notified by WsSign about process events.,WsSign 用于通知流程事件的地址。
 Admin escalation email sent for document pending signature.,已就等待签署的文档向管理员发送升级电子邮件。
 Admin recipient email,管理员收件邮箱
@@ -65,7 +63,6 @@ Audit trail retention (days),审计跟踪保留期（天）
 Auto-sign delay (seconds),自动签名延迟（秒）
 Automatic reminders,自动催签
 Automatically delete past the retention period,超过保留期后自动删除
-Available,可用
 Avg signing time,平均签署时间
 Back,返回
 Black,黑色
@@ -245,7 +242,6 @@ Generate signature documents for the selected orders?,是否为所选订单生�
 Generate template documents with manual trigger,通过手动触发器生成模板文档
 Generated,已生成
 Generated ZIP files contain personal data and are deleted after this period.,生成的 ZIP 文件包含个人数据，将在此期限后删除。
-Guide to integrating signature providers,电子签名服务商集成指南
 HMAC Secret,HMAC 密钥
 HTTP/HTTPS endpoint where JSON webhook push notifications will be sent.,接收 JSON 格式 Webhook 推送通知的 HTTP/HTTPS 端点。
 "Hello %name,",您好 %name，
@@ -254,7 +250,6 @@ I want to receive the contract to sign digitally,我希望收到需要电子签�
 ID,ID
 "If you believe this is a mistake, contact our customer service. You can check your order here: <a href=""%url"">My orders</a>","如果您认为这是错误，请联系我们的客服。您可以在此查看订单：<a href=""%url"">我的订单</a>"
 Immediate download up to (documents),立即下载的上限（文档数）
-In development,开发中
 "Independent from the document retention below: typically tied to the contract's legal prescription period, not a GDPR minimum.",独立于下方的文档保留期：通常取决于合同的法定诉讼时效，而非 GDPR 最低要求。
 Integration,集成
 Integration ID,集成 ID
@@ -322,7 +317,6 @@ Notify the customer when the document is signed,文档签署完成时通知客�
 Numeric ID of the integration already created under System > Integrations.,在“系统 > 集成”下已创建的集成的数字 ID。
 Off by default to avoid alarm: evaluate case by case.,默认关闭以避免误报：请根据具体情况评估。
 Off by default: deletion is destructive and should be enabled deliberately after defining the required (fiscal/legal) retention periods.,默认关闭：删除属于破坏性操作，应在明确所需的（税务/法律）保留期后谨慎启用。
-Official provider website,服务商官方网站
 "Open the order in backend: <a href=""%url"">%url</a>","在后台打开订单：<a href=""%url"">%url</a>"
 Operation cancelled.,操作已取消。
 Order ID,订单编号
@@ -536,7 +530,6 @@ Username (owner),用户名（所有者）
 Validation Error,验证错误
 View order,查看订单
 WARNING: enable only in test/development environments.,注意：仅可在测试/开发环境中启用。
-Want to integrate a different provider?,想要集成不同的服务商？
 Warning: the signature is still required to complete the order.,注意：完成订单仍需签名。
 We couldn't save your preference. Please try again.,无法保存偏好设置，请重试。
 We kindly ask you to digitally sign the document related to your order.,请对您订单相关的文档进行数字签名。

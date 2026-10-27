@@ -1,0 +1,16 @@
+<?php
+/** @var \MageOS\DigitalSignature\Block\Adminhtml\ConfigurationWarning $block */
+/** @var \Magento\Framework\Escaper $escaper */
+if ($block->isConfigured()) {
+    return;
+}
+?>
+<div class="message message-warning warning">
+    <?= $escaper->escapeHtml(__(
+        'Digital Signature is not active yet: the signature checkbox will not appear in the cart or checkout, '
+        . 'and no document will be generated, until you enable it and pick a provider.'
+    )) ?>
+    <a href="<?= $escaper->escapeUrl($block->getConfigurationUrl()) ?>">
+        <?= $escaper->escapeHtml(__('Go to Stores > Configuration > Digital Signature')) ?>
+    </a>
+</div>

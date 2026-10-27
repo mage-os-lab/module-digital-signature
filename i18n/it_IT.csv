@@ -25,8 +25,6 @@ Actions,Azioni
 Active,Attivo
 Active signature provider,Provider di firma attivo
 Add mapping,Aggiungi mappatura
-Additional & Planned Connectors,Connettori Aggiuntivi & Pianificati
-Additional connectors,Connettori aggiuntivi
 Address notified by WsSign about process events.,Indirizzo notificato da WsSign sugli eventi del processo.
 Admin escalation email sent for document pending signature.,Inviata email di escalation all\'admin per documento in attesa di firma.
 Admin recipient email,Email destinatario admin
@@ -65,7 +63,6 @@ Audit trail retention (days),Conservazione audit trail (giorni)
 Auto-sign delay (seconds),Ritardo auto-firma (secondi)
 Automatic reminders,Reminder automatici
 Automatically delete past the retention period,Elimina automaticamente oltre il periodo di conservazione
-Available,Disponibile
 Avg signing time,Tempo medio firma
 Back,Indietro
 Black,Nero
@@ -245,7 +242,6 @@ Generate signature documents for the selected orders?,Generare i documenti firma
 Generate template documents with manual trigger,Genera documenti dei template con trigger manuale
 Generated,Generato
 Generated ZIP files contain personal data and are deleted after this period.,I file ZIP generati contengono dati personali e vengono eliminati dopo questo periodo.
-Guide to integrating signature providers,Guida all\'integrazione dei provider di firma
 HMAC Secret,Secret HMAC
 HTTP/HTTPS endpoint where JSON webhook push notifications will be sent.,Endpoint HTTP/HTTPS a cui inviare le notifiche push webhook in formato JSON.
 "Hello %name,","Ciao %name,"
@@ -254,7 +250,6 @@ I want to receive the contract to sign digitally,Voglio ricevere il contratto da
 ID,ID
 "If you believe this is a mistake, contact our customer service. You can check your order here: <a href=""%url"">My orders</a>","Se ritieni che si tratti di un errore, contatta il nostro servizio clienti. Puoi consultare il tuo ordine qui: <a href=""%url"">I miei ordini</a>"
 Immediate download up to (documents),Download immediato fino a (documenti)
-In development,In sviluppo
 "Independent from the document retention below: typically tied to the contract's legal prescription period, not a GDPR minimum.","Indipendente dalla conservazione dei documenti più sotto: di norma legata al termine di prescrizione del contratto, non a un minimo GDPR."
 Integration,Integrazione
 Integration ID,ID Integrazione
@@ -322,7 +317,6 @@ Notify the customer when the document is signed,Avvisa il cliente quando il docu
 Numeric ID of the integration already created under System > Integrations.,ID numerico dell'integrazione già creata in Sistema > Integrazioni.
 Off by default to avoid alarm: evaluate case by case.,Disattivato di default per evitare allarmismi: valutare caso per caso.
 Off by default: deletion is destructive and should be enabled deliberately after defining the required (fiscal/legal) retention periods.,"Disattivato di default: la cancellazione è distruttiva, va attivata consapevolmente dopo aver definito i tempi di conservazione richiesti (fiscali/legali)."
-Official provider website,Sito ufficiale del provider
 "Open the order in backend: <a href=""%url"">%url</a>","Vai all'ordine in backend: <a href=""%url"">%url</a>"
 Operation cancelled.,Operazione annullata.
 Order ID,ID ordine
@@ -536,7 +530,6 @@ Username (owner),Username (owner)
 Validation Error,Errore di Validazione
 View order,Vedi ordine
 WARNING: enable only in test/development environments.,ATTENZIONE: abilitare solo in ambienti di test/sviluppo.
-Want to integrate a different provider?,Vuoi integrare un provider differente?
 Warning: the signature is still required to complete the order.,Attenzione: la firma resta obbligatoria per completare l'ordine.
 We couldn't save your preference. Please try again.,Non è stato possibile salvare la preferenza. Riprova.
 We kindly ask you to digitally sign the document related to your order.,Ti chiediamo di firmare digitalmente il documento relativo al tuo ordine.

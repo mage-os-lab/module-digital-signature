@@ -8,6 +8,7 @@ use MageOS\DigitalSignature\Api\DocumentStorageInterface;
 use MageOS\DigitalSignature\Api\SignProviderInterface;
 use MageOS\DigitalSignature\Exception\ProviderException;
 use MageOS\DigitalSignature\Model\Document\Status;
+use MageOS\DigitalSignature\Model\Pdf\SignatureStamp;
 use MageOS\DigitalSignature\Model\Provider\Result\StartResult;
 use MageOS\DigitalSignature\Model\Provider\Result\StatusResult;
 use Magento\Framework\Math\Random;
@@ -31,7 +32,8 @@ class Dummy implements SignProviderInterface
         private readonly ProviderConfig $config,
         private readonly DocumentStorageInterface $storage,
         private readonly Random $random,
-        private readonly DateTime $dateTime
+        private readonly DateTime $dateTime,
+        private readonly SignatureStamp $signatureStamp
     ) {
     }
 
@@ -89,8 +91,12 @@ class Dummy implements SignProviderInterface
             throw ProviderException::permanent(__('Dummy: generated PDF not found in storage.'));
         }
 
-        // Simulated "signature": returns the generated PDF as-is
-        return $this->storage->read($pdfPath);
+        // Simulated "signature": stamps a visible "DUMMY SIGNED at HH:MM:SS"
+        // box over the signature tag's position, so the demo document looks
+        // like it really went through a signing step.
+        $stampText = sprintf('DUMMY SIGNED at %s', gmdate('H:i:s', $this->dateTime->gmtTimestamp()));
+
+        return $this->signatureStamp->stampAt($this->storage->read($pdfPath), $stampText);
     }
 
     public function cancel(DocumentInterface $document): void

@@ -46,7 +46,7 @@ class AssignProducts extends Template
 
     public function getProductsJson(): string
     {
-        return $this->jsonSerializer->serialize($this->getAssignedProducts());
+        return $this->jsonSerializer->serialize($this->getAssignedProductsAsObject());
     }
 
     /**
@@ -57,9 +57,30 @@ class AssignProducts extends Template
     public function getProductsJsonForScript(): string
     {
         return json_encode(
-            $this->getAssignedProducts(),
+            $this->getAssignedProductsAsObject(),
             JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT
         );
+    }
+
+    /**
+     * A PHP empty array (and, once a template has only sequential 0-based keys,
+     * even a non-empty one) encodes as a JSON array "[]" rather than an object
+     * "{}". The client-side selectedProducts would then start as a JS Array,
+     * and assigning numeric-string product ids onto it (selectedProducts["5"]
+     * = 0) sets array indexes instead of object keys: JSON.stringify emits
+     * holes as null (e.g. "[null,null,null,null,null,0]"), and the server's
+     * array_keys() on decode reads back its own 0..5 indexes as if they were
+     * product ids, instead of the real entity_id that was selected. Casting
+     * to stdClass forces json_encode to always emit an object, so the keys
+     * stay the real product ids on both sides.
+     *
+     * @return \stdClass|array<int, int>
+     */
+    private function getAssignedProductsAsObject(): \stdClass|array
+    {
+        $products = $this->getAssignedProducts();
+
+        return $products ?: new \stdClass();
     }
 
     /**

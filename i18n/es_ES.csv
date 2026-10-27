@@ -25,8 +25,6 @@ Actions,Acciones
 Active,Activo
 Active signature provider,Proveedor de firma activo
 Add mapping,Añadir mapeo
-Additional & Planned Connectors,Conectores Adicionales y Planificados
-Additional connectors,Conectores adicionales
 Address notified by WsSign about process events.,Dirección notificada por WsSign sobre los eventos del proceso.
 Admin escalation email sent for document pending signature.,Correo electrónico de escalamiento enviado al administrador para el documento pendiente de firma.
 Admin recipient email,Correo electrónico del destinatario administrador
@@ -65,7 +63,6 @@ Audit trail retention (days),Conservación del registro de auditoría (días)
 Auto-sign delay (seconds),Retraso de firma automática (segundos)
 Automatic reminders,Recordatorios automáticos
 Automatically delete past the retention period,Eliminar automáticamente tras el período de retención
-Available,Disponible
 Avg signing time,Tiempo medio de firma
 Back,Volver
 Black,Negro
@@ -245,7 +242,6 @@ Generate signature documents for the selected orders?,¿Generar los documentos d
 Generate template documents with manual trigger,Generar documentos de plantillas con disparador manual
 Generated,Generado
 Generated ZIP files contain personal data and are deleted after this period.,Los archivos ZIP generados contienen datos personales y se eliminan después de este periodo.
-Guide to integrating signature providers,Guía para la integración de proveedores de firma
 HMAC Secret,Secreto HMAC
 HTTP/HTTPS endpoint where JSON webhook push notifications will be sent.,Punto de conexión HTTP/HTTPS al que se enviarán las notificaciones push de webhook en formato JSON.
 "Hello %name,","Hola %name,"
@@ -254,7 +250,6 @@ I want to receive the contract to sign digitally,Quiero recibir el contrato para
 ID,ID
 "If you believe this is a mistake, contact our customer service. You can check your order here: <a href=""%url"">My orders</a>","Si cree que se trata de un error, contacte con nuestro servicio de atención al cliente. Puede consultar su pedido aquí: <a href=""%url"">Mis pedidos</a>"
 Immediate download up to (documents),Descarga inmediata hasta (documentos)
-In development,En desarrollo
 "Independent from the document retention below: typically tied to the contract's legal prescription period, not a GDPR minimum.","Independiente de la conservación de documentos de más abajo: normalmente ligada al plazo de prescripción legal del contrato, no a un mínimo del RGPD."
 Integration,Integración
 Integration ID,ID de integración
@@ -322,7 +317,6 @@ Notify the customer when the document is signed,Avisar al cliente cuando el docu
 Numeric ID of the integration already created under System > Integrations.,ID numérico de la integración ya creada en Sistema > Integraciones.
 Off by default to avoid alarm: evaluate case by case.,Desactivado por defecto para evitar alarmas: evaluar caso por caso.
 Off by default: deletion is destructive and should be enabled deliberately after defining the required (fiscal/legal) retention periods.,Desactivado por defecto: la eliminación es destructiva y debe habilitarse deliberadamente tras definir los períodos de retención requeridos (fiscales/legales).
-Official provider website,Sitio oficial del proveedor
 "Open the order in backend: <a href=""%url"">%url</a>","Abrir el pedido en el backend: <a href=""%url"">%url</a>"
 Operation cancelled.,Operación cancelada.
 Order ID,ID de pedido
@@ -536,7 +530,6 @@ Username (owner),Usuario (owner)
 Validation Error,Error de validación
 View order,Ver pedido
 WARNING: enable only in test/development environments.,ATENCIÓN: habilitar solo en entornos de prueba/desarrollo.
-Want to integrate a different provider?,¿Quieres integrar un proveedor diferente?
 Warning: the signature is still required to complete the order.,Atención: la firma sigue siendo obligatoria para completar el pedido.
 We couldn't save your preference. Please try again.,No se pudo guardar la preferencia. Vuelva a intentarlo.
 We kindly ask you to digitally sign the document related to your order.,Te pedimos que firmes digitalmente el documento relacionado con tu pedido.

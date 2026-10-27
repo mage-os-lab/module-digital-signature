@@ -68,6 +68,22 @@ class XrefChainResolverTest extends TestCase
         self::assertTrue($info->isStreamBased);
     }
 
+    public function testResolvesChainAtTheLimit(): void
+    {
+        // Exactly the depth a signed document reaches in production: template
+        // (rev0) -> tag injected (rev1) -> signer's email merged in (rev2).
+        $link1 = "xref\n0 1\n0000000000 65535 f \ntrailer\n<</Size 1 /Root 1 0 R>>\n";
+        $link2Offset = strlen($link1);
+        $link2 = "xref\n0 1\n0000000000 65535 f \ntrailer\n<</Size 2 /Root 1 0 R /Prev 0>>\n";
+        $link3Offset = $link2Offset + strlen($link2);
+        $link3 = "xref\n0 1\n0000000000 65535 f \ntrailer\n<</Size 3 /Root 1 0 R /Prev {$link2Offset}>>\n";
+        $pdf = $link1 . $link2 . $link3 . "startxref\n{$link3Offset}\n%%EOF\n";
+
+        $info = $this->resolver->resolve($pdf);
+
+        self::assertSame(3, $info->size);
+    }
+
     public function testRejectsChainLongerThanLimit(): void
     {
         $link1 = "xref\n0 1\n0000000000 65535 f \ntrailer\n<</Size 1 /Root 1 0 R>>\n";
@@ -75,7 +91,9 @@ class XrefChainResolverTest extends TestCase
         $link2 = "xref\n0 1\n0000000000 65535 f \ntrailer\n<</Size 2 /Root 1 0 R /Prev 0>>\n";
         $link3Offset = $link2Offset + strlen($link2);
         $link3 = "xref\n0 1\n0000000000 65535 f \ntrailer\n<</Size 3 /Root 1 0 R /Prev {$link2Offset}>>\n";
-        $pdf = $link1 . $link2 . $link3 . "startxref\n{$link3Offset}\n%%EOF\n";
+        $link4Offset = $link3Offset + strlen($link3);
+        $link4 = "xref\n0 1\n0000000000 65535 f \ntrailer\n<</Size 4 /Root 1 0 R /Prev {$link3Offset}>>\n";
+        $pdf = $link1 . $link2 . $link3 . $link4 . "startxref\n{$link4Offset}\n%%EOF\n";
 
         $this->expectException(LocalizedException::class);
         $this->expectExceptionMessageMatches('/too many linked revisions/');

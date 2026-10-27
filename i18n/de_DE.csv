@@ -25,8 +25,6 @@ Actions,Aktionen
 Active,Aktiv
 Active signature provider,Aktiver Signaturanbieter
 Add mapping,Zuordnung hinzufügen
-Additional & Planned Connectors,Zusätzliche & geplante Konnektoren
-Additional connectors,Zusätzliche Konnektoren
 Address notified by WsSign about process events.,"Adresse, die von WsSign über Prozessereignisse benachrichtigt wird."
 Admin escalation email sent for document pending signature.,Admin-Eskalations-E-Mail für Dokument mit ausstehender Unterschrift gesendet.
 Admin recipient email,E-Mail-Adresse des Administrators
@@ -65,7 +63,6 @@ Audit trail retention (days),Aufbewahrung Audit-Trail (Tage)
 Auto-sign delay (seconds),Verzögerung für automatische Signatur (Sekunden)
 Automatic reminders,Automatische Erinnerungen
 Automatically delete past the retention period,Nach Ablauf der Aufbewahrungsfrist automatisch löschen
-Available,Verfügbar
 Avg signing time,Durchschnittliche Signaturzeit
 Back,Zurück
 Black,Schwarz
@@ -245,7 +242,6 @@ Generate signature documents for the selected orders?,Signaturdokumente für die
 Generate template documents with manual trigger,Vorlagendokumente mit manuellem Trigger generieren
 Generated,Erstellt
 Generated ZIP files contain personal data and are deleted after this period.,Erzeugte ZIP-Dateien enthalten personenbezogene Daten und werden nach diesem Zeitraum gelöscht.
-Guide to integrating signature providers,Anleitung zur Integration von Signaturanbietern
 HMAC Secret,HMAC-Secret
 HTTP/HTTPS endpoint where JSON webhook push notifications will be sent.,"HTTP/HTTPS-Endpunkt, an den JSON-Webhook-Push-Benachrichtigungen gesendet werden."
 "Hello %name,","Hallo %name,"
@@ -254,7 +250,6 @@ I want to receive the contract to sign digitally,Ich möchte den Vertrag zur dig
 ID,ID
 "If you believe this is a mistake, contact our customer service. You can check your order here: <a href=""%url"">My orders</a>","Falls Sie glauben, dass dies ein Fehler ist, wenden Sie sich an unseren Kundendienst. Sie können Ihre Bestellung hier einsehen: <a href=""%url"">Meine Bestellungen</a>"
 Immediate download up to (documents),Sofortiger Download bis (Dokumente)
-In development,In Entwicklung
 "Independent from the document retention below: typically tied to the contract's legal prescription period, not a GDPR minimum.","Unabhängig von der unten stehenden Dokumentenaufbewahrung: üblicherweise an die gesetzliche Verjährungsfrist des Vertrags gebunden, nicht an ein DSGVO-Minimum."
 Integration,Integration
 Integration ID,Integrations-ID
@@ -322,7 +317,6 @@ Notify the customer when the document is signed,"Kunden benachrichtigen, wenn da
 Numeric ID of the integration already created under System > Integrations.,Numerische ID der bereits unter System > Integrationen erstellten Integration.
 Off by default to avoid alarm: evaluate case by case.,"Standardmäßig deaktiviert, um Fehlalarme zu vermeiden: von Fall zu Fall prüfen."
 Off by default: deletion is destructive and should be enabled deliberately after defining the required (fiscal/legal) retention periods.,Standardmäßig deaktiviert: Das Löschen ist destruktiv und sollte erst nach Definition der erforderlichen (steuerlichen/rechtlichen) Aufbewahrungsfristen bewusst aktiviert werden.
-Official provider website,Offizielle Website des Anbieters
 "Open the order in backend: <a href=""%url"">%url</a>","Bestellung im Backend öffnen: <a href=""%url"">%url</a>"
 Operation cancelled.,Vorgang abgebrochen.
 Order ID,Bestell-ID
@@ -536,7 +530,6 @@ Username (owner),Benutzername (Owner)
 Validation Error,Validierungsfehler
 View order,Bestellung ansehen
 WARNING: enable only in test/development environments.,ACHTUNG: nur in Test-/Entwicklungsumgebungen aktivieren.
-Want to integrate a different provider?,Möchten Sie einen anderen Anbieter integrieren?
 Warning: the signature is still required to complete the order.,"Achtung: Die Unterschrift ist weiterhin erforderlich, um die Bestellung abzuschließen."
 We couldn't save your preference. Please try again.,Die Einstellung konnte nicht gespeichert werden. Bitte versuchen Sie es erneut.
 We kindly ask you to digitally sign the document related to your order.,"Wir bitten Sie, das Dokument zu Ihrer Bestellung digital zu signieren."

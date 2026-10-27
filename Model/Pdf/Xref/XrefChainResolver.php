@@ -17,10 +17,14 @@ class XrefChainResolver
     /**
      * Depth limit of the explored /Prev chain: beyond it, explicitly rejects
      * instead of silently ignoring historical revisions (they could contain
-     * undetected object streams). Covers the common case (freshly exported
-     * file, 0 or 1 previous revision).
+     * undetected object streams). Covers the common case of a document that
+     * already carries the two increments every signature document goes
+     * through before any provider ever sees it (signature tag injected at
+     * template build time, signer's real email merged in at order time),
+     * plus one more revision layered on top of that (e.g. the dummy
+     * provider's visible signing stamp, see SignatureStamp).
      */
-    private const MAX_CHAIN_DEPTH = 2;
+    private const MAX_CHAIN_DEPTH = 3;
 
     public function __construct(
         private readonly ClassicXrefReader $classicReader,

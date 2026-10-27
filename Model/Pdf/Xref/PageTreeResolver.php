@@ -86,11 +86,16 @@ class PageTreeResolver
             }
         }
 
-        $contentsRef = DictFields::extractRef($page['dict'], 'Contents');
-        if ($contentsRef === null) {
+        $contentsNumbers = $this->extractContentsNumbers($page['dict']);
+        if ($contentsNumbers === []) {
             throw new LocalizedException(__('Unsupported PDF: page is missing /Contents.'));
         }
-        $contentsNumber = $this->refToObjectNumber($contentsRef);
+        // The first entry anchors where a new sibling content stream is
+        // inserted (SignatureTagInjector rewrites "/Contents N 0 R" into
+        // "/Contents [N 0 R M 0 R]"); a page whose /Contents is already an
+        // array (e.g. a template that already received a tag) exposes the
+        // same anchor, the others stay untouched.
+        $contentsNumber = $contentsNumbers[0];
         if (!isset($info->objectOffsets[$contentsNumber])) {
             throw new LocalizedException(
                 __('Unsupported PDF: page content stream could not be resolved.')
@@ -109,6 +114,56 @@ class PageTreeResolver
             resourcesObjectNumber: $resourcesObjectNumber,
             resourcesDictText: $resourcesDict
         );
+    }
+
+    /**
+     * Finds the 1-based page number whose /Contents (single ref or array)
+     * includes $contentObjectNumber. Used by SignatureStamp to locate the
+     * page holding an already-injected signature tag, without re-validating
+     * the whole page (rotation, /Resources, ...) for every candidate.
+     *
+     * @throws LocalizedException
+     */
+    public function findPageNumberByContentObject(string $pdf, int $contentObjectNumber): ?int
+    {
+        $info = $this->xrefResolver->resolve($pdf);
+
+        $root = $this->readObjectDict($pdf, $info->objectOffsets, $this->refToObjectNumber($info->root));
+        $pagesRef = DictFields::extractRef($root['dict'], 'Pages');
+        if ($pagesRef === null) {
+            return null;
+        }
+
+        $pages = $this->readObjectDict($pdf, $info->objectOffsets, $this->refToObjectNumber($pagesRef));
+        $kids = DictFields::extractRefArray($pages['dict'], 'Kids') ?? [];
+
+        foreach ($kids as $index => $kidRef) {
+            $pageObjNumber = $this->refToObjectNumber($kidRef);
+            if (!isset($info->objectOffsets[$pageObjNumber])) {
+                continue;
+            }
+            $page = $this->readObjectDict($pdf, $info->objectOffsets, $pageObjNumber);
+            if (in_array($contentObjectNumber, $this->extractContentsNumbers($page['dict']), true)) {
+                return $index + 1;
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * @return int[] object numbers composing /Contents, in order; empty if absent
+     */
+    private function extractContentsNumbers(string $pageDict): array
+    {
+        $ref = DictFields::extractRef($pageDict, 'Contents');
+        if ($ref !== null) {
+            return [$this->refToObjectNumber($ref)];
+        }
+
+        $refs = DictFields::extractRefArray($pageDict, 'Contents') ?? [];
+
+        return array_map(fn (string $r): int => $this->refToObjectNumber($r), $refs);
     }
 
     /**

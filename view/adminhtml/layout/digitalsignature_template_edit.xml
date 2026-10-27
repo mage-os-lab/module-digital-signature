@@ -13,6 +13,7 @@
             </block>
         </referenceContainer>
         <referenceContainer name="content">
+            <block class="MageOS\DigitalSignature\Block\Adminhtml\ConfigurationWarning" name="digitalsignature.configuration.warning"/>
             <block class="MageOS\DigitalSignature\Block\Adminhtml\Template\PdfJsConfig" name="digitalsignature.pdfjs.config" template="MageOS_DigitalSignature::template/pdfjs_config.phtml"/>
             <uiComponent name="digitalsignature_template_form"/>
         </referenceContainer>
